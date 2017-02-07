@@ -19,7 +19,7 @@ public class Main extends Application {
         Scene scene = new Scene(startView);
         primaryStage.setScene(scene);
         //add stylesheet:
-        scene.getStylesheets().add("be/kdg/project_2048/css/stylesheet.css");
+        scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
         primaryStage.setMinHeight(700);
         primaryStage.setMinWidth(450);
         primaryStage.setTitle("2048");
