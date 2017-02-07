@@ -6,11 +6,9 @@
 .toggle-button {
     -fx-text-fill: #006464;
     -fx-background-color: none;
-    -fx-padding: 30, 5, 5, 5;
 }
 
 .toggle-button:hover {
     -fx-text-fill: #fff;
     -fx-background-color: #ecc400;
-    -fx-padding: 30, 5, 5, 5;
 }
