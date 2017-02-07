@@ -5,4 +5,7 @@ package be.kdg.thegame_2048;
  * @version 1.0 07-02-17 19:38
  */
 public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
 }
