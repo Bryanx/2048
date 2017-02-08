@@ -1,15 +1,15 @@
 package be.kdg.thegame_2048.views.views;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * @author Bryan de Ridder
@@ -31,9 +31,16 @@ public class NewPlayerView extends BorderPane {
         //Same as in the StartView class, maybe put inside an interface
         this.logo = new ImageView("be/kdg/thegame_2048/views/views/img/logo.png");
 
-        //Label:
-        this.lblNewPlayer = new Label("");
+        //NewPlayerView:
+        this.lblNewPlayer = new Label("What's your name?");
+        lblNewPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 35));
+        lblNewPlayer.setPadding(new Insets(0,0,30,0));
+        lblNewPlayer.setTextFill(Color.rgb(0,100,100));
+
         this.tfNewPlayer = new TextField();
+        tfNewPlayer.setPrefHeight(40);
+        tfNewPlayer.setMaxWidth(210);
+        tfNewPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 23));
     }
 
     private void layoutNodes() {
@@ -44,5 +51,10 @@ public class NewPlayerView extends BorderPane {
         this.setTop(top);
         this.setPadding(new Insets(OVERALL_PADDING));
         this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        //NewPlayerView:
+        VBox middle = new VBox(lblNewPlayer,tfNewPlayer);
+        middle.setAlignment(Pos.TOP_CENTER);
+        this.setCenter(middle);
     }
 }
