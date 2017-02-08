@@ -21,6 +21,7 @@ public class NewPlayerView extends BorderPane {
     private ImageView logo;
     private Label lblNewPlayer;
     private TextField tfNewPlayer;
+    private Label nameExistsError;
 
     public NewPlayerView() {
         initialiseNodes();
@@ -32,15 +33,22 @@ public class NewPlayerView extends BorderPane {
         this.logo = new ImageView("be/kdg/thegame_2048/views/views/img/logo.png");
 
         //NewPlayerView:
+        //Label What's your name? has 30px padding on the bottom
         this.lblNewPlayer = new Label("What's your name?");
         lblNewPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 35));
         lblNewPlayer.setPadding(new Insets(0,0,30,0));
         lblNewPlayer.setTextFill(Color.rgb(0,100,100));
 
+        //Input field
         this.tfNewPlayer = new TextField();
         tfNewPlayer.setPrefHeight(40);
         tfNewPlayer.setMaxWidth(210);
         tfNewPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 23));
+
+        //Optional error message, should be invisible by default
+        this.nameExistsError = new Label("Sorry, this name already exists :(");
+        nameExistsError.setPadding(new Insets(15,0,0,0));
+        nameExistsError.setTextFill(Color.DARKRED);
     }
 
     private void layoutNodes() {
@@ -53,7 +61,7 @@ public class NewPlayerView extends BorderPane {
         this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
 
         //NewPlayerView:
-        VBox middle = new VBox(lblNewPlayer,tfNewPlayer);
+        VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError);
         middle.setAlignment(Pos.TOP_CENTER);
         this.setCenter(middle);
     }
