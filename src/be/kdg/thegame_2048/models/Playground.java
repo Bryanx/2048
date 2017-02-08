@@ -55,9 +55,22 @@ public class Playground {
         sectionOtherBlock.removeBlock();
     }
 
-    public void moveBlocksBottom() {
-        for (Section section : sections) {
-
+    //NIET IN KIJKEN!! JE GAAT ER ECHT NIETS VAN BEGRIJPEN, IK LEG HET MORGEN WEL UIT OP SCHOOL :P
+    public void moveBlocksTop() {
+        for (int i = 4; i < 8; i++) {
+            if (this.sections[i-4].hasBlock() && this.sections[i].hasBlock()) {
+                if (this.sections[i].getBlock().getValue() == this.sections[i-4].getBlock().getValue()) {
+                    merge(this.sections[i], this.sections[i-4]);
+                }
+                //IN PROGRESS...
+            }
         }
+        for (int i = 8; i < 12; i++) {
+            //IN PROGRESS...
+        }
+        for (int i = 12; i < 16; i++) {
+            //IN PROGRESS...
+        }
+
     }
 }
