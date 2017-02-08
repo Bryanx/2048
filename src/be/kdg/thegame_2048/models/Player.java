@@ -4,13 +4,13 @@ package be.kdg.thegame_2048.models;
  * @author Jarne Van Aerde
  * @version 1.0 7/02/2017 19:58
  */
-public class Player {
+class Player {
     //EIGENSCHAPPEN
     private String name;
     private int bestScore;
 
     //CONSTRUCTORS
-    public Player(String name, int bestScore) {
+    Player(String name, int bestScore) {
         this.name = name;
         this.bestScore = bestScore;
     }
@@ -20,7 +20,7 @@ public class Player {
         return bestScore;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 

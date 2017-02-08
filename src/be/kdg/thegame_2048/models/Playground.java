@@ -48,4 +48,16 @@ public class Playground {
             }
         }
     }
+
+    private void merge(Section sectionBlock, Section sectionOtherBlock) {
+        score.calculateScore(sectionBlock.getBlock(), sectionOtherBlock.getBlock());
+        sectionBlock.getBlock().setValue(sectionBlock.getBlock().getValue() + sectionOtherBlock.getBlock().getValue());
+        sectionOtherBlock.removeBlock();
+    }
+
+    public void moveBlocksBottom() {
+        for (Section section : sections) {
+
+        }
+    }
 }
