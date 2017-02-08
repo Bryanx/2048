@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048;
 
+import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.views.NewPlayerView;
 import be.kdg.thegame_2048.views.views.StartView;
 import javafx.application.Application;
@@ -14,6 +15,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //KLASSEN AANAMKEN
+        PlayerManager manager = new PlayerManager();
+
         NewPlayerView newPlayerView = new NewPlayerView();
 
         //SCENE SAMENSTELLEN

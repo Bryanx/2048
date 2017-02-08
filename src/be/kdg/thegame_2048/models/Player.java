@@ -7,16 +7,16 @@ package be.kdg.thegame_2048.models;
 public class Player {
     //EIGENSCHAPPEN
     private String name;
-    private String bestScore;
+    private int bestScore;
 
     //CONSTRUCTORS
-    public Player(String name, String bestScore) {
+    public Player(String name, int bestScore) {
         this.name = name;
         this.bestScore = bestScore;
     }
 
     //METHODEN
-    public String getBestScore() {
+    public int getBestScore() {
         return bestScore;
     }
 
@@ -24,7 +24,7 @@ public class Player {
         return name;
     }
 
-    public void setBestScore(String bestScore) {
+    public void setBestScore(int bestScore) {
         this.bestScore = bestScore;
     }
 }
