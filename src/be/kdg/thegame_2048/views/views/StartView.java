@@ -6,6 +6,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
