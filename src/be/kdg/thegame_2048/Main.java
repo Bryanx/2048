@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048;
 
+import be.kdg.thegame_2048.views.views.NewPlayerView;
 import be.kdg.thegame_2048.views.views.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,10 +14,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //KLASSEN AANAMKEN
-        StartView startView = new StartView();
+        NewPlayerView newPlayerView = new NewPlayerView();
 
         //SCENE SAMENSTELLEN
-        Scene scene = new Scene(startView);
+        Scene scene = new Scene(newPlayerView);
         primaryStage.setScene(scene);
         //add stylesheet:
         //scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");

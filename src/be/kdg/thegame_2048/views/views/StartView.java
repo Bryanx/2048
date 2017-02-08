@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
  * @version 1.0 5/02/2017 18:49
  */
 public class StartView extends BorderPane {
-    public static final Color BG_COLOR = Color.rgb(236,196,0);
-    public static final int OVERALL_PADDING = 50;
+    private static final Color BG_COLOR = Color.rgb(236,196,0);
+    private static final int OVERALL_PADDING = 50;
     private ImageView logo;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
