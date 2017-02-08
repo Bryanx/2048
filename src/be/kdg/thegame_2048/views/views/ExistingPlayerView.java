@@ -13,9 +13,9 @@ import javafx.scene.text.FontWeight;
 
 /**
  * @author Bryan de Ridder
- * @version 1.0 08-02-17 17:03
+ * @version 1.0 08-02-17 18:09
  */
-public class NewPlayerView extends BorderPane {
+public class ExistingPlayerView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
     private static final Paint BG_COLOR = Color.rgb(236, 196, 0);
     private ImageView logo;
@@ -23,7 +23,7 @@ public class NewPlayerView extends BorderPane {
     private TextField tfNewPlayer;
     private Label nameExistsError;
 
-    public NewPlayerView() {
+    public ExistingPlayerView() {
         initialiseNodes();
         layoutNodes();
     }
@@ -32,21 +32,18 @@ public class NewPlayerView extends BorderPane {
         //Same as in the StartView class, maybe put inside an interface
         this.logo = new ImageView("be/kdg/thegame_2048/views/views/img/logo.png");
 
-        //NewPlayerView:
-        //Label What's your name? has 30px padding on the bottom
-        this.lblNewPlayer = new Label("What's your name?");
+        //ExistingPlayerView
+        this.lblNewPlayer = new Label("Enter your existing name?");
         lblNewPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 35));
         lblNewPlayer.setPadding(new Insets(0,0,30,0));
         lblNewPlayer.setTextFill(Color.rgb(0,100,100));
 
-        //Input field
         this.tfNewPlayer = new TextField();
         tfNewPlayer.setPrefHeight(40);
         tfNewPlayer.setMaxWidth(210);
         tfNewPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 23));
 
-        //Optional error message, should be invisible by default
-        this.nameExistsError = new Label("Sorry, this name already exists :(");
+        this.nameExistsError = new Label("Sorry, this name doesn't exist :(");
         nameExistsError.setPadding(new Insets(15,0,0,0));
         nameExistsError.setTextFill(Color.DARKRED);
         nameExistsError.setVisible(false);
@@ -61,7 +58,7 @@ public class NewPlayerView extends BorderPane {
         this.setPadding(new Insets(OVERALL_PADDING));
         this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        //NewPlayerView:
+        //ExistingPlayerView
         VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError);
         middle.setAlignment(Pos.TOP_CENTER);
         this.setCenter(middle);
