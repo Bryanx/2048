@@ -19,21 +19,13 @@ public class PlayerManager {
         return playerNowPlaying;
     }
 
-    private void addPlayer(String namePlayer) {
+    public void addPlayer(String namePlayer) {
+        if (!isUnique(namePlayer)) return;
         playerList.add(new Player(namePlayer, 0));
-        for (Player player : playerList) {
-            if (player.getName().equals(namePlayer)) {
-                this.playerNowPlaying = player;
-                //Vanaf de speler gevonden is, gaan we uit de methoden
-                //De speler wordt altijd teruggevonden,
-                // omdat dit al op voorhand gechecked is in de isUnique methode.
-                return;
-            }
-        }
     }
 
     //Voor het aanmaken van een nieuwe speler.
-    public boolean isUnique(String namePlayer) throws IllegalArgumentException {
+    private boolean isUnique(String namePlayer) throws IllegalArgumentException {
         //Ja kan diet niet oplossen met de methode contains,
         //Want dan gaat die kijken of het object Player uniek is en niet de naam.
         for (Player player : playerList) {
