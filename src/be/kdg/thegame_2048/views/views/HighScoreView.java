@@ -31,7 +31,7 @@ public class HighScoreView extends BorderPane {
 
     public HighScoreView() {
         initialiseNodes();
-        updateView();
+        layoutNodes();
     }
 
     private void initialiseNodes() {
@@ -67,7 +67,7 @@ public class HighScoreView extends BorderPane {
         }
     }
 
-    private void updateView() {
+    private void layoutNodes() {
         GridPane grid = new GridPane();
         grid.add(lblColumnNameRank, 0, 0);
         GridPane.setMargin(lblColumnNameRank, new Insets(0, 15, 0, 0));
