@@ -10,72 +10,72 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author Bryan de Ridder
  * @version 1.0 08-02-17 18:55
  */
 public class HighScoreView extends BorderPane {
-    private static final int TOTAL_RANKS = 8;
     private static final Paint BG_COLOR = Color.rgb(236, 196, 0);
     private static final double OVERALL_PADDING = 50;
+    private int playerAmount;
     private Label lblHighScores;
-    private Label lblColumnNameRank;
-    private Label lblColumnNameName;
-    private Label lblColumnNameScore;
     private List<Label> ranks;
     private List<Label> names;
     private List<Label> scores;
+    private List<String> updatedScores;
 
     public HighScoreView() {
+    }
+
+    public void displayCurrentHighScore(String[] namen, int[] bestScores) {
+        this.playerAmount = namen.length;
+
+        updatedScores = new ArrayList<>();
+        for (int i = 0; i < playerAmount; i++) {
+            String zin = namen[i] + "," + bestScores[i] + ";";
+            updatedScores.add(i, zin);
+        }
+
+        Collections.sort(updatedScores, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String score1 = o1.split(",")[1].replace(";","");
+                String score2 = o2.split(",")[1].replace(";","");
+                return Integer.parseInt(score2) - Integer.parseInt(score1);
+            }
+        });
+
+        System.out.println(updatedScores.get(0).split(",")[0]);
+
         initialiseNodes();
         layoutNodes();
     }
 
     private void initialiseNodes() {
 //        this.lblHighScores = lblHighScores;
-        this.lblColumnNameRank = new Label("RANK");
-        this.lblColumnNameName = new Label("NAME");
-        this.lblColumnNameScore = new Label("SCORE");
-        this.lblColumnNameRank.setFont(Font.font("Arial", FontWeight.BOLD, 22));
-        this.lblColumnNameRank.setTextFill(Color.rgb(0, 100, 100));
-        this.lblColumnNameName.setFont(Font.font("Arial", FontWeight.BOLD, 22));
-        this.lblColumnNameName.setTextFill(Color.rgb(0, 100, 100));
-        this.lblColumnNameScore.setFont(Font.font("Arial", FontWeight.BOLD, 22));
-        this.lblColumnNameScore.setTextFill(Color.rgb(0, 100, 100));
 
         this.ranks = new ArrayList<>();
         this.names = new ArrayList<>();
         this.scores = new ArrayList<>();
 
-        //Updating the hiscore list, the information should be put here:
-        for (int i = 0; i <= TOTAL_RANKS + 1; i++) {
-            ranks.add(new Label(i + "."));
-            names.add(new Label("Michiel"));
-            scores.add(new Label(Integer.toString(i * i * i * i * i * i)));
-        }
+        ranks.add(new Label("RANK"));
+        names.add(new Label("NAME"));
+        scores.add(new Label("SCORE"));
 
-        for (int i = 0; i <= TOTAL_RANKS + 1; i++) {
-            ranks.get(i).setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 25));
-            ranks.get(i).setTextFill(Color.rgb(0, 100, 100));
-            names.get(i).setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 25));
-            names.get(i).setTextFill(Color.rgb(0, 100, 100));
-            scores.get(i).setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 25));
-            scores.get(i).setTextFill(Color.rgb(0, 100, 100));
+        for (int i = 0; i < playerAmount; i++) {
+            ranks.add(new Label(i + 1 + "."));
+            names.add(new Label(updatedScores.get(i).split(",")[0]));
+            scores.add(new Label(updatedScores.get(i).split(",")[1].replace(";","")));
         }
     }
 
     private void layoutNodes() {
         GridPane grid = new GridPane();
-        grid.add(lblColumnNameRank, 0, 0);
-        GridPane.setMargin(lblColumnNameRank, new Insets(0, 15, 0, 0));
-        grid.add(lblColumnNameName, 1, 0);
-        grid.add(lblColumnNameScore, 2, 0);
-        GridPane.setHalignment(lblColumnNameScore, HPos.RIGHT);
 
-        for (int i = 1; i < TOTAL_RANKS + 1; i++) {
+        for (int i = 0; i < playerAmount + 1; i++) {
             grid.add(ranks.get(i), 0, i);
             GridPane.setMargin(ranks.get(i), new Insets(0, 15, 0, 0));
             grid.add(names.get(i), 1, i);

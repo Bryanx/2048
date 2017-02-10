@@ -1,10 +1,8 @@
 package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.views.ExistingPlayerView;
+import be.kdg.thegame_2048.views.presenters.TestPresenter;
 import be.kdg.thegame_2048.views.views.HighScoreView;
-import be.kdg.thegame_2048.views.views.NewPlayerView;
-import be.kdg.thegame_2048.views.views.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,12 +18,13 @@ public class Main extends Application {
         PlayerManager manager = new PlayerManager();
 
         HighScoreView hsView = new HighScoreView();
+        new TestPresenter(hsView);
 
         //SCENE SAMENSTELLEN
         Scene scene = new Scene(hsView);
         primaryStage.setScene(scene);
         //add stylesheet:
-        //scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
+        scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
         primaryStage.setMinHeight(700);
         primaryStage.setMinWidth(450);
         primaryStage.setTitle("2048");
