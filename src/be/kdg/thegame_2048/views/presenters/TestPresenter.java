@@ -21,8 +21,14 @@ public class TestPresenter {
     }
 
     private void updateView() {
-        String[] namen = {"Jeroen", "Paul","Henk", "Vlaas","Mark", "Jarne","Bryan", "René"};
-        int[] bestScores = {123, 324535,45,6,546,567,6,787};
-        view.displayCurrentHighScore(namen, bestScores);
+        String namen = "Jeroen,123\n" +
+                "Paul,324535\n" +
+                "Henk,45\n" +
+                "Vlaas,6\n" +
+                "Mark,546\n" +
+                "Jarne,567\n" +
+                "Bryan,7\n" +
+                "René,787";
+        view.updateHighScore(namen);
     }
 }

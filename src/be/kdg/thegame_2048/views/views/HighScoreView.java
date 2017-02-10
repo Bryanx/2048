@@ -30,25 +30,26 @@ public class HighScoreView extends BorderPane {
     public HighScoreView() {
     }
 
-    public void displayCurrentHighScore(String[] namen, int[] bestScores) {
-        this.playerAmount = namen.length;
+    public void updateHighScore(String newScores) {
+        this.updatedScores = new ArrayList<>();
 
-        updatedScores = new ArrayList<>();
+        //specify the amount of total scores
+        this.playerAmount = newScores.split("\n").length;
+
+        //add the new scores to the list
         for (int i = 0; i < playerAmount; i++) {
-            String zin = namen[i] + "," + bestScores[i] + ";";
-            updatedScores.add(i, zin);
+            this.updatedScores.add(i, newScores.split("\n")[i]);
         }
 
+        //sorts the new scores on score:
         Collections.sort(updatedScores, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                String score1 = o1.split(",")[1].replace(";","");
-                String score2 = o2.split(",")[1].replace(";","");
+                String score1 = o1.split(",")[1];
+                String score2 = o2.split(",")[1];
                 return Integer.parseInt(score2) - Integer.parseInt(score1);
             }
         });
-
-        System.out.println(updatedScores.get(0).split(",")[0]);
 
         initialiseNodes();
         layoutNodes();
@@ -68,7 +69,7 @@ public class HighScoreView extends BorderPane {
         for (int i = 0; i < playerAmount; i++) {
             ranks.add(new Label(i + 1 + "."));
             names.add(new Label(updatedScores.get(i).split(",")[0]));
-            scores.add(new Label(updatedScores.get(i).split(",")[1].replace(";","")));
+            scores.add(new Label(updatedScores.get(i).split(",")[1]));
         }
     }
 

@@ -1,9 +1,13 @@
 .root{
-    -fx-background: yellow;
+    -fx-background: rgb(236, 196, 0);
+    -fx-font-family: "Calibri";
+    -fx-font-size: 18pt;
+    -fx-font-color: rgb(0,100,100);
 }
-.toggle-button {
+.button {
+    -fx-background-color: none;
 }
 
-.toggle-button:hover {
+.button:hover {
     -fx-graphic: url("../views/views/img/existingplayer-hover.png");
 }
