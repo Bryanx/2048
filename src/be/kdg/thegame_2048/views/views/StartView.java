@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
  * @version 1.0 5/02/2017 18:49
  */
 public class StartView extends BorderPane {
-    private static final Color BG_COLOR = Color.rgb(236,196,0);
     private static final int OVERALL_PADDING = 50;
     private ImageView logo;
     private Button btnNewPlayer;
@@ -29,16 +28,14 @@ public class StartView extends BorderPane {
         this.logo = new ImageView("be/kdg/thegame_2048/views/views/img/logo.png");
 
         //Creates the New Player button and adds an icon:
-        this.btnNewPlayer = new Button();
-        btnNewPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/newplayer.png"));
-        btnNewPlayer.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-        btnNewPlayer.setCursor(Cursor.HAND);
+        this.btnNewPlayer = new Button("New Player");
+        btnNewPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/ufo.png"));
+        btnNewPlayer.setGraphicTextGap(10);
 
         //Creates the Existing Player button and adds an icon:
-        this.btnExistingPlayer = new Button();
-        btnExistingPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/existingplayer.png"));
-        btnExistingPlayer.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-        btnExistingPlayer.setCursor(Cursor.HAND);
+        this.btnExistingPlayer = new Button("Existing Player");
+        btnExistingPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/user.png"));
+        btnExistingPlayer.setGraphicTextGap(10);
     }
 
     private void layoutNodes() {
@@ -50,6 +47,7 @@ public class StartView extends BorderPane {
 
         //Middle of the StartView, 2 buttons are stacked inside a GridPane:
         GridPane middle = new GridPane();
+        middle.setAlignment(Pos.TOP_CENTER);
         middle.add(btnNewPlayer, 0, 0);
         middle.add(btnExistingPlayer, 0, 1);
         middle.setAlignment(Pos.TOP_CENTER);
@@ -57,6 +55,5 @@ public class StartView extends BorderPane {
 
         //Properties for the entire screen:
         this.setPadding(new Insets(OVERALL_PADDING));
-        this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 }

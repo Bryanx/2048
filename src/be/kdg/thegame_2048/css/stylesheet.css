@@ -1,13 +1,37 @@
-.root{
+/*
+Font colors:
+rgb(0,100,100)
+
+BG colors:
+rgb(236, 196, 0)
+*/
+
+.root, .label{
     -fx-background: rgb(236, 196, 0);
     -fx-font-family: "Calibri";
-    -fx-font-size: 18pt;
-    -fx-font-color: rgb(0,100,100);
+    -fx-font-size: 25pt;
+    -fx-text-fill: rgb(0,100,100);
 }
+.tfPlayer {
+    -fx-font-size: 18pt;
+}
+
 .button {
     -fx-background-color: none;
+    -fx-font-family: "Calibri";
+    -fx-font-size: 26pt;
+    -fx-text-fill: rgb(0,100,100);
+    -fx-cursor: hand;
 }
 
 .button:hover {
-    -fx-graphic: url("../views/views/img/existingplayer-hover.png");
+    -fx-text-fill: white;
+}
+
+.button:pressed {
+    -fx-text-fill: black;
+}
+.inputError {
+    -fx-font-size: 14pt;
+    -fx-text-fill: darkred;
 }

@@ -17,10 +17,9 @@ import javafx.scene.text.FontWeight;
  */
 public class ExistingPlayerView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
-    private static final Paint BG_COLOR = Color.rgb(236, 196, 0);
     private ImageView logo;
-    private Label lblExistingPlayer;
     private TextField tfExistingPlayer;
+    private Label lblExistingPlayer;
     private Label nameDoesntExistError;
 
     public ExistingPlayerView() {
@@ -33,20 +32,20 @@ public class ExistingPlayerView extends BorderPane {
         this.logo = new ImageView("be/kdg/thegame_2048/views/views/img/logo.png");
 
         //ExistingPlayerView
-        this.lblExistingPlayer = new Label("Enter your existing name?");
-        lblExistingPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 35));
+        this.lblExistingPlayer = new Label("Enter your existing name");
         lblExistingPlayer.setPadding(new Insets(0,0,30,0));
-        lblExistingPlayer.setTextFill(Color.rgb(0,100,100));
 
+        //Textfield is set up
         this.tfExistingPlayer = new TextField();
         tfExistingPlayer.setPrefHeight(40);
         tfExistingPlayer.setMaxWidth(210);
-        tfExistingPlayer.setFont(Font.font("Calibri", FontWeight.SEMI_BOLD, 23));
+        tfExistingPlayer.getStyleClass().add("tfPlayer");
 
+        //Potential error is set up, setvisible true to turn on
         this.nameDoesntExistError = new Label("Sorry, this name doesn't exist :(");
         nameDoesntExistError.setPadding(new Insets(15,0,0,0));
-        nameDoesntExistError.setTextFill(Color.DARKRED);
         nameDoesntExistError.setVisible(false);
+        nameDoesntExistError.getStyleClass().add("inputError");
     }
 
     private void layoutNodes() {
@@ -56,11 +55,13 @@ public class ExistingPlayerView extends BorderPane {
         top.setPadding(new Insets(0, 0, 100, 0));
         this.setTop(top);
         this.setPadding(new Insets(OVERALL_PADDING));
-        this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
+        this.setMaxWidth(450);
 
         //ExistingPlayerView
         VBox middle = new VBox(lblExistingPlayer, tfExistingPlayer, nameDoesntExistError);
         middle.setAlignment(Pos.TOP_CENTER);
         this.setCenter(middle);
     }
+
+
 }

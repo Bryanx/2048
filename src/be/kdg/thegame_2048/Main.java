@@ -2,7 +2,9 @@ package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.presenters.TestPresenter;
+import be.kdg.thegame_2048.views.views.ExistingPlayerView;
 import be.kdg.thegame_2048.views.views.HighScoreView;
+import be.kdg.thegame_2048.views.views.NewPlayerView;
 import be.kdg.thegame_2048.views.views.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,7 +20,7 @@ public class Main extends Application {
         //KLASSEN AANAMKEN
         PlayerManager manager = new PlayerManager();
 
-        StartView hsView = new StartView();
+        HighScoreView hsView = new HighScoreView();
 //        new TestPresenter(hsView);
 
         //SCENE SAMENSTELLEN
