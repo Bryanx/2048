@@ -35,3 +35,28 @@ rgb(236, 196, 0)
     -fx-font-size: 14pt;
     -fx-text-fill: darkred;
 }
+
+.backButton:hover {
+    -fx-graphic: url("../views/views/img/left-arrow-hover.png");
+}
+.backButton:pressed {
+    -fx-graphic: url("../views/views/img/left-arrow-pressed.png");
+}
+
+/* High Scores */
+.hsColumnNames {
+    -fx-font-family: "PT Sans Narrow";
+    -fx-font-size: 14pt;
+}
+
+.hsColumnFillRanks {
+    -fx-font-size: 16pt;
+    -fx-font-family: "PT Sans";
+    -fx-font-weight: bold;
+}
+
+.hsColumnFill {
+    -fx-font-size: 16pt;
+    -fx-font-family: "PT Sans Narrow";
+    -fx-font-weight: lighter;
+}

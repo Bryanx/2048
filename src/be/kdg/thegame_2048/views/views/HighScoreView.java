@@ -3,6 +3,7 @@ package be.kdg.thegame_2048.views.views;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -25,6 +26,7 @@ public class HighScoreView extends BorderPane {
     private List<Label> ranks;
     private List<Label> names;
     private List<Label> scores;
+    private Button goBack;
 
     public HighScoreView() {
         initialiseNodes();
@@ -34,6 +36,8 @@ public class HighScoreView extends BorderPane {
     private void initialiseNodes() {
         this.lblHighScores = new Label("2048 High Scores");
         lblHighScores.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/cup.png"));
+        lblHighScores.setGraphicTextGap(10);
+        lblHighScores.getStyleClass().add("HighScoreHeader");
 
         //Initialize highscore
         this.ranks = new ArrayList<>();
@@ -41,35 +45,59 @@ public class HighScoreView extends BorderPane {
         this.scores = new ArrayList<>();
 
         //Adds the Column names
-        ranks.add(new Label("RANK"));
-        names.add(new Label("NAME"));
-        scores.add(new Label("SCORE"));
+        ranks.add(new Label("Rank"));
+        names.add(new Label("Name"));
+        scores.add(new Label("Score"));
+        ranks.get(0).getStyleClass().add("hsColumnNames");
+        names.get(0).getStyleClass().add("hsColumnNames");
+        scores.get(0).getStyleClass().add("hsColumnNames");
 
         //Creates the list
         for (int i = 0; i < playerAmount; i++) {
-            ranks.add(new Label(i + 1 + "."));
-            names.add(new Label("naam"));
-            scores.add(new Label("score"));
+            ranks.add(new Label(i + 1 + ""));
+            names.add(new Label("Naam"));
+            scores.add(new Label("0"));
+            ranks.get(i+1).getStyleClass().add("hsColumnFillRanks");
+            names.get(i+1).getStyleClass().add("hsColumnFill");
+            scores.get(i+1).getStyleClass().add("hsColumnFill");
         }
+
+        //back button
+        goBack = new Button();
+        goBack.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/left-arrow.png"));
+        goBack.getStyleClass().add("backButton");
     }
 
     private void layoutNodes() {
-        //TOP
-        this.setTop(lblHighScores);
+        //TOP (high score label)
+        BorderPane top = new BorderPane();
+        top.setCenter(lblHighScores);
+        this.setTop(top);
+        top.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        top.setMargin(lblHighScores, new Insets(OVERALL_PADDING/2, 0, OVERALL_PADDING/2, 0));
 
-        //MIDDLE
+        //MIDDLE (scores)
+        BorderPane middle = new BorderPane();
         GridPane grid = new GridPane();
         for (int i = 0; i < playerAmount + 1; i++) {
             grid.add(ranks.get(i), 0, i);
-            GridPane.setMargin(ranks.get(i), new Insets(0, 15, 0, 0));
+            GridPane.setMargin(ranks.get(i), new Insets(0, OVERALL_PADDING/2, 0, 0));
             grid.add(names.get(i), 1, i);
-            GridPane.setMargin(names.get(i), new Insets(0, 80, 0, 0));
+            GridPane.setMargin(names.get(i), new Insets(0, OVERALL_PADDING*2, 0, 0));
             grid.add(scores.get(i), 2, i);
             GridPane.setHalignment(scores.get(i), HPos.RIGHT);
         }
-        grid.setVgap(15);
-        grid.setAlignment(Pos.CENTER);
-        this.setCenter(grid);
-        this.setPadding(new Insets(OVERALL_PADDING));
+        grid.setVgap(20);
+        grid.setAlignment(Pos.TOP_CENTER);
+        middle.setCenter(grid);
+        middle.setPadding(new Insets(OVERALL_PADDING, OVERALL_PADDING, OVERALL_PADDING/2, OVERALL_PADDING));
+
+        //BOTTOM (back button)
+        BorderPane bottom = new BorderPane();
+        bottom.setCenter(goBack);
+        bottom.setAlignment(goBack, Pos.TOP_CENTER);
+
+        VBox vBox = new VBox(middle, bottom);
+        this.setCenter(vBox);
     }
 }

@@ -6,6 +6,7 @@ import be.kdg.thegame_2048.views.views.ExistingPlayerView;
 import be.kdg.thegame_2048.views.views.HighScoreView;
 import be.kdg.thegame_2048.views.views.NewPlayerView;
 import be.kdg.thegame_2048.views.views.StartView;
+import com.sun.tools.javadoc.Start;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,8 +29,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
-        primaryStage.setMinHeight(700);
-        primaryStage.setMinWidth(450);
+        primaryStage.setMinHeight(750);
+        primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
         primaryStage.show();
     }

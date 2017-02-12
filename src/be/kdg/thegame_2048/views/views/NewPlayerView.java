@@ -2,6 +2,7 @@ package be.kdg.thegame_2048.views.views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ public class NewPlayerView extends BorderPane {
     private Label lblNewPlayer;
     private TextField tfNewPlayer;
     private Label nameExistsError;
+    private Button goBack;
 
     public NewPlayerView() {
         initialiseNodes();
@@ -46,6 +48,11 @@ public class NewPlayerView extends BorderPane {
         nameExistsError.setPadding(new Insets(15,0,0,0));
         nameExistsError.setVisible(false);
         nameExistsError.getStyleClass().add("inputError");
+
+        //back button
+        goBack = new Button();
+        goBack.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/left-arrow.png"));
+        goBack.getStyleClass().add("backButton");
     }
 
     private void layoutNodes() {
@@ -58,7 +65,7 @@ public class NewPlayerView extends BorderPane {
         this.setMaxWidth(450);
 
         //NewPlayerView:
-        VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError);
+        VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError, goBack);
         middle.setAlignment(Pos.TOP_CENTER);
         this.setCenter(middle);
     }
