@@ -6,7 +6,7 @@ import java.util.Random;
  * @author Jarne Van Aerde
  * @version 1.0 8/02/2017 17:44
  */
-public class Playground {
+class Playground {
     //EIGENSCAPPEN
     private static final Random blockGen = new Random();
     private static final int NUMBER_OF_H_SECTIONS = 4;
@@ -15,24 +15,15 @@ public class Playground {
     private Score score;
 
     //CONSTRUCTORS
-    public Playground(Score score) {
+    Playground(Score score) {
         this.score = score;
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
         initialiseSections();
-        this.sections[0][1].putBlock(new Block(4));
-        this.sections[0][2].putBlock(new Block(2));
-        this.sections[1][1].putBlock(new Block(4));
-        this.sections[1][2].putBlock(new Block(2));
-        this.sections[1][3].putBlock(new Block(2));
-        this.sections[2][1].putBlock(new Block(8));
-        this.sections[2][3].putBlock(new Block(2));
-        System.out.println(toString());
-        moveBlocksTop();
-        System.out.println(toString());
+        addRandomBlocks();
     }
 
     //METHODEN
-    public Section[][] getSections() {
+    Section[][] getSections() {
         return sections;
     }
 
@@ -64,13 +55,15 @@ public class Playground {
         sectionOtherBlock.removeBlock();
     }
 
-    public void moveBlocksTop() {
+    void moveBlocksTop() {
         //ROW 1 AND 2
         boolean[] haveBlocksRow1 = haveBlocksRow1();
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        boolean[] alreadyMergedRow1AndRow2 = new boolean[NUMBER_OF_H_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[1][i].hasBlock() && haveBlocksRow1[i]) {
                 if (this.sections[1][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()) {
                     merge(this.sections[0][i], this.sections[1][i]);
+                    alreadyMergedRow1AndRow2[i] = true;
                 }
             } else if (this.sections[1][i].hasBlock() && !haveBlocksRow1[i]) {
                 this.sections[0][i].putBlock(this.sections[1][i].getBlock());
@@ -79,14 +72,18 @@ public class Playground {
         }
 
         //ROW 2 AND 3
+        haveBlocksRow1 = haveBlocksRow1();
         boolean[] haveBlocksRow2 = haveBlocksRow2();
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_H_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[2][i].hasBlock() && haveBlocksRow2[i]) {
                 if (this.sections[2][i].getBlock().getValue() == this.sections[1][i].getBlock().getValue()) {
                     merge(this.sections[1][i], this.sections[2][i]);
+                    alreadyMergedRow2AndRow3[i] = true;
                 }
             } else if (this.sections[2][i].hasBlock() && haveBlocksRow1[i]) {
-                if (this.sections[2][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()) {
+                if (this.sections[2][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()
+                        && !alreadyMergedRow1AndRow2[i]) {
                     merge(this.sections[0][i], this.sections[2][i]);
                 } else {
                     this.sections[1][i].putBlock(this.sections[2][i].getBlock());
@@ -98,43 +95,79 @@ public class Playground {
             }
         }
 
-        /*boolean[] haveBlocksRow3 = haveBlocksRow3();
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        //ROW 3 AND 4
+        haveBlocksRow1 = haveBlocksRow1();
+        haveBlocksRow2 = haveBlocksRow2();
+        boolean[] haveBlocksRow3 = haveBlocksRow3();
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[3][i].hasBlock() && haveBlocksRow3[i]) {
-                //TODO
-            } else if (this.sections[3][i].hasBlock())
-        }*/
+                if (this.sections[3][i].getBlock().getValue() == this.sections[2][i].getBlock().getValue()) {
+                    merge(this.sections[2][i], this.sections[3][i]);
+                }
+            } else if (this.sections[3][i].hasBlock() && haveBlocksRow2[i]) {
+                if (this.sections[3][i].getBlock().getValue() == this.sections[1][i].getBlock().getValue()
+                        && !alreadyMergedRow2AndRow3[i]) {
+                    merge(this.sections[1][i], this.sections[3][i]);
+                } else {
+                    this.sections[2][i].putBlock(this.sections[3][i].getBlock());
+                    this.sections[3][i].removeBlock();
+                }
+            } else if (this.sections[3][i].hasBlock() && haveBlocksRow1[i]) {
+                if (this.sections[3][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()
+                        && !alreadyMergedRow1AndRow2[i] && !alreadyMergedRow2AndRow3[i]) {
+                    merge(this.sections[0][i], this.sections[3][i]);
+                } else {
+                    this.sections[1][i].putBlock(this.sections[3][i].getBlock());
+                    this.sections[3][i].removeBlock();
+                }
+            } else if (this.sections[3][i].hasBlock() && !haveBlocksRow1[i]) {
+                this.sections[0][i].putBlock(this.sections[3][i].getBlock());
+                this.sections[3][i].removeBlock();
+            }
+        }
 
-        boolean[] haveBlocksRow4 = haveBlocksRow4();
+        addRandomBlocks();
+    }
+
+    void moveBlocksBottom() {
+
+    }
+
+    void moveBlocksLeft() {
+
+    }
+
+    void moveBlocksRight() {
+
     }
 
     private boolean[] haveBlocksRow1() {
-        boolean[] haveBlocksRow1 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        boolean[] haveBlocksRow1 = new boolean[NUMBER_OF_H_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[0][i].hasBlock()) haveBlocksRow1[i] = true;
         }
         return haveBlocksRow1;
     }
 
     private boolean[] haveBlocksRow2() {
-        boolean[] haveBlocksRow2 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        boolean[] haveBlocksRow2 = new boolean[NUMBER_OF_H_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[1][i].hasBlock()) haveBlocksRow2[i] = true;
         }
         return haveBlocksRow2;
     }
 
     private boolean[] haveBlocksRow3() {
-        boolean[] haveBlocksRow3 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        boolean[] haveBlocksRow3 = new boolean[NUMBER_OF_H_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[2][i].hasBlock()) haveBlocksRow3[i] = true;
         }
         return haveBlocksRow3;
     }
 
     private boolean[] haveBlocksRow4() {
-        boolean[] haveBlocksRow4 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+        boolean[] haveBlocksRow4 = new boolean[NUMBER_OF_H_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (this.sections[3][i].hasBlock()) haveBlocksRow4[i] = true;
         }
         return haveBlocksRow4;

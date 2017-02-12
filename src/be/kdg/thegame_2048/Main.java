@@ -1,8 +1,7 @@
 package be.kdg.thegame_2048;
 
+import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.models.Playground;
-import be.kdg.thegame_2048.models.Score;
 import be.kdg.thegame_2048.views.views.HighScoreView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //KLASSEN AANAMKEN
         PlayerManager manager = new PlayerManager();
-        Playground playground = new Playground(new Score());
+        Game game = new Game(manager);
 
         HighScoreView hsView = new HighScoreView();
 //        new TestPresenter(hsView);
