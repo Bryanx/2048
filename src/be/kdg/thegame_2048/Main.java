@@ -13,22 +13,22 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        //KLASSEN AANAMKEN
+    public void start(Stage primaryStage) {
+        //MAKING CLASSES
         PlayerManager manager = new PlayerManager();
         Game game = new Game(manager);
 
         HighScoreView hsView = new HighScoreView();
-//        new TestPresenter(hsView);
-        //SCENE SAMENSTELLEN
+
+        //PUTTING TOGETHER THE SCENE
         Scene scene = new Scene(hsView);
-        primaryStage.setScene(scene);
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
+        primaryStage.setScene(scene);
         primaryStage.setMinHeight(750);
         primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
-        //primaryStage.show();
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

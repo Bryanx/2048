@@ -6,7 +6,7 @@ import java.util.List;
  * @author Jarne Van Aerde
  * @version 1.0 8/02/2017 17:17
  */
-public class PlayerManager {
+public final class PlayerManager {
     //EIGENSCHAPPEN
     private List<Player> playerList;
     private Player playerNowPlaying;

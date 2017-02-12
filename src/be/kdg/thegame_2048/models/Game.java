@@ -4,7 +4,7 @@ package be.kdg.thegame_2048.models;
  * @author Jarne Van Aerde
  * @version 1.0 12/02/2017 19:40
  */
-public class Game {
+public final class Game {
     //ATTRIBUTES
     private enum Direction {
         TOP, BOTTTOM, LEFT, RIGHT

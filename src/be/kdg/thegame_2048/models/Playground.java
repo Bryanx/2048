@@ -6,7 +6,7 @@ import java.util.Random;
  * @author Jarne Van Aerde
  * @version 1.0 8/02/2017 17:44
  */
-class Playground {
+final class Playground {
     //EIGENSCAPPEN
     private static final Random blockGen = new Random();
     private static final int NUMBER_OF_H_SECTIONS = 4;
