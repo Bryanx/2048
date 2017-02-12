@@ -2,6 +2,7 @@ package be.kdg.thegame_2048.views.views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ public class ExistingPlayerView extends BorderPane {
     private TextField tfExistingPlayer;
     private Label lblExistingPlayer;
     private Label nameDoesntExistError;
+    private Button goBack;
 
     public ExistingPlayerView() {
         initialiseNodes();
@@ -33,7 +35,7 @@ public class ExistingPlayerView extends BorderPane {
 
         //ExistingPlayerView
         this.lblExistingPlayer = new Label("Enter your existing name");
-        lblExistingPlayer.setPadding(new Insets(0,0,30,0));
+        lblExistingPlayer.setPadding(new Insets(0,0,OVERALL_PADDING/2,0));
 
         //Textfield is set up
         this.tfExistingPlayer = new TextField();
@@ -43,22 +45,27 @@ public class ExistingPlayerView extends BorderPane {
 
         //Potential error is set up, setvisible true to turn on
         this.nameDoesntExistError = new Label("Sorry, this name doesn't exist :(");
-        nameDoesntExistError.setPadding(new Insets(15,0,0,0));
+        nameDoesntExistError.setPadding(new Insets(OVERALL_PADDING/10,0,-OVERALL_PADDING/10,0));
         nameDoesntExistError.setVisible(false);
         nameDoesntExistError.getStyleClass().add("inputError");
+
+        //back button
+        goBack = new Button();
+        goBack.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/left-arrow.png"));
+        goBack.getStyleClass().add("backButton");
     }
 
     private void layoutNodes() {
         //Same as in the StartView class, maybe put inside an interface
         BorderPane top = new BorderPane();
         top.setCenter(logo);
-        top.setPadding(new Insets(0, 0, 100, 0));
+        top.setPadding(new Insets(0, 0, OVERALL_PADDING*2, 0));
         this.setTop(top);
         this.setPadding(new Insets(OVERALL_PADDING));
         this.setMaxWidth(450);
 
         //ExistingPlayerView
-        VBox middle = new VBox(lblExistingPlayer, tfExistingPlayer, nameDoesntExistError);
+        VBox middle = new VBox(lblExistingPlayer, tfExistingPlayer, nameDoesntExistError, goBack);
         middle.setAlignment(Pos.TOP_CENTER);
         this.setCenter(middle);
     }

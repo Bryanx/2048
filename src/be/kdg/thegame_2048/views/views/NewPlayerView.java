@@ -35,7 +35,7 @@ public class NewPlayerView extends BorderPane {
 
         //NewPlayerView
         this.lblNewPlayer = new Label("What's your name?");
-        lblNewPlayer.setPadding(new Insets(0,0,30,0));
+        lblNewPlayer.setPadding(new Insets(0,0,OVERALL_PADDING/2,0));
 
         //Textfield is set up
         this.tfNewPlayer = new TextField();
@@ -45,7 +45,7 @@ public class NewPlayerView extends BorderPane {
 
         //Optional error message, should be invisible by default
         this.nameExistsError = new Label("Sorry, this name already exists :(");
-        nameExistsError.setPadding(new Insets(15,0,0,0));
+        nameExistsError.setPadding(new Insets(OVERALL_PADDING/10,0,-OVERALL_PADDING/10,0));
         nameExistsError.setVisible(false);
         nameExistsError.getStyleClass().add("inputError");
 
@@ -59,7 +59,7 @@ public class NewPlayerView extends BorderPane {
         //Same as in the StartView class, maybe put inside an interface
         BorderPane top = new BorderPane();
         top.setCenter(logo);
-        top.setPadding(new Insets(0, 0, 100, 0));
+        top.setPadding(new Insets(0, 0, OVERALL_PADDING*2, 0));
         this.setTop(top);
         this.setPadding(new Insets(OVERALL_PADDING));
         this.setMaxWidth(450);

@@ -8,12 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * @author Bryan de Ridder
@@ -23,9 +19,12 @@ public class HighScoreView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
     private int playerAmount = 8;
     private Label lblHighScores;
-    private List<Label> ranks;
-    private List<Label> names;
-    private List<Label> scores;
+    //lblHsNames.get(1) the name of rank 1
+    //lblHsScores.get(1) is the score of rank 1
+    private List<Label> lblHsRanks;
+    private List<Label> lblHsNames;
+    private List<Label> lblHsScores;
+
     private Button goBack;
 
     public HighScoreView() {
@@ -34,70 +33,80 @@ public class HighScoreView extends BorderPane {
     }
 
     private void initialiseNodes() {
+        //Top side of the highscores
         this.lblHighScores = new Label("2048 High Scores");
         lblHighScores.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/cup.png"));
         lblHighScores.setGraphicTextGap(10);
-        lblHighScores.getStyleClass().add("HighScoreHeader");
 
-        //Initialize highscore
-        this.ranks = new ArrayList<>();
-        this.names = new ArrayList<>();
-        this.scores = new ArrayList<>();
+        //Initialize highscorelist
+        this.lblHsRanks = new ArrayList<>();
+        this.lblHsNames = new ArrayList<>();
+        this.lblHsScores = new ArrayList<>();
 
-        //Adds the Column names
-        ranks.add(new Label("Rank"));
-        names.add(new Label("Name"));
-        scores.add(new Label("Score"));
-        ranks.get(0).getStyleClass().add("hsColumnNames");
-        names.get(0).getStyleClass().add("hsColumnNames");
-        scores.get(0).getStyleClass().add("hsColumnNames");
+        //Adds the Column lblHsNames to the highscorelist
+        lblHsRanks.add(new Label("Rank"));
+        lblHsNames.add(new Label("Name"));
+        lblHsScores.add(new Label("Score"));
 
-        //Creates the list
+        //Adds the players to the highscorelist
+        //Number 1 on the list is also rank 1 of the highscores
         for (int i = 0; i < playerAmount; i++) {
-            ranks.add(new Label(i + 1 + ""));
-            names.add(new Label("Naam"));
-            scores.add(new Label("0"));
-            ranks.get(i+1).getStyleClass().add("hsColumnFillRanks");
-            names.get(i+1).getStyleClass().add("hsColumnFill");
-            scores.get(i+1).getStyleClass().add("hsColumnFill");
+            lblHsRanks.add(new Label(i + 1 + "")); //Rank
+            lblHsNames.add(new Label("Naam")); //Name
+            lblHsScores.add(new Label("Score")); //Score
         }
 
         //back button
         goBack = new Button();
         goBack.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/left-arrow.png"));
-        goBack.getStyleClass().add("backButton");
+        addStyles();
     }
 
     private void layoutNodes() {
-        //TOP (high score label)
+        //TOP (2048 High Scores)
         BorderPane top = new BorderPane();
         top.setCenter(lblHighScores);
         this.setTop(top);
-        top.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-        top.setMargin(lblHighScores, new Insets(OVERALL_PADDING/2, 0, OVERALL_PADDING/2, 0));
+        top.setBackground(new Background(new BackgroundFill(Color.rgb(215,180,7), CornerRadii.EMPTY, Insets.EMPTY)));
+        top.setMargin(lblHighScores, new Insets(OVERALL_PADDING / 2, 0, OVERALL_PADDING / 2, 0));
 
-        //MIDDLE (scores)
+        //MIDDLE (Actual highscores, including the column lblHsNames)
         BorderPane middle = new BorderPane();
         GridPane grid = new GridPane();
         for (int i = 0; i < playerAmount + 1; i++) {
-            grid.add(ranks.get(i), 0, i);
-            GridPane.setMargin(ranks.get(i), new Insets(0, OVERALL_PADDING/2, 0, 0));
-            grid.add(names.get(i), 1, i);
-            GridPane.setMargin(names.get(i), new Insets(0, OVERALL_PADDING*2, 0, 0));
-            grid.add(scores.get(i), 2, i);
-            GridPane.setHalignment(scores.get(i), HPos.RIGHT);
+            grid.add(lblHsRanks.get(i), 0, i);
+            GridPane.setMargin(lblHsRanks.get(i), new Insets(0, OVERALL_PADDING / 2, 0, 0));
+            grid.add(lblHsNames.get(i), 1, i);
+            GridPane.setMargin(lblHsNames.get(i), new Insets(0, OVERALL_PADDING * 2, 0, 0));
+            grid.add(lblHsScores.get(i), 2, i);
+            GridPane.setHalignment(lblHsScores.get(i), HPos.RIGHT);
         }
-        grid.setVgap(20);
+        grid.setVgap(OVERALL_PADDING / 5 * 2);
         grid.setAlignment(Pos.TOP_CENTER);
         middle.setCenter(grid);
-        middle.setPadding(new Insets(OVERALL_PADDING, OVERALL_PADDING, OVERALL_PADDING/2, OVERALL_PADDING));
+        middle.setPadding(new Insets(OVERALL_PADDING, OVERALL_PADDING, OVERALL_PADDING / 2, OVERALL_PADDING));
 
         //BOTTOM (back button)
         BorderPane bottom = new BorderPane();
         bottom.setCenter(goBack);
         bottom.setAlignment(goBack, Pos.TOP_CENTER);
 
+        //the highscores and back button are added to a vbox
         VBox vBox = new VBox(middle, bottom);
         this.setCenter(vBox);
+    }
+
+    private void addStyles() {
+        //These nodes are given a special styleclass name for CSS editing
+        lblHighScores.getStyleClass().add("hsHeader");
+        lblHsRanks.get(0).getStyleClass().add("hsColumnNames");
+        lblHsNames.get(0).getStyleClass().add("hsColumnNames");
+        lblHsScores.get(0).getStyleClass().add("hsColumnNames");
+        for (int i = 0; i < playerAmount; i++) {
+            lblHsRanks.get(i + 1).getStyleClass().add("hsColumnFillRanks");
+            lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
+            lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
+        }
+        goBack.getStyleClass().add("backButton");
     }
 }
