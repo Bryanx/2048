@@ -48,4 +48,13 @@ public class PlayerManager {
         }
         throw new IllegalArgumentException("This player doesn't exists, check if the name is spelled correctly.");
     }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Player player: this.playerList) {
+            s.append(player.toString() + "\n");
+        }
+        return s.toString();
+    }
 }

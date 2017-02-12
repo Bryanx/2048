@@ -9,29 +9,29 @@ import java.util.Random;
 public class Playground {
     //EIGENSCAPPEN
     private static final Random blockGen = new Random();
-    private static final int NUMBER_OF_SECTIONS = 16;
-    private Section[] sections;
+    private static final int NUMBER_OF_H_SECTIONS = 4;
+    private static final int NUMBER_OF_V_SECTIONS = 4;
+    private Section[][] sections;
     private Score score;
 
     //CONSTRUCTORS
     public Playground(Score score) {
         this.score = score;
-        this.sections = new Section[NUMBER_OF_SECTIONS];
+        this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
         initialiseSections();
         addRandomBlocks();
+        System.out.println(toString());
     }
 
     //METHODEN
-    public Section[] getSections() {
+    public Section[][] getSections() {
         return sections;
     }
 
     private void initialiseSections() {
-        //Ik hoop dat je dit snapt want ik zou niet weten hoe ik dit moet uitleggen haha!
-        int index = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                this.sections[index++] = new Section(String.valueOf(i) + String.valueOf(j)); //Bv. coord = 01 (eerste rij, tweede kolom.
+        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
+            for (int j = 0; j < NUMBER_OF_V_SECTIONS; j++) {
+                this.sections[i][j] = new Section();
             }
         }
     }
@@ -41,9 +41,10 @@ public class Playground {
         // Dit heeft niets te maken met dat de speler verloren zou hebben als hij niets vindt!
         //Dat wordt bepaald in de klasse Game!
         while (true) {
-            int index = blockGen.nextInt(16);
-            if (!this.sections[index].hasBlock()) {
-                this.sections[index].putBlock(new Block(2));
+            int indexH = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
+            int indexV = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
+            if (!this.sections[indexH][indexV].hasBlock()) {
+                this.sections[indexH][indexV].putBlock(new Block(2));
                 return;
             }
         }
@@ -55,22 +56,19 @@ public class Playground {
         sectionOtherBlock.removeBlock();
     }
 
-    //NIET IN KIJKEN!! JE GAAT ER ECHT NIETS VAN BEGRIJPEN, IK LEG HET MORGEN WEL UIT OP SCHOOL :P
     public void moveBlocksTop() {
-        for (int i = 4; i < 8; i++) {
-            if (this.sections[i-4].hasBlock() && this.sections[i].hasBlock()) {
-                if (this.sections[i].getBlock().getValue() == this.sections[i-4].getBlock().getValue()) {
-                    merge(this.sections[i], this.sections[i-4]);
-                }
-                //IN PROGRESS...
-            }
-        }
-        for (int i = 8; i < 12; i++) {
-            //IN PROGRESS...
-        }
-        for (int i = 12; i < 16; i++) {
-            //IN PROGRESS...
-        }
+        //TODO
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                s.append(this.sections[i][j].toString() + "  ");
+            }
+            s.append("\n");
+        }
+        return s.toString();
     }
 }

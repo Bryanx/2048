@@ -6,19 +6,12 @@ package be.kdg.thegame_2048.models;
  */
 class Section {
     //EIGENSCHAPPEN
-    private final String coord;
     private Block block;
 
     //CONSTRUCTORS
-    Section(String coord) {
-        this.coord = coord;
-    }
+    //Geen.
 
     //METHODEN
-    public String getCoord() {
-        return coord;
-    }
-
     public Block getBlock() {
         return this.block;
     }
@@ -34,5 +27,11 @@ class Section {
 
     public void removeBlock() {
         this.block = null;
+    }
+
+    @Override
+    public String toString() {
+        if (block == null) return "E";
+        return block.toString();
     }
 }

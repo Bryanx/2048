@@ -27,4 +27,9 @@ class Player {
     public void setBestScore(int bestScore) {
         this.bestScore = bestScore;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Name: %-20s, Best Score: %d", this.name, this.bestScore);
+    }
 }

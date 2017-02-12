@@ -45,9 +45,9 @@ rgb(236, 196, 0)
 
 /* High Scores */
 .hsColumnNames {
-    -fx-font-family: "PT Sans Narrow";
-    -fx-font-size: 14pt;
-}
+     -fx-font-family: "PT Sans Narrow";
+     -fx-font-size: 14pt;
+ }
 
 .hsColumnFillRanks {
     -fx-font-size: 16pt;

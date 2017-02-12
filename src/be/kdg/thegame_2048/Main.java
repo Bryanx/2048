@@ -1,12 +1,9 @@
 package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.presenters.TestPresenter;
-import be.kdg.thegame_2048.views.views.ExistingPlayerView;
+import be.kdg.thegame_2048.models.Playground;
+import be.kdg.thegame_2048.models.Score;
 import be.kdg.thegame_2048.views.views.HighScoreView;
-import be.kdg.thegame_2048.views.views.NewPlayerView;
-import be.kdg.thegame_2048.views.views.StartView;
-import com.sun.tools.javadoc.Start;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,10 +17,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //KLASSEN AANAMKEN
         PlayerManager manager = new PlayerManager();
+        Playground playground = new Playground(new Score());
 
         HighScoreView hsView = new HighScoreView();
 //        new TestPresenter(hsView);
-
         //SCENE SAMENSTELLEN
         Scene scene = new Scene(hsView);
         primaryStage.setScene(scene);
