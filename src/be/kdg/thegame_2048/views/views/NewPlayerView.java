@@ -52,13 +52,13 @@ public final class NewPlayerView extends BorderPane {
         //Same as in the StartView class, maybe put inside an interface
         BorderPane top = new BorderPane();
         top.setCenter(logo);
-        top.setPadding(new Insets(0, 0, OVERALL_PADDING*2, 0));
+        top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
         this.setTop(top);
         this.setPadding(new Insets(OVERALL_PADDING));
 
         //NewPlayerView:
         VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError, goBack);
-        middle.setAlignment(Pos.TOP_CENTER);
+        middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
     }
 

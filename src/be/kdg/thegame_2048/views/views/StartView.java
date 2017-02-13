@@ -40,14 +40,14 @@ public final class StartView extends BorderPane {
         //topside of the StartView, contains the 2048 logo:
         BorderPane top = new BorderPane();
         top.setCenter(logo);
-        top.setPadding(new Insets(0, 0, 100, 0));
+        top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
         this.setTop(top);
 
         //Middle of the StartView, 2 buttons are stacked inside a GridPane:
         GridPane middle = new GridPane();
         middle.add(btnNewPlayer, 0, 0);
         middle.add(btnExistingPlayer, 0, 1);
-        middle.setAlignment(Pos.TOP_CENTER);
+        middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
 
         //Properties for the entire screen:
