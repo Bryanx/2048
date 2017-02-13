@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.views;
 
+import be.kdg.thegame_2048.Main;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,8 +16,9 @@ import java.util.*;
  * @author Bryan de Ridder
  * @version 1.0 08-02-17 18:55
  */
-public class HighScoreView extends BorderPane {
+public final class HighScoreView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
+    private static final double SCENE_WIDTH = 550;
     private int playerAmount = 8;
     private Label lblHighScores;
     //lblHsNames.get(1) the name of rank 1
@@ -35,8 +37,6 @@ public class HighScoreView extends BorderPane {
     private void initialiseNodes() {
         //Top side of the highscores
         this.lblHighScores = new Label("2048 High Scores");
-        lblHighScores.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/cup.png"));
-        lblHighScores.setGraphicTextGap(10);
 
         //Initialize highscorelist
         this.lblHsRanks = new ArrayList<>();
@@ -58,7 +58,6 @@ public class HighScoreView extends BorderPane {
 
         //back button
         goBack = new Button();
-        goBack.setGraphic(new ImageView("be/kdg/thegame_2048/views/views/img/left-arrow.png"));
         addStyles();
     }
 
@@ -75,16 +74,16 @@ public class HighScoreView extends BorderPane {
         GridPane grid = new GridPane();
         for (int i = 0; i < playerAmount + 1; i++) {
             grid.add(lblHsRanks.get(i), 0, i);
-            GridPane.setMargin(lblHsRanks.get(i), new Insets(0, OVERALL_PADDING / 2, 0, 0));
             grid.add(lblHsNames.get(i), 1, i);
-            GridPane.setMargin(lblHsNames.get(i), new Insets(0, OVERALL_PADDING * 2, 0, 0));
             grid.add(lblHsScores.get(i), 2, i);
+            GridPane.setMargin(lblHsRanks.get(i), new Insets(0, OVERALL_PADDING / 2, 0, 0));
             GridPane.setHalignment(lblHsScores.get(i), HPos.RIGHT);
+            GridPane.setHgrow(lblHsNames.get(i), Priority.ALWAYS);
         }
         grid.setVgap(OVERALL_PADDING / 5 * 2);
         grid.setAlignment(Pos.TOP_CENTER);
         middle.setCenter(grid);
-        middle.setPadding(new Insets(OVERALL_PADDING, OVERALL_PADDING, OVERALL_PADDING / 2, OVERALL_PADDING));
+        middle.setPadding(new Insets(OVERALL_PADDING));
 
         //BOTTOM (back button)
         BorderPane bottom = new BorderPane();
@@ -93,11 +92,11 @@ public class HighScoreView extends BorderPane {
 
         //the highscores and back button are added to a vbox
         VBox vBox = new VBox(middle, bottom);
+        vBox.setMaxWidth(SCENE_WIDTH-OVERALL_PADDING*2);
         this.setCenter(vBox);
     }
 
     private void addStyles() {
-        //These nodes are given a special styleclass name for CSS editing
         lblHighScores.getStyleClass().add("hsHeader");
         lblHsRanks.get(0).getStyleClass().add("hsColumnNames");
         lblHsNames.get(0).getStyleClass().add("hsColumnNames");
@@ -107,6 +106,6 @@ public class HighScoreView extends BorderPane {
             lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
             lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
         }
-        goBack.getStyleClass().add("backButton");
+        goBack.getStyleClass().add("btnGoBack");
     }
 }

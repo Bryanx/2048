@@ -6,69 +6,95 @@ BG colors:
 rgb(236, 196, 0)
 */
 
-.root, .label{
+/* ========== General  ========== */
+.root, .label {
     -fx-background: rgb(236, 196, 0);
     -fx-font-family: "Calibri";
     -fx-font-size: 25pt;
-    -fx-text-fill: rgb(0,100,100);
+    -fx-text-fill: rgb(0, 100, 100);
 }
 
+/*  ========== StartView ========== */
 .tfPlayer {
     -fx-font-size: 18pt;
     -fx-background-radius: 5;
 }
 
-.button {
+.btnStartView {
     -fx-background-color: none;
     -fx-font-family: "Calibri";
     -fx-font-size: 26pt;
-    -fx-text-fill: rgb(0,100,100);
+    -fx-text-fill: rgb(0, 100, 100);
     -fx-cursor: hand;
+    -fx-graphic-text-gap: 10px;
 }
 
-.button:hover {
+.btnStartView:hover {
     -fx-text-fill: white;
 }
 
-.button:pressed {
+.btnStartView:pressed {
     -fx-text-fill: black;
 }
 
+/* ========== GameView ========== */
 .inGameScore {
     -fx-font-size: 16pt;
-
+    -fx-text-fill: white;
+}
+.btnHighScores {
+    -fx-background-color: none;
 }
 
 .btnHighScores:hover {
-    -fx-graphic: url("../views/views/img/highscores-hover.png");
-}
-.btnRestart:hover {
-    -fx-graphic: url("../views/views/img/restart-hover.png");
+    -fx-graphic: url("../views/img/highscores-hover.png");
 }
 
-/* Inputerror used when entering a wrong input value */
+.btnHighScores:pressed {
+    -fx-graphic: url("../views/img/highscores-pressed.png");
+}
+
+.btnRestart {
+    -fx-background-color: none;
+}
+
+.btnRestart:hover {
+    -fx-graphic: url("../views/img/restart-hover.png");
+}
+
+.btnRestart:pressed {
+    -fx-graphic: url("../views/img/restart-pressed.png");
+}
+
+/* ========== NewPlayerView & ExistingPlayerView ========== */
+/* Backbtn is also used in highscoreView */
+.btnGoBack {
+    -fx-background-color: none;
+    -fx-graphic: url("../views/img/left-arrow.png");
+}
+.btnGoBack:hover {
+    -fx-graphic: url("../views/img/left-arrow-hover.png");
+}
+
+.btnGoBack:pressed {
+    -fx-graphic: url("../views/img/left-arrow-pressed.png");
+}
 .inputError {
     -fx-font-size: 14pt;
     -fx-text-fill: darkred;
 }
 
-/* Back button on NewPlayerView, ExistingPlayerView and HighScores */
-.backButton:hover {
-    -fx-graphic: url("../views/views/img/left-arrow-hover.png");
-}
-.backButton:pressed {
-    -fx-graphic: url("../views/views/img/left-arrow-pressed.png");
-}
-
-/* High Scores */
+/* ========== HighScoreView ========== */
 .hsHeader {
     -fx-text-fill: white;
+    -fx-graphic: url("../views/img/cup.png");
+    -fx-graphic-text-gap: 20px;
 }
 
 .hsColumnNames {
-     -fx-font-family: "PT Sans Narrow";
-     -fx-font-size: 14pt;
- }
+    -fx-font-family: "PT Sans Narrow";
+    -fx-font-size: 14pt;
+}
 
 .hsColumnFillRanks {
     -fx-font-size: 16pt;
@@ -78,6 +104,6 @@ rgb(236, 196, 0)
 
 .hsColumnFill {
     -fx-font-size: 16pt;
-    -fx-font-family: "PT Sans Narrow";
+    -fx-font-family: "Calibri";
     -fx-font-weight: lighter;
 }
