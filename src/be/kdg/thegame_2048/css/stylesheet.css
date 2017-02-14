@@ -43,6 +43,15 @@ rgb(236, 196, 0)
     -fx-font-size: 16pt;
     -fx-text-fill: white;
 }
+
+.blocks {
+    -fx-background-color: #cdc1b4;
+    -fx-font-family: "Calibri";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 29pt;
+}
+
 .btnHighScores {
     -fx-background-color: none;
     -fx-cursor: hand;

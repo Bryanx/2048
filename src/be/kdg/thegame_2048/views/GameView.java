@@ -27,8 +27,8 @@ public final class GameView extends BorderPane {
     private Label lblScoreInput;
 
     //middle
-    private Canvas playground;
-//    private Button[][] blocks;
+//    private Canvas playground;
+    private Button[][] blocks;
 
     //bottom
     private Button btnRestart;
@@ -48,18 +48,21 @@ public final class GameView extends BorderPane {
         this.lblScoreInput = new Label("0");
 
         //Middle side
-        this.playground = new Canvas(450,450);
-        final GraphicsContext gc = this.playground.getGraphicsContext2D();
-        gc.setFill(Color.rgb(215,180,7));
-        gc.fillRoundRect(0.0,0.0,450,450,10,10);
+//        this.playground = new Canvas(450,450);
+//        final GraphicsContext gc = this.playground.getGraphicsContext2D();
+//        gc.setFill(Color.rgb(215,180,7));
+//        gc.fillRoundRect(0.0,0.0,450,450,10,10);
 
-//        this.blocks = new Button[4][4];
-//
-//        for (int y = 0; y < 4; y++) {
-//            for (int x = 0; x < 4; x++) {
-//                blocks[x][y].setText(x + "," + y);
-//            }
-//        }
+        this.blocks = new Button[4][4];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                this.blocks[i][j] = new Button();
+                this.blocks[i][j].setText(i + " " + j);
+                this.blocks[i][j].setMinSize(100,100);
+                this.blocks[i][j].setMaxSize(100,100);
+            }
+        }
 
         //Bottom side
         this.btnRestart = new Button();
@@ -97,13 +100,16 @@ public final class GameView extends BorderPane {
         //MIDDLE
         BorderPane middle = new BorderPane();
         GridPane gridSections = new GridPane();
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 0; j < 4; j++) {
-//                gridSections.add(this.blocks[i][j],i,j);
-//            }
-//        }
-//        middle.setCenter(gridSections);
-        middle.setCenter(playground);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                gridSections.add(this.blocks[i][j],i,j);
+            }
+        }
+        gridSections.setVgap(10);
+        gridSections.setHgap(10);
+        gridSections.setAlignment(Pos.CENTER);
+        middle.setCenter(gridSections);
+//        middle.setCenter(playground);
         this.setCenter(middle);
 
         //BOTTOM
@@ -129,6 +135,12 @@ public final class GameView extends BorderPane {
         lblBestScoreInput.getStyleClass().add("inGameScore");
         lblScore.getStyleClass().add("inGameScore");
         lblScoreInput.getStyleClass().add("inGameScore");
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                this.blocks[i][j].getStyleClass().add("blocks");
+            }
+        }
 
         btnHighScores.getStyleClass().add("btnHighScores");
         btnRestart.getStyleClass().add("btnRestart");
