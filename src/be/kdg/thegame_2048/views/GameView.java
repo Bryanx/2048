@@ -58,7 +58,6 @@ public final class GameView extends BorderPane {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 this.blocks[i][j] = new Button();
-                this.blocks[i][j].setText(i + " " + j);
                 this.blocks[i][j].setMinSize(100,100);
                 this.blocks[i][j].setMaxSize(100,100);
             }
@@ -99,6 +98,7 @@ public final class GameView extends BorderPane {
 
         //MIDDLE
         BorderPane middle = new BorderPane();
+        BorderPane playground = new BorderPane();
         GridPane gridSections = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -108,8 +108,11 @@ public final class GameView extends BorderPane {
         gridSections.setVgap(10);
         gridSections.setHgap(10);
         gridSections.setAlignment(Pos.CENTER);
-        middle.setCenter(gridSections);
-//        middle.setCenter(playground);
+        playground.setMinSize(450,450);
+        playground.setMaxSize(450,450);
+        playground.setCenter(gridSections);
+        playground.setBackground(new Background(new BackgroundFill(Color.web("#bbada0"), new CornerRadii(5), Insets.EMPTY)));
+        middle.setCenter(playground);
         this.setCenter(middle);
 
         //BOTTOM

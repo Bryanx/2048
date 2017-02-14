@@ -45,11 +45,8 @@ rgb(236, 196, 0)
 }
 
 .blocks {
-    -fx-background-color: #cdc1b4;
-    -fx-font-family: "Calibri";
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-font-size: 29pt;
+    -fx-background-color: none;
+    -fx-graphic: url("../views/img/blocks/blockE.png");
 }
 
 .btnHighScores {
