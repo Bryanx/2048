@@ -11,7 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 12-02-17 18:49
  */
 public final class GameView extends BorderPane {

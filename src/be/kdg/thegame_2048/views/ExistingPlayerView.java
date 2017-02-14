@@ -9,10 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-02-17 18:09
  */
-public final class ExistingPlayerView extends BorderPane {
+public final class ExistingPlayerView extends SuperView {
     private static final double OVERALL_PADDING = 50;
     private ImageView logo;
     private TextField tfExistingPlayer;
@@ -25,9 +25,8 @@ public final class ExistingPlayerView extends BorderPane {
         layoutNodes();
     }
 
-    private void initialiseNodes() {
-        //Same as in the StartView class, maybe put inside an interface
-        this.logo = new ImageView("be/kdg/thegame_2048/views/img/logo.png");
+    protected void initialiseNodes() {
+        super.initialiseNodes();
 
         //ExistingPlayerView
         this.lblExistingPlayer = new Label("Enter your existing name");
@@ -47,13 +46,8 @@ public final class ExistingPlayerView extends BorderPane {
         addStyles();
     }
 
-    private void layoutNodes() {
-        //Same as in the StartView class, maybe put inside an interface
-        BorderPane top = new BorderPane();
-        top.setCenter(logo);
-        top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
-        this.setTop(top);
-        this.setPadding(new Insets(OVERALL_PADDING));
+    protected void layoutNodes() {
+        super.layoutNodes();
 
         //ExistingPlayerView
         VBox middle = new VBox(lblExistingPlayer, tfExistingPlayer, nameDoesntExistError, goBack);

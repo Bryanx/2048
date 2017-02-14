@@ -5,16 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-02-17 17:03
  */
-public final class NewPlayerView extends BorderPane {
+public final class NewPlayerView extends SuperView {
     private static final double OVERALL_PADDING = 50;
-    private ImageView logo;
     private Label lblNewPlayer;
     private TextField tfNewPlayer;
     private Label nameExistsError;
@@ -25,9 +23,8 @@ public final class NewPlayerView extends BorderPane {
         layoutNodes();
     }
 
-    private void initialiseNodes() {
-        //Same as in the StartView class, maybe put inside an interface
-        this.logo = new ImageView("be/kdg/thegame_2048/views/img/logo.png");
+    protected void initialiseNodes() {
+        super.initialiseNodes();
 
         //NewPlayerView
         this.lblNewPlayer = new Label("What's your name?");
@@ -48,14 +45,8 @@ public final class NewPlayerView extends BorderPane {
         addStyles();
     }
 
-    private void layoutNodes() {
-        //Same as in the StartView class, maybe put inside an interface
-        BorderPane top = new BorderPane();
-        top.setCenter(logo);
-        top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
-        this.setTop(top);
-        this.setPadding(new Insets(OVERALL_PADDING));
-
+    protected void layoutNodes() {
+        super.layoutNodes();
         //NewPlayerView:
         VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError, goBack);
         middle.setAlignment(Pos.CENTER);
@@ -66,5 +57,13 @@ public final class NewPlayerView extends BorderPane {
         tfNewPlayer.getStyleClass().add("tfPlayer");
         nameExistsError.getStyleClass().add("inputError");
         goBack.getStyleClass().add("btnGoBack");
+    }
+
+    Button getGoBack() {
+        return goBack;
+    }
+
+    TextField getTfNewPlayer() {
+        return tfNewPlayer;
     }
 }
