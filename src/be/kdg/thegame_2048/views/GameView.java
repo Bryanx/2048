@@ -58,8 +58,8 @@ public final class GameView extends BorderPane {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 this.blocks[i][j] = new Button();
-                this.blocks[i][j].setMinSize(100,100);
-                this.blocks[i][j].setMaxSize(100,100);
+                this.blocks[i][j].setMinSize(100, 100);
+                this.blocks[i][j].setMaxSize(100, 100);
             }
         }
 
@@ -79,10 +79,10 @@ public final class GameView extends BorderPane {
         GridPane gridTop = new GridPane();
         VBox vboxScore = new VBox(lblBestScore, lblScore);
         VBox vboxScoreInput = new VBox(lblBestScoreInput, lblScoreInput);
-        gridTop.add(logo,0,0,1,2);
-        gridTop.add(vboxScore,1,0);
-        gridTop.add(vboxScoreInput,2,0);
-        gridTop.setMaxWidth(SCENE_WIDTH -OVERALL_PADDING*2);
+        gridTop.add(logo, 0, 0, 1, 2);
+        gridTop.add(vboxScore, 1, 0);
+        gridTop.add(vboxScoreInput, 2, 0);
+        gridTop.setMaxWidth(SCENE_WIDTH - OVERALL_PADDING * 2);
         gridTop.setMinHeight(HEIGHT_OUTER_PANELS);
         VBox[] vBoxes = {vboxScoreInput, vboxScore};
         for (VBox vBox : vBoxes) {
@@ -93,7 +93,7 @@ public final class GameView extends BorderPane {
         }
         GridPane.setHgrow(vboxScore, Priority.ALWAYS);
         top.setCenter(gridTop);
-        top.setBackground(new Background(new BackgroundFill(Color.rgb(215,180,7), CornerRadii.EMPTY, Insets.EMPTY)));
+        top.setBackground(new Background(new BackgroundFill(Color.rgb(215, 180, 7), CornerRadii.EMPTY, Insets.EMPTY)));
         this.setTop(top);
 
         //MIDDLE
@@ -102,14 +102,14 @@ public final class GameView extends BorderPane {
         GridPane gridSections = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                gridSections.add(this.blocks[i][j],i,j);
+                gridSections.add(this.blocks[i][j], i, j);
             }
         }
         gridSections.setVgap(10);
         gridSections.setHgap(10);
         gridSections.setAlignment(Pos.CENTER);
-        playground.setMinSize(450,450);
-        playground.setMaxSize(450,450);
+        playground.setMinSize(450, 450);
+        playground.setMaxSize(450, 450);
         playground.setCenter(gridSections);
         playground.setBackground(new Background(new BackgroundFill(Color.web("#bbada0"), new CornerRadii(5), Insets.EMPTY)));
         middle.setCenter(playground);
@@ -118,9 +118,9 @@ public final class GameView extends BorderPane {
         //BOTTOM
         BorderPane bottom = new BorderPane();
         GridPane gridBottom = new GridPane();
-        gridBottom.add(btnRestart, 0,0);
-        gridBottom.add(btnHighScores, 1,0);
-        gridBottom.setMaxWidth(SCENE_WIDTH -OVERALL_PADDING*2);
+        gridBottom.add(btnRestart, 0, 0);
+        gridBottom.add(btnHighScores, 1, 0);
+        gridBottom.setMaxWidth(SCENE_WIDTH - OVERALL_PADDING * 2);
         gridBottom.setMinHeight(HEIGHT_OUTER_PANELS);
         Button[] buttons = {btnHighScores, btnRestart};
         for (Button btn : buttons) {
@@ -130,9 +130,10 @@ public final class GameView extends BorderPane {
             GridPane.setHalignment(btn, HPos.CENTER);
         }
         bottom.setCenter(gridBottom);
-        bottom.setBackground(new Background(new BackgroundFill(Color.rgb(215,180,7), CornerRadii.EMPTY, Insets.EMPTY)));
+        bottom.setBackground(new Background(new BackgroundFill(Color.rgb(215, 180, 7), CornerRadii.EMPTY, Insets.EMPTY)));
         this.setBottom(bottom);
     }
+
     private void addStyles() {
         lblBestScore.getStyleClass().add("inGameScore");
         lblBestScoreInput.getStyleClass().add("inGameScore");
