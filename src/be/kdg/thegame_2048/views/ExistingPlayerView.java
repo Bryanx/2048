@@ -61,5 +61,15 @@ public final class ExistingPlayerView extends SuperView {
         goBack.getStyleClass().add("btnGoBack");
     }
 
+    TextField getTfExistingPlayer() {
+        return tfExistingPlayer;
+    }
 
+    Label getNameDoesntExistError() {
+        return nameDoesntExistError;
+    }
+
+    Button getGoBack() {
+        return goBack;
+    }
 }

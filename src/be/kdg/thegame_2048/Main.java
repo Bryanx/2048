@@ -16,12 +16,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         //MAKING CLASSES
-        PlayerManager manager = new PlayerManager();
-        NewPlayerView newPlayerView = new NewPlayerView();
-        new NewPlayerPresenter(manager, newPlayerView);
+        PlayerManager model = new PlayerManager();
+        ExistingPlayerView view = new ExistingPlayerView();
+        ExistingPlayerPresenter presenter = new ExistingPlayerPresenter(model, view);
 
         //PUTTING TOGETHER THE SCENE
-        Scene scene = new Scene(newPlayerView);
+        Scene scene = new Scene(view);
 
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");

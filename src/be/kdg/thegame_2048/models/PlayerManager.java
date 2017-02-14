@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +13,19 @@ public final class PlayerManager {
     private Player playerNowPlaying;
 
     //CONSTRUCTORS
-    //Geen.
+    public PlayerManager() {
+        this.playerList = new ArrayList<>();
+    }
 
     //METHODEN
+    public void setPlayerNowPlaying(String name) {
+        for (Player player : playerList) {
+            if (player.getName().toLowerCase().equals(name.toLowerCase())) {
+                this.playerNowPlaying = player;
+            }
+        }
+    }
+
     public Player getPlayerNowPlaying() {
         return playerNowPlaying;
     }
@@ -40,7 +51,8 @@ public final class PlayerManager {
 
     //Voor het zoeken naar een bestaande speler
     public boolean checkIfExists(String namePlayer) throws IllegalArgumentException {
-        for (Player player: playerList) {
+        if (playerList.size() == 0) throw new IllegalArgumentException("This player doesn't exists, check if the name is spelled correctly.");
+        for (Player player : playerList) {
             if (player.getName().equals(namePlayer)) {
                 this.playerNowPlaying = player;
                 return true;
@@ -52,7 +64,7 @@ public final class PlayerManager {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (Player player: this.playerList) {
+        for (Player player : this.playerList) {
             s.append(player.toString() + "\n");
         }
         return s.toString();
