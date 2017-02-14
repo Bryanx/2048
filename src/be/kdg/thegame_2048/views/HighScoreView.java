@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.views;
+package be.kdg.thegame_2048.views;
 
 import be.kdg.thegame_2048.Main;
 import javafx.geometry.HPos;

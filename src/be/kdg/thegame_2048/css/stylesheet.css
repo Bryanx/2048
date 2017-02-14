@@ -6,7 +6,7 @@ BG colors:
 rgb(236, 196, 0)
 */
 
-/* ========== General  ========== */
+/* ========== General ========== */
 .root, .label {
     -fx-background: rgb(236, 196, 0);
     -fx-font-family: "Calibri";
@@ -35,6 +35,7 @@ rgb(236, 196, 0)
 
 .btnStartView:pressed {
     -fx-text-fill: black;
+
 }
 
 /* ========== GameView ========== */
@@ -44,6 +45,7 @@ rgb(236, 196, 0)
 }
 .btnHighScores {
     -fx-background-color: none;
+    -fx-cursor: hand;
 }
 
 .btnHighScores:hover {
@@ -56,6 +58,7 @@ rgb(236, 196, 0)
 
 .btnRestart {
     -fx-background-color: none;
+    -fx-cursor: hand;
 }
 
 .btnRestart:hover {
@@ -71,6 +74,7 @@ rgb(236, 196, 0)
 .btnGoBack {
     -fx-background-color: none;
     -fx-graphic: url("../views/img/left-arrow.png");
+    -fx-cursor: hand;
 }
 .btnGoBack:hover {
     -fx-graphic: url("../views/img/left-arrow-hover.png");

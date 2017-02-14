@@ -2,7 +2,7 @@ package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.views.*;
+import be.kdg.thegame_2048.views.GameView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
