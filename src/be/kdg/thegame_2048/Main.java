@@ -17,17 +17,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         //MAKING CLASSES
         PlayerManager manager = new PlayerManager();
-        Game game = new Game(manager);
-
-        StartView startView = new StartView();
         NewPlayerView newPlayerView = new NewPlayerView();
-
-        StartPresenter Startpresenter = new StartPresenter(startView);
-        NewPlayerPresenter NPpresenter = new NewPlayerPresenter(manager, newPlayerView);
-        Startpresenter.setPrevStage(primaryStage);
+        new NewPlayerPresenter(manager, newPlayerView);
 
         //PUTTING TOGETHER THE SCENE
-        Scene scene = new Scene(startView);
+        Scene scene = new Scene(newPlayerView);
 
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
