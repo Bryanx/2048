@@ -25,8 +25,8 @@ public final class GameView extends BorderPane {
     private Label lblScoreInput;
 
     //middle
-    private Button[][] sections;
-    private ImageView[] blocks;
+    private Button[][] btnSections;
+    private ImageView[] imgBlocks;
 
     //bottom
     private Button btnRestart;
@@ -46,27 +46,26 @@ public final class GameView extends BorderPane {
         this.lblScoreInput = new Label("0");
 
         //Middle side
-        //Create blocks
+        //Create imgBlocks
         String path = "be/kdg/thegame_2048/views/img/blocks/block";
         String[] blockNumbers = {"E","2","4","8","16","32","64","128","256","512","1024","2048"};
-        this.blocks = new ImageView[12];
+        this.imgBlocks = new ImageView[12];
         for (int i = 0; i <= 11; i++) {
-            this.blocks[i] = new ImageView(path + blockNumbers[i] + ".png");
+            this.imgBlocks[i] = new ImageView(path + blockNumbers[i] + ".png");
         }
-        //create sections
-        //to fill sections: sections[i][j].setGraphic()
-        this.sections = new Button[4][4];
+        //create btnSections
+        //to fill btnSections: btnSections[i][j].setGraphic()
+        this.btnSections = new Button[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                this.sections[i][j] = new Button();
-                this.sections[i][j].setMinSize(100, 100);
-                this.sections[i][j].setMaxSize(100, 100);
+                this.btnSections[i][j] = new Button();
+                this.btnSections[i][j].setMinSize(100, 100);
+                this.btnSections[i][j].setMaxSize(100, 100);
             }
         }
 
         //Bottom side
         this.btnRestart = new Button();
-        this.btnRestart.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/restart.png"));
         this.btnHighScores = new Button();
         this.btnHighScores.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/highscores.png"));
 
@@ -103,7 +102,7 @@ public final class GameView extends BorderPane {
         GridPane sectionGrid = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                sectionGrid.add(this.sections[i][j], i, j);
+                sectionGrid.add(this.btnSections[i][j], i, j);
             }
         }
         sectionGrid.setVgap(10);
@@ -143,7 +142,7 @@ public final class GameView extends BorderPane {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                this.sections[i][j].getStyleClass().add("sections");
+                this.btnSections[i][j].getStyleClass().add("sections");
             }
         }
 
@@ -151,11 +150,11 @@ public final class GameView extends BorderPane {
         btnRestart.getStyleClass().add("btnRestart");
     }
 
-    Button[][] getSections() {
-        return sections;
+    Button[][] getBtnSections() {
+        return btnSections;
     }
 
     ImageView getBlock(int index) {
-        return blocks[index];
+        return imgBlocks[index];
     }
 }

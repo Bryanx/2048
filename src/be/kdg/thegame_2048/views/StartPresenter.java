@@ -1,7 +1,9 @@
 package be.kdg.thegame_2048.views;
 
+import be.kdg.thegame_2048.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 
 /**
  * @author Jarne Van Aerde
@@ -36,6 +38,9 @@ public class StartPresenter {
     }
 
     private void setSceneToNewPlayer() {
-
+        NewPlayerView view = new NewPlayerView();
+        Scene scene = new Scene(view);
+        Main main = new Main();
+        main.start
     }
 }

@@ -63,6 +63,7 @@ rgb(236, 196, 0)
 }
 
 .btnRestart {
+    -fx-graphic: url("../views/img/restart.png");
     -fx-background-color: none;
     -fx-cursor: hand;
 }
