@@ -76,19 +76,31 @@ rgb(236, 196, 0)
     -fx-graphic: url("../views/img/restart-pressed.png");
 }
 
+.btnExit {
+    -fx-background-color: none;
+    -fx-graphic: url("../views/img/exit.png");
+    -fx-cursor: hand;
+}
+.btnExit:hover {
+    -fx-graphic: url("../views/img/exit-hover.png");
+}
+.btnExit:pressed {
+    -fx-graphic: url("../views/img/exit-pressed.png");
+}
+
 /* ========== NewPlayerView & ExistingPlayerView ========== */
 /* Backbtn is also used in highscoreView */
 .btnGoBack {
     -fx-background-color: none;
-    -fx-graphic: url("../views/img/left-arrow.png");
+    -fx-graphic: url("../views/img/goback.png");
     -fx-cursor: hand;
 }
 .btnGoBack:hover {
-    -fx-graphic: url("../views/img/left-arrow-hover.png");
+    -fx-graphic: url("../views/img/goback-hover.png");
 }
 
 .btnGoBack:pressed {
-    -fx-graphic: url("../views/img/left-arrow-pressed.png");
+    -fx-graphic: url("../views/img/goback-pressed.png");
 }
 .inputError {
     -fx-font-size: 14pt;

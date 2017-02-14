@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import java.util.*;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 08-02-17 18:55
  */
 public final class HighScoreView extends BorderPane {

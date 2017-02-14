@@ -17,8 +17,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         //MAKING CLASSES
         PlayerManager model = new PlayerManager();
-        ExistingPlayerView view = new ExistingPlayerView();
-        ExistingPlayerPresenter presenter = new ExistingPlayerPresenter(model, view);
+        NewPlayerView view = new NewPlayerView();
+//        NewPlayerPresenter presenter = new NewPlayerPresenter(model, view);
 
         //PUTTING TOGETHER THE SCENE
         Scene scene = new Scene(view);

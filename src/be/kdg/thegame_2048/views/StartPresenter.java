@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * @author Jarne Van Aerde
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 14/02/2017 12:18
  */
 public class StartPresenter {

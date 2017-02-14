@@ -11,25 +11,24 @@ import javafx.scene.layout.VBox;
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 14-02-17 11:51
  */
-public final class WinView extends BorderPane {
-    private Label lblWin;
+public final class LoseView extends BorderPane {
+    private Label lblLose;
     private Label lblScore;
     private Label lblScoreInput;
     private Button btnRestart;
     private Button btnContinue;
     private Button btnExit;
 
-    public WinView() {
+    public LoseView() {
         initialiseNodes();
         layoutNodes();
     }
 
     private void initialiseNodes() {
-        this.lblWin = new Label("You win!");
+        this.lblLose = new Label("You lose!");
         this.lblScore = new Label("Score: ");
         this.lblScoreInput = new Label("0");
         this.btnRestart = new Button();
-        this.btnContinue = new Button();
         this.btnExit = new Button();
 
         addStyles();
@@ -37,14 +36,13 @@ public final class WinView extends BorderPane {
 
     private void addStyles() {
         btnRestart.getStyleClass().add("btnRestart");
-        btnContinue.getStyleClass().add("btnGoBack");
         btnExit.getStyleClass().add("btnExit");
     }
 
     private void layoutNodes() {
         HBox hbox1 = new HBox(lblScore,lblScoreInput);
-        HBox hBbuttons = new HBox(btnRestart,btnContinue,btnExit);
-        VBox vbox = new VBox(lblWin,hbox1,hBbuttons);
+        HBox hBbuttons = new HBox(btnRestart,btnExit);
+        VBox vbox = new VBox(lblLose,hbox1,hBbuttons);
         hbox1.setAlignment(Pos.CENTER);
         hBbuttons.setAlignment(Pos.CENTER);
         vbox.setAlignment(Pos.CENTER);

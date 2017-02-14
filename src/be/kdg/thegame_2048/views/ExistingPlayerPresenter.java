@@ -6,7 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * @author Jarne Van Aerde
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 14/02/2017 15:12
  */
 public class ExistingPlayerPresenter {

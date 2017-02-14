@@ -8,7 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 14-02-17 14:24
  */
 public class NewPlayerPresenter {
