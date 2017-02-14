@@ -58,4 +58,12 @@ public final class StartView extends BorderPane {
         btnNewPlayer.getStyleClass().add("btnStartView");
         btnExistingPlayer.getStyleClass().add("btnStartView");
     }
+
+    Button getBtnNewPlayer() {
+        return btnNewPlayer;
+    }
+
+    Button getBtnExistingPlayer() {
+        return btnExistingPlayer;
+    }
 }
