@@ -18,17 +18,17 @@ public class Main extends Application {
         PlayerManager manager = new PlayerManager();
         Game game = new Game(manager);
 
-        GameView hsView = new GameView();
+        GameView view = new GameView();
 
         //PUTTING TOGETHER THE SCENE
-        Scene scene = new Scene(hsView);
+        Scene scene = new Scene(view);
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
         primaryStage.setScene(scene);
         primaryStage.setMinHeight(750+20);
         primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
-        primaryStage.show();
+        //primaryStage.show();
     }
 
     public static void main(String[] args) {
