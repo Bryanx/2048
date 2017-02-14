@@ -31,23 +31,17 @@ public final class PlayerManager {
     }
 
     public void addPlayer(String namePlayer) {
-        if (!isUnique(namePlayer)) return;
         playerList.add(new Player(namePlayer, 0));
     }
 
     //Voor het aanmaken van een nieuwe speler.
     private boolean isUnique(String namePlayer) throws IllegalArgumentException {
-        if (playerList.size() == 0) {
-            addPlayer(namePlayer);
-            return true;
-        }
         for (Player player : playerList) {
             if (player.getName().equals(namePlayer)) {
                 //Geen return meer nodig, de exception maakt meteen een einde aan de methode.
                 throw new IllegalArgumentException("This name already exists :( Choose another one.");
             }
         }
-        addPlayer(namePlayer);
         return true;
     }
 
