@@ -14,9 +14,6 @@ import javafx.stage.Stage;
  * @version 1.0 04-02-17 18:38
  */
 public class Main extends Application {
-    private Scene scene;
-    private Stage primaryStage;
-
     @Override
     public void start(Stage primaryStage) {
         //MAKING CLASSES
@@ -26,23 +23,23 @@ public class Main extends Application {
         StartView view = new StartView();
 
         //PUTTING TOGETHER THE SCENE
-        this.scene = new Scene(view);
+        Scene scene = new Scene(view);
         //add stylesheet:
-        this.primaryStage = primaryStage;
+        primaryStage = primaryStage;
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
-        this.primaryStage.setScene(scene);
-        this.primaryStage.setMinHeight(750+20);
-        this.primaryStage.setMinWidth(550);
-        this.primaryStage.setTitle("2048");
-        this.primaryStage.show();
+        primaryStage.setScene(scene);
+        primaryStage.setMinHeight(750+20);
+        primaryStage.setMinWidth(550);
+        primaryStage.setTitle("2048");
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
         Application.launch(args);
     }
 
-    public void setScene(Scene scene) {
-        this.primaryStage.setScene(scene);
-        this.primaryStage.show();
+    public void setScene(Scene scene1) {
+        Scene scene = scene1;
+        //dit is onzin
     }
 }

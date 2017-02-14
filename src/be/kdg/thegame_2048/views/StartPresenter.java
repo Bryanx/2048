@@ -23,7 +23,7 @@ public class StartPresenter {
         view.getBtnNewPlayer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                setSceneToNewPlayer();
             }
         });
         view.getBtnExistingPlayer().setOnAction(new EventHandler<ActionEvent>() {
@@ -41,6 +41,6 @@ public class StartPresenter {
         NewPlayerView view = new NewPlayerView();
         Scene scene = new Scene(view);
         Main main = new Main();
-        main.start
+        main.setScene(scene);
     }
 }
