@@ -16,6 +16,7 @@ public class StartPresenter {
     //CONSTRUCTORS
     public StartPresenter(StartView view) {
         this.view = view;
+        addEventHandles();
     }
 
     //METHODS
@@ -38,9 +39,6 @@ public class StartPresenter {
     }
 
     private void setSceneToNewPlayer() {
-        NewPlayerView view = new NewPlayerView();
-        Scene scene = new Scene(view);
-        Main main = new Main();
-        main.setScene(scene);
+
     }
 }
