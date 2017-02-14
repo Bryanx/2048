@@ -44,7 +44,7 @@ rgb(236, 196, 0)
     -fx-text-fill: white;
 }
 
-.blocks {
+.sections {
     -fx-background-color: none;
     -fx-graphic: url("../views/img/blocks/blockE.png");
 }

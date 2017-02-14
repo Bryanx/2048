@@ -28,7 +28,7 @@ public class Main extends Application {
         primaryStage.setMinHeight(750+20);
         primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
-        //primaryStage.show();
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
