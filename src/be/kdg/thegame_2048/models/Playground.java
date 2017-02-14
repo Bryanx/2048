@@ -67,13 +67,12 @@ final class Playground {
         boolean[] alreadyMergedRow1AndRow2 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow2[i] && haveBlocksRow1[i]) {
-                if (this.sections[1][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()) {
+                if (isMergealbe(this.sections[1][i], this.sections[0][i])) {
                     merge(this.sections[0][i], this.sections[1][i]);
                     alreadyMergedRow1AndRow2[i] = true;
                 }
             } else if (haveBlocksRow2[i] && !haveBlocksRow1[i]) {
-                this.sections[0][i].putBlock(this.sections[1][i].getBlock());
-                this.sections[1][i].removeBlock();
+                moveBlock(this.sections[0][i], this.sections[1][i]);
             }
         }
 
@@ -84,21 +83,18 @@ final class Playground {
         boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow3[i] && haveBlocksRow2[i]) {
-                if (this.sections[2][i].getBlock().getValue() == this.sections[1][i].getBlock().getValue()) {
+                if (isMergealbe(this.sections[2][i], this.sections[1][i])) {
                     merge(this.sections[1][i], this.sections[2][i]);
                     alreadyMergedRow2AndRow3[i] = true;
                 }
             } else if (haveBlocksRow3[i] && haveBlocksRow1[i]) {
-                if (this.sections[2][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()
-                        && !alreadyMergedRow1AndRow2[i]) {
+                if (isMergealbe(this.sections[2][i], this.sections[0][i]) && !alreadyMergedRow1AndRow2[i]) {
                     merge(this.sections[0][i], this.sections[2][i]);
                 } else {
-                    this.sections[1][i].putBlock(this.sections[2][i].getBlock());
-                    this.sections[2][i].removeBlock();
+                    moveBlock(this.sections[1][i], this.sections[2][i]);
                 }
             } else if (haveBlocksRow3[i] && !haveBlocksRow1[i]) {
-                this.sections[0][i].putBlock(this.sections[2][i].getBlock());
-                this.sections[2][i].removeBlock();
+                moveBlock(this.sections[0][i], this.sections[2][i]);
             }
         }
 
@@ -109,37 +105,32 @@ final class Playground {
         boolean[] haveBlocksRow4 = haveBlocksRow4();
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow4[i] && haveBlocksRow3[i]) {
-                if (this.sections[3][i].getBlock().getValue() == this.sections[2][i].getBlock().getValue()) {
+                if (isMergealbe(this.sections[3][i], this.sections[2][i])) {
                     merge(this.sections[2][i], this.sections[3][i]);
                 }
             } else if (haveBlocksRow4[i] && haveBlocksRow2[i]) {
-                if (this.sections[3][i].getBlock().getValue() == this.sections[1][i].getBlock().getValue()
-                        && !alreadyMergedRow2AndRow3[i]) {
+                if (isMergealbe(this.sections[3][i], this.sections[1][i]) && !alreadyMergedRow2AndRow3[i]) {
                     merge(this.sections[1][i], this.sections[3][i]);
                 } else {
-                    this.sections[2][i].putBlock(this.sections[3][i].getBlock());
-                    this.sections[3][i].removeBlock();
+                    moveBlock(this.sections[2][i], this.sections[3][i]);
                 }
             } else if (haveBlocksRow4[i] && haveBlocksRow1[i]) {
-                if (this.sections[3][i].getBlock().getValue() == this.sections[0][i].getBlock().getValue()
+                if (isMergealbe(this.sections[3][i], this.sections[0][i])
                         && !alreadyMergedRow1AndRow2[i]) {
                     merge(this.sections[0][i], this.sections[3][i]);
                 } else {
-                    this.sections[1][i].putBlock(this.sections[3][i].getBlock());
-                    this.sections[3][i].removeBlock();
+                    moveBlock(this.sections[1][i], this.sections[3][i]);
                 }
             } else if (haveBlocksRow4[i] && !haveBlocksRow1[i]) {
-                this.sections[0][i].putBlock(this.sections[3][i].getBlock());
-                this.sections[3][i].removeBlock();
+                moveBlock(this.sections[0][i], this.sections[3][i]);
             }
         }
 
         //addRandomBlocks();
     }
 
-
-
     void moveBlocksBottom() {
+        //TODO NOG TE REFATOREN!!
         //ROW 3 AND 4
         boolean[] haveBlocksRow4 = haveBlocksRow4();
         boolean[] alreadyMergedRow3AndRow4 = new boolean[NUMBER_OF_H_SECTIONS];
@@ -251,6 +242,15 @@ final class Playground {
             if (this.sections[3][i].hasBlock()) haveBlocksRow4[i] = true;
         }
         return haveBlocksRow4;
+    }
+
+    private boolean isMergealbe(Section section, Section otherSection) {
+        return section.getBlock().getValue() == otherSection.getBlock().getValue();
+    }
+
+    private void moveBlock(Section section, Section otherSection) {
+        section.putBlock(otherSection.getBlock());
+        otherSection.removeBlock();
     }
 
     @Override
