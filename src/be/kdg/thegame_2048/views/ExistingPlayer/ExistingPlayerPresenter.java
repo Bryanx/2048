@@ -1,6 +1,7 @@
 package be.kdg.thegame_2048.views.ExistingPlayer;
 
 import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.views.GameView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
@@ -39,7 +40,8 @@ public class ExistingPlayerPresenter {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    searchPlayer(event.getText());
+                    searchPlayer(view.getTfExistingPlayer().getText());
+                    GameView gameView = new GameView();
                 } else {
                     view.getNameDoesntExistError().setVisible(false);
                 }
@@ -56,6 +58,5 @@ public class ExistingPlayerPresenter {
             view.getNameDoesntExistError().setText("Player bestaat niet, maak een nieuwe aan!");
             view.getNameDoesntExistError().setVisible(true);
         }
-        System.out.println(model.toString());
     }
 }

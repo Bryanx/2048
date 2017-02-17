@@ -24,6 +24,7 @@ public final class PlayerManager {
 
     public void setPlayerNowPlaying(String name) {
         for (Player player : playerList) {
+            System.out.println(player.getName().toLowerCase().equals(name.toLowerCase()));
             if (player.getName().toLowerCase().equals(name.toLowerCase())) {
                 this.playerNowPlaying = player;
             }
