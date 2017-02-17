@@ -15,6 +15,7 @@ public final class StartView extends BorderPane {
     private ImageView logo;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
+    private Button btnAbout;
 
     public StartView() {
         initialiseNodes();
@@ -33,6 +34,11 @@ public final class StartView extends BorderPane {
         this.btnExistingPlayer = new Button("Existing Player");
         btnExistingPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/user.png"));
 
+
+        //Creates the About button and adds an icon:
+        this.btnAbout = new Button("How to play");
+        btnAbout.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/about.png"));
+
         addStyles();
     }
 
@@ -47,6 +53,7 @@ public final class StartView extends BorderPane {
         GridPane middle = new GridPane();
         middle.add(btnNewPlayer, 0, 0);
         middle.add(btnExistingPlayer, 0, 1);
+        middle.add(btnAbout, 0, 2);
         middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
 
@@ -57,6 +64,7 @@ public final class StartView extends BorderPane {
     private void addStyles() {
         btnNewPlayer.getStyleClass().add("btnStartView");
         btnExistingPlayer.getStyleClass().add("btnStartView");
+        btnAbout.getStyleClass().add("btnStartView");
     }
 
     Button getBtnNewPlayer() {
