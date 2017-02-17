@@ -17,7 +17,7 @@ public final class NewPlayerView extends SuperView {
     private Label lblNewPlayer;
     private TextField tfNewPlayer;
     private Label nameExistsError;
-    private Button goBack;
+    private Button btnGoBack;
 
     public NewPlayerView() {
         initialiseNodes();
@@ -36,14 +36,13 @@ public final class NewPlayerView extends SuperView {
         this.tfNewPlayer = new TextField();
         tfNewPlayer.setMaxSize(210,40);
 
-
         //Optional error message, should be invisible by default
         this.nameExistsError = new Label("Sorry, this name already exists :(");
         nameExistsError.setPadding(new Insets(OVERALL_PADDING/10,0,-OVERALL_PADDING/10,0));
         nameExistsError.setVisible(false);
 
         //back button
-        goBack = new Button();
+        btnGoBack = new Button();
         addStyles();
     }
 
@@ -51,7 +50,7 @@ public final class NewPlayerView extends SuperView {
     protected void layoutNodes() {
         super.layoutNodes();
         //NewPlayerView:
-        VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError, goBack);
+        VBox middle = new VBox(lblNewPlayer,tfNewPlayer, nameExistsError, btnGoBack);
         middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
     }
@@ -59,11 +58,11 @@ public final class NewPlayerView extends SuperView {
     private void addStyles() {
         tfNewPlayer.getStyleClass().add("tfPlayer");
         nameExistsError.getStyleClass().add("inputError");
-        goBack.getStyleClass().add("btnGoBack");
+        btnGoBack.getStyleClass().add("btnGoBack");
     }
 
-    Button getGoBack() {
-        return goBack;
+    Button getBtnGoBack() {
+        return btnGoBack;
     }
 
     TextField getTfNewPlayer() {

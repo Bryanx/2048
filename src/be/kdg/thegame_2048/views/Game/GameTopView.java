@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
  * @version 1.0 17-02-17 11:06
  */
 class GameTopView extends BorderPane {
-    private ImageView logo;
+    private static final ImageView IMG_LOGO = new ImageView("be/kdg/thegame_2048/views/img/logo-2048.png");
     private Label lblBestScore;
     private Label lblBestScoreInput;
     private Label lblScore;
@@ -26,7 +26,6 @@ class GameTopView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        this.logo = new ImageView("be/kdg/thegame_2048/views/img/logo-2048.png");
         this.lblBestScore = new Label("Best score: ");
         this.lblBestScoreInput = new Label("0");
         this.lblScore = new Label("Current score: ");
@@ -38,7 +37,7 @@ class GameTopView extends BorderPane {
         GridPane gridTop = new GridPane();
         VBox vboxScore = new VBox(lblBestScore, lblScore);
         VBox vboxScoreInput = new VBox(lblBestScoreInput, lblScoreInput);
-        gridTop.add(logo, 0, 0, 1, 2);
+        gridTop.add(IMG_LOGO, 0, 0, 1, 2);
         gridTop.add(vboxScore, 1, 0);
         gridTop.add(vboxScoreInput, 2, 0);
         gridTop.setMaxWidth(GameView.SCENE_WIDTH - GameView.OVERALL_PADDING * 2);

@@ -12,7 +12,10 @@ import javafx.scene.layout.*;
  */
 public final class StartView extends BorderPane {
     private static final int OVERALL_PADDING = 50;
-    private ImageView logo;
+    private static final ImageView IMG_LOGO = new ImageView("be/kdg/thegame_2048/views/img/logo.png");
+    private static final ImageView IMG_UFO = new ImageView("be/kdg/thegame_2048/views/img/ufo.png");
+    private static final ImageView IMG_MAN = new ImageView("be/kdg/thegame_2048/views/img/user.png");
+    private static final ImageView IMG_JOYSTICK = new ImageView("be/kdg/thegame_2048/views/img/about.png");
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
     private Button btnAbout;
@@ -23,29 +26,21 @@ public final class StartView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        //Creates the logo at the top of the screen:
-        this.logo = new ImageView("be/kdg/thegame_2048/views/img/logo.png");
-
         //Creates the New Player button and adds an icon:
-        this.btnNewPlayer = new Button("New Player");
-        btnNewPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/ufo.png"));
+        this.btnNewPlayer = new Button("New Player", IMG_UFO);
 
         //Creates the Existing Player button and adds an icon:
-        this.btnExistingPlayer = new Button("Existing Player");
-        btnExistingPlayer.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/user.png"));
-
+        this.btnExistingPlayer = new Button("Existing Player", IMG_MAN);
 
         //Creates the About button and adds an icon:
-        this.btnAbout = new Button("How to play");
-        btnAbout.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/about.png"));
+        this.btnAbout = new Button("How to play", IMG_JOYSTICK);
 
         addStyles();
     }
 
     private void layoutNodes() {
-        //topside of the StartView, contains the 2048 logo:
-        BorderPane top = new BorderPane();
-        top.setCenter(logo);
+        //topside of the StartView, contains the 2048 IMG_LOGO:
+        BorderPane top = new BorderPane(IMG_LOGO);
         top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
         this.setTop(top);
 
@@ -56,8 +51,6 @@ public final class StartView extends BorderPane {
         middle.add(btnAbout, 0, 2);
         middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
-
-        //Properties for the entire screen:
         this.setPadding(new Insets(OVERALL_PADDING));
     }
 
@@ -75,7 +68,7 @@ public final class StartView extends BorderPane {
         return btnExistingPlayer;
     }
 
-    public Button getBtnAbout() {
+    Button getBtnAbout() {
         return btnAbout;
     }
 }

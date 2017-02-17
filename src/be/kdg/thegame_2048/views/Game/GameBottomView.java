@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
  * @version 1.0 17-02-17 10:45
  */
 class GameBottomView extends BorderPane {
+    private static final ImageView IMG_CUP = new ImageView("be/kdg/thegame_2048/views/img/highscores.png");
     private Button btnRestart;
     private Button btnHighScores;
     private Button btnExit;
@@ -24,8 +25,7 @@ class GameBottomView extends BorderPane {
 
     private void initialiseNodes() {
         this.btnRestart = new Button();
-        this.btnHighScores = new Button();
-        this.btnHighScores.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/highscores.png"));
+        this.btnHighScores = new Button("", IMG_CUP);
         this.btnExit = new Button();
         addStyles();
     }
@@ -53,6 +53,7 @@ class GameBottomView extends BorderPane {
         btnRestart.getStyleClass().add("btnRestart");
         btnExit.getStyleClass().add("btnExit");
     }
+
     Button getBtnHighScores() {
         return btnHighScores;
     }

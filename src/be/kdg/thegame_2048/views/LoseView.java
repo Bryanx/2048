@@ -16,7 +16,6 @@ public final class LoseView extends BorderPane {
     private Label lblScore;
     private Label lblScoreInput;
     private Button btnRestart;
-    private Button btnContinue;
     private Button btnExit;
 
     public LoseView() {

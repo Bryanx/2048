@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
@@ -15,11 +14,10 @@ import javafx.scene.layout.*;
  */
 public final class ExistingPlayerView extends SuperView {
     private static final double OVERALL_PADDING = 50;
-    private ImageView logo;
     private TextField tfExistingPlayer;
     private Label lblExistingPlayer;
     private Label nameDoesntExistError;
-    private Button goBack;
+    private Button btnGoBack;
 
     public ExistingPlayerView() {
         initialiseNodes();
@@ -44,7 +42,7 @@ public final class ExistingPlayerView extends SuperView {
         nameDoesntExistError.setVisible(false);
 
         //back button
-        goBack = new Button();
+        btnGoBack = new Button();
         addStyles();
     }
 
@@ -53,7 +51,7 @@ public final class ExistingPlayerView extends SuperView {
         super.layoutNodes();
 
         //ExistingPlayerView
-        VBox middle = new VBox(lblExistingPlayer, tfExistingPlayer, nameDoesntExistError, goBack);
+        VBox middle = new VBox(lblExistingPlayer, tfExistingPlayer, nameDoesntExistError, btnGoBack);
         middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
     }
@@ -61,7 +59,7 @@ public final class ExistingPlayerView extends SuperView {
     private void addStyles() {
         tfExistingPlayer.getStyleClass().add("tfPlayer");
         nameDoesntExistError.getStyleClass().add("inputError");
-        goBack.getStyleClass().add("btnGoBack");
+        btnGoBack.getStyleClass().add("btnGoBack");
     }
 
     TextField getTfExistingPlayer() {
@@ -72,7 +70,7 @@ public final class ExistingPlayerView extends SuperView {
         return nameDoesntExistError;
     }
 
-    Button getGoBack() {
-        return goBack;
+    Button getBtnGoBack() {
+        return btnGoBack;
     }
 }

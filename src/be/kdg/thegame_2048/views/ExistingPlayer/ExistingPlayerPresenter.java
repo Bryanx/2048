@@ -29,7 +29,7 @@ public class ExistingPlayerPresenter {
 
     //METHODS
     private void addEventHandlers() {
-        view.getGoBack().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 model.setPlayerNowPlayingToNull();

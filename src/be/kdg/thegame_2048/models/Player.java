@@ -21,7 +21,7 @@ public class Player {
     }
 
     String getName() {
-        return name;
+        return name.toLowerCase();
     }
 
     public void setBestScore(int bestScore) {

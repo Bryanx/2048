@@ -102,6 +102,11 @@ rgb(236, 196, 0)
     -fx-text-fill: darkred;
 }
 
+.lblExplanation {
+    -fx-font-size: 14pt;
+    -fx-text-alignment: center;
+}
+
 /* ========== HighScoreView ========== */
 .hsHeader {
     -fx-text-fill: white;

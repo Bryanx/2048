@@ -44,10 +44,10 @@ final class Playground {
         for (int i = 0; i < numberOfBlocks; i++) {
             boolean blockFound = false;
             while (!blockFound) {
-                int indexH = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
-                int indexV = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
-                if (!this.sections[indexH][indexV].hasBlock()) {
-                    this.sections[indexH][indexV].putBlock(new Block(2));
+                int X = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
+                int Y = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
+                if (!this.sections[X][Y].hasBlock()) {
+                    this.sections[X][Y].putBlock(new Block(2));
                     blockFound = true;
                 }
             }
