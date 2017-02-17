@@ -29,6 +29,7 @@ public class GamePresenter {
         this.modelPlayerManager = modelPlayerManager;
         this.view = view;
         this.addEventHandlers();
+        view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getPlayerNowPlaying().getBestScore()));
     }
 
     //METHODEN
@@ -44,6 +45,8 @@ public class GamePresenter {
         view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                System.out.println(modelPlayerManager.getPlayerNowPlaying().getName());
+                saveInfo();
                 StartView startView = new StartView();
                 StartPresenter presenter = new StartPresenter(modelPlayerManager, startView);
                 view.getScene().setRoot(startView);
@@ -68,10 +71,18 @@ public class GamePresenter {
 
     }
 
+    private void saveInfo() {
+        modelPlayerManager.getPlayerNowPlaying().setBestScore(modelGame.getScore().getScore());
+        modelPlayerManager.setPlayerNowPlayingToNull();
+    }
+
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
-        checkIfLostOrWin();
+        if (Integer.parseInt(view.getLblScoreInput().getText()) >= Integer.parseInt(view.getLblBestScoreInput().getText())) {
+            view.getLblBestScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
+        }
         view.getLblScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
+        checkIfLostOrWin();
     }
 
     private void checkIfLostOrWin() {
@@ -85,8 +96,7 @@ public class GamePresenter {
     private void updateSceneToLost() {
         LoseView loseView = new LoseView();
         view.getScene().setRoot(loseView);
-        modelPlayerManager.getPlayerNowPlaying().setBestScore(modelGame.getScore().getScore());
-        modelPlayerManager.setPlayerNowPlayingToNull();
+        saveInfo();
     }
 
     private void updateSceneToWin() {

@@ -24,7 +24,7 @@ public final class PlayerManager {
 
     public void setPlayerNowPlaying(String name) {
         for (Player player : playerList) {
-            if (player.getName().equals(name)) {
+            if (player.getName().toLowerCase().equals(name.toLowerCase())) {
                 this.playerNowPlaying = player;
             }
         }
@@ -44,7 +44,7 @@ public final class PlayerManager {
 
     public boolean checkIfExists(String name) {
         for (Player player : playerList) {
-            if (player.getName().equals(name)) return true;
+            if (player.getName().toLowerCase().equals(name.toLowerCase())) return true;
         }
         return false;
     }
@@ -57,6 +57,9 @@ public final class PlayerManager {
        }
     }
 
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
 
     @Override
     public String toString() {

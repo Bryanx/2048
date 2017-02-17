@@ -52,11 +52,11 @@ public final class GameView extends BorderPane {
         return gameBottomView.getBtnExit();
     }
 
-    Label getLblBestScoreInput() {
+    public Label getLblBestScoreInput() {
         return gameTopView.getLblBestScoreInput();
     }
 
-    Label getLblScoreInput() {
+    public Label getLblScoreInput() {
         return gameTopView.getLblScoreInput();
     }
 }

@@ -243,7 +243,7 @@ final class Playground {
         otherSection.removeBlock();
     }
 
-    public Random getBlockGen() {
+    Random getBlockGen() {
         return blockGen;
     }
 

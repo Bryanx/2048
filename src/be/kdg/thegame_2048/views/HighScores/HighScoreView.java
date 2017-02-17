@@ -45,13 +45,7 @@ public final class HighScoreView extends BorderPane {
         lblHsNames.add(new Label("Name"));
         lblHsScores.add(new Label("Score"));
 
-        //Adds the players to the highscorelist
-        //Number 1 on the list is also rank 1 of the highscores
-        for (int i = 0; i < PLAYER_AMOUNT; i++) {
-            lblHsRanks.add(new Label(i + 1 + "")); //Rank
-            lblHsNames.add(new Label("Naam")); //Name
-            lblHsScores.add(new Label("Score")); //Score
-        }
+
 
         //back button
         goBack = new Button();
@@ -66,8 +60,33 @@ public final class HighScoreView extends BorderPane {
         this.setTop(top);
 
         //MIDDLE (Actual highscores, including the column lblHsNames)
+        //See updateHighScoreView();
+
+    }
+
+    private void addStyles() {
+        lblHighScores.getStyleClass().add("hsHeader");
+        lblHsRanks.get(0).getStyleClass().add("hsColumnNames");
+        lblHsNames.get(0).getStyleClass().add("hsColumnNames");
+        lblHsScores.get(0).getStyleClass().add("hsColumnNames");
+        goBack.getStyleClass().add("btnGoBack");
+    }
+
+    public void updateHighScore(List<String> names, List<Integer> scores) {
+        //Adds the players to the highscorelist
+        //Number 1 on the list is also rank 1 of the highscores
+        for (int i = 0; i < names.size(); i++) {
+            lblHsRanks.add(new Label(i + 1 + "")); //Rank
+            lblHsNames.add(new Label(names.get(i))); //Name
+            lblHsScores.add(new Label(String.valueOf(scores.get(i)))); //Score
+        }
+        for (int i = 0; i < names.size(); i++) {
+            lblHsRanks.get(i + 1).getStyleClass().add("hsColumnFillRanks");
+            lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
+            lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
+        }
         GridPane grid = new GridPane();
-        for (int i = 0; i < PLAYER_AMOUNT + 1; i++) {
+        for (int i = 0; i < names.size() + 1; i++) {
             grid.add(lblHsRanks.get(i), 0, i);
             grid.add(lblHsNames.get(i), 1, i);
             grid.add(lblHsScores.get(i), 2, i);
@@ -83,19 +102,6 @@ public final class HighScoreView extends BorderPane {
         VBox vBox = new VBox(new BorderPane(grid), new BorderPane(goBack));
         vBox.setMaxWidth(SCENE_WIDTH-OVERALL_PADDING*2);
         this.setCenter(vBox);
-    }
-
-    private void addStyles() {
-        lblHighScores.getStyleClass().add("hsHeader");
-        lblHsRanks.get(0).getStyleClass().add("hsColumnNames");
-        lblHsNames.get(0).getStyleClass().add("hsColumnNames");
-        lblHsScores.get(0).getStyleClass().add("hsColumnNames");
-        for (int i = 0; i < PLAYER_AMOUNT; i++) {
-            lblHsRanks.get(i + 1).getStyleClass().add("hsColumnFillRanks");
-            lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
-            lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
-        }
-        goBack.getStyleClass().add("btnGoBack");
     }
 
     Button getGoBack() {
