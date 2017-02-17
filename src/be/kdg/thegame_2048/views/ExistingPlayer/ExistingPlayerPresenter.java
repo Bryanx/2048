@@ -43,10 +43,6 @@ public class ExistingPlayerPresenter {
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     searchPlayer(view.getTfExistingPlayer().getText());
-                    GameView gameView = new GameView();
-                    Game gameModel = new Game(model);
-                    GamePresenter presenter = new GamePresenter(gameModel, model, gameView);
-                    view.getScene().setRoot(gameView);
                 } else {
                     view.getNameDoesntExistError().setVisible(false);
                 }
@@ -56,12 +52,18 @@ public class ExistingPlayerPresenter {
 
     private void searchPlayer(String name) {
         if (model.checkIfExists(name)) {
-            view.getNameDoesntExistError().setText("Player bestaat!");
-            view.getNameDoesntExistError().setVisible(true);
             model.setPlayerNowPlaying(name);
+            updateScene();
         } else {
             view.getNameDoesntExistError().setText("Player bestaat niet, maak een nieuwe aan!");
             view.getNameDoesntExistError().setVisible(true);
         }
+    }
+
+    private void updateScene() {
+        GameView gameView = new GameView();
+        Game gameModel = new Game(model);
+        GamePresenter presenter = new GamePresenter(gameModel, model, gameView);
+        view.getScene().setRoot(gameView);
     }
 }

@@ -125,7 +125,8 @@ final class Playground {
             }
         }
 
-        //addRandomBlocks();
+        addRandomBlocks(blockGen.nextInt(2)+1);
+        System.out.println(toString());
     }
 
     void moveBlocksBottom() {
@@ -135,13 +136,12 @@ final class Playground {
         boolean[] alreadyMergedRow3AndRow4 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow3[i] && haveBlocksRow4[i]) {
-                if (this.sections[2][i].getBlock().getValue() == this.sections[3][i].getBlock().getValue()) {
+                if (isMergealbe(this.sections[2][i], this.sections[3][i])) {
                     merge(this.sections[3][i], this.sections[2][i]);
                     alreadyMergedRow3AndRow4[i] = true;
                 }
             } else if (haveBlocksRow3[i] && !haveBlocksRow4[i]) {
-                this.sections[3][i].putBlock(this.sections[2][i].getBlock());
-                this.sections[2][i].removeBlock();
+                moveBlock(this.sections[3][i], this.sections[2][i]);
             }
         }
 
@@ -152,21 +152,18 @@ final class Playground {
         boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow2[i] && haveBlocksRow3[i]) {
-                if (this.sections[1][i].getBlock().getValue() == this.sections[2][i].getBlock().getValue()) {
+                if (isMergealbe(this.sections[1][i], this.sections[2][i])) {
                     merge(this.sections[2][i], this.sections[1][i]);
                     alreadyMergedRow2AndRow3[i] = true;
                 }
             } else if (haveBlocksRow2[i] && haveBlocksRow4[i]) {
-                if (this.sections[1][i].getBlock().getValue() == this.sections[3][i].getBlock().getValue()
-                        && !alreadyMergedRow3AndRow4[i]) {
+                if (isMergealbe(this.sections[1][i], this.sections[3][i]) && !alreadyMergedRow3AndRow4[i]) {
                     merge(this.sections[3][i], this.sections[1][i]);
                 } else {
-                    this.sections[2][i].putBlock(this.sections[1][i].getBlock());
-                    this.sections[1][i].removeBlock();
+                    moveBlock(this.sections[2][i], this.sections[1][i]);
                 }
             } else if (haveBlocksRow2[i] && !haveBlocksRow4[i]) {
-                this.sections[3][i].putBlock(this.sections[1][i].getBlock());
-                this.sections[1][i].removeBlock();
+                moveBlock(this.sections[3][i], this.sections[1][i]);
             }
         }
 
@@ -177,32 +174,29 @@ final class Playground {
         boolean[] haveBlocksRow1 = haveBlocksRow1();
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow1[i] && haveBlocksRow2[i]) {
-                if (this.sections[0][i].getBlock().getValue() == this.sections[1][i].getBlock().getValue()) {
+                if (isMergealbe(this.sections[0][i], this.sections[1][i])) {
                     merge(this.sections[1][i], this.sections[0][i]);
                 }
             } else if (haveBlocksRow1[i] && haveBlocksRow3[i]) {
-                if (this.sections[0][i].getBlock().getValue() == this.sections[2][i].getBlock().getValue()
-                        && !alreadyMergedRow2AndRow3[i]) {
+                if (isMergealbe(this.sections[0][i], this.sections[2][i]) && !alreadyMergedRow2AndRow3[i]) {
                     merge(this.sections[2][i], this.sections[0][i]);
                 } else {
-                    this.sections[1][i].putBlock(this.sections[0][i].getBlock());
-                    this.sections[0][i].removeBlock();
+                    moveBlock(this.sections[1][i], this.sections[0][i]);
                 }
             } else if (haveBlocksRow1[i] && haveBlocksRow4[i]) {
-                if (this.sections[0][i].getBlock().getValue() == this.sections[3][i].getBlock().getValue()
+                if (isMergealbe(this.sections[0][i], this.sections[3][i])
                         && !alreadyMergedRow3AndRow4[i]) {
                     merge(this.sections[3][i], this.sections[0][i]);
                 } else {
-                    this.sections[2][i].putBlock(this.sections[0][i].getBlock());
-                    this.sections[0][i].removeBlock();
+                    moveBlock(this.sections[2][i], this.sections[0][i]);
                 }
             } else if (haveBlocksRow1[i] && !haveBlocksRow4[i]) {
-                this.sections[3][i].putBlock(this.sections[0][i].getBlock());
-                this.sections[0][i].removeBlock();
+                moveBlock(this.sections[3][i], this.sections[0][i]);
             }
         }
 
-        //addRandomBlocks();
+        addRandomBlocks(blockGen.nextInt(2)+1);
+        System.out.println(toString());
     }
 
     void moveBlocksLeft() {
