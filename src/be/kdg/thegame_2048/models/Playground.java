@@ -20,10 +20,10 @@ final class Playground {
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
         initialiseSections();
         for (int i = 0; i < 10; i++) {
-            addRandomBlocks();
+            addRandomBlocks(1);
         }
         System.out.println(toString());
-        moveBlocksTop();
+        moveBlocksBottom();
         System.out.println(toString());
     }
 
@@ -40,16 +40,15 @@ final class Playground {
         }
     }
 
-    private void addRandomBlocks() {
-        //Blijft zoeken tot dat er een vrije plek gevonden is.
-        // Dit heeft niets te maken met dat de speler verloren zou hebben als hij niets vindt!
-        //Dat wordt bepaald in de klasse Game!
-        while (true) {
-            int indexH = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
-            int indexV = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
-            if (!this.sections[indexH][indexV].hasBlock()) {
-                this.sections[indexH][indexV].putBlock(new Block(2));
-                return;
+    private void addRandomBlocks(int numberOfBlocks) {
+        for (int i = 0; i < numberOfBlocks; i++) {
+            while (true) {
+                int indexH = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
+                int indexV = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
+                if (!this.sections[indexH][indexV].hasBlock()) {
+                    this.sections[indexH][indexV].putBlock(new Block(2));
+                    return;
+                }
             }
         }
     }
