@@ -52,19 +52,25 @@ public class GamePresenter {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.DOWN)) {
-                    updateViewBlocksDown();
+                    updateViewBlocks(Game.Direction.DOWN);
                 } else if (event.getCode().equals(KeyCode.UP)) {
-                    updateViewBlocksTop();
+                    updateViewBlocks(Game.Direction.DOWN);
                 } else if (event.getCode().equals(KeyCode.RIGHT)) {
-                    updateViewBlocksRight();
+                    updateViewBlocks(Game.Direction.DOWN);
                 } else if (event.getCode().equals(KeyCode.LEFT)) {
-                    updateViewBlocksLeft();
+                    updateViewBlocks(Game.Direction.DOWN);
                 } else {
                     event.consume();
                 }
             }
         });
 
+    }
+
+    private void updateViewBlocks(Game.Direction direction) {
+        modelGame.runGameCycle(direction);
+        checkIfLostOrWin();
+        view.getLblScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
     }
 
     private void checkIfLostOrWin() {
@@ -75,26 +81,6 @@ public class GamePresenter {
         }
     }
 
-    private void updateViewBlocksLeft() {
-        modelGame.runGameCycle(Game.Direction.LEFT);
-        checkIfLostOrWin();
-    }
-
-    private void updateViewBlocksRight() {
-        modelGame.runGameCycle(Game.Direction.RIGHT);
-        checkIfLostOrWin();
-    }
-
-    private void updateViewBlocksTop() {
-        modelGame.runGameCycle(Game.Direction.TOP);
-        checkIfLostOrWin();
-    }
-
-    private void updateViewBlocksDown() {
-        modelGame.runGameCycle(Game.Direction.DOWN);
-        checkIfLostOrWin();
-    }
-
     private void updateSceneToLost() {
         LoseView loseView = new LoseView();
         view.getScene().setRoot(loseView);
@@ -103,6 +89,6 @@ public class GamePresenter {
     }
 
     private void updateSceneToWin() {
-        
+
     }
 }
