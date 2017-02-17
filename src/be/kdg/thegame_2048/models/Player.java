@@ -30,6 +30,6 @@ class Player {
 
     @Override
     public String toString() {
-        return String.format("Name: %-20s, Best Score: %d", this.name, this.bestScore);
+        return String.format("Name: %-20sBest Score: %d", this.name, this.bestScore);
     }
 }

@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.HighScores;
 
 import be.kdg.thegame_2048.Main;
 import javafx.geometry.HPos;
@@ -107,5 +107,9 @@ public final class HighScoreView extends BorderPane {
             lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
         }
         goBack.getStyleClass().add("btnGoBack");
+    }
+
+    Button getGoBack() {
+        return goBack;
     }
 }

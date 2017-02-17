@@ -32,6 +32,7 @@ public final class GameView extends BorderPane {
     //bottom
     private Button btnRestart;
     private Button btnHighScores;
+    private Button btnExit;
 
     public GameView() {
         initialiseNodes();
@@ -56,19 +57,22 @@ public final class GameView extends BorderPane {
         }
         //create btnSections
         //to fill btnSections: btnSections[i][j].setGraphic()
-        this.btnSections = new Button[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                this.btnSections[i][j] = new Button();
-                this.btnSections[i][j].setMinSize(100, 100);
-                this.btnSections[i][j].setMaxSize(100, 100);
-            }
-        }
+
+
+//        this.btnSections = new Button[4][4];
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                this.btnSections[i][j] = new Button();
+//                this.btnSections[i][j].setMinSize(100, 100);
+//                this.btnSections[i][j].setMaxSize(100, 100);
+//            }
+//        }
 
         //Bottom side
         this.btnRestart = new Button();
         this.btnHighScores = new Button();
         this.btnHighScores.setGraphic(new ImageView("be/kdg/thegame_2048/views/img/highscores.png"));
+        this.btnExit = new Button();
 
         //Add CSS Styles
         addStyles();
@@ -121,9 +125,10 @@ public final class GameView extends BorderPane {
         GridPane gridBottom = new GridPane();
         gridBottom.add(btnRestart, 0, 0);
         gridBottom.add(btnHighScores, 1, 0);
+        gridBottom.add(btnExit, 2, 0);
         gridBottom.setMaxWidth(SCENE_WIDTH - OVERALL_PADDING * 2);
         gridBottom.setMinHeight(HEIGHT_OUTER_PANELS);
-        Button[] buttons = {btnHighScores, btnRestart};
+        Button[] buttons = {btnHighScores, btnRestart, btnExit};
         for (Button btn : buttons) {
             GridPane.setVgrow(btn, Priority.ALWAYS);
             GridPane.setHgrow(btn, Priority.ALWAYS);
@@ -149,6 +154,7 @@ public final class GameView extends BorderPane {
 
         btnHighScores.getStyleClass().add("btnHighScores");
         btnRestart.getStyleClass().add("btnRestart");
+        btnExit.getStyleClass().add("btnExit");
     }
 
     Button[][] getBtnSections() {
@@ -157,5 +163,9 @@ public final class GameView extends BorderPane {
 
     ImageView getBlock(int index) {
         return imgBlocks[index];
+    }
+
+    Button getBtnHighScores() {
+        return btnHighScores;
     }
 }

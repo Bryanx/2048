@@ -1,6 +1,6 @@
 package be.kdg.thegame_2048.views;
 
-import be.kdg.thegame_2048.views.HighScoreView;
+import be.kdg.thegame_2048.views.HighScores.HighScoreView;
 
 /**
  * @author Jarne Van Aerde
