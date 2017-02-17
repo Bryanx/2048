@@ -24,6 +24,7 @@ public class NewPlayerPresenter {
         this.view = view;
         addEventHandlers();
     }
+
     private void addEventHandlers() {
         view.getGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -39,10 +40,7 @@ public class NewPlayerPresenter {
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     searchPlayer(view.getTfNewPlayer().getText());
-                    GameView gameView = new GameView();
-                    Game gameModel = new Game(model);
-                    GamePresenter presenter = new GamePresenter(gameModel, model,  gameView);
-                    view.getScene().setRoot(gameView);
+
                 } else {
                     view.getNameExistsError().setVisible(false);
                 }
@@ -55,10 +53,16 @@ public class NewPlayerPresenter {
             view.getNameExistsError().setText("Naam bestaat al :(");
             view.getNameExistsError().setVisible(true);
         } else {
-            view.getNameExistsError().setText("WELKOM!");
-            view.getNameExistsError().setVisible(true);
             model.addPlayer(name);
             model.setPlayerNowPlaying(name);
+            updateScene();
         }
+    }
+
+    private void updateScene() {
+        GameView gameView = new GameView();
+        Game gameModel = new Game(model);
+        GamePresenter presenter = new GamePresenter(gameModel, model, gameView);
+        view.getScene().setRoot(gameView);
     }
 }
