@@ -4,7 +4,7 @@ package be.kdg.thegame_2048.models;
  * @author Jarne Van Aerde
  * @version 1.0 8/02/2017 16:57
  */
-final class Score {
+public final class Score {
     //EIGENSCHAPPEN
     private int score;
 

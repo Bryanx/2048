@@ -51,6 +51,15 @@ public final class PlayerManager {
         return false;
     }
 
+    public void updatePlayerInfo(Player p) {
+       for (Player player: playerList) {
+           if (player.getName().toLowerCase().equals(p.getName().toLowerCase())) {
+               player.setBestScore(p.getBestScore());
+           }
+       }
+    }
+
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

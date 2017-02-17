@@ -33,13 +33,17 @@ public final class Game {
             case RIGHT:
                 playground.moveBlocksRight();
         }
+        playground.addRandomBlocks(playground.getBlockGen().nextInt(2)+1);
+        System.out.println(score.getScore() + "\n" + playground.toString());
     }
 
     public boolean hasWon() {
         Section[][] sections = playground.getSections();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (sections[i][j].getBlock().getValue() == 2048) return true;
+                if (sections[i][j].hasBlock() && sections[i][j].getBlock().getValue() == 2048) {
+                    return true;
+                }
             }
         }
         return false;
@@ -54,5 +58,9 @@ public final class Game {
             }
         }
         return amountOfBlocks == 16;
+    }
+
+    public Score getScore() {
+        return score;
     }
 }

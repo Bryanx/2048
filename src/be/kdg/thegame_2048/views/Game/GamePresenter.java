@@ -4,13 +4,13 @@ import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
 import be.kdg.thegame_2048.views.HighScores.HighScoreView;
+import be.kdg.thegame_2048.views.LoseView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.SwipeEvent;
 
 /**
  * @author Jarne Van Aerde
@@ -19,13 +19,13 @@ import javafx.scene.input.SwipeEvent;
 public class GamePresenter {
     //ATTRIBUTES
     private Game modelGame;
-    private PlayerManager playerManager;
+    private PlayerManager modelPlayerManager;
     private GameView view;
 
     //CONSTRUCTORS
-    public GamePresenter(Game modelGame, PlayerManager playerManager, GameView view) {
+    public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
         this.modelGame = modelGame;
-        this.playerManager = playerManager;
+        this.modelPlayerManager = modelPlayerManager;
         this.view = view;
         this.addEventHandlers();
     }
@@ -36,7 +36,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 HighScoreView hsView = new HighScoreView();
-                new HighScorePresenter(modelGame, playerManager, hsView);
+                new HighScorePresenter(modelGame, modelPlayerManager, hsView);
                 view.getScene().setRoot(hsView);
             }
         });
@@ -44,7 +44,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 StartView startView = new StartView();
-                StartPresenter presenter = new StartPresenter(playerManager, startView);
+                StartPresenter presenter = new StartPresenter(modelPlayerManager, startView);
                 view.getScene().setRoot(startView);
             }
         });
@@ -67,19 +67,42 @@ public class GamePresenter {
 
     }
 
+    private void checkIfLostOrWin() {
+        if (modelGame.hasLost()) {
+            updateSceneToLost();
+        } else if (modelGame.hasWon()) {
+            updateSceneToWin();
+        }
+    }
+
     private void updateViewBlocksLeft() {
-        System.out.println("Naar links!");
+        modelGame.runGameCycle(Game.Direction.LEFT);
+        checkIfLostOrWin();
     }
 
     private void updateViewBlocksRight() {
-        System.out.println("Naar rechts!");
+        modelGame.runGameCycle(Game.Direction.RIGHT);
+        checkIfLostOrWin();
     }
 
     private void updateViewBlocksTop() {
-        System.out.println("Naar boven!");
+        modelGame.runGameCycle(Game.Direction.TOP);
+        checkIfLostOrWin();
     }
 
     private void updateViewBlocksDown() {
-        System.out.println("Naar beneden!");
+        modelGame.runGameCycle(Game.Direction.DOWN);
+        checkIfLostOrWin();
+    }
+
+    private void updateSceneToLost() {
+        LoseView loseView = new LoseView();
+        view.getScene().setRoot(loseView);
+        modelPlayerManager.getPlayerNowPlaying().setBestScore(modelGame.getScore().getScore());
+        modelPlayerManager.setPlayerNowPlayingToNull();
+    }
+
+    private void updateSceneToWin() {
+        
     }
 }
