@@ -13,7 +13,6 @@ import javafx.stage.Stage;
  * @version 1.0 04-02-17 18:38
  */
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) {
         //MAKING CLASSES

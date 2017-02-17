@@ -7,6 +7,7 @@ import be.kdg.thegame_2048.views.HighScores.HighScoreView;
 import be.kdg.thegame_2048.views.LoseView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
+import be.kdg.thegame_2048.views.WinView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -54,11 +55,11 @@ public class GamePresenter {
                 if (event.getCode().equals(KeyCode.DOWN)) {
                     updateViewBlocks(Game.Direction.DOWN);
                 } else if (event.getCode().equals(KeyCode.UP)) {
-                    updateViewBlocks(Game.Direction.DOWN);
+                    updateViewBlocks(Game.Direction.TOP);
                 } else if (event.getCode().equals(KeyCode.RIGHT)) {
-                    updateViewBlocks(Game.Direction.DOWN);
+                    updateViewBlocks(Game.Direction.RIGHT);
                 } else if (event.getCode().equals(KeyCode.LEFT)) {
-                    updateViewBlocks(Game.Direction.DOWN);
+                    updateViewBlocks(Game.Direction.LEFT);
                 } else {
                     event.consume();
                 }
@@ -89,6 +90,7 @@ public class GamePresenter {
     }
 
     private void updateSceneToWin() {
-
+        WinView winView = new WinView();
+        view.getScene().setRoot(winView);
     }
 }
