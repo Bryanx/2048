@@ -41,9 +41,8 @@ public final class Game {
         Section[][] sections = playground.getSections();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (sections[i][j].hasBlock() && sections[i][j].getBlock().getValue() == 2048) {
+                if (sections[i][j].hasBlock() && sections[i][j].getBlock().getValue() == 2048)
                     return true;
-                }
             }
         }
         return false;

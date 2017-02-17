@@ -52,7 +52,7 @@ public class ExistingPlayerPresenter {
 
     private void searchPlayer(String name) {
         if (model.checkIfExists(name)) {
-            model.setPlayerNowPlaying(name);
+            model.setCurrentPlayer(name);
             updateScene();
         } else {
             view.getNameDoesntExistError().setText("Player bestaat niet, maak een nieuwe aan!");

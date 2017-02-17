@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.LoseView;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -47,5 +47,13 @@ public final class LoseView extends BorderPane {
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(25);
         this.setCenter(vbox);
+    }
+
+    Button getBtnExit() {
+        return btnExit;
+    }
+
+    Label getLblScoreInput() {
+        return lblScoreInput;
     }
 }

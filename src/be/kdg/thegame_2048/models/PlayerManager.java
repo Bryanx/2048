@@ -10,7 +10,7 @@ import java.util.List;
 public final class PlayerManager {
     //EIGENSCHAPPEN
     private List<Player> playerList;
-    private Player playerNowPlaying;
+    private Player currentPlayer;
 
     //CONSTRUCTORS
     public PlayerManager() {
@@ -19,19 +19,19 @@ public final class PlayerManager {
 
     //METHODEN
     public void setPlayerNowPlayingToNull() {
-        this.playerNowPlaying = null;
+        this.currentPlayer = null;
     }
 
-    public void setPlayerNowPlaying(String name) {
+    public void setCurrentPlayer(String name) {
         for (Player player : playerList) {
             if (player.getName().toLowerCase().equals(name.toLowerCase())) {
-                this.playerNowPlaying = player;
+                this.currentPlayer = player;
             }
         }
     }
 
-    public Player getPlayerNowPlaying() {
-        return playerNowPlaying;
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public void addPlayer(String name) {

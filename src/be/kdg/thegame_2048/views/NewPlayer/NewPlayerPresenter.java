@@ -54,7 +54,7 @@ public class NewPlayerPresenter {
             view.getNameExistsError().setVisible(true);
         } else {
             model.addPlayer(name);
-            model.setPlayerNowPlaying(name);
+            model.setCurrentPlayer(name);
             updateScene();
         }
     }

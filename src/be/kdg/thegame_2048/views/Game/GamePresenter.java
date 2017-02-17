@@ -4,7 +4,8 @@ import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
 import be.kdg.thegame_2048.views.HighScores.HighScoreView;
-import be.kdg.thegame_2048.views.LoseView;
+import be.kdg.thegame_2048.views.LoseView.LosePresenter;
+import be.kdg.thegame_2048.views.LoseView.LoseView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import be.kdg.thegame_2048.views.WinView;
@@ -29,7 +30,7 @@ public class GamePresenter {
         this.modelPlayerManager = modelPlayerManager;
         this.view = view;
         this.addEventHandlers();
-        view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getPlayerNowPlaying().getBestScore()));
+        view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
     }
 
     //METHODEN
@@ -45,7 +46,7 @@ public class GamePresenter {
         view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(modelPlayerManager.getPlayerNowPlaying().getName());
+                System.out.println(modelPlayerManager.getCurrentPlayer().getName());
                 saveInfo();
                 StartView startView = new StartView();
                 StartPresenter presenter = new StartPresenter(modelPlayerManager, startView);
@@ -55,24 +56,24 @@ public class GamePresenter {
         view.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.DOWN)) {
-                    updateViewBlocks(Game.Direction.DOWN);
-                } else if (event.getCode().equals(KeyCode.UP)) {
-                    updateViewBlocks(Game.Direction.TOP);
-                } else if (event.getCode().equals(KeyCode.RIGHT)) {
-                    updateViewBlocks(Game.Direction.RIGHT);
-                } else if (event.getCode().equals(KeyCode.LEFT)) {
-                    updateViewBlocks(Game.Direction.LEFT);
-                } else {
-                    event.consume();
+                switch (event.getCode()) {
+                    case DOWN : updateViewBlocks(Game.Direction.DOWN); break;
+                    case UP : updateViewBlocks(Game.Direction.TOP); break;
+                    case RIGHT : updateViewBlocks(Game.Direction.RIGHT); break;
+                    case LEFT : updateViewBlocks(Game.Direction.LEFT); break;
+                    default : event.consume();;
                 }
-            }
-        });
+                updateView();
+        }});
 
     }
 
+    private void updateView() {
+        //TODO: Koppel playground aan view
+    }
+
     private void saveInfo() {
-        modelPlayerManager.getPlayerNowPlaying().setBestScore(modelGame.getScore().getScore());
+        modelPlayerManager.getCurrentPlayer().setBestScore(modelGame.getScore().getScore());
         modelPlayerManager.setPlayerNowPlayingToNull();
     }
 
@@ -94,9 +95,11 @@ public class GamePresenter {
     }
 
     private void updateSceneToLost() {
-        LoseView loseView = new LoseView();
-        view.getScene().setRoot(loseView);
         saveInfo();
+        LoseView loseView = new LoseView();
+        //TODO:
+//        new LosePresenter(modelPlayerManager,loseView);
+        view.getScene().setRoot(loseView);
     }
 
     private void updateSceneToWin() {

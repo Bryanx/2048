@@ -5,8 +5,6 @@ import be.kdg.thegame_2048.models.Player;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.Game.GamePresenter;
 import be.kdg.thegame_2048.views.Game.GameView;
-import be.kdg.thegame_2048.views.Start.StartPresenter;
-import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -41,7 +39,7 @@ public class HighScorePresenter {
     private void updateScene() {
         GameView gameView = new GameView();
         gameView.getLblScoreInput().setText(String.valueOf(modelGame.getScore()));
-        gameView.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getPlayerNowPlaying().getBestScore()));
+        gameView.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         GamePresenter presenter = new GamePresenter(modelGame, modelPlayerManager, gameView);
         view.getScene().setRoot(gameView);
     }
