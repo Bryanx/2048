@@ -1,6 +1,8 @@
 package be.kdg.thegame_2048.views.NewPlayer;
 
 import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.views.Start.StartPresenter;
+import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -23,13 +25,17 @@ public class NewPlayerPresenter {
         view.getGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                model.setPlayerNowPlayingToNull();
+                StartView startView = new StartView();
+                StartPresenter presenter = new StartPresenter(model, startView);
+                view.getScene().setRoot(startView);
             }
         });
         view.getTfNewPlayer().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    searchPlayer(event.getText());
+                    searchPlayer(view.getTfNewPlayer().getText());
                 } else {
                     view.getNameExistsError().setVisible(false);
                 }
@@ -38,12 +44,14 @@ public class NewPlayerPresenter {
     }
 
     private void searchPlayer(String name) {
-        try {
-            if (model.isUnique(name)) model.addPlayer(name);
-        } catch (IllegalArgumentException iae) {
-            view.getNameExistsError().setText(iae.getMessage());
+        if (model.checkIfExists(name)) {
+            view.getNameExistsError().setText("Naam bestaat al :(");
             view.getNameExistsError().setVisible(true);
+        } else {
+            view.getNameExistsError().setText("WELKOM!");
+            view.getNameExistsError().setVisible(true);
+            model.addPlayer(name);
+            model.setPlayerNowPlaying(name);
         }
-        model.setPlayerNowPlaying(name);
     }
 }

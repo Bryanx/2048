@@ -18,6 +18,10 @@ public final class PlayerManager {
     }
 
     //METHODEN
+    public void setPlayerNowPlayingToNull() {
+        this.playerNowPlaying = null;
+    }
+
     public void setPlayerNowPlaying(String name) {
         for (Player player : playerList) {
             if (player.getName().toLowerCase().equals(name.toLowerCase())) {
@@ -34,28 +38,11 @@ public final class PlayerManager {
         playerList.add(new Player(namePlayer, 0));
     }
 
-    //Voor het aanmaken van een nieuwe speler.
-    public boolean isUnique(String namePlayer) throws IllegalArgumentException {
-        if (playerList.size() == 0) return true;
+    public boolean checkIfExists(String namePlayer) {
         for (Player player : playerList) {
-            if (player.getName().equals(namePlayer)) {
-                //Geen return meer nodig, de exception maakt meteen een einde aan de methode.
-                throw new IllegalArgumentException("This name already exists :( Choose another one.");
-            }
+            if (player.getName().toLowerCase().equals(namePlayer.toLowerCase())) return true;
         }
-        return true;
-    }
-
-    //Voor het zoeken naar een bestaande speler
-    public boolean checkIfExists(String namePlayer) throws IllegalArgumentException {
-        if (playerList.size() == 0) throw new IllegalArgumentException("This player doesn't exists, check if the name is spelled correctly.");
-        for (Player player : playerList) {
-            if (player.getName().equals(namePlayer)) {
-                this.playerNowPlaying = player;
-                return true;
-            }
-        }
-        throw new IllegalArgumentException("This player doesn't exists, check if the name is spelled correctly.");
+        return false;
     }
 
     @Override

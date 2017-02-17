@@ -13,7 +13,7 @@ import javafx.scene.layout.*;
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-02-17 18:09
  */
-final class ExistingPlayerView extends SuperView {
+public final class ExistingPlayerView extends SuperView {
     private static final double OVERALL_PADDING = 50;
     private ImageView logo;
     private TextField tfExistingPlayer;

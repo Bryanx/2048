@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 5/02/2017 18:49
  */
-final class StartView extends BorderPane {
+public final class StartView extends BorderPane {
     private static final int OVERALL_PADDING = 50;
     private ImageView logo;
     private Button btnNewPlayer;

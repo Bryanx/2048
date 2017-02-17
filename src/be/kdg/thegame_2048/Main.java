@@ -4,6 +4,8 @@ import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.GameView;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
+import be.kdg.thegame_2048.views.Start.StartPresenter;
+import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,8 +20,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         //MAKING CLASSES
         PlayerManager model = new PlayerManager();
-        GameView view = new GameView();
-//        NewPlayerPresenter presenter = new NewPlayerPresenter(model, view);
+        StartView view = new StartView();
+        StartPresenter presenter = new StartPresenter(model, view);
 
         //PUTTING TOGETHER THE SCENE
         Scene scene = new Scene(view);
@@ -27,7 +29,7 @@ public class Main extends Application {
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
         primaryStage.setScene(scene);
-        primaryStage.setMinHeight(750+20);
+        primaryStage.setMinHeight(750 + 20);
         primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
         primaryStage.show();

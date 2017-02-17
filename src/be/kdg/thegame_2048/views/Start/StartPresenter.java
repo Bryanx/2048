@@ -1,5 +1,9 @@
 package be.kdg.thegame_2048.views.Start;
 
+import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerPresenter;
+import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerView;
+import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,11 +14,13 @@ import javafx.event.EventHandler;
  */
 public class StartPresenter {
     //ATTRIBUTES
+    private PlayerManager model;
     private StartView view;
 
 
     //CONSTRUCTORS
-    public StartPresenter(StartView view) {
+    public StartPresenter(PlayerManager model, StartView view) {
+        this.model = model;
         this.view = view;
         addEventHandlers();
     }
@@ -24,15 +30,17 @@ public class StartPresenter {
         view.getBtnNewPlayer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                NewPlayerView view = new NewPlayerView();
-
-
+                NewPlayerView playerView = new NewPlayerView();
+                NewPlayerPresenter presenter = new NewPlayerPresenter(model, playerView);
+                view.getScene().setRoot(playerView);
             }
         });
         view.getBtnExistingPlayer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-//                setSceneToExistingPlayer();
+                ExistingPlayerView playerView = new ExistingPlayerView();
+                ExistingPlayerPresenter presenter = new ExistingPlayerPresenter(model, playerView);
+                view.getScene().setRoot(playerView);
             }
         });
     }
