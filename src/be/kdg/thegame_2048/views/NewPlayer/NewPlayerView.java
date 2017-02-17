@@ -1,5 +1,6 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.NewPlayer;
 
+import be.kdg.thegame_2048.views.SuperView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ public final class NewPlayerView extends SuperView {
         layoutNodes();
     }
 
+    @Override
     protected void initialiseNodes() {
         super.initialiseNodes();
 
@@ -45,6 +47,7 @@ public final class NewPlayerView extends SuperView {
         addStyles();
     }
 
+    @Override
     protected void layoutNodes() {
         super.layoutNodes();
         //NewPlayerView:
@@ -65,5 +68,9 @@ public final class NewPlayerView extends SuperView {
 
     TextField getTfNewPlayer() {
         return tfNewPlayer;
+    }
+
+    Label getNameExistsError() {
+        return nameExistsError;
     }
 }

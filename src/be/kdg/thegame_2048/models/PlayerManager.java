@@ -35,7 +35,7 @@ public final class PlayerManager {
     }
 
     //Voor het aanmaken van een nieuwe speler.
-    private boolean isUnique(String namePlayer) throws IllegalArgumentException {
+    public boolean isUnique(String namePlayer) throws IllegalArgumentException {
         if (playerList.size() == 0) return true;
         for (Player player : playerList) {
             if (player.getName().equals(namePlayer)) {

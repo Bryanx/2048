@@ -8,12 +8,12 @@ import javafx.scene.layout.BorderPane;
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 14-02-17 14:39
  */
-abstract class SuperView extends BorderPane {
+public abstract class SuperView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
     private ImageView logo;
 
 
-    SuperView() {
+    protected SuperView() {
         initialiseNodes();
         layoutNodes();
     }

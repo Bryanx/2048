@@ -1,8 +1,9 @@
 package be.kdg.thegame_2048;
 
-import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.*;
+import be.kdg.thegame_2048.views.GameView;
+import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
+import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         //MAKING CLASSES
         PlayerManager model = new PlayerManager();
-        NewPlayerView view = new NewPlayerView();
+        GameView view = new GameView();
 //        NewPlayerPresenter presenter = new NewPlayerPresenter(model, view);
 
         //PUTTING TOGETHER THE SCENE

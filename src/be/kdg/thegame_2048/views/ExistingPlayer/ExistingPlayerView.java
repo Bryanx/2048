@@ -1,5 +1,6 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.ExistingPlayer;
 
+import be.kdg.thegame_2048.views.SuperView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ import javafx.scene.layout.*;
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-02-17 18:09
  */
-public final class ExistingPlayerView extends SuperView {
+final class ExistingPlayerView extends SuperView {
     private static final double OVERALL_PADDING = 50;
     private ImageView logo;
     private TextField tfExistingPlayer;
@@ -25,6 +26,7 @@ public final class ExistingPlayerView extends SuperView {
         layoutNodes();
     }
 
+    @Override
     protected void initialiseNodes() {
         super.initialiseNodes();
 
@@ -46,6 +48,7 @@ public final class ExistingPlayerView extends SuperView {
         addStyles();
     }
 
+    @Override
     protected void layoutNodes() {
         super.layoutNodes();
 

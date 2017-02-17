@@ -1,35 +1,37 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.NewPlayer;
 
 import be.kdg.thegame_2048.models.PlayerManager;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
- * @version 1.0 14/02/2017 15:12
+ * @version 1.0 14-02-17 14:24
  */
-public class ExistingPlayerPresenter {
-    //ATTRIBUTES
+public class NewPlayerPresenter {
     private PlayerManager model;
-    private ExistingPlayerView view;
+    private NewPlayerView view;
 
-    //CONSTRUCTORS
-    public ExistingPlayerPresenter(PlayerManager model, ExistingPlayerView view) {
+    public NewPlayerPresenter(PlayerManager model, NewPlayerView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();
     }
-
-    //METHODS
     private void addEventHandlers() {
-        view.getTfExistingPlayer().setOnKeyPressed(new EventHandler<KeyEvent>() {
+        view.getGoBack().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            }
+        });
+        view.getTfNewPlayer().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     searchPlayer(event.getText());
                 } else {
-                    view.getNameDoesntExistError().setVisible(false);
+                    view.getNameExistsError().setVisible(false);
                 }
             }
         });
@@ -37,10 +39,10 @@ public class ExistingPlayerPresenter {
 
     private void searchPlayer(String name) {
         try {
-            model.checkIfExists(name);
+            if (model.isUnique(name)) model.addPlayer(name);
         } catch (IllegalArgumentException iae) {
-            view.getNameDoesntExistError().setText(iae.getMessage());
-            view.getNameDoesntExistError().setVisible(true);
+            view.getNameExistsError().setText(iae.getMessage());
+            view.getNameExistsError().setVisible(true);
         }
         model.setPlayerNowPlaying(name);
     }

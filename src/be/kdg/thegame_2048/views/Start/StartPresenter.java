@@ -1,9 +1,8 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.Start;
 
+import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
@@ -12,6 +11,7 @@ import javafx.stage.Stage;
 public class StartPresenter {
     //ATTRIBUTES
     private StartView view;
+
 
     //CONSTRUCTORS
     public StartPresenter(StartView view) {
@@ -24,7 +24,9 @@ public class StartPresenter {
         view.getBtnNewPlayer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-//                setSceneToNewPlayer();
+                NewPlayerView view = new NewPlayerView();
+
+
             }
         });
         view.getBtnExistingPlayer().setOnAction(new EventHandler<ActionEvent>() {

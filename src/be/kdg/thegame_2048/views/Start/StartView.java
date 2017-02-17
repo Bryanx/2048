@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views;
+package be.kdg.thegame_2048.views.Start;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 5/02/2017 18:49
  */
-public final class StartView extends BorderPane {
+final class StartView extends BorderPane {
     private static final int OVERALL_PADDING = 50;
     private ImageView logo;
     private Button btnNewPlayer;
