@@ -74,4 +74,8 @@ public final class StartView extends BorderPane {
     Button getBtnExistingPlayer() {
         return btnExistingPlayer;
     }
+
+    public Button getBtnAbout() {
+        return btnAbout;
+    }
 }

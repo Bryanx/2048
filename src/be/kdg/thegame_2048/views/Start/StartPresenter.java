@@ -1,6 +1,8 @@
 package be.kdg.thegame_2048.views.Start;
 
 import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.views.AboutPresenter;
+import be.kdg.thegame_2048.views.AboutView;
 import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerPresenter;
 import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerView;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
@@ -41,6 +43,14 @@ public class StartPresenter {
                 ExistingPlayerView playerView = new ExistingPlayerView();
                 ExistingPlayerPresenter presenter = new ExistingPlayerPresenter(model, playerView);
                 view.getScene().setRoot(playerView);
+            }
+        });
+        view.getBtnAbout().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AboutView aboutView = new AboutView();
+//                AboutPresenter presenter = new AboutPresenter(model, aboutView);
+                view.getScene().setRoot(aboutView);
             }
         });
     }
