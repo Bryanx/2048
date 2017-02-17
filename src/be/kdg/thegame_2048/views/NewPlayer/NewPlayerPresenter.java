@@ -1,6 +1,9 @@
 package be.kdg.thegame_2048.views.NewPlayer;
 
+import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.views.Game.GamePresenter;
+import be.kdg.thegame_2048.views.Game.GameView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
@@ -36,6 +39,10 @@ public class NewPlayerPresenter {
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     searchPlayer(view.getTfNewPlayer().getText());
+                    GameView gameView = new GameView();
+                    Game gameModel = new Game(model);
+                    GamePresenter presenter = new GamePresenter(gameModel, gameView);
+                    view.getScene().setRoot(gameView);
                 } else {
                     view.getNameExistsError().setVisible(false);
                 }

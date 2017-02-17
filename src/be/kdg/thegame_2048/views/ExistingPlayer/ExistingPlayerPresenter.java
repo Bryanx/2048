@@ -1,7 +1,9 @@
 package be.kdg.thegame_2048.views.ExistingPlayer;
 
+import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.GameView;
+import be.kdg.thegame_2048.views.Game.GamePresenter;
+import be.kdg.thegame_2048.views.Game.GameView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
@@ -42,6 +44,9 @@ public class ExistingPlayerPresenter {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     searchPlayer(view.getTfExistingPlayer().getText());
                     GameView gameView = new GameView();
+                    Game gameModel = new Game(model);
+                    GamePresenter presenter = new GamePresenter(gameModel, gameView);
+                    view.getScene().setRoot(gameView);
                 } else {
                     view.getNameDoesntExistError().setVisible(false);
                 }

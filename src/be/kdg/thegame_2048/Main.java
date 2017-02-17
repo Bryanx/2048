@@ -1,9 +1,6 @@
 package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.GameView;
-import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
-import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.application.Application;
