@@ -104,18 +104,18 @@ public final class GameView extends BorderPane {
         //MIDDLE
         BorderPane middle = new BorderPane();
         BorderPane playground = new BorderPane();
-        GridPane sectionGrid = new GridPane();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                sectionGrid.add(this.btnSections[i][j], i, j);
-            }
-        }
-        sectionGrid.setVgap(10);
-        sectionGrid.setHgap(10);
-        sectionGrid.setAlignment(Pos.CENTER);
+//        GridPane sectionGrid = new GridPane();
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                sectionGrid.add(this.btnSections[i][j], i, j);
+//            }
+//        }
+//        sectionGrid.setVgap(10);
+//        sectionGrid.setHgap(10);
+//        sectionGrid.setAlignment(Pos.CENTER);
         playground.setMinSize(450, 450);
         playground.setMaxSize(450, 450);
-        playground.setCenter(sectionGrid);
+//        playground.setCenter(sectionGrid);
         playground.setBackground(new Background(new BackgroundFill(Color.web("#bbada0"), new CornerRadii(5), Insets.EMPTY)));
         middle.setCenter(playground);
         this.setCenter(middle);
@@ -146,11 +146,11 @@ public final class GameView extends BorderPane {
         lblScore.getStyleClass().add("inGameScore");
         lblScoreInput.getStyleClass().add("inGameScore");
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                this.btnSections[i][j].getStyleClass().add("sections");
-            }
-        }
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                this.btnSections[i][j].getStyleClass().add("sections");
+//            }
+//        }
 
         btnHighScores.getStyleClass().add("btnHighScores");
         btnRestart.getStyleClass().add("btnRestart");
