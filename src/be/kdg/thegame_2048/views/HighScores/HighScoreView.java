@@ -19,7 +19,7 @@ import java.util.*;
 public final class HighScoreView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
     private static final double SCENE_WIDTH = 550;
-    private int playerAmount = 8;
+    private int playerAmount = 10;
     private Label lblHighScores;
     //lblHsNames.get(1) the name of rank 1
     //lblHsScores.get(1) is the score of rank 1
@@ -76,11 +76,11 @@ public final class HighScoreView extends BorderPane {
             grid.add(lblHsRanks.get(i), 0, i);
             grid.add(lblHsNames.get(i), 1, i);
             grid.add(lblHsScores.get(i), 2, i);
-            GridPane.setMargin(lblHsRanks.get(i), new Insets(0, OVERALL_PADDING / 2, 0, 0));
+            GridPane.setMargin(lblHsRanks.get(i), new Insets(0, OVERALL_PADDING / 5, 0, 0));
             GridPane.setHalignment(lblHsScores.get(i), HPos.RIGHT);
             GridPane.setHgrow(lblHsNames.get(i), Priority.ALWAYS);
         }
-        grid.setVgap(OVERALL_PADDING / 5 * 2);
+        grid.setVgap(10);
         grid.setAlignment(Pos.TOP_CENTER);
         middle.setCenter(grid);
         middle.setPadding(new Insets(OVERALL_PADDING));
