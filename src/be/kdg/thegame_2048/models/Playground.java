@@ -125,7 +125,8 @@ final class Playground {
             }
         }
 
-        //addRandomBlocks();
+        addRandomBlocks(blockGen.nextInt(2)+1);
+        System.out.println(toString());
     }
 
     void moveBlocksBottom() {
@@ -194,7 +195,8 @@ final class Playground {
             }
         }
 
-        //addRandomBlocks();
+        addRandomBlocks(blockGen.nextInt(2)+1);
+        System.out.println(toString());
     }
 
     void moveBlocksLeft() {

@@ -6,8 +6,8 @@ package be.kdg.thegame_2048.models;
  */
 public final class Game {
     //ATTRIBUTES
-    private enum Direction {
-        TOP, BOTTTOM, LEFT, RIGHT
+    public enum Direction {
+        TOP, DOWN, LEFT, RIGHT
     }
     private Player playerNowPlaying;
     private Score score;
@@ -26,7 +26,7 @@ public final class Game {
         switch (direction) {
             case TOP:
                 playground.moveBlocksTop(); break;
-            case BOTTTOM:
+            case DOWN:
                 playground.moveBlocksBottom(); break;
             case LEFT:
                 playground.moveBlocksLeft(); break;

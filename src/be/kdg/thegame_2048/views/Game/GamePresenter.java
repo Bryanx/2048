@@ -8,6 +8,9 @@ import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.SwipeEvent;
 
 /**
  * @author Jarne Van Aerde
@@ -45,6 +48,38 @@ public class GamePresenter {
                 view.getScene().setRoot(startView);
             }
         });
+        view.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.DOWN)) {
+                    updateViewBlocksDown();
+                } else if (event.getCode().equals(KeyCode.UP)) {
+                    updateViewBlocksTop();
+                } else if (event.getCode().equals(KeyCode.RIGHT)) {
+                    updateViewBlocksRight();
+                } else if (event.getCode().equals(KeyCode.LEFT)) {
+                    updateViewBlocksLeft();
+                } else {
+                    event.consume();
+                }
+            }
+        });
+
     }
 
+    private void updateViewBlocksLeft() {
+        System.out.println("Naar links!");
+    }
+
+    private void updateViewBlocksRight() {
+        System.out.println("Naar rechts!");
+    }
+
+    private void updateViewBlocksTop() {
+        System.out.println("Naar boven!");
+    }
+
+    private void updateViewBlocksDown() {
+        System.out.println("Naar beneden!");
+    }
 }
