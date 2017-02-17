@@ -168,4 +168,8 @@ public final class GameView extends BorderPane {
     Button getBtnHighScores() {
         return btnHighScores;
     }
+
+    Button getBtnExit() {
+        return btnExit;
+    }
 }

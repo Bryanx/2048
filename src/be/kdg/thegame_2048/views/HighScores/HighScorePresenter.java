@@ -14,11 +14,13 @@ import javafx.event.EventHandler;
  * @version 1.0 17-02-17 09:46
  */
 public class HighScorePresenter {
-    private Game model;
+    private PlayerManager modelPlayerManager;
+    private Game modelGame;
     private HighScoreView view;
 
-    public HighScorePresenter(Game model, HighScoreView view) {
-        this.model = model;
+    public HighScorePresenter(Game modelGame, PlayerManager modelPlayerManager, HighScoreView view) {
+        this.modelGame = modelGame;
+        this.modelPlayerManager = modelPlayerManager;
         this.view = view;
         this.addEventHandlers();
         this.updateView();
@@ -28,7 +30,7 @@ public class HighScorePresenter {
             @Override
             public void handle(ActionEvent event) {
                 GameView startView = new GameView();
-                GamePresenter presenter = new GamePresenter(model, startView);
+                GamePresenter presenter = new GamePresenter(modelGame, modelPlayerManager, startView);
                 view.getScene().setRoot(startView);
             }
         });

@@ -45,7 +45,7 @@ public class ExistingPlayerPresenter {
                     searchPlayer(view.getTfExistingPlayer().getText());
                     GameView gameView = new GameView();
                     Game gameModel = new Game(model);
-                    GamePresenter presenter = new GamePresenter(gameModel, gameView);
+                    GamePresenter presenter = new GamePresenter(gameModel, model, gameView);
                     view.getScene().setRoot(gameView);
                 } else {
                     view.getNameDoesntExistError().setVisible(false);
