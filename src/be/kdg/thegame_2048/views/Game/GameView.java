@@ -40,8 +40,8 @@ public final class GameView extends BorderPane {
         this.setBottom(gameBottomView);
     }
 
-    Image getBlock(int index) {
-        return gameMiddleView.getBlock(index);
+    Image getImgBlock(int value) {
+        return gameMiddleView.getImgBlock(value); //value 0 = Empty
     }
 
     Button getBtnHighScores() {

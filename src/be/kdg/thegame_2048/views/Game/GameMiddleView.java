@@ -10,13 +10,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 11:11
  */
 class GameMiddleView extends BorderPane {
     private Canvas canvas;
-    private Image[] imgBlocks;
+    private Map<Integer, Image> imgBlocks;
 
     GameMiddleView() {
         initialiseNodes();
@@ -25,17 +28,17 @@ class GameMiddleView extends BorderPane {
 
     private void initialiseNodes() {
         //Create imgBlocks
-        String[] blockNumbers = {"E","2","4","8","16","32","64","128","256","512","1024","2048"};
-        this.imgBlocks = new Image[12];
-        for (int i = 0; i <= 11; i++) {
-            this.imgBlocks[i] = new Image(
-                    "be/kdg/thegame_2048/views/img/blocks/block" + blockNumbers[i] + ".png");
+        this.imgBlocks = new HashMap<>();
+        imgBlocks.put(0, new Image("be/kdg/thegame_2048/views/img/blocks/E.png"));
+        for (int i = 2; i <= 2048; i*=2) {
+            imgBlocks.put(i, new Image("be/kdg/thegame_2048/views/img/blocks/" + Integer.toString(i) + ".png"));
         }
+
         this.canvas = new Canvas(GameView.GAME_SIZE,GameView.GAME_SIZE);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         for (int i = 10; i <= 340; i+=110) {
             for (int j = 10; j <= 340; j+=110) {
-                gc.drawImage(imgBlocks[0], i, j, 100, 100);
+                gc.drawImage(imgBlocks.get(0), i, j, 100, 100);
             }
         }
     }
@@ -48,7 +51,7 @@ class GameMiddleView extends BorderPane {
         this.setCenter(new BorderPane(playground));
     }
 
-    Image getBlock(int index) {
-        return imgBlocks[index];
+    Image getImgBlock(int value) {
+        return imgBlocks.get(value); //value 0 = Empty
     }
 }
