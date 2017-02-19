@@ -73,7 +73,7 @@ public final class HighScoreView extends BorderPane {
         //Number 1 on the list is also rank 1 of the highscores
         for (int i = 0; i < names.size(); i++) {
             lblHsRanks.add(new Label(i + 1 + "")); //Rank
-            lblHsNames.add(new Label(names.get(i))); //Name
+            lblHsNames.add(new Label(names.get(i).toUpperCase().charAt(0) + names.get(i).substring(1))); //Name
             lblHsScores.add(new Label(String.valueOf(scores.get(i)))); //Score
         }
         for (int i = 0; i < names.size(); i++) {

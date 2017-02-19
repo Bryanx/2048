@@ -50,7 +50,7 @@ public class NewPlayerPresenter {
 
     private void searchPlayer(String name) {
         if (model.checkIfExists(name)) {
-            view.getNameExistsError().setText("Naam bestaat al :(");
+            view.getNameExistsError().setText("NName already exists");
             view.getNameExistsError().setVisible(true);
         } else {
             model.addPlayer(name);

@@ -26,8 +26,8 @@ public class AboutView extends SuperView {
         super.initialiseNodes();
         this.lblHeader = new Label("How to play");
         this.lblExplanation = new Label("Use your arrow keys to move the tiles. \n" +
-                "When two tiles with the same number touch, \nthey merge into one!" +
-                "The goal of the game is to merge 1024 and 1024 \nto get the final block: 2048." +
+                "When two tiles with the same number touch, \nthey merge into one! " +
+                "The goal of the game is to merge \n1024 and 1024 to get the final block: 2048.\n" +
                 "Good luck!");
         this.lblExplanation.setAlignment(Pos.CENTER);
         this.btnGoBack = new Button();
