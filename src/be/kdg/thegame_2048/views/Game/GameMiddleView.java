@@ -1,14 +1,17 @@
 package be.kdg.thegame_2048.views.Game;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +21,7 @@ import java.util.Map;
  * @version 1.0 17-02-17 11:11
  */
 class GameMiddleView extends BorderPane {
-    private Canvas canvas;
-    private Map<Integer, Image> imgBlocks;
+    GridPane sectionGrid;
 
     GameMiddleView() {
         initialiseNodes();
@@ -27,31 +29,63 @@ class GameMiddleView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        //Create imgBlocks
-        this.imgBlocks = new HashMap<>();
-        imgBlocks.put(0, new Image("be/kdg/thegame_2048/views/img/blocks/E.png"));
-        for (int i = 2; i <= 2048; i*=2) {
-            imgBlocks.put(i, new Image("be/kdg/thegame_2048/views/img/blocks/" + Integer.toString(i) + ".png"));
-        }
-
-        this.canvas = new Canvas(GameView.GAME_SIZE,GameView.GAME_SIZE);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        for (int i = 10; i <= 340; i+=110) {
-            for (int j = 10; j <= 340; j+=110) {
-                gc.drawImage(imgBlocks.get(0), i, j, 100, 100);
-            }
-        }
     }
 
     private void layoutNodes() {
-        BorderPane playground = new BorderPane(canvas);
+        //MIDDLE
+        this.sectionGrid = new GridPane();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                sectionGrid.add(getBlock(0), i, j);
+            }
+        }
+        sectionGrid.setVgap(10);
+        sectionGrid.setHgap(10);
+        sectionGrid.setAlignment(Pos.CENTER);
+
+        BorderPane playground = new BorderPane(sectionGrid);
         playground.setMinSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
         playground.setMaxSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
-        playground.setBackground(new Background(new BackgroundFill(Color.rgb(187, 173, 160), new CornerRadii(5), Insets.EMPTY)));
+        playground.setBackground(new Background(new BackgroundFill(Color.web("#bbada0"), new CornerRadii(5), Insets.EMPTY)));
         this.setCenter(new BorderPane(playground));
     }
 
-    Image getImgBlock(int value) {
-        return imgBlocks.get(value); //value 0 = Empty
+    private StackPane getBlock(int value) {
+        //TODO: Refactoren, misschien met een map?
+        Rectangle rect = new Rectangle(100,100);
+        Text number = new Text("");
+        if (value == 0)
+            rect.setFill(Color.web("#cdc1b4"));
+        if (value != 0) {
+            number = new Text(Integer.toString(value));
+            number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 55));
+            number.setFill(Color.web("#776e65"));
+        }
+        if (value > 4)
+            number.setFill(Color.web("#f9f6f2"));
+        if (value > 64)
+            number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 43));
+        if (value > 512)
+            number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 34));
+
+        switch (value) {
+            case 0: rect.setFill(Color.web("#cdc1b4"));break;
+            case 2: rect.setFill(Color.web("#eee4da"));break;
+            case 4: rect.setFill(Color.web("#ede0c8"));break;
+            case 8: rect.setFill(Color.web("#f2b179"));break;
+            case 16: rect.setFill(Color.web("#f59563"));break;
+            case 32: rect.setFill(Color.web("#f67c5f"));break;
+            case 64: rect.setFill(Color.web("#f65e3b"));break;
+            case 128: rect.setFill(Color.web("#edcf72"));break;
+            case 256: rect.setFill(Color.web("#edcc61"));break;
+            case 512: rect.setFill(Color.web("#f1c85d"));break;
+            case 1024: rect.setFill(Color.web("#edc53f"));break;
+            case 2048: rect.setFill(Color.web("#edc22e"));break;
+        }
+        return new StackPane(rect, number);
+    }
+
+    void setBlock(int value, int x, int y) {
+        this.sectionGrid.add(getBlock(value), y, x);
     }
 }

@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Arrays;
+
 /**
  * @author Jarne Van Aerde
  * @version 1.0 17/02/2017 9:28
@@ -67,7 +69,17 @@ public class GamePresenter {
     }
 
     private void updateView() {
-        //TODO: Koppel playground aan view
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                int value;
+                if (modelGame.getPiece(i,j) == null) {
+                    value = 0;
+                } else {
+                    value = modelGame.getPieceValue(i,j);
+                }
+                view.setBlock(value,i,j);
+            }
+        }
     }
 
     private void saveInfo() {

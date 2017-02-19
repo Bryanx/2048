@@ -1,13 +1,8 @@
 package be.kdg.thegame_2048.views.Game;
 
-import javafx.geometry.Insets;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
@@ -40,8 +35,8 @@ public final class GameView extends BorderPane {
         this.setBottom(gameBottomView);
     }
 
-    Image getImgBlock(int value) {
-        return gameMiddleView.getImgBlock(value); //value 0 = Empty
+    void setBlock(int value, int x ,int y) {
+        gameMiddleView.setBlock(value, x, y);
     }
 
     Button getBtnHighScores() {

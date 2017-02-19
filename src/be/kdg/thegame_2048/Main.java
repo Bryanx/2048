@@ -6,6 +6,7 @@ import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +26,9 @@ public class Main extends Application {
 
         //add stylesheet:
         scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
+        //add fonts:
+        Font.loadFont(Main.class.getResource("views/fonts/ClearSans-Bold.TTF").toExternalForm(), 12);
+
         primaryStage.setScene(scene);
         primaryStage.setMinHeight(750 + 20);
         primaryStage.setMinWidth(550);

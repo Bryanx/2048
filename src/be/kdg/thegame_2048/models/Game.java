@@ -62,4 +62,11 @@ public final class Game {
     public Score getScore() {
         return score;
     }
+
+    public int getPieceValue(int x, int y) {
+        return playground.getSections()[x][y].getBlock().getValue();
+    }
+    public Block getPiece(int x, int y) {
+        return playground.getSections()[x][y].getBlock();
+    }
 }
