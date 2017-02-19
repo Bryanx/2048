@@ -255,7 +255,69 @@ final class Playground {
     }
 
     void moveBlocksRight() {
+        //COLUMN 3 AND 4
+        boolean[] haveBlocksColumn4 = haveBlocksColumn4();
+        boolean[] haveBlocksColumn3 = haveBlocksColumn3();
+        boolean[] alreadyMergedRow3AndRow4 = new boolean[NUMBER_OF_V_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+            if (haveBlocksColumn3[i] && haveBlocksColumn4[i]) {
+                if (isMergealbe(this.sections[i][2], this.sections[i][3])) {
+                    merge(this.sections[i][3], this.sections[i][2]);
+                    alreadyMergedRow3AndRow4[i] = true;
+                }
+            } else if (haveBlocksColumn3[i] && !haveBlocksColumn4[i]) {
+                moveBlock(this.sections[i][3], this.sections[i][2]);
+            }
+        }
 
+        //COLUMN 2 AND 3
+        haveBlocksColumn4 = haveBlocksColumn4();
+        haveBlocksColumn3 = haveBlocksColumn3();
+        boolean[] haveBlocksColumn2 = haveBlocksColumn2();
+        boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_V_SECTIONS];
+        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+            if (haveBlocksColumn2[i] && haveBlocksColumn3[i]) {
+                if (isMergealbe(this.sections[i][1], this.sections[i][2])) {
+                    merge(this.sections[i][2], this.sections[i][1]);
+                    alreadyMergedRow2AndRow3[i] = true;
+                }
+            } else if (haveBlocksColumn2[i] && haveBlocksColumn4[i]) {
+                if (isMergealbe(this.sections[i][1], this.sections[i][3]) && !alreadyMergedRow3AndRow4[i]) {
+                    merge(this.sections[i][3], this.sections[i][1]);
+                } else {
+                    moveBlock(this.sections[i][2], this.sections[i][1]);
+                }
+            } else if (haveBlocksColumn2[i] && !haveBlocksColumn4[i]) {
+                moveBlock(this.sections[i][3], this.sections[i][1]);
+            }
+        }
+
+        //COLUMN 1 AND 2
+        haveBlocksColumn4 = haveBlocksColumn4();
+        haveBlocksColumn3 = haveBlocksColumn3();
+        haveBlocksColumn2 = haveBlocksColumn2();
+        boolean[] haveBlocksColumn1 = haveBlocksColumn1();
+        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
+            if (haveBlocksColumn1[i] && haveBlocksColumn2[i]) {
+                if (isMergealbe(this.sections[i][0], this.sections[i][1])) {
+                    merge(this.sections[i][1], this.sections[i][0]);
+                }
+            } else if (haveBlocksColumn1[i] && haveBlocksColumn3[i]) {
+                if (isMergealbe(this.sections[i][0], this.sections[i][2]) && !alreadyMergedRow2AndRow3[i]) {
+                    merge(this.sections[i][2], this.sections[i][0]);
+                } else {
+                    moveBlock(this.sections[i][1], this.sections[i][0]);
+                }
+            } else if (haveBlocksColumn1[i] && haveBlocksColumn4[i]) {
+                if (isMergealbe(this.sections[i][0], this.sections[i][3]) && !alreadyMergedRow3AndRow4[i] && !alreadyMergedRow2AndRow3[i]) {
+                    merge(this.sections[i][3], this.sections[i][0]);
+                } else {
+                    moveBlock(this.sections[i][2], this.sections[i][0]);
+                }
+            } else if (haveBlocksColumn1[i] && !haveBlocksColumn4[i]) {
+                moveBlock(this.sections[i][3], this.sections[i][0]);
+            }
+        }
     }
 
     private boolean[] haveBlocksRow1() {
