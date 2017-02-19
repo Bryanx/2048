@@ -58,10 +58,6 @@ public final class HighScoreView extends BorderPane {
         top.setBackground(new Background(new BackgroundFill(Color.rgb(215,180,7), CornerRadii.EMPTY, Insets.EMPTY)));
         setMargin(lblHighScores, new Insets(OVERALL_PADDING / 2, 0, OVERALL_PADDING / 2, 0));
         this.setTop(top);
-
-        //MIDDLE (Actual highscores, including the column lblHsNames)
-        //See updateHighScoreView();
-
     }
 
     private void addStyles() {
@@ -72,7 +68,7 @@ public final class HighScoreView extends BorderPane {
         goBack.getStyleClass().add("btnGoBack");
     }
 
-    public void updateHighScore(List<String> names, List<Integer> scores) {
+    void updateHighScore(List<String> names, List<Integer> scores) {
         //Adds the players to the highscorelist
         //Number 1 on the list is also rank 1 of the highscores
         for (int i = 0; i < names.size(); i++) {
@@ -85,6 +81,8 @@ public final class HighScoreView extends BorderPane {
             lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
             lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
         }
+
+        //MIDDLE (Actual highscores, including the column lblHsNames)
         GridPane grid = new GridPane();
         for (int i = 0; i < names.size() + 1; i++) {
             grid.add(lblHsRanks.get(i), 0, i);

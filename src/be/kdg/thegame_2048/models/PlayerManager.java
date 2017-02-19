@@ -18,7 +18,7 @@ public final class PlayerManager {
     }
 
     //METHODEN
-    public void setPlayerNowPlayingToNull() {
+    public void setCurrentPlayerToNull() {
         this.currentPlayer = null;
     }
 
@@ -47,14 +47,6 @@ public final class PlayerManager {
             if (player.getName().toLowerCase().equals(name.toLowerCase())) return true;
         }
         return false;
-    }
-
-    public void updatePlayerInfo(Player p) {
-       for (Player player: playerList) {
-           if (player.getName().equals(p.getName())) {
-               player.setBestScore(p.getBestScore());
-           }
-       }
     }
 
     public List<Player> getPlayerList() {

@@ -19,12 +19,7 @@ final class Playground {
         this.score = score;
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
         initialiseSections();
-        for (int i = 0; i < 10; i++) {
-            addRandomBlocks(1);
-        }
-        System.out.println(toString());
-        moveBlocksBottom();
-        System.out.println(toString());
+        addRandomBlocks(2);
     }
 
     //METHODEN

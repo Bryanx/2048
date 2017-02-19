@@ -4,14 +4,12 @@ import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
 import be.kdg.thegame_2048.views.HighScores.HighScoreView;
-import be.kdg.thegame_2048.views.LoseView.LosePresenter;
 import be.kdg.thegame_2048.views.LoseView.LoseView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import be.kdg.thegame_2048.views.WinView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -61,7 +59,7 @@ public class GamePresenter {
                     case UP : updateViewBlocks(Game.Direction.TOP); break;
                     case RIGHT : updateViewBlocks(Game.Direction.RIGHT); break;
                     case LEFT : updateViewBlocks(Game.Direction.LEFT); break;
-                    default : event.consume();;
+                    default : event.consume();
                 }
                 updateView();
         }});
@@ -74,7 +72,7 @@ public class GamePresenter {
 
     private void saveInfo() {
         modelPlayerManager.getCurrentPlayer().setBestScore(modelGame.getScore().getScore());
-        modelPlayerManager.setPlayerNowPlayingToNull();
+        modelPlayerManager.setCurrentPlayerToNull();
     }
 
     private void updateViewBlocks(Game.Direction direction) {

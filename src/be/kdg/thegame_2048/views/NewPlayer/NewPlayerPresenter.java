@@ -29,7 +29,7 @@ public class NewPlayerPresenter {
         view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                model.setPlayerNowPlayingToNull();
+                model.setCurrentPlayerToNull();
                 StartView startView = new StartView();
                 StartPresenter presenter = new StartPresenter(model, startView);
                 view.getScene().setRoot(startView);
