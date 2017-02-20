@@ -49,13 +49,18 @@ public final class Game {
     private boolean isMoveable(Direction direction) {
         if (playground.hasMerged()) return true;
 
+        Direction[] directions = {Direction.TOP, Direction.DOWN, Direction.RIGHT, Direction.LEFT};
+
         Section[][] sections = playground.getSections();
         boolean hasBlock = false;
-        if (direction == Direction.TOP) {
-            for (int i = 3; i >= 0; i--) {
-                for (int j = 3; j >= 0; j--) {
-                    if (sections[i][j].hasBlock()) hasBlock = true;
-                    if (hasBlock && !sections[i][j].hasBlock()) return true;
+
+        for (Direction dir : directions) {
+            if (direction == dir) {
+                for (int i = 3; i >= 0; i--) {
+                    for (int j = 3; j >= 0; j--) {
+                        if (sections[i][j].hasBlock()) hasBlock = true;
+                        if (hasBlock && !sections[i][j].hasBlock()) return true;
+                    }
                 }
             }
         }
