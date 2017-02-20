@@ -21,6 +21,7 @@ public final class Game {
         this.manager = playerManager;
 
         this.playground.addRandomBlock();
+        this.playground.addRandomBlock();
     }
 
     //METHODS

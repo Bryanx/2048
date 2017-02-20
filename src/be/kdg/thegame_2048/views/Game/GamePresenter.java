@@ -31,8 +31,8 @@ public class GamePresenter {
         this.view = view;
         this.addEventHandlers();
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
-        view.setBlock(modelGame.getPieceValue(modelGame.getCoordXFromLastAddedBlock(), modelGame.getCoordYFromLastAddedBlock()),
-                modelGame.getCoordXFromLastAddedBlock(), modelGame.getCoordYFromLastAddedBlock());
+        //eenmalige updateview
+        updateView();
     }
 
     //METHODEN
@@ -59,27 +59,18 @@ public class GamePresenter {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case DOWN:
-                        updateViewBlocks(Game.Direction.DOWN);
-                        break;
-                    case UP:
-                        updateViewBlocks(Game.Direction.TOP);
-                        break;
-                    case RIGHT:
-                        updateViewBlocks(Game.Direction.RIGHT);
-                        break;
-                    case LEFT:
-                        updateViewBlocks(Game.Direction.LEFT);
-                        break;
-                    default:
-                        event.consume();
+                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
+                    case UP:updateViewBlocks(Game.Direction.TOP);break;
+                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
+                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
+                    default:event.consume();
                 }
-                updateView(event.getCode());
+                updateView();
             }
         });
     }
 
-    private void updateView(KeyCode dir) {
+    public void updateView() {
         view.getSectionGrid().getChildren().clear();
         view.resetGrid();
         for (int i = 0; i < 4; i++) {
