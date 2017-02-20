@@ -19,6 +19,7 @@ public final class Game {
         this.score = new Score();
         this.playground = new Playground(this.score);
         this.manager = playerManager;
+        this.playground.addRandomBlock();
     }
 
     //METHODS
@@ -33,7 +34,7 @@ public final class Game {
             case RIGHT:
                 playground.moveBlocksRight();
         }
-        playground.addRandomBlocks(1);
+        playground.addRandomBlock();
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
 

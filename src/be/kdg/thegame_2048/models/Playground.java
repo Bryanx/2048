@@ -11,6 +11,7 @@ final class Playground {
     private final Random blockGen = new Random();
     private static final int NUMBER_OF_H_SECTIONS = 4;
     private static final int NUMBER_OF_V_SECTIONS = 4;
+
     private Section[][] sections;
     private Score score;
 
@@ -19,7 +20,6 @@ final class Playground {
         this.score = score;
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
         initialiseSections();
-        addRandomBlocks(1);
     }
 
     //METHODEN
@@ -35,16 +35,14 @@ final class Playground {
         }
     }
 
-    void addRandomBlocks(int numberOfBlocks) {
-        for (int i = 0; i < numberOfBlocks; i++) {
-            boolean blockFound = false;
-            while (!blockFound) {
-                int X = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
-                int Y = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
-                if (!this.sections[X][Y].hasBlock()) {
-                    this.sections[X][Y].putBlock(new Block(2));
-                    blockFound = true;
-                }
+    void addRandomBlock() {
+        boolean blockFound = false;
+        while (!blockFound) {
+            int X = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
+            int Y = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
+            if (!this.sections[X][Y].hasBlock()) {
+                this.sections[X][Y].putBlock(new Block(2));
+                blockFound = true;
             }
         }
     }
@@ -391,10 +389,6 @@ final class Playground {
     private void moveBlock(Section section, Section otherSection) {
         section.putBlock(otherSection.getBlock());
         otherSection.removeBlock();
-    }
-
-    Random getBlockGen() {
-        return blockGen;
     }
 
     @Override
