@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.LoseView;
+package be.kdg.thegame_2048.views.Lose;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -55,5 +55,9 @@ public final class LoseView extends BorderPane {
 
     Label getLblScoreInput() {
         return lblScoreInput;
+    }
+
+    Button getBtnRestart() {
+        return btnRestart;
     }
 }

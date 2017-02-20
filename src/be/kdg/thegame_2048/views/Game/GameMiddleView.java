@@ -1,27 +1,33 @@
 package be.kdg.thegame_2048.views.Game;
 
+import javafx.animation.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
+import javafx.util.Duration;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Stack;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 11:11
  */
 class GameMiddleView extends BorderPane {
-    GridPane sectionGrid;
+    private static final Image BG = new Image("be/kdg/thegame_2048/views/img/bg.png");
+    private GridPane sectionGrid;
+    private StackPane stack;
+    private TranslateTransition tt = new TranslateTransition(Duration.millis(100));
 
     GameMiddleView() {
         initialiseNodes();
@@ -46,13 +52,14 @@ class GameMiddleView extends BorderPane {
         BorderPane playground = new BorderPane(sectionGrid);
         playground.setMinSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
         playground.setMaxSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
-        playground.setBackground(new Background(new BackgroundFill(Color.web("#bbada0"), new CornerRadii(5), Insets.EMPTY)));
+        playground.setBackground(new Background(new BackgroundImage(BG, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         this.setCenter(new BorderPane(playground));
     }
 
     private StackPane getBlock(int value) {
         //TODO: Refactoren, misschien met een map?
-        Rectangle rect = new Rectangle(100,100);
+        Rectangle rect = new Rectangle(100, 100);
         Text number = new Text("");
         if (value == 0)
             rect.setFill(Color.web("#cdc1b4"));
@@ -69,23 +76,79 @@ class GameMiddleView extends BorderPane {
             number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 34));
 
         switch (value) {
-            case 0: rect.setFill(Color.web("#cdc1b4"));break;
-            case 2: rect.setFill(Color.web("#eee4da"));break;
-            case 4: rect.setFill(Color.web("#ede0c8"));break;
-            case 8: rect.setFill(Color.web("#f2b179"));break;
-            case 16: rect.setFill(Color.web("#f59563"));break;
-            case 32: rect.setFill(Color.web("#f67c5f"));break;
-            case 64: rect.setFill(Color.web("#f65e3b"));break;
-            case 128: rect.setFill(Color.web("#edcf72"));break;
-            case 256: rect.setFill(Color.web("#edcc61"));break;
-            case 512: rect.setFill(Color.web("#f1c85d"));break;
-            case 1024: rect.setFill(Color.web("#edc53f"));break;
-            case 2048: rect.setFill(Color.web("#edc22e"));break;
+            case 0:
+                rect.setFill(Color.web("#cdc1b4"));
+                break;
+            case 2:
+                rect.setFill(Color.web("#eee4da"));
+                break;
+            case 4:
+                rect.setFill(Color.web("#ede0c8"));
+                break;
+            case 8:
+                rect.setFill(Color.web("#f2b179"));
+                break;
+            case 16:
+                rect.setFill(Color.web("#f59563"));
+                break;
+            case 32:
+                rect.setFill(Color.web("#f67c5f"));
+                break;
+            case 64:
+                rect.setFill(Color.web("#f65e3b"));
+                break;
+            case 128:
+                rect.setFill(Color.web("#edcf72"));
+                break;
+            case 256:
+                rect.setFill(Color.web("#edcc61"));
+                break;
+            case 512:
+                rect.setFill(Color.web("#f1c85d"));
+                break;
+            case 1024:
+                rect.setFill(Color.web("#edc53f"));
+                break;
+            case 2048:
+                rect.setFill(Color.web("#edc22e"));
+                break;
         }
-        return new StackPane(rect, number);
+        this.stack = new StackPane(rect, number);
+        return stack;
     }
 
-    void setBlock(int value, int x, int y) {
+    void setBlock(int value, int x, int y, KeyCode dir) {
         this.sectionGrid.add(getBlock(value), y, x);
+    }
+
+    //TODO: Animatie maken
+//    void animate(KeyCode dir) {
+//        for (int i = 0; i < 16; i++) {
+//            StackPane e = (StackPane) sectionGrid.getChildren().get(i);
+//            Text txt = (Text) e.getChildren().get(1);
+//            if (!txt.getText().equals(""))
+//                this.tt = new TranslateTransition(Duration.millis(100),
+//                        sectionGrid.getChildren().get(i));
+//        }
+//        if (dir == KeyCode.RIGHT) tt.setByX(110);
+//        if (dir == KeyCode.LEFT) tt.setByX(-110);
+//        if (dir == KeyCode.UP) tt.setByY(-110);
+//        if (dir == KeyCode.DOWN) tt.setByY(110);
+//        tt.setCycleCount(1);
+//        tt.setAutoReverse(false);
+//        tt.play();
+//    }
+
+//    private Node getNodeFromGridPane(GridPane sectionGrid, int col, int row) {
+//        for (Node node : sectionGrid.getChildren()) {
+//            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+//                return node;
+//            }
+//        }
+//        return null;
+//    }
+
+    GridPane getSectionGrid() {
+        return sectionGrid;
     }
 }

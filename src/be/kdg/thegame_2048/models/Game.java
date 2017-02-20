@@ -1,7 +1,7 @@
 package be.kdg.thegame_2048.models;
 
 /**
- * @author Jarne Van Aerde
+ * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 12/02/2017 19:40
  */
 public final class Game {
@@ -33,7 +33,7 @@ public final class Game {
             case RIGHT:
                 playground.moveBlocksRight();
         }
-        playground.addRandomBlocks(playground.getBlockGen().nextInt(2)+1);
+        playground.addRandomBlocks(1);
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
 
@@ -56,7 +56,7 @@ public final class Game {
                 if (sections[i][j].hasBlock()) amountOfBlocks++;
             }
         }
-        return amountOfBlocks == 16;
+        return amountOfBlocks >= 16;
     }
 
     public Score getScore() {

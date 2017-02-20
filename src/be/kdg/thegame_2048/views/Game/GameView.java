@@ -1,7 +1,9 @@
 package be.kdg.thegame_2048.views.Game;
 
+import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
 /**
@@ -35,8 +37,12 @@ public final class GameView extends BorderPane {
         this.setBottom(gameBottomView);
     }
 
-    void setBlock(int value, int x ,int y) {
-        gameMiddleView.setBlock(value, x, y);
+    void setBlock(int value, int x ,int y, KeyCode dir) {
+        gameMiddleView.setBlock(value, x, y, dir);
+    }
+
+    GridPane getSectionGrid() {
+        return gameMiddleView.getSectionGrid();
     }
 
     Button getBtnHighScores() {

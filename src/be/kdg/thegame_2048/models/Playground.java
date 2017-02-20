@@ -19,7 +19,7 @@ final class Playground {
         this.score = score;
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
         initialiseSections();
-        addRandomBlocks(2);
+        addRandomBlocks(1);
     }
 
     //METHODEN

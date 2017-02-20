@@ -39,19 +39,21 @@ public class NewPlayerPresenter {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    searchPlayer(view.getTfNewPlayer().getText());
+                    checkInput(view.getTfNewPlayer().getText());
 
                 } else {
-                    view.getNameExistsError().setVisible(false);
+                    view.getLblInputError().setVisible(false);
                 }
             }
         });
     }
 
-    private void searchPlayer(String name) {
-        if (model.checkIfExists(name)) {
-            view.getNameExistsError().setText("NName already exists");
-            view.getNameExistsError().setVisible(true);
+    private void checkInput(String name) {if (model.checkIfExists(name)) {
+            view.getLblInputError().setText("Name already exists");
+            view.getLblInputError().setVisible(true);
+        } else if (name.length() < 3 || name.length() > 10) {
+            view.getLblInputError().setText("Name has to be between 3 and 10 characters long");
+            view.getLblInputError().setVisible(true);
         } else {
             model.addPlayer(name);
             model.setCurrentPlayer(name);

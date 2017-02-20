@@ -4,15 +4,15 @@ import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
 import be.kdg.thegame_2048.views.HighScores.HighScoreView;
-import be.kdg.thegame_2048.views.LoseView.LoseView;
+import be.kdg.thegame_2048.views.Lose.LosePresenter;
+import be.kdg.thegame_2048.views.Lose.LoseView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import be.kdg.thegame_2048.views.WinView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
-import java.util.Arrays;
 
 /**
  * @author Jarne Van Aerde
@@ -63,12 +63,11 @@ public class GamePresenter {
                     case LEFT : updateViewBlocks(Game.Direction.LEFT); break;
                     default : event.consume();
                 }
-                updateView();
+                updateView(event.getCode());
         }});
-
     }
 
-    private void updateView() {
+    private void updateView(KeyCode dir) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
@@ -77,7 +76,7 @@ public class GamePresenter {
                 } else {
                     value = modelGame.getPieceValue(i,j);
                 }
-                view.setBlock(value,i,j);
+                view.setBlock(value,i,j, dir);
             }
         }
     }
@@ -105,10 +104,11 @@ public class GamePresenter {
     }
 
     private void updateSceneToLost() {
+        //Bij saveInfo soms NullPointerException... hoe?
         saveInfo();
         LoseView loseView = new LoseView();
         //TODO:
-//        new LosePresenter(modelPlayerManager,loseView);
+        new LosePresenter(modelPlayerManager,loseView);
         view.getScene().setRoot(loseView);
     }
 

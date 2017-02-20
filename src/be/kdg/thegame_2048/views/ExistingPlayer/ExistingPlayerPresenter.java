@@ -55,7 +55,7 @@ public class ExistingPlayerPresenter {
             model.setCurrentPlayer(name);
             updateScene();
         } else {
-            view.getNameDoesntExistError().setText("Player doesn't exists.");
+            view.getNameDoesntExistError().setText("Player doesn't exist.");
             view.getNameDoesntExistError().setVisible(true);
         }
     }
