@@ -1,7 +1,5 @@
 package be.kdg.thegame_2048.models;
 
-import java.util.List;
-
 /**
  * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
@@ -11,6 +9,7 @@ public final class Game {
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
     }
+
     //private Player playerNowPlaying;
     private Score score;
     private PlayerManager manager;
@@ -29,38 +28,42 @@ public final class Game {
 
     //METHODS
     public void runGameCycle(Direction direction) {
+        boolean addRandom = false;
         switch (direction) {
             case TOP:
-                playground.moveBlocksTop(); break;
+                playground.moveBlocksTop();
+                if (checkIfMoveable(3, 0, -1, 'Y')) addRandom = true;
+                break;
             case DOWN:
-                playground.moveBlocksBottom(); break;
+                playground.moveBlocksBottom();
+                if (checkIfMoveable(0, 3, 1, 'Y')) addRandom = true;
+                break;
             case LEFT:
-                playground.moveBlocksLeft(); break;
+                playground.moveBlocksLeft();
+                if (checkIfMoveable(3, 0, -1, 'X')) addRandom = true;
+                break;
             case RIGHT:
                 playground.moveBlocksRight();
+                if (checkIfMoveable(0, 3, 1, 'X')) addRandom = true;
         }
-        if (isMoveable(direction)) {
+        //if (addRandom) {
             playground.addRandomBlock();
-        }
-        playground.setHasMerged(false);
+        //}
+        //playground.setHasMerged(false);
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
 
-    private boolean isMoveable(Direction direction) {
-        if (playground.hasMerged()) return true;
-
-        Direction[] directions = {Direction.TOP, Direction.DOWN, Direction.RIGHT, Direction.LEFT};
-
-        Section[][] sections = playground.getSections();
+    private boolean checkIfMoveable(int begin, int end, int increment, char as) {
         boolean hasBlock = false;
-
-        for (Direction dir : directions) {
-            if (direction == dir) {
-                for (int i = 3; i >= 0; i--) {
-                    for (int j = 3; j >= 0; j--) {
-                        if (sections[i][j].hasBlock()) hasBlock = true;
-                        if (hasBlock && !sections[i][j].hasBlock()) return true;
-                    }
+        Section[][] sections = playground.getSections();
+        for (int i = begin; i >= end; i = i + increment) {
+            for (int j = begin; j >= end; j = j + increment) {
+                if (as == 'Y') {
+                    if (sections[i][j].hasBlock()) hasBlock = true;
+                    if (hasBlock && !sections[i][j].hasBlock()) return true;
+                } else {
+                    if (sections[j][i].hasBlock()) hasBlock = true;
+                    if (hasBlock && !sections[j][i].hasBlock()) return true;
                 }
             }
         }
@@ -86,7 +89,7 @@ public final class Game {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (j != 3) {
-                    if (sections[i][j].getBlock().getValue() == sections[i][j+1].getBlock().getValue()) return false;
+                    if (sections[i][j].getBlock().getValue() == sections[i][j + 1].getBlock().getValue()) return false;
                 }
             }
         }
@@ -95,7 +98,7 @@ public final class Game {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (j != 3) {
-                    if (sections[j][i].getBlock().getValue() == sections[j+1][i].getBlock().getValue()) return false;
+                    if (sections[j][i].getBlock().getValue() == sections[j + 1][i].getBlock().getValue()) return false;
                 }
             }
         }
@@ -114,6 +117,7 @@ public final class Game {
     public int getPieceValue(int x, int y) {
         return playground.getSections()[x][y].getBlock().getValue();
     }
+
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
     }
