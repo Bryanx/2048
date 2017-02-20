@@ -60,4 +60,12 @@ public final class GameView extends BorderPane {
     public Label getLblScoreInput() {
         return gameTopView.getLblScoreInput();
     }
+
+    void resetGrid() {
+        gameMiddleView.layoutNodes();
+    }
+
+//    void animate(KeyCode dir) {
+//        gameMiddleView.animate(dir);
+//    }
 }
