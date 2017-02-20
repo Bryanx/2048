@@ -68,6 +68,8 @@ public class GamePresenter {
     }
 
     private void updateView(KeyCode dir) {
+        view.getSectionGrid().getChildren().clear();
+        view.resetGrid();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
