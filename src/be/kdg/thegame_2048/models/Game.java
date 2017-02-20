@@ -1,7 +1,7 @@
 package be.kdg.thegame_2048.models;
 
 /**
- * @author Bryan de Ridder, Jarne van Aerde
+ * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
  */
 public final class Game {
@@ -50,14 +50,8 @@ public final class Game {
     }
 
     public boolean hasLost() {
-        int amountOfBlocks = 0;
+        if (!playground.playGroundFull()) return false;
         Section[][] sections = playground.getSections();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (sections[i][j].hasBlock()) amountOfBlocks++;
-            }
-        }
-        if (amountOfBlocks < 16) return false;
 
         //HORIZONTAL CONTROL
         for (int i = 0; i < 4; i++) {
@@ -89,5 +83,13 @@ public final class Game {
     }
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
+    }
+
+    public int getCoordXFromLastAddedBlock() {
+        return playground.getCoordXFromLastAddedBlock();
+    }
+
+    public int getCoordYFromLastAddedBlock() {
+        return playground.getCoordXFromLastAddedBlock();
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Jarne Van Aerde
+ * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 8/02/2017 17:17
  */
 public final class PlayerManager {
