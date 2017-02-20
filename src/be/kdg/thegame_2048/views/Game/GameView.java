@@ -23,6 +23,7 @@ public final class GameView extends BorderPane {
     public GameView() {
         initialiseNodes();
         layoutNodes();
+
     }
 
     private void initialiseNodes() {
@@ -37,8 +38,8 @@ public final class GameView extends BorderPane {
         this.setBottom(gameBottomView);
     }
 
-    void setBlock(int value, int x ,int y, KeyCode dir) {
-        gameMiddleView.setBlock(value, x, y, dir);
+    void setBlock(int value, int x ,int y) {
+        gameMiddleView.setBlock(value, x, y);
     }
 
     GridPane getSectionGrid() {

@@ -19,6 +19,7 @@ public final class Game {
         this.score = new Score();
         this.playground = new Playground(this.score);
         this.manager = playerManager;
+
         this.playground.addRandomBlock();
     }
 
@@ -90,6 +91,6 @@ public final class Game {
     }
 
     public int getCoordYFromLastAddedBlock() {
-        return playground.getCoordXFromLastAddedBlock();
+        return playground.getCoordYFromLastAddedBlock();
     }
 }

@@ -14,7 +14,7 @@ class Block {
     }
 
     //METHODEN
-    int getValue() {
+    public int getValue() {
         return value;
     }
 

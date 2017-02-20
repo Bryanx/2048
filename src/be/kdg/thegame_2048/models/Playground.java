@@ -59,7 +59,7 @@ final class Playground {
                 if (this.sections[i][j].hasBlock()) blockCounter++;
             }
         }
-        return blockCounter == 16;
+        return blockCounter >= 16;
     }
 
     private void merge(Section sectionBlock, Section sectionOtherBlock) {

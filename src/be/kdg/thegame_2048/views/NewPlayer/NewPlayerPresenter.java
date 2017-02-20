@@ -48,11 +48,12 @@ public class NewPlayerPresenter {
         });
     }
 
-    private void checkInput(String name) {if (model.checkIfExists(name)) {
+    private void checkInput(String name) {
+        if (model.checkIfExists(name)) {
             view.getLblInputError().setText("Name already exists");
             view.getLblInputError().setVisible(true);
-        } else if (name.length() < 3 || name.length() > 10) {
-            view.getLblInputError().setText("Name has to be between 3 and 10 characters long");
+        } else if (name.length() < 3 || name.length() > 15) {
+            view.getLblInputError().setText("Name has to be between 3 and 15 characters long");
             view.getLblInputError().setVisible(true);
         } else {
             model.addPlayer(name);

@@ -3,7 +3,6 @@ package be.kdg.thegame_2048.views.Game;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -32,7 +31,7 @@ class GameMiddleView extends BorderPane {
         this.sectionGrid = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                sectionGrid.add(getBlock(0), i, j);
+                sectionGrid.add(addBlock(0), i, j);
             }
         }
         sectionGrid.setVgap(10);
@@ -47,7 +46,7 @@ class GameMiddleView extends BorderPane {
         this.setCenter(new BorderPane(playground));
     }
 
-    private StackPane getBlock(int value) {
+    private StackPane addBlock(int value) {
         //TODO: Refactoren, misschien met een map?
         Rectangle rect = new Rectangle(100,100);
         Text number = new Text("");
@@ -82,8 +81,8 @@ class GameMiddleView extends BorderPane {
         return new StackPane(rect, number);
     }
 
-    void setBlock(int value, int x, int y, KeyCode dir) {
-        this.sectionGrid.add(getBlock(value), y, x);
+    void setBlock(int value, int x, int y) {
+        this.sectionGrid.add(addBlock(value), y, x);
     }
 
     //TODO: Animatie maken

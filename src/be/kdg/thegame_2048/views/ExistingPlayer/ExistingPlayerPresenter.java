@@ -61,8 +61,8 @@ public class ExistingPlayerPresenter {
     }
 
     private void updateScene() {
-        GameView gameView = new GameView();
         Game gameModel = new Game(model);
+        GameView gameView = new GameView();
         GamePresenter presenter = new GamePresenter(gameModel, model, gameView);
         view.getScene().setRoot(gameView);
     }

@@ -31,6 +31,8 @@ public class GamePresenter {
         this.view = view;
         this.addEventHandlers();
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
+        view.setBlock(modelGame.getPieceValue(modelGame.getCoordXFromLastAddedBlock(), modelGame.getCoordYFromLastAddedBlock()),
+                modelGame.getCoordXFromLastAddedBlock(), modelGame.getCoordYFromLastAddedBlock());
     }
 
     //METHODEN
@@ -57,14 +59,24 @@ public class GamePresenter {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case DOWN : updateViewBlocks(Game.Direction.DOWN); break;
-                    case UP : updateViewBlocks(Game.Direction.TOP); break;
-                    case RIGHT : updateViewBlocks(Game.Direction.RIGHT); break;
-                    case LEFT : updateViewBlocks(Game.Direction.LEFT); break;
-                    default : event.consume();
+                    case DOWN:
+                        updateViewBlocks(Game.Direction.DOWN);
+                        break;
+                    case UP:
+                        updateViewBlocks(Game.Direction.TOP);
+                        break;
+                    case RIGHT:
+                        updateViewBlocks(Game.Direction.RIGHT);
+                        break;
+                    case LEFT:
+                        updateViewBlocks(Game.Direction.LEFT);
+                        break;
+                    default:
+                        event.consume();
                 }
                 updateView(event.getCode());
-        }});
+            }
+        });
     }
 
     private void updateView(KeyCode dir) {
@@ -73,12 +85,12 @@ public class GamePresenter {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
-                if (modelGame.getPiece(i,j) == null) {
+                if (modelGame.getPiece(i, j) == null) {
                     value = 0;
                 } else {
-                    value = modelGame.getPieceValue(i,j);
+                    value = modelGame.getPieceValue(i, j);
                 }
-                view.setBlock(value,i,j, dir);
+                view.setBlock(value, i, j);
             }
         }
     }
@@ -110,7 +122,7 @@ public class GamePresenter {
         saveInfo();
         LoseView loseView = new LoseView();
         //TODO:
-        new LosePresenter(modelPlayerManager,loseView);
+        new LosePresenter(modelPlayerManager, loseView);
         view.getScene().setRoot(loseView);
     }
 
