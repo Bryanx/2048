@@ -55,8 +55,8 @@ final class Playground {
 
     void moveBlocksTop() {
         //ROW 1 AND 2
-        boolean[] haveBlocksRow1 = haveBlocksRow1();
-        boolean[] haveBlocksRow2 = haveBlocksRow2();
+        boolean[] haveBlocksRow1 = haveBlocksRow(1);
+        boolean[] haveBlocksRow2 = haveBlocksRow(2);
         boolean[] alreadyMergedRow1AndRow2 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow2[i] && haveBlocksRow1[i]) {
@@ -70,9 +70,9 @@ final class Playground {
         }
 
         //ROW 2 AND 3
-        haveBlocksRow1 = haveBlocksRow1();
-        haveBlocksRow2 = haveBlocksRow2();
-        boolean[] haveBlocksRow3 = haveBlocksRow3();
+        haveBlocksRow1 = haveBlocksRow(1);
+        haveBlocksRow2 = haveBlocksRow(2);
+        boolean[] haveBlocksRow3 = haveBlocksRow(3);
         boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow3[i] && haveBlocksRow2[i]) {
@@ -92,10 +92,10 @@ final class Playground {
         }
 
         //ROW 3 AND 4
-        haveBlocksRow1 = haveBlocksRow1();
-        haveBlocksRow2 = haveBlocksRow2();
-        haveBlocksRow3 = haveBlocksRow3();
-        boolean[] haveBlocksRow4 = haveBlocksRow4();
+        haveBlocksRow1 = haveBlocksRow(1);
+        haveBlocksRow2 = haveBlocksRow(2);
+        haveBlocksRow3 = haveBlocksRow(3);
+        boolean[] haveBlocksRow4 = haveBlocksRow(4);
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow4[i] && haveBlocksRow3[i]) {
                 if (isMergealbe(this.sections[3][i], this.sections[2][i])) {
@@ -121,8 +121,8 @@ final class Playground {
 
     void moveBlocksBottom() {
         //ROW 3 AND 4
-        boolean[] haveBlocksRow4 = haveBlocksRow4();
-        boolean[] haveBlocksRow3 = haveBlocksRow3();
+        boolean[] haveBlocksRow4 = haveBlocksRow(4);
+        boolean[] haveBlocksRow3 = haveBlocksRow(3);
         boolean[] alreadyMergedRow3AndRow4 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow3[i] && haveBlocksRow4[i]) {
@@ -136,9 +136,9 @@ final class Playground {
         }
 
         //ROW 2 AND 3
-        haveBlocksRow4 = haveBlocksRow4();
-        haveBlocksRow3 = haveBlocksRow3();
-        boolean[] haveBlocksRow2 = haveBlocksRow2();
+        haveBlocksRow4 = haveBlocksRow(4);
+        haveBlocksRow3 = haveBlocksRow(3);
+        boolean[] haveBlocksRow2 = haveBlocksRow(2);
         boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow2[i] && haveBlocksRow3[i]) {
@@ -158,10 +158,10 @@ final class Playground {
         }
 
         //ROW 1 AND 2
-        haveBlocksRow4 = haveBlocksRow4();
-        haveBlocksRow3 = haveBlocksRow3();
-        haveBlocksRow2 = haveBlocksRow2();
-        boolean[] haveBlocksRow1 = haveBlocksRow1();
+        haveBlocksRow4 = haveBlocksRow(4);
+        haveBlocksRow3 = haveBlocksRow(3);
+        haveBlocksRow2 = haveBlocksRow(2);
+        boolean[] haveBlocksRow1 = haveBlocksRow(1);
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             if (haveBlocksRow1[i] && haveBlocksRow2[i]) {
                 if (isMergealbe(this.sections[0][i], this.sections[1][i])) {
@@ -187,8 +187,8 @@ final class Playground {
 
     void moveBlocksLeft() {
         //COLUMN 1 AND 2
-        boolean[] haveBlocksColumn1 = haveBlocksColumn1();
-        boolean[] haveBlocksColumn2 = haveBlocksColumn2();
+        boolean[] haveBlocksColumn1 = haveBlocksColumn(1);
+        boolean[] haveBlocksColumn2 = haveBlocksColumn(2);
         boolean[] alreadyMergedColumn1AndColumn2 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
             if (haveBlocksColumn2[i] && haveBlocksColumn1[i]) {
@@ -202,9 +202,9 @@ final class Playground {
         }
 
         //COLUMN 2 AND 3
-        haveBlocksColumn1 = haveBlocksColumn1();
-        haveBlocksColumn2 = haveBlocksColumn2();
-        boolean[] haveBlocksColumn3 = haveBlocksColumn3();
+        haveBlocksColumn1 = haveBlocksColumn(1);
+        haveBlocksColumn2 = haveBlocksColumn(2);
+        boolean[] haveBlocksColumn3 = haveBlocksColumn(3);
         boolean[] alreadyMergedColumn2AndColumn3 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
             if (haveBlocksColumn3[i] && haveBlocksColumn2[i]) {
@@ -225,10 +225,10 @@ final class Playground {
         }
 
         //COLUMN 3 AND 4
-        haveBlocksColumn1 = haveBlocksColumn1();
-        haveBlocksColumn2 = haveBlocksColumn2();
-        haveBlocksColumn3 = haveBlocksColumn3();
-        boolean[] haveBlocksColumn4 = haveBlocksColumn4();
+        haveBlocksColumn1 = haveBlocksColumn(1);
+        haveBlocksColumn2 = haveBlocksColumn(2);
+        haveBlocksColumn3 = haveBlocksColumn(3);
+        boolean[] haveBlocksColumn4 = haveBlocksColumn(4);
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
             if (haveBlocksColumn4[i] && haveBlocksColumn3[i]) {
                 if (isMergealbe(this.sections[i][3], this.sections[i][2])) {
@@ -254,8 +254,8 @@ final class Playground {
 
     void moveBlocksRight() {
         //COLUMN 3 AND 4
-        boolean[] haveBlocksColumn4 = haveBlocksColumn4();
-        boolean[] haveBlocksColumn3 = haveBlocksColumn3();
+        boolean[] haveBlocksColumn4 = haveBlocksColumn(4);
+        boolean[] haveBlocksColumn3 = haveBlocksColumn(3);
         boolean[] alreadyMergedRow3AndRow4 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
             if (haveBlocksColumn3[i] && haveBlocksColumn4[i]) {
@@ -269,9 +269,9 @@ final class Playground {
         }
 
         //COLUMN 2 AND 3
-        haveBlocksColumn4 = haveBlocksColumn4();
-        haveBlocksColumn3 = haveBlocksColumn3();
-        boolean[] haveBlocksColumn2 = haveBlocksColumn2();
+        haveBlocksColumn4 = haveBlocksColumn(4);
+        haveBlocksColumn3 = haveBlocksColumn(3);
+        boolean[] haveBlocksColumn2 = haveBlocksColumn(2);
         boolean[] alreadyMergedRow2AndRow3 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
             if (haveBlocksColumn2[i] && haveBlocksColumn3[i]) {
@@ -291,10 +291,10 @@ final class Playground {
         }
 
         //COLUMN 1 AND 2
-        haveBlocksColumn4 = haveBlocksColumn4();
-        haveBlocksColumn3 = haveBlocksColumn3();
-        haveBlocksColumn2 = haveBlocksColumn2();
-        boolean[] haveBlocksColumn1 = haveBlocksColumn1();
+        haveBlocksColumn4 = haveBlocksColumn(4);
+        haveBlocksColumn3 = haveBlocksColumn(3);
+        haveBlocksColumn2 = haveBlocksColumn(2);
+        boolean[] haveBlocksColumn1 = haveBlocksColumn(1);
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
             if (haveBlocksColumn1[i] && haveBlocksColumn2[i]) {
                 if (isMergealbe(this.sections[i][0], this.sections[i][1])) {
@@ -318,68 +318,20 @@ final class Playground {
         }
     }
 
-    private boolean[] haveBlocksRow1() {
-        boolean[] haveBlocksRow1 = new boolean[NUMBER_OF_H_SECTIONS];
+    private boolean[] haveBlocksRow(int numberRow) {
+        boolean[] haveBlocksRow = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
-            if (this.sections[0][i].hasBlock()) haveBlocksRow1[i] = true;
+            if (this.sections[numberRow-1][i].hasBlock()) haveBlocksRow[i] = true;
         }
-        return haveBlocksRow1;
+        return haveBlocksRow;
     }
 
-    private boolean[] haveBlocksRow2() {
-        boolean[] haveBlocksRow2 = new boolean[NUMBER_OF_H_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
-            if (this.sections[1][i].hasBlock()) haveBlocksRow2[i] = true;
-        }
-        return haveBlocksRow2;
-    }
-
-    private boolean[] haveBlocksRow3() {
-        boolean[] haveBlocksRow3 = new boolean[NUMBER_OF_H_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
-            if (this.sections[2][i].hasBlock()) haveBlocksRow3[i] = true;
-        }
-        return haveBlocksRow3;
-    }
-
-    private boolean[] haveBlocksRow4() {
-        boolean[] haveBlocksRow4 = new boolean[NUMBER_OF_H_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
-            if (this.sections[3][i].hasBlock()) haveBlocksRow4[i] = true;
-        }
-        return haveBlocksRow4;
-    }
-
-    private boolean[] haveBlocksColumn1() {
+    private boolean[] haveBlocksColumn(int numberColumn) {
         boolean[] haveBlocksColumn1 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
-            if (this.sections[i][0].hasBlock()) haveBlocksColumn1[i] = true;
+            if (this.sections[i][numberColumn-1].hasBlock()) haveBlocksColumn1[i] = true;
         }
         return haveBlocksColumn1;
-    }
-
-    private boolean[] haveBlocksColumn2() {
-        boolean[] haveBlocksColumn2 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
-            if (this.sections[i][1].hasBlock()) haveBlocksColumn2[i] = true;
-        }
-        return haveBlocksColumn2;
-    }
-
-    private boolean[] haveBlocksColumn3() {
-        boolean[] haveBlocksColumn3 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
-            if (this.sections[i][2].hasBlock()) haveBlocksColumn3[i] = true;
-        }
-        return haveBlocksColumn3;
-    }
-
-    private boolean[] haveBlocksColumn4() {
-        boolean[] haveBlocksColumn4 = new boolean[NUMBER_OF_V_SECTIONS];
-        for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
-            if (this.sections[i][3].hasBlock()) haveBlocksColumn4[i] = true;
-        }
-        return haveBlocksColumn4;
     }
 
     private boolean isMergealbe(Section section, Section otherSection) {
