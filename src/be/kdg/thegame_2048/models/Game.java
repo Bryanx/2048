@@ -9,7 +9,7 @@ public final class Game {
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
     }
-    private Player playerNowPlaying;
+    //private Player playerNowPlaying;
     private Score score;
     private PlayerManager manager;
     private Playground playground;
@@ -57,7 +57,27 @@ public final class Game {
                 if (sections[i][j].hasBlock()) amountOfBlocks++;
             }
         }
-        return amountOfBlocks >= 16;
+        if (amountOfBlocks < 16) return false;
+
+        //HORIZONTAL CONTROL
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j != 3) {
+                    if (sections[i][j].getBlock().getValue() == sections[i][j+1].getBlock().getValue()) return false;
+                }
+            }
+        }
+
+        //VERTICAL CONTROL
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j != 3) {
+                    if (sections[j][i].getBlock().getValue() == sections[j+1][i].getBlock().getValue()) return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public Score getScore() {
