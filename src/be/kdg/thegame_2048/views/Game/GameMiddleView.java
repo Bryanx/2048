@@ -114,4 +114,6 @@ class GameMiddleView extends BorderPane {
     GridPane getSectionGrid() {
         return sectionGrid;
     }
+
+
 }

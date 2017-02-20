@@ -13,6 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.omg.CORBA.TIMEOUT;
+
+import java.util.Timer;
 
 /**
  * @author Jarne Van Aerde
@@ -50,6 +53,7 @@ public class GamePresenter {
             public void handle(ActionEvent event) {
                 System.out.println(modelPlayerManager.getCurrentPlayer().getName());
                 saveInfo();
+                modelPlayerManager.setCurrentPlayerToNull();
                 StartView startView = new StartView();
                 StartPresenter presenter = new StartPresenter(modelPlayerManager, startView);
                 view.getScene().setRoot(startView);
@@ -58,6 +62,7 @@ public class GamePresenter {
         view.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                Timer timer = new Timer();
                 switch (event.getCode()) {
                     case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
                     case UP:updateViewBlocks(Game.Direction.TOP);break;
@@ -65,6 +70,18 @@ public class GamePresenter {
                     case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
                     default:event.consume();
                 }
+                updateView();
+            }
+        });
+        view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (modelGame.beatHighscore(modelPlayerManager.getCurrentPlayer())) {
+                    saveInfo();
+                }
+                modelGame = new Game(modelPlayerManager);
+
+                view.getLblScoreInput().setText("0");
                 updateView();
             }
         });
@@ -88,7 +105,6 @@ public class GamePresenter {
 
     private void saveInfo() {
         modelPlayerManager.getCurrentPlayer().setBestScore(modelGame.getScore().getScore());
-        modelPlayerManager.setCurrentPlayerToNull();
     }
 
     private void updateViewBlocks(Game.Direction direction) {

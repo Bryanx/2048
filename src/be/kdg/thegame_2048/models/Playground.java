@@ -14,14 +14,12 @@ final class Playground {
 
     private Section[][] sections;
     private Score score;
-    private int coordXFromLastAddedBlock;
-    private int coordYFromLastAddedBlock;
+    private boolean hasMerged;
 
     //CONSTRUCTORS
     Playground(Score score) {
         this.score = score;
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
-        initialiseSections();
     }
 
     //METHODEN
@@ -29,7 +27,7 @@ final class Playground {
         return sections;
     }
 
-    private void initialiseSections() {
+    void initialiseSections() {
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             for (int j = 0; j < NUMBER_OF_V_SECTIONS; j++) {
                 this.sections[i][j] = new Section();
@@ -46,8 +44,6 @@ final class Playground {
             if (!this.sections[x][y].hasBlock()) {
                 this.sections[x][y].putBlock(new Block(2));
                 blockFound = true;
-                this.coordXFromLastAddedBlock = x;
-                this.coordYFromLastAddedBlock = y;
             }
         }
     }
@@ -66,6 +62,7 @@ final class Playground {
         score.calculateScore(sectionBlock.getBlock(), sectionOtherBlock.getBlock());
         sectionBlock.getBlock().setValue(sectionBlock.getBlock().getValue() + sectionOtherBlock.getBlock().getValue());
         sectionOtherBlock.removeBlock();
+        this.hasMerged = true;
     }
 
     void moveBlocksTop() {
@@ -358,12 +355,12 @@ final class Playground {
         otherSection.removeBlock();
     }
 
-    int getCoordXFromLastAddedBlock() {
-        return coordXFromLastAddedBlock;
+    public boolean hasMerged() {
+        return hasMerged;
     }
 
-    int getCoordYFromLastAddedBlock() {
-        return coordYFromLastAddedBlock;
+    public void setHasMerged(boolean hasMerged) {
+        this.hasMerged = hasMerged;
     }
 
     @Override

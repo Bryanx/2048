@@ -66,6 +66,10 @@ public final class GameView extends BorderPane {
         gameMiddleView.layoutNodes();
     }
 
+    Button getBtnRestart() {
+        return gameBottomView.getBtnRestart();
+    }
+
 //    void animate(KeyCode dir) {
 //        gameMiddleView.animate(dir);
 //    }

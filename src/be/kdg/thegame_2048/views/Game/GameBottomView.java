@@ -61,4 +61,8 @@ class GameBottomView extends BorderPane {
     Button getBtnExit() {
         return btnExit;
     }
+
+    Button getBtnRestart() {
+        return btnRestart;
+    }
 }

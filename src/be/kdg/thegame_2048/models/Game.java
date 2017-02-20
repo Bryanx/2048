@@ -1,5 +1,7 @@
 package be.kdg.thegame_2048.models;
 
+import java.util.List;
+
 /**
  * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
@@ -20,6 +22,7 @@ public final class Game {
         this.playground = new Playground(this.score);
         this.manager = playerManager;
 
+        playground.initialiseSections();
         this.playground.addRandomBlock();
         this.playground.addRandomBlock();
     }
@@ -36,8 +39,27 @@ public final class Game {
             case RIGHT:
                 playground.moveBlocksRight();
         }
-        playground.addRandomBlock();
+        if (isMoveable(direction)) {
+            playground.addRandomBlock();
+        }
+        playground.setHasMerged(false);
         System.out.println(score.getScore() + "\n" + playground.toString());
+    }
+
+    private boolean isMoveable(Direction direction) {
+        if (playground.hasMerged()) return true;
+
+        Section[][] sections = playground.getSections();
+        boolean hasBlock = false;
+        if (direction == Direction.TOP) {
+            for (int i = 3; i >= 0; i--) {
+                for (int j = 3; j >= 0; j--) {
+                    if (sections[i][j].hasBlock()) hasBlock = true;
+                    if (hasBlock && !sections[i][j].hasBlock()) return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean hasWon() {
@@ -76,6 +98,10 @@ public final class Game {
         return true;
     }
 
+    public boolean beatHighscore(Player p) {
+        return this.score.getScore() > p.getBestScore();
+    }
+
     public Score getScore() {
         return score;
     }
@@ -85,13 +111,5 @@ public final class Game {
     }
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
-    }
-
-    public int getCoordXFromLastAddedBlock() {
-        return playground.getCoordXFromLastAddedBlock();
-    }
-
-    public int getCoordYFromLastAddedBlock() {
-        return playground.getCoordYFromLastAddedBlock();
     }
 }
