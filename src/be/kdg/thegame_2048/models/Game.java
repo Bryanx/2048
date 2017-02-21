@@ -14,6 +14,7 @@ public final class Game {
     private Score score;
     private PlayerManager manager;
     private Playground playground;
+    private String lastMove;
 
     //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
@@ -28,46 +29,24 @@ public final class Game {
 
     //METHODS
     public void runGameCycle(Direction direction) {
-        boolean addRandom = false;
+        String lastMove = playground.toString();
         switch (direction) {
             case TOP:
                 playground.moveBlocksTop();
-                if (checkIfMoveable(3, 0, -1, 'Y')) addRandom = true;
                 break;
             case DOWN:
                 playground.moveBlocksBottom();
-                if (checkIfMoveable(0, 3, 1, 'Y')) addRandom = true;
                 break;
             case LEFT:
                 playground.moveBlocksLeft();
-                if (checkIfMoveable(3, 0, -1, 'X')) addRandom = true;
                 break;
             case RIGHT:
                 playground.moveBlocksRight();
-                if (checkIfMoveable(0, 3, 1, 'X')) addRandom = true;
         }
-        //if (addRandom) {
+        if (!lastMove.equals(playground.toString())) {
             playground.addRandomBlock();
-        //}
-        //playground.setHasMerged(false);
-        System.out.println(score.getScore() + "\n" + playground.toString());
-    }
-
-    private boolean checkIfMoveable(int begin, int end, int increment, char as) {
-        boolean hasBlock = false;
-        Section[][] sections = playground.getSections();
-        for (int i = begin; i >= end; i = i + increment) {
-            for (int j = begin; j >= end; j = j + increment) {
-                if (as == 'Y') {
-                    if (sections[i][j].hasBlock()) hasBlock = true;
-                    if (hasBlock && !sections[i][j].hasBlock()) return true;
-                } else {
-                    if (sections[j][i].hasBlock()) hasBlock = true;
-                    if (hasBlock && !sections[j][i].hasBlock()) return true;
-                }
-            }
         }
-        return false;
+        System.out.println(score.getScore() + "\n" + playground.toString());
     }
 
     public boolean hasWon() {

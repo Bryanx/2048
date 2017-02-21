@@ -355,14 +355,6 @@ final class Playground {
         otherSection.removeBlock();
     }
 
-    public boolean hasMerged() {
-        return hasMerged;
-    }
-
-    public void setHasMerged(boolean hasMerged) {
-        this.hasMerged = hasMerged;
-    }
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
