@@ -1,16 +1,10 @@
 package be.kdg.thegame_2048.views.About;
 
-import be.kdg.thegame_2048.views.SuperView;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 /**
  * @author Bryan de Ridder
