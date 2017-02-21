@@ -15,13 +15,13 @@ import java.util.*;
  * @version 1.0 17-02-17 09:46
  */
 public class HighScorePresenter {
-    private PlayerManager modelPlayerManager;
+    private PlayerManager modelPM;
     private Game modelGame;
     private HighScoreView view;
 
-    public HighScorePresenter(Game modelGame, PlayerManager modelPlayerManager, HighScoreView view) {
+    public HighScorePresenter(Game modelGame, PlayerManager modelPM, HighScoreView view) {
         this.modelGame = modelGame;
-        this.modelPlayerManager = modelPlayerManager;
+        this.modelPM = modelPM;
         this.view = view;
         this.addEventHandlers();
         this.updateView();
@@ -39,29 +39,31 @@ public class HighScorePresenter {
     private void updateScene() {
         GameView gameView = new GameView();
         gameView.getLblScoreInput().setText(String.valueOf(modelGame.getScore()));
-        gameView.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
-        GamePresenter presenter = new GamePresenter(modelGame, modelPlayerManager, gameView);
-        if (modelGame.getScore().getScore() >= modelPlayerManager.getCurrentPlayer().getBestScore()) {
+        gameView.getLblBestScoreInput().setText(String.valueOf(modelPM.getCurrentPlayer().getBestScore()));
+        GamePresenter presenter = new GamePresenter(modelGame, modelPM, gameView);
+        if (modelGame.getScore().getScore() >= modelPM.getCurrentPlayer().getBestScore()) {
             gameView.getLblBestScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
         }
         view.getScene().setRoot(gameView);
     }
 
     private void updateView() {
-        Map<Integer, String> playerMap = new HashMap<>();
-        List<Player> playerList = modelPlayerManager.getPlayerList();
+        List<Player> playerList = modelPM.getPlayerList();
         Collections.sort(playerList);
 
         //OPSPLITSEN IN 2 APART LISTS
         List<String> playernames = new ArrayList<>();
         List<Integer> playerBestScores = new ArrayList<>();
-        for (int i = 0; i < playerList.size(); i++) {
-            playernames.add(playerList.get(i).getName());
-            playerBestScores.add(playerList.get(i).getBestScore());
+        for (Player p : playerList) {
+            playernames.add(p.getName());
+            playerBestScores.add(p.getBestScore());
         }
         System.out.println(playernames.toString());
         System.out.println(playerBestScores.toString());
 
+        String currentPlayer = modelPM.getCurrentPlayer().getName();
+
         view.updateHighScore(playernames, playerBestScores);
+        view.highlightPlayer(currentPlayer);
     }
 }

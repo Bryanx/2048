@@ -138,13 +138,14 @@ BG darker:
 }
 
 .hsColumnNames {
-    -fx-font-family: "PT Sans Narrow";
+    -fx-font-family: "Calibri";
+    -fx-font-weight: bold;
     -fx-font-size: 14pt;
 }
 
 .hsColumnFillRanks {
     -fx-font-size: 16pt;
-    -fx-font-family: "PT Sans";
+    -fx-font-family: "Calibri";
     -fx-font-weight: bold;
 }
 
@@ -152,4 +153,8 @@ BG darker:
     -fx-font-size: 16pt;
     -fx-font-family: "Calibri";
     -fx-font-weight: lighter;
+}
+
+.hsActivePlayer {
+    -fx-text-fill: white;
 }

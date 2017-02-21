@@ -1,8 +1,13 @@
-lopen:9724
-bra:7452
+joren:9724
+dave:7452
 jarne:4852
+henk:4533
 nami:3164
 karel:2828
+klaas:2345
+kaastosti:1820
+bram:1708
+kip:632
+tom:546
 bryan:484
-bram:0
-brn:0
+kbal:392

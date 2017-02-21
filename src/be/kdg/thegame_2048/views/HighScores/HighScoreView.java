@@ -16,7 +16,7 @@ import java.util.*;
 public final class HighScoreView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
     private static final double SCENE_WIDTH = 550;
-    private static final int PLAYER_AMOUNT = 10;
+    private int playerAmount;
     private Label lblHighScores;
     //lblHsNames.get(1) the name of rank 1
     //lblHsScores.get(1) is the score of rank 1
@@ -69,14 +69,20 @@ public final class HighScoreView extends BorderPane {
     }
 
     void updateHighScore(List<String> names, List<Integer> scores) {
-        //Adds the players to the highscorelist
+        //Adds the players to the highscorelist (max=10)
         //Number 1 on the list is also rank 1 of the highscores
-        for (int i = 0; i < names.size(); i++) {
+        if (names.size() < 10) {
+            playerAmount = names.size();
+        } else {
+            playerAmount = 10;
+        }
+
+        for (int i = 0; i < playerAmount; i++) {
             lblHsRanks.add(new Label(i + 1 + "")); //Rank
             lblHsNames.add(new Label(names.get(i).toUpperCase().charAt(0) + names.get(i).substring(1))); //Name
             lblHsScores.add(new Label(String.valueOf(scores.get(i)))); //Score
         }
-        for (int i = 0; i < names.size(); i++) {
+        for (int i = 0; i < playerAmount; i++) {
             lblHsRanks.get(i + 1).getStyleClass().add("hsColumnFillRanks");
             lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
             lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
@@ -84,7 +90,7 @@ public final class HighScoreView extends BorderPane {
 
         //MIDDLE (Actual highscores, including the column lblHsNames)
         GridPane grid = new GridPane();
-        for (int i = 0; i < names.size() + 1; i++) {
+        for (int i = 0; i < playerAmount + 1; i++) {
             grid.add(lblHsRanks.get(i), 0, i);
             grid.add(lblHsNames.get(i), 1, i);
             grid.add(lblHsScores.get(i), 2, i);
@@ -100,6 +106,18 @@ public final class HighScoreView extends BorderPane {
         VBox vBox = new VBox(new BorderPane(grid), new BorderPane(goBack));
         vBox.setMaxWidth(SCENE_WIDTH-OVERALL_PADDING*2);
         this.setCenter(vBox);
+    }
+
+    void highlightPlayer(String naam) {
+        //highlights the active player in the highscore list
+        String upperNaam = naam.toUpperCase().charAt(0) + naam.substring(1);
+        for (int i = 0; i < playerAmount; i++) {
+            if (upperNaam.equals(lblHsNames.get(i).getText())) {
+                lblHsRanks.get(i).getStyleClass().add("hsActivePlayer");
+                lblHsNames.get(i).getStyleClass().add("hsActivePlayer");
+                lblHsScores.get(i).getStyleClass().add("hsActivePlayer");
+            }
+        }
     }
 
     Button getGoBack() {
