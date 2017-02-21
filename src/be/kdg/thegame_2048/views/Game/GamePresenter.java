@@ -52,6 +52,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println(modelPlayerManager.getCurrentPlayer().getName());
+
                 saveInfo();
                 modelPlayerManager.setCurrentPlayerToNull();
                 StartView startView = new StartView();
@@ -64,11 +65,20 @@ public class GamePresenter {
             public void handle(KeyEvent event) {
                 Timer timer = new Timer();
                 switch (event.getCode()) {
-                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
-                    case UP:updateViewBlocks(Game.Direction.TOP);break;
-                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
-                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
-                    default:event.consume();
+                    case DOWN:
+                        updateViewBlocks(Game.Direction.DOWN);
+                        break;
+                    case UP:
+                        updateViewBlocks(Game.Direction.TOP);
+                        break;
+                    case RIGHT:
+                        updateViewBlocks(Game.Direction.RIGHT);
+                        break;
+                    case LEFT:
+                        updateViewBlocks(Game.Direction.LEFT);
+                        break;
+                    default:
+                        event.consume();
                 }
                 updateView();
             }
@@ -76,15 +86,14 @@ public class GamePresenter {
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (modelGame.beatHighscore(modelPlayerManager.getCurrentPlayer())) {
-                    saveInfo();
-                }
+                saveInfo();
                 modelGame = new Game(modelPlayerManager);
 
                 view.getLblScoreInput().setText("0");
                 updateView();
             }
         });
+
     }
 
     public void updateView() {
@@ -104,7 +113,9 @@ public class GamePresenter {
     }
 
     private void saveInfo() {
-        modelPlayerManager.getCurrentPlayer().setBestScore(modelGame.getScore().getScore());
+        if (modelPlayerManager.getCurrentPlayer().getBestScore() < modelGame.getScore().getScore()) {
+            modelPlayerManager.getCurrentPlayer().setBestScore(modelGame.getScore().getScore());
+        }
     }
 
     private void updateViewBlocks(Game.Direction direction) {

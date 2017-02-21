@@ -85,10 +85,6 @@ public final class Game {
         return true;
     }
 
-    public boolean beatHighscore(Player p) {
-        return this.score.getScore() > p.getBestScore();
-    }
-
     public Score getScore() {
         return score;
     }

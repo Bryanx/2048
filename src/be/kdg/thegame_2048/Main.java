@@ -5,9 +5,11 @@ import be.kdg.thegame_2048.views.Game.GameView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
@@ -34,6 +36,12 @@ public class Main extends Application {
         primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                model.saveData();
+            }
+        });
     }
 
     public static void main(String[] args) {

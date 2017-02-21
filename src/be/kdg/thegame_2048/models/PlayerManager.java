@@ -1,7 +1,7 @@
 package be.kdg.thegame_2048.models;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,19 +24,39 @@ public final class PlayerManager {
     }
 
     private void loadPlayerData() {
-        Path playerPath = Paths.get("../file");
+        Path data = Paths.get("playerdata" + File.separator + "data.txt");
         try {
-            Scanner s  = new Scanner(playerPath);
-            while (s.hasNext()) {
-                String playerInfo = s.nextLine();
-                String[] sepPlayerInfo = playerInfo.split(":");
-                playerList.add(new Player(sepPlayerInfo[0], Integer.parseInt(sepPlayerInfo[1])));
+            BufferedReader reader = new BufferedReader(new FileReader(data.toFile()));
+            String info = reader.readLine();
+            while (info != null) {
+                String[] splittedData = info.split(":");
+                playerList.add(new Player(splittedData[0], Integer.parseInt(splittedData[1])));
+                info = reader.readLine();
             }
-            s.close();
+            reader.close();
         } catch (IOException e) {
-            System.out.println("File does not exists.");
+            System.out.println("Couldn't find file data.txt, contact support!");
         }
+    }
 
+    public void saveData() {
+        Path playerdata = Paths.get("playerdata");
+        Path data = playerdata.resolve("data.txt");
+        try {
+            if (!Files.exists(playerdata)) Files.createDirectory(playerdata);
+            if (!Files.exists(data)) Files.createFile(data);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(data.toFile()));
+            String playerInfo = "";
+            for (Player player : playerList) {
+                playerInfo += player.getName() + ":" + player.getBestScore() + "\n";
+            }
+
+            writer.write(playerInfo);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     //METHODEN
