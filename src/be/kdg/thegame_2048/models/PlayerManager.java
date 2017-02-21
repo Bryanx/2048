@@ -1,10 +1,13 @@
 package be.kdg.thegame_2048.models;
 
+import javax.crypto.EncryptedPrivateKeyInfo;
+import java.beans.Encoder;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 
