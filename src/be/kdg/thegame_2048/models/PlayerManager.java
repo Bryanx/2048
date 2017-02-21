@@ -1,7 +1,12 @@
 package be.kdg.thegame_2048.models;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author Jarne Van Aerde, Bryan de Ridder
@@ -15,6 +20,23 @@ public final class PlayerManager {
     //CONSTRUCTORS
     public PlayerManager() {
         this.playerList = new ArrayList<>();
+        loadPlayerData();
+    }
+
+    private void loadPlayerData() {
+        Path playerPath = Paths.get("../file");
+        try {
+            Scanner s  = new Scanner(playerPath);
+            while (s.hasNext()) {
+                String playerInfo = s.nextLine();
+                String[] sepPlayerInfo = playerInfo.split(":");
+                playerList.add(new Player(sepPlayerInfo[0], Integer.parseInt(sepPlayerInfo[1])));
+            }
+            s.close();
+        } catch (IOException e) {
+            System.out.println("File does not exists.");
+        }
+
     }
 
     //METHODEN

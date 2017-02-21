@@ -6,7 +6,6 @@ package be.kdg.thegame_2048.models;
  */
 public final class Game {
     //ATTRIBUTES
-    //Hallo
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
     }
