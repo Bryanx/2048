@@ -1,17 +1,19 @@
 /*
 Font colors:
-rgb(0,100,100)
+#006464
 
 BG colors:
-rgb(236, 196, 0)
+#ECC400
+BG darker:
+#D7B407
 */
 
 /* ========== General ========== */
 .root, .label {
-    -fx-background: rgb(236, 196, 0);
+    -fx-background: #ECC400;
     -fx-font-family: "Calibri";
     -fx-font-size: 25pt;
-    -fx-text-fill: rgb(0, 100, 100);
+    -fx-text-fill: #006464;
 }
 
 /*  ========== StartView ========== */
@@ -24,7 +26,7 @@ rgb(236, 196, 0)
     -fx-background-color: none;
     -fx-font-family: "Calibri";
     -fx-font-size: 26pt;
-    -fx-text-fill: rgb(0, 100, 100);
+    -fx-text-fill: #006464;
     -fx-cursor: hand;
     -fx-graphic-text-gap: 10px;
 }
@@ -86,7 +88,6 @@ rgb(236, 196, 0)
 }
 
 /* ========== NewPlayerView & ExistingPlayerView ========== */
-/* Backbtn is also used in highscoreView */
 .btnGoBack {
     -fx-background-color: none;
     -fx-graphic: url("../views/img/goback.png");
@@ -106,9 +107,27 @@ rgb(236, 196, 0)
     -fx-text-fill: darkred;
 }
 
+
+/* ========== AboutView ========== */
+.lblHeader {
+    -fx-font-family: 'Clear Sans';
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
 .lblExplanation {
     -fx-font-size: 14pt;
     -fx-text-alignment: center;
+    -fx-padding: 20px;
+}
+.toggle-button {
+    -fx-graphic: url("../views/img/togglebutton.png");
+    -fx-cursor: hand;
+    -fx-background-color: none;
+    -fx-padding: 10px;
+}
+.toggle-button:selected {
+    -fx-graphic: url("../views/img/togglebutton-selected.png");
 }
 
 /* ========== HighScoreView ========== */

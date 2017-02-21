@@ -31,6 +31,7 @@ public final class PlayerManager {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(data.toFile()));
             String info = reader.readLine();
+            if (info == null) return;
             while (info != null) {
                 String[] splittedData = info.split(":");
                 playerList.add(new Player(splittedData[0], Integer.parseInt(splittedData[1])));

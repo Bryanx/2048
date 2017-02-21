@@ -1,2 +1,8 @@
-jarne:125
-bryan:0
+lopen:9724
+bra:7452
+jarne:4852
+nami:3164
+karel:2828
+bryan:484
+bram:0
+brn:0

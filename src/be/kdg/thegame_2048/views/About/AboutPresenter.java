@@ -5,6 +5,7 @@ import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 /**
  * @author Bryan de Ridder
@@ -21,6 +22,33 @@ public class AboutPresenter {
         this.updateView();
     }
     private void addEventHandlers() {
+        view.getRbOption1().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.layoutNodes();
+            }
+        });
+        view.getRbOption2().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.show2ndSlide();
+            }
+        });
+        view.getRbOption3().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.show3rdSlide();
+            }
+        });
+
+        view.getRbOption1().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (view.getRbOption1().isSelected()) {
+                    event.consume();
+                }
+            }
+        });
         view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
