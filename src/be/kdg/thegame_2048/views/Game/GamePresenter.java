@@ -21,6 +21,7 @@ public class GamePresenter {
     private Game modelGame;
     private PlayerManager modelPlayerMananger;
     private GameView view;
+    private boolean alreadyWon;
 
     //CONSTRUCTORS
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
@@ -108,7 +109,9 @@ public class GamePresenter {
     }
 
     private void checkIfLostOrWin() {
+        if (alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
+            alreadyWon = true;
             modelPlayerMananger.saveInfo();
             ResultView resultView = new ResultView();
             new ResultPresenter(modelPlayerMananger, resultView, modelGame, view);

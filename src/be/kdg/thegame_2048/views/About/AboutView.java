@@ -1,10 +1,13 @@
 package be.kdg.thegame_2048.views.About;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 /**
  * @author Bryan de Ridder
@@ -26,7 +29,7 @@ public class AboutView extends BorderPane {
 
     public AboutView() {
         initialiseNodes();
-        layoutNodes();
+        layoutNodes(1);
     }
 
     protected void initialiseNodes() {
@@ -56,35 +59,34 @@ public class AboutView extends BorderPane {
         addStyles();
     }
 
-    protected void layoutNodes() {
+    protected void layoutNodes(int i) {
         this.setTop(new BorderPane(lblHeader));
+        animateFadeIn(i);
+        ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
+        Label[] explanations = {lblExplanation1, lblExplanation2, lblExplanation3};
+
         HBox hbox = new HBox(rbOption1, rbOption2, rbOption3);
-        VBox vbox = new VBox(IMG_ABOUT1, lblExplanation1, hbox);
+        VBox vbox = new VBox(images[i], explanations[i], hbox);
         vbox.setPadding(new Insets(50,0,0,0));
         vbox.setAlignment(Pos.CENTER);
         hbox.setAlignment(Pos.CENTER);
         this.setCenter(vbox);
+
         BorderPane bottom = new BorderPane(btnGoBack);
         this.setBottom(bottom);
         this.setPadding(new Insets(OVERALL_PADDING));
     }
 
-    void show2ndSlide() {
-        HBox hbox = new HBox(rbOption1, rbOption2, rbOption3);
-        VBox vbox = new VBox(IMG_ABOUT2, lblExplanation2, hbox);
-        vbox.setPadding(new Insets(50,0,0,0));
-        vbox.setAlignment(Pos.CENTER);
-        hbox.setAlignment(Pos.CENTER);
-        this.setCenter(vbox);
-    }
-
-    void show3rdSlide() {
-        HBox hbox = new HBox(rbOption1, rbOption2, rbOption3);
-        VBox vbox = new VBox(IMG_ABOUT3, lblExplanation3, hbox);
-        vbox.setPadding(new Insets(50,0,0,0));
-        vbox.setAlignment(Pos.CENTER);
-        hbox.setAlignment(Pos.CENTER);
-        this.setCenter(vbox);
+    private void animateFadeIn(int i) {
+        ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
+        ScaleTransition st = new ScaleTransition(Duration.millis(250), images[i]);
+        st.setFromX(0.0);
+        st.setFromY(0.0);
+        st.setToX(1.0);
+        st.setToY(1.0);
+        st.setCycleCount(1);
+        st.setAutoReverse(true);
+        st.play();
     }
 
     private void addStyles() {
@@ -99,15 +101,8 @@ public class AboutView extends BorderPane {
         return btnGoBack;
     }
 
-    ToggleButton getRbOption1() {
-        return rbOption1;
-    }
-
-    ToggleButton getRbOption2() {
-        return rbOption2;
-    }
-
-    ToggleButton getRbOption3() {
-        return rbOption3;
+    ToggleButton getToggleButton(int index) {
+        ToggleButton[] toggleButtons = {rbOption1, rbOption2, rbOption3};
+        return toggleButtons[index];
     }
 }

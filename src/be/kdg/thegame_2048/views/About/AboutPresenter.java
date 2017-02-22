@@ -22,33 +22,25 @@ public class AboutPresenter {
         this.updateView();
     }
     private void addEventHandlers() {
-        view.getRbOption1().setOnAction(new EventHandler<ActionEvent>() {
+        view.getToggleButton(0).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                view.layoutNodes();
+                view.layoutNodes(0);
             }
         });
-        view.getRbOption2().setOnAction(new EventHandler<ActionEvent>() {
+        view.getToggleButton(1).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                view.show2ndSlide();
+                view.layoutNodes(1);
             }
         });
-        view.getRbOption3().setOnAction(new EventHandler<ActionEvent>() {
+        view.getToggleButton(2).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                view.show3rdSlide();
+                view.layoutNodes(2);
             }
         });
 
-        view.getRbOption1().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (view.getRbOption1().isSelected()) {
-                    event.consume();
-                }
-            }
-        });
         view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -60,5 +52,6 @@ public class AboutPresenter {
 
     }
     private void updateView() {
+        view.layoutNodes(0);
     }
 }

@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.Game;
 
+import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
@@ -47,7 +49,6 @@ class GameMiddleView extends BorderPane {
     }
 
     private StackPane addBlock(int value) {
-        //TODO: Refactoren, misschien met een map?
         Rectangle rect = new Rectangle(100,100);
         Text number = new Text("");
         if (value == 0)
@@ -85,31 +86,16 @@ class GameMiddleView extends BorderPane {
         this.sectionGrid.add(addBlock(value), y, x);
     }
 
-    //TODO: Animatie maken
-//    void animate(KeyCode dir) {
-//        TranslateTransition tt = new TranslateTransition(Duration.millis(500));
-//        for (int i = 0; i < 16; i++) {
-//            StackPane e = (StackPane) sectionGrid.getChildren().get(i);
-//            Text txt = (Text) e.getChildren().get(1);
-//            if (!txt.getText().equals("")) tt.setNode(sectionGrid.getChildren().get(i));
-//        }
-//        if (dir == KeyCode.RIGHT) tt.setByX(110);
-//        if (dir == KeyCode.LEFT) tt.setByX(-110);
-//        if (dir == KeyCode.UP) tt.setByY(-110);
-//        if (dir == KeyCode.DOWN) tt.setByY(110);
-//        tt.setCycleCount(1);
-//        tt.setAutoReverse(false);
-//        tt.play();
-//    }
-
-//    private Node getNodeFromGridPane(GridPane sectionGrid, int col, int row) {
-//        for (Node node : sectionGrid.getChildren()) {
-//            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-//                return node;
-//            }
-//        }
-//        return null;
-//    }
+    private void popIn(StackPane block) {
+        ScaleTransition st = new ScaleTransition(Duration.millis(250), block);
+        st.setFromX(0.0);
+        st.setFromY(0.0);
+        st.setToX(1.0);
+        st.setToY(1.0);
+        st.setCycleCount(1);
+        st.setAutoReverse(true);
+        st.play();
+    }
 
     GridPane getSectionGrid() {
         return sectionGrid;
