@@ -158,3 +158,19 @@ BG darker:
 .hsActivePlayer {
     -fx-text-fill: white;
 }
+
+/* ========== ResultView ========== */
+
+.lblResult {
+    -fx-font-family: 'Clear Sans';
+    -fx-font-size: 45pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.lblResultScore {
+    -fx-font-family: 'Clear Sans';
+    -fx-font-size: 25pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}

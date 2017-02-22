@@ -111,7 +111,7 @@ public final class HighScoreView extends BorderPane {
     void highlightPlayer(String naam) {
         //highlights the active player in the highscore list
         String upperNaam = naam.toUpperCase().charAt(0) + naam.substring(1);
-        for (int i = 0; i < playerAmount; i++) {
+        for (int i = 0; i <= playerAmount; i++) {
             if (upperNaam.equals(lblHsNames.get(i).getText())) {
                 lblHsRanks.get(i).getStyleClass().add("hsActivePlayer");
                 lblHsNames.get(i).getStyleClass().add("hsActivePlayer");

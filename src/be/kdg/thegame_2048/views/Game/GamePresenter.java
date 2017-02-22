@@ -4,18 +4,13 @@ import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
 import be.kdg.thegame_2048.views.HighScores.HighScoreView;
-import be.kdg.thegame_2048.views.Lose.LosePresenter;
-import be.kdg.thegame_2048.views.Lose.LoseView;
+import be.kdg.thegame_2048.views.Result.ResultPresenter;
+import be.kdg.thegame_2048.views.Result.ResultView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
-import be.kdg.thegame_2048.views.WinView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.omg.CORBA.TIMEOUT;
-
-import java.util.Timer;
 
 /**
  * @author Jarne Van Aerde
@@ -24,13 +19,13 @@ import java.util.Timer;
 public class GamePresenter {
     //ATTRIBUTES
     private Game modelGame;
-    private PlayerManager modelPlayerManager;
+    private PlayerManager modelPM;
     private GameView view;
 
     //CONSTRUCTORS
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
         this.modelGame = modelGame;
-        this.modelPlayerManager = modelPlayerManager;
+        this.modelPM = modelPlayerManager;
         this.view = view;
         this.addEventHandlers();
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
@@ -43,42 +38,31 @@ public class GamePresenter {
         view.getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                saveInfo();
                 HighScoreView hsView = new HighScoreView();
-                new HighScorePresenter(modelGame, modelPlayerManager, hsView);
+                new HighScorePresenter(modelGame, modelPM, hsView);
                 view.getScene().setRoot(hsView);
             }
         });
         view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(modelPlayerManager.getCurrentPlayer().getName());
-
                 saveInfo();
-                modelPlayerManager.setCurrentPlayerToNull();
+                modelPM.setCurrentPlayerToNull();
                 StartView startView = new StartView();
-                StartPresenter presenter = new StartPresenter(modelPlayerManager, startView);
+                new StartPresenter(modelPM, startView);
                 view.getScene().setRoot(startView);
             }
         });
         view.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                Timer timer = new Timer();
                 switch (event.getCode()) {
-                    case DOWN:
-                        updateViewBlocks(Game.Direction.DOWN);
-                        break;
-                    case UP:
-                        updateViewBlocks(Game.Direction.TOP);
-                        break;
-                    case RIGHT:
-                        updateViewBlocks(Game.Direction.RIGHT);
-                        break;
-                    case LEFT:
-                        updateViewBlocks(Game.Direction.LEFT);
-                        break;
-                    default:
-                        event.consume();
+                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
+                    case UP:updateViewBlocks(Game.Direction.TOP);break;
+                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
+                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
+                    default:event.consume();
                 }
                 updateView();
             }
@@ -87,8 +71,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 saveInfo();
-                modelGame = new Game(modelPlayerManager);
-
+                modelGame = new Game(modelPM);
                 view.getLblScoreInput().setText("0");
                 updateView();
             }
@@ -96,7 +79,7 @@ public class GamePresenter {
 
     }
 
-    public void updateView() {
+    private void updateView() {
         view.getSectionGrid().getChildren().clear();
         view.resetGrid();
         for (int i = 0; i < 4; i++) {
@@ -113,39 +96,30 @@ public class GamePresenter {
     }
 
     private void saveInfo() {
-        if (modelPlayerManager.getCurrentPlayer().getBestScore() < modelGame.getScore().getScore()) {
-            modelPlayerManager.getCurrentPlayer().setBestScore(modelGame.getScore().getScore());
+        int bestScore = modelPM.getCurrentPlayer().getBestScore();
+        int currentScore = modelGame.getScore().getScore();
+
+        if (currentScore > bestScore) {
+            modelPM.getCurrentPlayer().setBestScore(currentScore);
         }
     }
 
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
+        int score = modelGame.getScore().getScore();
         if (Integer.parseInt(view.getLblScoreInput().getText()) >= Integer.parseInt(view.getLblBestScoreInput().getText())) {
-            view.getLblBestScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
+            view.getLblBestScoreInput().setText(score + "");
         }
-        view.getLblScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
+        view.getLblScoreInput().setText(score + "");
         checkIfLostOrWin();
     }
 
     private void checkIfLostOrWin() {
-        if (modelGame.hasLost()) {
-            updateSceneToLost();
-        } else if (modelGame.hasWon()) {
-            updateSceneToWin();
+        if (modelGame.hasLost() || modelGame.hasWon()) {
+            saveInfo();
+            ResultView resultView = new ResultView();
+            new ResultPresenter(modelPM, resultView, modelGame, view);
+            view.setView(resultView);
         }
-    }
-
-    private void updateSceneToLost() {
-        //Bij saveInfo soms NullPointerException... hoe?
-        saveInfo();
-        LoseView loseView = new LoseView();
-        //TODO:
-        new LosePresenter(modelPlayerManager, loseView);
-        view.getScene().setRoot(loseView);
-    }
-
-    private void updateSceneToWin() {
-        WinView winView = new WinView();
-        view.getScene().setRoot(winView);
     }
 }
