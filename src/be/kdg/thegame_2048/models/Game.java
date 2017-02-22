@@ -105,8 +105,4 @@ public final class Game {
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
     }
-
-    public boolean getPieceIsRandom(int x, int y) {
-        return playground.getSections()[x][y].getBlock().isRandom();
-    }
 }

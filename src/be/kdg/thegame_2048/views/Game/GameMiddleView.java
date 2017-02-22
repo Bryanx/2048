@@ -80,7 +80,7 @@ class GameMiddleView extends BorderPane {
             case 2048:rect.setFill(Color.web("#edc22e"));break;
         }
         StackPane block = new StackPane(rect, number);
-        if (value == 2) popIn(block);
+        if (isRandom) popIn(block);
         return block;
     }
 

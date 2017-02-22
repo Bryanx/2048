@@ -89,16 +89,17 @@ public class GamePresenter {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
-                boolean isRandom = true;
                 if (modelGame.getPiece(i, j) == null) {
                     value = 0;
                 } else {
                     value = modelGame.getPieceValue(i, j);
-                    if (modelGame.getPieceIsRandom(i,j)) isRandom = true;
                 }
-                view.setBlock(value, i, j, isRandom);
+                if (!(i == modelGame.getCoordRandomBlockX() && j == modelGame.getCoordRandomBlockY()))
+                view.setBlock(value, i, j, false);
             }
         }
+        view.setBlock(2, modelGame.getCoordRandomBlockX(),modelGame.getCoordRandomBlockY(),true);
+
     }
 
     private void updateViewBlocks(Game.Direction direction) {
