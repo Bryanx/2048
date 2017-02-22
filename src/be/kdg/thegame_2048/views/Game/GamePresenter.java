@@ -19,14 +19,16 @@ import javafx.scene.input.KeyEvent;
 public class GamePresenter {
     //ATTRIBUTES
     private Game modelGame;
-    private PlayerManager modelPM;
+    private PlayerManager modelPlayerMananger;
     private GameView view;
 
     //CONSTRUCTORS
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
         this.modelGame = modelGame;
-        this.modelPM = modelPlayerManager;
+        this.modelPlayerMananger = modelPlayerManager;
+        this.modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
         this.view = view;
+
         this.addEventHandlers();
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         //eenmalige updateview
@@ -38,19 +40,19 @@ public class GamePresenter {
         view.getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                saveInfo();
+                modelPlayerMananger.saveInfo();
                 HighScoreView hsView = new HighScoreView();
-                new HighScorePresenter(modelGame, modelPM, hsView);
+                new HighScorePresenter(modelGame, modelPlayerMananger, hsView);
                 view.getScene().setRoot(hsView);
             }
         });
         view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                saveInfo();
-                modelPM.setCurrentPlayerToNull();
+                modelPlayerMananger.saveInfo();
+                modelPlayerMananger.setCurrentPlayerToNull();
                 StartView startView = new StartView();
-                new StartPresenter(modelPM, startView);
+                new StartPresenter(modelPlayerMananger, startView);
                 view.getScene().setRoot(startView);
             }
         });
@@ -64,19 +66,19 @@ public class GamePresenter {
                     case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
                     default:event.consume();
                 }
+                modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
                 updateView();
             }
         });
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                saveInfo();
-                modelGame = new Game(modelPM);
+                modelPlayerMananger.saveInfo();
+                modelGame = new Game(modelPlayerMananger);
                 view.getLblScoreInput().setText("0");
                 updateView();
             }
         });
-
     }
 
     private void updateView() {
@@ -95,15 +97,6 @@ public class GamePresenter {
         }
     }
 
-    private void saveInfo() {
-        int bestScore = modelPM.getCurrentPlayer().getBestScore();
-        int currentScore = modelGame.getScore().getScore();
-
-        if (currentScore > bestScore) {
-            modelPM.getCurrentPlayer().setBestScore(currentScore);
-        }
-    }
-
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
         int score = modelGame.getScore().getScore();
@@ -116,9 +109,9 @@ public class GamePresenter {
 
     private void checkIfLostOrWin() {
         if (modelGame.hasLost() || modelGame.hasWon()) {
-            saveInfo();
+            modelPlayerMananger.saveInfo();
             ResultView resultView = new ResultView();
-            new ResultPresenter(modelPM, resultView, modelGame, view);
+            new ResultPresenter(modelPlayerMananger, resultView, modelGame, view);
             view.setView(resultView);
         }
     }

@@ -6,10 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author Jarne Van Aerde, Bryan de Ridder
@@ -19,6 +16,7 @@ public final class PlayerManager {
     //EIGENSCHAPPEN
     private List<Player> playerList;
     private Player currentPlayer;
+    private int currentPlayerScore;
 
     //CONSTRUCTORS
     public PlayerManager() {
@@ -26,38 +24,78 @@ public final class PlayerManager {
         loadPlayerData();
     }
 
+    public void saveInfo() {
+        int bestScore = this.currentPlayer.getBestScore();
+
+        if (currentPlayerScore > bestScore) {
+            this.currentPlayer.setBestScore(currentPlayerScore);
+        }
+    }
+
     private void loadPlayerData() {
         Path data = Paths.get("playerdata" + File.separator + "data.txt");
+        Path decoderData = Paths.get("playerdata" + File.separator + "encripted.txt");
         try {
+            int decodeNumber = Integer.parseInt(new Scanner(decoderData).nextLine());
+
             BufferedReader reader = new BufferedReader(new FileReader(data.toFile()));
             String info = reader.readLine();
             if (info == null) return;
             while (info != null) {
                 String[] splittedData = info.split(":");
-                playerList.add(new Player(splittedData[0], Integer.parseInt(splittedData[1])));
+
+                String decodedName = "";
+                String decodedScore = "";
+                for (int i = 0; i < splittedData[0].length(); i++) {
+                    char decodedLetter = ((char) (splittedData[0].charAt(i) - decodeNumber));
+                    decodedName = decodedName + String.valueOf(decodedLetter);
+                }
+                for (int i = 0; i < splittedData[1].length(); i++) {
+                    char decodedNumber = ((char) (splittedData[1].charAt(i) - decodeNumber));
+                    decodedScore = decodedScore + decodedNumber;
+                }
+                playerList.add(new Player(decodedName, Integer.parseInt(decodedScore)));
                 info = reader.readLine();
             }
             reader.close();
         } catch (IOException e) {
-            System.out.println("Couldn't find file data.txt, contact support!");
+            System.out.println("Something went wrong, contact support!");
         }
     }
 
     public void saveData() {
         Path playerdata = Paths.get("playerdata");
         Path data = playerdata.resolve("data.txt");
+        Path encription = playerdata.resolve("encripted.txt");
         try {
             if (!Files.exists(playerdata)) Files.createDirectory(playerdata);
             if (!Files.exists(data)) Files.createFile(data);
+            if (!Files.exists(encription)) Files.createFile(encription);
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(data.toFile()));
             String playerInfo = "";
-            for (Player player : playerList) {
-                playerInfo += player.getName() + ":" + player.getBestScore() + "\n";
-            }
+            Random random = new Random();
+            int randomEncriptionCode = random.nextInt(100) + 10;
 
+            for (Player player : playerList) {
+                String encodedName = "";
+                String encodedScore = "";
+                for (int i = 0; i < player.getName().length(); i++) {
+                    char encodedLetter = ((char) (player.getName().charAt(i) + randomEncriptionCode));
+                    encodedName = encodedName + String.valueOf(encodedLetter);
+                }
+                for (int i = 0; i < String.valueOf(player.getBestScore()).length(); i++) {
+                    char encodedNumber = ((char) (String.valueOf(player.getBestScore()).charAt(i) + randomEncriptionCode));
+                    encodedScore = encodedScore + encodedNumber;
+                }
+                playerInfo += encodedName + ":" + encodedScore + "\n";
+            }
             writer.write(playerInfo);
             writer.close();
+
+            Formatter formatter = new Formatter(encription.toFile());
+            formatter.format(String.valueOf(randomEncriptionCode));
+            formatter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -97,6 +135,14 @@ public final class PlayerManager {
 
     public List<Player> getPlayerList() {
         return playerList;
+    }
+
+    public int getCurrentPlayerScore() {
+        return currentPlayerScore;
+    }
+
+    public void setCurrentPlayerScore(int currentPlayerScore) {
+        this.currentPlayerScore = currentPlayerScore;
     }
 
     @Override
