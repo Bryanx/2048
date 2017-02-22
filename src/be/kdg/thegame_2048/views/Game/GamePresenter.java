@@ -22,6 +22,7 @@ public class GamePresenter {
     private PlayerManager modelPlayerMananger;
     private GameView view;
     private boolean alreadyWon;
+    private boolean firstRun;
 
     //CONSTRUCTORS
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
@@ -29,7 +30,7 @@ public class GamePresenter {
         this.modelPlayerMananger = modelPlayerManager;
         this.modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
         this.view = view;
-
+        this.firstRun = true;
         this.addEventHandlers();
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         //eenmalige updateview
@@ -75,6 +76,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 alreadyWon = false;
+                firstRun = true;
                 modelPlayerMananger.saveInfoCurrentPlayer();
                 modelGame = new Game(modelPlayerMananger);
                 view.getLblScoreInput().setText("0");
@@ -86,6 +88,9 @@ public class GamePresenter {
     private void updateView() {
         view.getSectionGrid().getChildren().clear();
         view.resetGrid();
+        int randomblockX = modelGame.getCoordRandomBlockX();
+        int randomblockY = modelGame.getCoordRandomBlockY();
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
@@ -94,12 +99,21 @@ public class GamePresenter {
                 } else {
                     value = modelGame.getPieceValue(i, j);
                 }
-                if (!(i == modelGame.getCoordRandomBlockX() && j == modelGame.getCoordRandomBlockY()))
-                view.setBlock(value, i, j, false);
+                if (firstRun) {
+                    view.setBlock(value, i, j, true);
+                } else if (!(i == randomblockX && j == randomblockY)) {
+                    view.setBlock(value, i, j, false);
+                }
             }
         }
-        view.setBlock(2, modelGame.getCoordRandomBlockX(),modelGame.getCoordRandomBlockY(),true);
-
+        if (!firstRun) {
+            if (!modelGame.getLastMove().equals(modelGame.getCurrentMove())) {
+                view.setBlock(2, randomblockX, randomblockY, true);
+            } else {
+                view.setBlock(2, randomblockX, randomblockY, false);
+            }
+        }
+        this.firstRun = false;
     }
 
     private void updateViewBlocks(Game.Direction direction) {

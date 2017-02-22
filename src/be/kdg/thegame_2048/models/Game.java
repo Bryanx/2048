@@ -14,6 +14,8 @@ public final class Game {
     private Score score;
     private PlayerManager manager;
     private Playground playground;
+    private String lastMove;
+    private String currentMove;
 
     //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
@@ -37,7 +39,7 @@ public final class Game {
 
     //METHODS
     public void runGameCycle(Direction direction) {
-        String lastMove = playground.toString();
+        this.lastMove = playground.toString();
         switch (direction) {
             case TOP:
                 playground.moveBlocksTop();
@@ -51,7 +53,8 @@ public final class Game {
             case RIGHT:
                 playground.moveBlocksRight();
         }
-        if (!lastMove.equals(playground.toString())) {
+        this.currentMove = playground.toString();
+        if (!lastMove.equals(currentMove)) {
             playground.addRandomBlock();
         }
         System.out.println(score.getScore() + "\n" + playground.toString());
@@ -104,5 +107,13 @@ public final class Game {
 
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
+    }
+
+    public String getLastMove() {
+        return lastMove;
+    }
+
+    public String getCurrentMove() {
+        return currentMove;
     }
 }
