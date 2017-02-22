@@ -8,6 +8,7 @@ import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
@@ -49,6 +50,13 @@ public class ResultPresenter {
                 gameView.getLblScoreInput().setText("0");
                 modelGame = new Game(modelPM);
                 new GamePresenter(modelGame, modelPM, gameView);
+            }
+        });
+        view.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                //Keyboard is blocked when resultpresenter is active
+                event.consume();
             }
         });
 
