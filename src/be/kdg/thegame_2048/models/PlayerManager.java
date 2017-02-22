@@ -24,7 +24,7 @@ public final class PlayerManager {
         loadPlayerData();
     }
 
-    public void saveInfo() {
+    public void saveInfoCurrentPlayer() {
         int bestScore = this.currentPlayer.getBestScore();
 
         if (currentPlayerScore > bestScore) {
@@ -63,7 +63,7 @@ public final class PlayerManager {
         }
     }
 
-    public void saveData() {
+    public void savePlayerData() {
         Path playerdata = Paths.get("playerdata");
         Path data = playerdata.resolve("data.txt");
         Path encription = playerdata.resolve("encripted.txt");

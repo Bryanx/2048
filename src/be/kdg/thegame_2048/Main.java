@@ -1,7 +1,6 @@
 package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Game.GameView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.application.Application;
@@ -39,8 +38,8 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                if (model.getCurrentPlayer() != null) model.saveInfo();
-                model.saveData();
+                if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();
+                model.savePlayerData();
             }
         });
     }

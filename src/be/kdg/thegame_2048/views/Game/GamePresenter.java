@@ -41,7 +41,7 @@ public class GamePresenter {
         view.getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPlayerMananger.saveInfo();
+                modelPlayerMananger.saveInfoCurrentPlayer();
                 HighScoreView hsView = new HighScoreView();
                 new HighScorePresenter(modelGame, modelPlayerMananger, hsView);
                 view.getScene().setRoot(hsView);
@@ -50,7 +50,7 @@ public class GamePresenter {
         view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPlayerMananger.saveInfo();
+                modelPlayerMananger.saveInfoCurrentPlayer();
                 modelPlayerMananger.setCurrentPlayerToNull();
                 StartView startView = new StartView();
                 new StartPresenter(modelPlayerMananger, startView);
@@ -74,9 +74,10 @@ public class GamePresenter {
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPlayerMananger.saveInfo();
+                modelPlayerMananger.saveInfoCurrentPlayer();
                 modelGame = new Game(modelPlayerMananger);
                 view.getLblScoreInput().setText("0");
+                alreadyWon = false;
                 updateView();
             }
         });
@@ -112,7 +113,7 @@ public class GamePresenter {
         if (alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
             alreadyWon = true;
-            modelPlayerMananger.saveInfo();
+            modelPlayerMananger.saveInfoCurrentPlayer();
             ResultView resultView = new ResultView();
             new ResultPresenter(modelPlayerMananger, resultView, modelGame, view);
             view.setView(resultView);

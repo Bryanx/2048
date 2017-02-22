@@ -359,11 +359,11 @@ final class Playground {
         otherSection.removeBlock();
     }
 
-    public int getCoordRandomBlockX() {
+    int getCoordRandomBlockX() {
         return coordRandomBlockX;
     }
 
-    public int getCoordRandomBlockY() {
+    int getCoordRandomBlockY() {
         return coordRandomBlockY;
     }
 
