@@ -26,6 +26,15 @@ public final class Game {
         this.playground.addRandomBlock();
     }
 
+    public int getCoordRandomBlockX() {
+        return playground.getCoordRandomBlockX();
+    }
+
+    public int getCoordRandomBlockY() {
+        return playground.getCoordRandomBlockY();
+    }
+
+
     //METHODS
     public void runGameCycle(Direction direction) {
         String lastMove = playground.toString();
@@ -100,5 +109,4 @@ public final class Game {
     public boolean getPieceIsRandom(int x, int y) {
         return playground.getSections()[x][y].getBlock().isRandom();
     }
-
 }

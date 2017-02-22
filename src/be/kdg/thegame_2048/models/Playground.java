@@ -43,7 +43,7 @@ final class Playground {
             int x = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
             int y = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
             if (!this.sections[x][y].hasBlock()) {
-                this.sections[x][y].putBlock(new Block(2));
+                this.sections[x][y].putBlock(new Block(2, true));
                 this.coordRandomBlockX = x;
                 this.coordRandomBlockY = y;
                 blockFound = true;
