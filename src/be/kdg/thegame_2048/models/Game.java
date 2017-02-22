@@ -14,7 +14,6 @@ public final class Game {
     private Score score;
     private PlayerManager manager;
     private Playground playground;
-    private String lastMove;
 
     //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
@@ -47,6 +46,14 @@ public final class Game {
             playground.addRandomBlock();
         }
         System.out.println(score.getScore() + "\n" + playground.toString());
+    }
+
+    public int getCoordRandomBlockx () {
+       return playground.getCoordRandomBlockX();
+    }
+
+    public int getCoordRandomBlockY () {
+        return playground.getCoordRandomBlockY();
     }
 
     public boolean hasWon() {
