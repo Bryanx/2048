@@ -32,6 +32,7 @@ public final class PlayerManager {
         }
     }
 
+    /**Decription was used**/
     private void loadPlayerData() {
         Path data = Paths.get("playerdata" + File.separator + "data.txt");
         Path decoderData = Paths.get("playerdata" + File.separator + "encripted.txt");
@@ -44,6 +45,7 @@ public final class PlayerManager {
             while (info != null) {
                 String[] splittedData = info.split(":");
 
+                //DECRYPT THE PLAYER DATA
                 String decodedName = "";
                 String decodedScore = "";
                 for (int i = 0; i < splittedData[0].length(); i++) {
@@ -63,6 +65,7 @@ public final class PlayerManager {
         }
     }
 
+    /**Incription was used**/
     public void savePlayerData() {
         Path playerdata = Paths.get("playerdata");
         Path data = playerdata.resolve("data.txt");
@@ -77,6 +80,7 @@ public final class PlayerManager {
             Random random = new Random();
             int randomEncriptionCode = random.nextInt(100) + 10;
 
+            //ENCRYPTING THE PLAYER DATA
             for (Player player : playerList) {
                 String encodedName = "";
                 String encodedScore = "";
