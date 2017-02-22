@@ -15,8 +15,6 @@ final class Playground {
     private Section[][] sections;
     private Score score;
     private boolean hasMerged;
-    private int coordRandomBlockX;
-    private int coordRandomBlockY;
 
     //CONSTRUCTORS
     Playground(Score score) {
@@ -44,9 +42,7 @@ final class Playground {
             int x = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
             int y = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
             if (!this.sections[x][y].hasBlock()) {
-                this.sections[x][y].putBlock(new Block(2));
-                this.coordRandomBlockX = x;
-                this.coordRandomBlockY = y;
+                this.sections[x][y].putBlock(new Block(2, true));
                 blockFound = true;
             }
         }
@@ -67,6 +63,8 @@ final class Playground {
         sectionBlock.getBlock().setValue(sectionBlock.getBlock().getValue() + sectionOtherBlock.getBlock().getValue());
         sectionOtherBlock.removeBlock();
         this.hasMerged = true;
+//        if (sectionBlock.getBlock() != null) sectionBlock.getBlock().setRandom(false);
+//        if (sectionOtherBlock.getBlock() != null) sectionOtherBlock.getBlock().setRandom(false);
     }
 
     void moveBlocksTop() {
@@ -357,14 +355,6 @@ final class Playground {
     private void moveBlock(Section section, Section otherSection) {
         section.putBlock(otherSection.getBlock());
         otherSection.removeBlock();
-    }
-
-    public int getCoordRandomBlockX() {
-        return coordRandomBlockX;
-    }
-
-    public int getCoordRandomBlockY() {
-        return coordRandomBlockY;
     }
 
     @Override

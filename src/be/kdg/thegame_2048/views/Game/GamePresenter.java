@@ -74,6 +74,7 @@ public class GamePresenter {
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                alreadyWon = false;
                 modelPlayerMananger.saveInfo();
                 modelGame = new Game(modelPlayerMananger);
                 view.getLblScoreInput().setText("0");
@@ -88,12 +89,14 @@ public class GamePresenter {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
+                boolean isRandom = true;
                 if (modelGame.getPiece(i, j) == null) {
                     value = 0;
                 } else {
                     value = modelGame.getPieceValue(i, j);
+                    if (modelGame.getPieceIsRandom(i,j)) isRandom = true;
                 }
-                view.setBlock(value, i, j);
+                view.setBlock(value, i, j, isRandom);
             }
         }
     }

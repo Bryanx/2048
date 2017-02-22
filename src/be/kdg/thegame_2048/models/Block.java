@@ -7,10 +7,12 @@ package be.kdg.thegame_2048.models;
 class Block {
     //EIGENSCHAPPEN
     private int value;
+    boolean isRandom;
 
     //CONSTRUCTORS
-    Block(int value) {
+    Block(int value, boolean isRandom) {
         this.value = value;
+        this.isRandom = isRandom;
     }
 
     //METHODEN
@@ -25,5 +27,13 @@ class Block {
     @Override
     public String toString() {
         return String.valueOf(this.value);
+    }
+
+    public boolean isRandom() {
+        return isRandom;
+    }
+
+    public void setRandom(boolean random) {
+        isRandom = random;
     }
 }

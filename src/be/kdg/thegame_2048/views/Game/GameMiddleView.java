@@ -33,7 +33,7 @@ class GameMiddleView extends BorderPane {
         this.sectionGrid = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                sectionGrid.add(addBlock(0), i, j);
+                sectionGrid.add(addBlock(0, false), i, j);
             }
         }
         sectionGrid.setVgap(10);
@@ -48,7 +48,7 @@ class GameMiddleView extends BorderPane {
         this.setCenter(new BorderPane(playground));
     }
 
-    private StackPane addBlock(int value) {
+    private StackPane addBlock(int value, boolean isRandom) {
         Rectangle rect = new Rectangle(100,100);
         Text number = new Text("");
         if (value == 0)
@@ -79,11 +79,13 @@ class GameMiddleView extends BorderPane {
             case 1024:rect.setFill(Color.web("#edc53f"));break;
             case 2048:rect.setFill(Color.web("#edc22e"));break;
         }
-        return new StackPane(rect, number);
+        StackPane block = new StackPane(rect, number);
+        if (value == 2) popIn(block);
+        return block;
     }
 
-    void setBlock(int value, int x, int y) {
-        this.sectionGrid.add(addBlock(value), y, x);
+    void setBlock(int value, int x, int y, boolean isRandom) {
+        this.sectionGrid.add(addBlock(value, isRandom), y, x);
     }
 
     private void popIn(StackPane block) {

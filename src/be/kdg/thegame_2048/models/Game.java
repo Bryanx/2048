@@ -48,19 +48,11 @@ public final class Game {
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
 
-    public int getCoordRandomBlockx () {
-       return playground.getCoordRandomBlockX();
-    }
-
-    public int getCoordRandomBlockY () {
-        return playground.getCoordRandomBlockY();
-    }
-
     public boolean hasWon() {
         Section[][] sections = playground.getSections();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (sections[i][j].hasBlock() && sections[i][j].getBlock().getValue() == 2) {
+                if (sections[i][j].hasBlock() && sections[i][j].getBlock().getValue() == 2048) {
                     return true;
                 }
             }
@@ -104,4 +96,9 @@ public final class Game {
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
     }
+
+    public boolean getPieceIsRandom(int x, int y) {
+        return playground.getSections()[x][y].getBlock().isRandom();
+    }
+
 }

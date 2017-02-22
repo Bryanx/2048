@@ -47,8 +47,8 @@ public final class GameView extends BorderPane {
         this.setCenter(stack);
     }
 
-    void setBlock(int value, int x ,int y) {
-        gameMiddleView.setBlock(value, x, y);
+    void setBlock(int value, int x ,int y, boolean isRandom) {
+        gameMiddleView.setBlock(value, x, y, isRandom);
     }
 
     GridPane getSectionGrid() {
