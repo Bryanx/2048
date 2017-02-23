@@ -2,6 +2,9 @@ package be.kdg.thegame_2048.views.About;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -29,7 +32,7 @@ public class AboutView extends BorderPane {
 
     public AboutView() {
         initialiseNodes();
-        layoutNodes(1);
+        layoutNodes(0);
     }
 
     protected void initialiseNodes() {
@@ -37,7 +40,7 @@ public class AboutView extends BorderPane {
         this.lblHeader = new Label("How to play");
 
         //explanation
-        this.lblExplanation1 = new Label("Use your arrow keys to move the tiles. \n" +
+        this.lblExplanation1 = new Label("Use your arrow keys to moveAnimation the tiles. \n" +
                 "Try to combine blocks with the same value.");
         this.lblExplanation2 = new Label("When two tiles with the same number touch,\n they merge into one!");
         this.lblExplanation3 = new Label("The goal of the game is to merge 1024 and 1024 " +
@@ -61,7 +64,6 @@ public class AboutView extends BorderPane {
 
     protected void layoutNodes(int i) {
         this.setTop(new BorderPane(lblHeader));
-        animateFadeIn(i);
         ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
         Label[] explanations = {lblExplanation1, lblExplanation2, lblExplanation3};
 
@@ -75,18 +77,6 @@ public class AboutView extends BorderPane {
         BorderPane bottom = new BorderPane(btnGoBack);
         this.setBottom(bottom);
         this.setPadding(new Insets(OVERALL_PADDING));
-    }
-
-    private void animateFadeIn(int i) {
-        ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
-        ScaleTransition st = new ScaleTransition(Duration.millis(250), images[i]);
-        st.setFromX(0.0);
-        st.setFromY(0.0);
-        st.setToX(1.0);
-        st.setToY(1.0);
-        st.setCycleCount(1);
-        st.setAutoReverse(true);
-        st.play();
     }
 
     private void addStyles() {
@@ -104,5 +94,10 @@ public class AboutView extends BorderPane {
     ToggleButton getToggleButton(int index) {
         ToggleButton[] toggleButtons = {rbOption1, rbOption2, rbOption3};
         return toggleButtons[index];
+    }
+
+    static ImageView getImg(int i) {
+        ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
+        return images[i];
     }
 }

@@ -3,9 +3,12 @@ package be.kdg.thegame_2048.views.About;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 /**
  * @author Bryan de Ridder
@@ -14,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 public class AboutPresenter {
     private PlayerManager model;
     private AboutView view;
+    private int currentIndex;
 
     public AboutPresenter(PlayerManager model, AboutView view) {
         this.model = model;
@@ -25,22 +29,24 @@ public class AboutPresenter {
         view.getToggleButton(0).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                view.layoutNodes(0);
+                moveAnimation(currentIndex, 0);
+                currentIndex = 0;
             }
         });
         view.getToggleButton(1).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                view.layoutNodes(1);
+                moveAnimation(currentIndex, 1);
+                currentIndex = 1;
             }
         });
         view.getToggleButton(2).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                view.layoutNodes(2);
+                moveAnimation(currentIndex, 2);
+                currentIndex = 2;
             }
         });
-
         view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -52,6 +58,50 @@ public class AboutPresenter {
 
     }
     private void updateView() {
-        view.layoutNodes(0);
+        moveAnimation(0, 0);
+    }
+
+    private void moveAnimation(int oldIndex, int newIndex) {
+        //move current slide
+        TranslateTransition tt = new TranslateTransition(Duration.millis(150), AboutView.getImg(oldIndex));
+        if (newIndex > oldIndex) {
+            tt.setToX(500);
+        } else if (newIndex == oldIndex){
+            tt.setToX(0);
+            tt.setDuration(Duration.millis(1));
+        } else {
+            tt.setToX(-500);
+        }
+        tt.play();
+
+        //make next slide ready
+        TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
+        if (newIndex > oldIndex) {
+            tt2.setToX(-500);
+        } else if (newIndex == oldIndex){
+            tt.setToX(0);
+        } else {
+            tt2.setToX(500);
+        }
+        tt2.play();
+
+        //TODO: add to eventhandlers()
+        //move next slide into view
+        tt.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
+                if (newIndex > oldIndex) {
+                    tt2.setFromX(-500);
+                } else if (newIndex == oldIndex){
+                    tt2.setToX(0);
+                } else {
+                    tt2.setFromX(500);
+                }
+                tt2.setToX(0);
+                tt2.play();
+                view.layoutNodes(newIndex);
+            }
+        });
     }
 }

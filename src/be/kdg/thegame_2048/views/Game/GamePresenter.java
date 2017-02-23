@@ -8,9 +8,15 @@ import be.kdg.thegame_2048.views.Result.ResultPresenter;
 import be.kdg.thegame_2048.views.Result.ResultView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
+
+import javax.xml.soap.Text;
 
 /**
  * @author Jarne Van Aerde
@@ -34,7 +40,7 @@ public class GamePresenter {
         this.addEventHandlers();
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         //eenmalige updateview
-        updateView();
+        updateView(KeyCode.A);
     }
 
     //METHODEN
@@ -69,7 +75,11 @@ public class GamePresenter {
                     default:event.consume();
                 }
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
-                updateView();
+//                if (firstRun) {
+                    updateView(event.getCode());
+//                } else {
+//                    move(event.getCode());
+//                }
             }
         });
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
@@ -80,14 +90,30 @@ public class GamePresenter {
                 modelPlayerMananger.saveInfoCurrentPlayer();
                 modelGame = new Game(modelPlayerMananger);
                 view.getLblScoreInput().setText("0");
-                updateView();
+                updateView(KeyCode.A);
             }
         });
     }
 
-    private void updateView() {
-        view.getSectionGrid().getChildren().clear();
-        view.resetGrid();
+    void move(KeyCode dir) {
+        TranslateTransition tt = new TranslateTransition(Duration.millis(100), view.getSectionGrid());
+        switch (dir.toString()) {
+            case ("UP"):tt.setToY(-110);break;
+            case ("DOWN"):tt.setToY(110);break;
+            case ("RIGHT"):tt.setToX(110);break;
+            case ("LEFT"):tt.setToX(-110);break;
+        }
+        tt.play();
+        tt.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.resetGrid();
+                updateView(dir);
+            }
+        });
+    }
+
+    private void updateView(KeyCode dir) {
         int randomblockX = modelGame.getCoordRandomBlockX();
         int randomblockY = modelGame.getCoordRandomBlockY();
 
@@ -100,17 +126,17 @@ public class GamePresenter {
                     value = modelGame.getPieceValue(i, j);
                 }
                 if (firstRun) {
-                    view.setBlock(value, i, j, true);
+                    view.putBlockOnGrid(value, i, j, true);
                 } else if (!(i == randomblockX && j == randomblockY)) {
-                    view.setBlock(value, i, j, false);
+                    view.putBlockOnGrid(value, i, j, false);
                 }
             }
         }
         if (!firstRun) {
             if (!modelGame.getLastMove().equals(modelGame.getCurrentMove())) {
-                view.setBlock(2, randomblockX, randomblockY, true);
+                view.putBlockOnGrid(2, randomblockX, randomblockY, true);
             } else {
-                view.setBlock(2, randomblockX, randomblockY, false);
+                view.putBlockOnGrid(2, randomblockX, randomblockY, false);
             }
         }
         this.firstRun = false;

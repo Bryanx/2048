@@ -3,6 +3,7 @@ package be.kdg.thegame_2048.views.Game;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
 /**
@@ -47,8 +48,8 @@ public final class GameView extends BorderPane {
         this.setCenter(stack);
     }
 
-    void setBlock(int value, int x ,int y, boolean isRandom) {
-        gameMiddleView.setBlock(value, x, y, isRandom);
+    void putBlockOnGrid(int value, int x , int y, boolean animate) {
+        gameMiddleView.putBlockOnGrid(value, x, y, animate);
     }
 
     GridPane getSectionGrid() {
@@ -79,7 +80,7 @@ public final class GameView extends BorderPane {
         return gameBottomView.getBtnRestart();
     }
 
-//    void animate(KeyCode dir) {
-//        gameMiddleView.animate(dir);
+//    void move(KeyCode dir) {
+//        gameMiddleView.move(dir);
 //    }
 }

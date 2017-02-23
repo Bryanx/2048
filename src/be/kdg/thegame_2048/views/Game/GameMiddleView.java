@@ -1,15 +1,11 @@
 package be.kdg.thegame_2048.views.Game;
 
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /**
@@ -33,7 +29,7 @@ class GameMiddleView extends BorderPane {
         this.sectionGrid = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                sectionGrid.add(addBlock(0, false), i, j);
+                sectionGrid.add(new BlockView(0, false), i, j);
             }
         }
         sectionGrid.setVgap(10);
@@ -48,44 +44,10 @@ class GameMiddleView extends BorderPane {
         this.setCenter(new BorderPane(playground));
     }
 
-    private StackPane addBlock(int value, boolean isRandom) {
-        Rectangle rect = new Rectangle(100,100);
-        Text number = new Text("");
-        if (value == 0)
-            rect.setFill(Color.web("#cdc1b4"));
-        if (value != 0) {
-            number = new Text(Integer.toString(value));
-            number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 55));
-            number.setFill(Color.web("#776e65"));
-        }
-        if (value > 4)
-            number.setFill(Color.web("#f9f6f2"));
-        if (value > 64)
-            number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 43));
-        if (value > 512)
-            number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 34));
-
-        switch (value) {
-            case 0:rect.setFill(Color.web("#cdc1b4"));break;
-            case 2:rect.setFill(Color.web("#eee4da"));break;
-            case 4:rect.setFill(Color.web("#ede0c8"));break;
-            case 8:rect.setFill(Color.web("#f2b179"));break;
-            case 16:rect.setFill(Color.web("#f59563"));break;
-            case 32:rect.setFill(Color.web("#f67c5f"));break;
-            case 64:rect.setFill(Color.web("#f65e3b"));break;
-            case 128:rect.setFill(Color.web("#edcf72"));break;
-            case 256:rect.setFill(Color.web("#edcc61"));break;
-            case 512:rect.setFill(Color.web("#f1c85d"));break;
-            case 1024:rect.setFill(Color.web("#edc53f"));break;
-            case 2048:rect.setFill(Color.web("#edc22e"));break;
-        }
-        StackPane block = new StackPane(rect, number);
-        if (isRandom) popIn(block);
-        return block;
-    }
-
-    void setBlock(int value, int x, int y, boolean isRandom) {
-        this.sectionGrid.add(addBlock(value, isRandom), y, x);
+    void putBlockOnGrid(int value, int x, int y, boolean animate) {
+        BlockView blockView = new BlockView(value, animate);
+        if (animate) popIn(blockView);
+        this.sectionGrid.add(blockView, y, x);
     }
 
     private void popIn(StackPane block) {
@@ -94,8 +56,6 @@ class GameMiddleView extends BorderPane {
         st.setFromY(0.0);
         st.setToX(1.0);
         st.setToY(1.0);
-        st.setCycleCount(1);
-        st.setAutoReverse(true);
         st.play();
     }
 
