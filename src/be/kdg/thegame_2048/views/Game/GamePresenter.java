@@ -86,11 +86,9 @@ public class GamePresenter {
                 }
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
                 updateView(event.getCode());
-                /*if (firstRun || isMovable()) {
-                    updateView(event.getCode());
-                } else {
-                    moveAnimation(event.getCode());
-                }*/
+
+
+
             }
         });
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {

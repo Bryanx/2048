@@ -17,7 +17,8 @@ final class Section {
     }
 
     boolean hasBlock() {
-        return this.block == null;
+        if (this.block == null) return false;
+        return true;
     }
 
     void putBlock(Block block) {
