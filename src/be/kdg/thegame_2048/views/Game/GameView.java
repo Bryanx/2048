@@ -73,14 +73,14 @@ public final class GameView extends BorderPane {
     }
 
     void resetGrid() {
-        gameMiddleView.layoutNodes();
+        gameMiddleView.getSectionGrid().getChildren().clear();
     }
 
     Button getBtnRestart() {
         return gameBottomView.getBtnRestart();
     }
 
-//    void move(KeyCode dir) {
-//        gameMiddleView.move(dir);
-//    }
+    int getBlockValue(int i) {
+        return gameMiddleView.getBlockValue(i);
+    }
 }

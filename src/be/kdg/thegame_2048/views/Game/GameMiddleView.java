@@ -1,8 +1,10 @@
 package be.kdg.thegame_2048.views.Game;
 
 import javafx.animation.*;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -25,11 +27,11 @@ class GameMiddleView extends BorderPane {
     }
 
     void layoutNodes() {
-        //MIDDLE
+        //fill grid with 0's
         this.sectionGrid = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                sectionGrid.add(new BlockView(0, false), i, j);
+                sectionGrid.add(new BlockView(0), i, j);
             }
         }
         sectionGrid.setVgap(10);
@@ -40,12 +42,13 @@ class GameMiddleView extends BorderPane {
         playground.setMinSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
         playground.setMaxSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
         playground.setBackground(new Background(
-                new BackgroundFill(Color.web("#bbada0"), CornerRadii.EMPTY, Insets.EMPTY)));
+                new BackgroundImage(BG, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER,BackgroundSize.DEFAULT)));
         this.setCenter(new BorderPane(playground));
     }
 
     void putBlockOnGrid(int value, int x, int y, boolean animate) {
-        BlockView blockView = new BlockView(value, animate);
+        BlockView blockView = new BlockView(value);
         if (animate) popIn(blockView);
         this.sectionGrid.add(blockView, y, x);
     }
@@ -63,5 +66,13 @@ class GameMiddleView extends BorderPane {
         return sectionGrid;
     }
 
+    int getBlockValue(int i) {
+        BlockView block = (BlockView) sectionGrid.getChildren().get(i);
+        return block.getValue();
+    }
 
+//    int getBlockCoords(int i) {
+//        sectionGrid.getChildren().get(i);
+//    }
+//
 }

@@ -9,14 +9,15 @@ import be.kdg.thegame_2048.views.Result.ResultView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-
-import javax.xml.soap.Text;
+import jdk.nashorn.internal.ir.Block;
 
 /**
  * @author Jarne Van Aerde
@@ -68,18 +69,27 @@ public class GamePresenter {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
-                    case UP:updateViewBlocks(Game.Direction.TOP);break;
-                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
-                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
-                    default:event.consume();
+                    case DOWN:
+                        updateViewBlocks(Game.Direction.DOWN);
+                        break;
+                    case UP:
+                        updateViewBlocks(Game.Direction.TOP);
+                        break;
+                    case RIGHT:
+                        updateViewBlocks(Game.Direction.RIGHT);
+                        break;
+                    case LEFT:
+                        updateViewBlocks(Game.Direction.LEFT);
+                        break;
+                    default:
+                        event.consume();
                 }
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
-//                if (firstRun) {
+                if (firstRun || isMovable()) {
                     updateView(event.getCode());
-//                } else {
-//                    move(event.getCode());
-//                }
+                } else {
+                    moveAnimation(event.getCode());
+                }
             }
         });
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
@@ -95,22 +105,40 @@ public class GamePresenter {
         });
     }
 
-    void move(KeyCode dir) {
-        TranslateTransition tt = new TranslateTransition(Duration.millis(100), view.getSectionGrid());
-        switch (dir.toString()) {
-            case ("UP"):tt.setToY(-110);break;
-            case ("DOWN"):tt.setToY(110);break;
-            case ("RIGHT"):tt.setToX(110);break;
-            case ("LEFT"):tt.setToX(-110);break;
-        }
-        tt.play();
-        tt.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                view.resetGrid();
-                updateView(dir);
+    void moveAnimation(KeyCode dir) {
+        ObservableList<Node> children = view.getSectionGrid().getChildren();
+        for (int i = 0; i < children.size(); i++) {
+            if (view.getBlockValue(i) > 0) {
+                TranslateTransition tt = new TranslateTransition(Duration.millis(500), children.get(i));
+                switch (dir.toString()) {
+                    case ("UP"):
+                        if (i > 4) {
+                            tt.setToY(-110);
+                        }
+                        break;
+                    case ("DOWN"):
+                        if (i < 11) {
+                            tt.setToY(110);
+                        }
+                        break;
+                    case ("RIGHT"):
+                            tt.setToX(110);
+                        break;
+                    case ("LEFT"):
+                        tt.setToX(-110);
+                        break;
+                }
+                tt.play();
+                tt.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        view.resetGrid();
+                        updateView(dir);
+                    }
+                });
             }
-        });
+        }
+
     }
 
     private void updateView(KeyCode dir) {
@@ -133,7 +161,7 @@ public class GamePresenter {
             }
         }
         if (!firstRun) {
-            if (!modelGame.getLastMove().equals(modelGame.getCurrentMove())) {
+            if (!isMovable()) {
                 view.putBlockOnGrid(2, randomblockX, randomblockY, true);
             } else {
                 view.putBlockOnGrid(2, randomblockX, randomblockY, false);
@@ -161,5 +189,23 @@ public class GamePresenter {
             new ResultPresenter(modelPlayerMananger, resultView, modelGame, view);
             view.setView(resultView);
         }
+    }
+
+//    public Node getGridNode(int row, int column) {
+//        Node result = null;
+//        ObservableList<Node> childrens = view.getSectionGrid().getChildren();
+//
+//        for (Node node : childrens) {
+//            if(view.getSectionGrid().getRowIndex(node) == row && view.getSectionGrid().getColumnIndex(node) == column) {
+//                result = node;
+//                break;
+//            }
+//        }
+//
+//        return result;
+//    }
+
+    private boolean isMovable() {
+        return modelGame.getLastMove().equals(modelGame.getCurrentMove());
     }
 }

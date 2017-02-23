@@ -14,20 +14,18 @@ import javafx.scene.text.Text;
 
 class BlockView extends StackPane {
     private int value;
-    private boolean animate;
     private Rectangle rect;
     private Text number;
 
-    BlockView(int value, boolean animate) {
+    BlockView(int value) {
         this.value = value;
-        this.animate = animate;
         initialiseNodes();
         updateView();
     }
 
     private void initialiseNodes() {
         this.rect = new Rectangle(100,100);
-        this.number = new Text("");
+        this.number = new Text();
     }
 
     private void updateView() {
@@ -60,4 +58,7 @@ class BlockView extends StackPane {
         this.getChildren().add(number);
     }
 
+    int getValue() {
+        return value;
+    }
 }
