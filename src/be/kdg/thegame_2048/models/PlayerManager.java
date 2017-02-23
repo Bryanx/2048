@@ -141,10 +141,6 @@ public final class PlayerManager {
         return playerList;
     }
 
-    public int getCurrentPlayerScore() {
-        return currentPlayerScore;
-    }
-
     public void setCurrentPlayerScore(int currentPlayerScore) {
         this.currentPlayerScore = currentPlayerScore;
     }

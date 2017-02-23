@@ -85,11 +85,12 @@ public class GamePresenter {
                         event.consume();
                 }
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
-                if (firstRun || isMovable()) {
+                updateView(event.getCode());
+                /*if (firstRun || isMovable()) {
                     updateView(event.getCode());
                 } else {
                     moveAnimation(event.getCode());
-                }
+                }*/
             }
         });
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {

@@ -12,20 +12,19 @@ final class Section {
     //Geen.
 
     //METHODEN
-    public Block getBlock() {
+    Block getBlock() {
         return this.block;
     }
 
     boolean hasBlock() {
-        if (this.block == null) return false;
-        return true;
+        return this.block == null;
     }
 
     void putBlock(Block block) {
         this.block = block;
     }
 
-    public void removeBlock() {
+    void removeBlock() {
         this.block = null;
     }
 

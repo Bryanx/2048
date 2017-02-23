@@ -24,7 +24,7 @@ public class Player implements Comparable<Player> {
         return name.toLowerCase();
     }
 
-    public void setBestScore(int bestScore) {
+    void setBestScore(int bestScore) {
         this.bestScore = bestScore;
     }
 
