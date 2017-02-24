@@ -93,6 +93,8 @@ public class DataReaderWriter {
                 } else {
                     playerInfo += encodedName + ":" + encodedScore + ":" + player.getLastMove() + "\n";
                 }
+
+                System.out.println(player.getLastScore());
             }
             writer.write(playerInfo);
             Formatter formatter = new Formatter(encription.toFile());

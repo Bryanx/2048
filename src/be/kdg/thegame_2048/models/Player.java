@@ -9,6 +9,7 @@ public class Player implements Comparable<Player> {
     private String name;
     private int bestScore;
     private String lastMove;
+    private int lastScore;
 
     //CONSTRUCTORS
     Player(String name, int bestScore) {
@@ -41,6 +42,14 @@ public class Player implements Comparable<Player> {
             this.lastMove = lastMove;
         }
         System.out.println(this.lastMove);
+    }
+
+    public int getLastScore() {
+        return lastScore;
+    }
+
+    public void setLastScore(int lastScore) {
+        this.lastScore = lastScore;
     }
 
     @Override

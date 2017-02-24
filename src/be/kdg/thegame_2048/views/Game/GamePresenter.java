@@ -37,7 +37,7 @@ public class GamePresenter {
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
         this.modelGame = modelGame;
         this.modelPlayerMananger = modelPlayerManager;
-        this.modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
+        this.modelPlayerMananger.getCurrentPlayer().setLastScore(modelGame.getScore().getScore());
         this.view = view;
         this.bottomView = view.getBottomView();
         this.midView = view.getMiddleView();
@@ -96,6 +96,9 @@ public class GamePresenter {
 
                 //Saves the current move from the existing player.
                 modelPlayerMananger.getCurrentPlayer().setLastMove(modelGame.toString());
+
+                //Saves the current score from the existing player.
+                modelPlayerMananger.getCurrentPlayer().setLastScore(modelGame.getScore().getScore());
             }
         });
         bottomView.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
