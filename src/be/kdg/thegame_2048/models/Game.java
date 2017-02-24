@@ -22,9 +22,31 @@ public final class Game {
         this.playground = new Playground(this.score);
         this.manager = playerManager;
 
-        playground.initialiseSections();
-        this.playground.addRandomBlock();
-        this.playground.addRandomBlock();
+        if (manager.getCurrentPlayer().getLastMove().length() > 1) {
+            //the code between the brackets returns en Section[][] object.
+            playground.initialiseSections(rebuildGame(manager.getCurrentPlayer().getLastMove()));
+        } else {
+            playground.initialiseSections();
+            this.playground.addRandomBlock();
+            this.playground.addRandomBlock();
+        }
+    }
+
+    private Section[][] rebuildGame(String playgroundString) {
+        String fields[] = playgroundString.split(" ");
+        Section[][] sections = new Section[4][4];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Section section = new Section();
+                if (!fields[(i*4)+j].contains("E")) {
+                    section.putBlock(new Block(Integer.parseInt(fields[(i*4)+j])));
+                }
+                sections[i][j] = section;
+                System.out.print(section.toString() + " ");
+            }
+        }
+        return sections;
     }
 
     public int getCoordRandomBlockX() {

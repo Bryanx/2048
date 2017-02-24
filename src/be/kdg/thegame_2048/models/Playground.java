@@ -36,6 +36,10 @@ final class Playground {
         }
     }
 
+    void initialiseSections(Section[][] sections) {
+        this.sections = sections;
+    }
+
     void addRandomBlock() {
         if (playGroundFull()) return;
         boolean blockFound = false;
