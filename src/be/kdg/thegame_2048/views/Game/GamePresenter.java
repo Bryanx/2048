@@ -48,11 +48,6 @@ public class GamePresenter {
         //eenmalige updateview
         updateView(KeyCode.A);
 
-        //TODO: resolve crash when logout and login
-        if (modelPlayerMananger.getCurrentPlayer().getLastPlayed() != null || modelPlayerMananger.getCurrentPlayer().getLastPlayed().length() > 5) {
-            modelGame.rebuildProject(modelPlayerMananger.getCurrentPlayer().getLastPlayed());
-            updateView(KeyCode.A);
-        }
     }
 
     //METHODEN
@@ -97,9 +92,6 @@ public class GamePresenter {
                 }
                 updateView(event.getCode());
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
-
-                /** remembers the last move of the current player **/
-                modelPlayerMananger.getCurrentPlayer().setLastPlayed(modelGame.getCurrentMove());
             }
         });
         bottomView.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
@@ -107,7 +99,6 @@ public class GamePresenter {
             public void handle(ActionEvent event) {
                 alreadyWon = false;
                 firstRun = true;
-                modelPlayerMananger.getCurrentPlayer().setLastPlayed(null);
                 modelPlayerMananger.saveInfoCurrentPlayer();
                 modelGame = new Game(modelPlayerMananger);
                 topView.getLblScoreInput().setText("0");

@@ -68,7 +68,7 @@ class BlockView extends StackPane {
         return value;
     }
 
-    private void setValue(int value) {
+    void setValue(int value) {
         this.value = value;
         changeAppearance();
     }

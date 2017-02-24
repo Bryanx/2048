@@ -16,13 +16,16 @@ public class DataReaderWriter {
     //CONSTRUCTORS
 
     //METHODS
-    /**Decription was used**/
+
+    /**
+     * Decription was used
+     **/
     public static List<Player> loadPlayerData() {
         Path data = Paths.get("playerdata" + File.separator + "data.txt");
         Path decoderData = Paths.get("playerdata" + File.separator + "encripted.txt");
         List<Player> playerList = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))) {
             int decodeNumber = Integer.parseInt(new Scanner(decoderData).nextLine());
             String info = reader.readLine();
             if (info == null) return playerList;
@@ -43,10 +46,6 @@ public class DataReaderWriter {
                 Player player = new Player(decodedName, Integer.parseInt(decodedScore));
                 playerList.add(player);
 
-                if (splittedData.length == 3) {
-                    player.setLastPlayed(splittedData[2]);
-                }
-
                 info = reader.readLine();
             }
         } catch (IOException e) {
@@ -55,7 +54,9 @@ public class DataReaderWriter {
         return playerList;
     }
 
-    /**Incription was used**/
+    /**
+     * Incription was used
+     **/
     public static void savePlayerData(List<Player> playerList) {
         Path playerdata = Paths.get("playerdata");
         Path data = playerdata.resolve("data.txt");
@@ -81,12 +82,8 @@ public class DataReaderWriter {
                     char encodedNumber = ((char) (String.valueOf(player.getBestScore()).charAt(i) + randomEncriptionCode));
                     encodedScore = encodedScore + encodedNumber;
                 }
-                if (player.getLastPlayed() == null) {
-                    playerInfo += encodedName + ":" + encodedScore +  ": " + "\n";
-                } else {
-                    playerInfo += encodedName + ":" + encodedScore +  ":" + player.getLastPlayed() + "\n";
-                }
 
+                playerInfo += encodedName + ":" + encodedScore + "\n";
             }
             writer.write(playerInfo);
             Formatter formatter = new Formatter(encription.toFile());
