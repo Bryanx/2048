@@ -8,6 +8,7 @@ public class Player implements Comparable<Player> {
     //EIGENSCHAPPEN
     private String name;
     private int bestScore;
+    private String lastMove;
 
     //CONSTRUCTORS
     Player(String name, int bestScore) {
@@ -26,6 +27,20 @@ public class Player implements Comparable<Player> {
 
     void setBestScore(int bestScore) {
         this.bestScore = bestScore;
+    }
+
+    String getLastMove() {
+        return this.lastMove;
+    }
+
+    public void setLastMove(String lastMove) {
+        if (lastMove.isEmpty()) this.lastMove = null;
+        if (lastMove.contains("\n")) {
+            this.lastMove = lastMove.replaceAll("\\n", " ").replaceAll("  ", " ").replaceAll("  ",  " ");
+        } else {
+            this.lastMove = lastMove;
+        }
+        System.out.println(this.lastMove);
     }
 
     @Override

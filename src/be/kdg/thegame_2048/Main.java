@@ -41,6 +41,7 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent event) {
                 if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();
+                System.out.println(model.getPlayerList().toString());
                 DataReaderWriter.savePlayerData(model.getPlayerList());
             }
         });

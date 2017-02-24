@@ -64,8 +64,9 @@ public class GamePresenter {
         bottomView.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                modelPlayerMananger.getCurrentPlayer().setLastMove(modelGame.toString());
                 modelPlayerMananger.saveInfoCurrentPlayer();
-                //modelPlayerMananger.setCurrentPlayerToNull();
+                modelPlayerMananger.setCurrentPlayerToNull();
                 StartView startView = new StartView();
                 new StartPresenter(modelPlayerMananger, startView);
                 view.getScene().setRoot(startView);
@@ -92,11 +93,15 @@ public class GamePresenter {
                 }
                 updateView(event.getCode());
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
+
+                //Saves the current move from the existing player.
+                modelPlayerMananger.getCurrentPlayer().setLastMove(modelGame.toString());
             }
         });
         bottomView.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                modelPlayerMananger.getCurrentPlayer().setLastMove("");
                 alreadyWon = false;
                 firstRun = true;
                 modelPlayerMananger.saveInfoCurrentPlayer();
@@ -171,14 +176,16 @@ public class GamePresenter {
         this.firstRun = false;
     }
 
+    /**
+     * Zo laten staan AUB
+     **/
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
         int score = modelGame.getScore().getScore();
-        Label input = topView.getLblScoreInput();
-        if (Integer.parseInt(input.getText()) >= Integer.parseInt(input.getText())) {
-            input.setText(score + "");
+        if (modelPlayerMananger.getCurrentPlayer().getBestScore() <= score) {
+            topView.getLblBestScoreInput().setText(String.valueOf(score));
         }
-        input.setText(score + "");
+        topView.getLblScoreInput().setText(String.valueOf(score));
         checkIfLostOrWin();
     }
 
