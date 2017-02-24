@@ -41,8 +41,10 @@ public class GamePresenter {
         //eenmalige updateview
         updateView(KeyCode.A);
 
-        if (modelPlayerMananger.getCurrentPlayer().getLastPlayed() != null) {
-            modelGame.rebuildProject(modelPlayerManager.getCurrentPlayer().getLastPlayed());
+        //TODO: resolve crash when logout and login
+        if (modelPlayerMananger.getCurrentPlayer().getLastPlayed() != null || modelPlayerMananger.getCurrentPlayer().getLastPlayed().length() > 5) {
+            modelGame.rebuildProject(modelPlayerMananger.getCurrentPlayer().getLastPlayed());
+            updateView(KeyCode.A);
         }
     }
 
@@ -61,7 +63,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent event) {
                 modelPlayerMananger.saveInfoCurrentPlayer();
-                modelPlayerMananger.setCurrentPlayerToNull();
+                //modelPlayerMananger.setCurrentPlayerToNull();
                 StartView startView = new StartView();
                 new StartPresenter(modelPlayerMananger, startView);
                 view.getScene().setRoot(startView);
@@ -88,6 +90,7 @@ public class GamePresenter {
                 }
                 updateView(event.getCode());
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
+
                 /** remembers the last move of the current player **/
                 modelPlayerMananger.getCurrentPlayer().setLastPlayed(modelGame.getCurrentMove());
             }
@@ -97,6 +100,7 @@ public class GamePresenter {
             public void handle(ActionEvent event) {
                 alreadyWon = false;
                 firstRun = true;
+                modelPlayerMananger.getCurrentPlayer().setLastPlayed(null);
                 modelPlayerMananger.saveInfoCurrentPlayer();
                 modelGame = new Game(modelPlayerMananger);
                 view.getLblScoreInput().setText("0");
@@ -206,6 +210,10 @@ public class GamePresenter {
 //    }
 
     private boolean isMovable() {
-        return modelGame.getLastMove().equals(modelGame.getCurrentMove());
+        if (modelGame.getLastMove() == null) {
+            return true;
+        } else {
+            return modelGame.getLastMove().equals(modelGame.getCurrentMove());
+        }
     }
 }

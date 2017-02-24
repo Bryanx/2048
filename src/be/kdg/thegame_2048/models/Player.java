@@ -34,9 +34,13 @@ public class Player implements Comparable<Player> {
     }
 
     public void setLastPlayed(String lastPlayed) {
-        String formatted = lastPlayed.replaceAll("\\n", "");
-        formatted = formatted.replaceAll("  ", " ");
-        this.lastPlayed = formatted;
+        if (lastPlayed == null) {
+            this.lastPlayed = null;
+        } else {
+            String formatted = lastPlayed.replaceAll("\\n", "");
+            formatted = formatted.replaceAll("  ", " ");
+            this.lastPlayed = formatted;
+        }
     }
 
     @Override
