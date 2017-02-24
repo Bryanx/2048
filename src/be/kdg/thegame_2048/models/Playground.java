@@ -365,6 +365,10 @@ final class Playground {
         return coordRandomBlockY;
     }
 
+    public void setSections(Section[][] sections) {
+        this.sections = sections;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

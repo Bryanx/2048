@@ -44,6 +44,8 @@ public class Main extends Application {
                 DataReaderWriter.savePlayerData(model.getPlayerList());
             }
         });
+
+        System.out.println(model.getPlayerList().get(0).getLastPlayed());
     }
 
     public static void main(String[] args) {

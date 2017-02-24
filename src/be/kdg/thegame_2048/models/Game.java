@@ -97,6 +97,15 @@ public final class Game {
         return true;
     }
 
+    public void rebuildProject(String playgroundString) {
+        String[] fields = playgroundString.split(" ");
+        System.out.println(fields.length);
+        /*Section[][] sections = new Section[4][4];
+        for (int i = 0; i < fields.length; i++) {
+
+        }*/
+    }
+
     public Score getScore() {
         return score;
     }

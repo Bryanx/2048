@@ -30,11 +30,13 @@ public class Player implements Comparable<Player> {
     }
 
     public String getLastPlayed() {
-        return lastPlayed;
+        return this.lastPlayed;
     }
 
     public void setLastPlayed(String lastPlayed) {
-        this.lastPlayed = lastPlayed;
+        String formatted = lastPlayed.replaceAll("\\n", "");
+        formatted = formatted.replaceAll("  ", " ");
+        this.lastPlayed = formatted;
     }
 
     @Override

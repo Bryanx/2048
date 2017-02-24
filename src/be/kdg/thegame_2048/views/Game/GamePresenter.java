@@ -40,6 +40,10 @@ public class GamePresenter {
         view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         //eenmalige updateview
         updateView(KeyCode.A);
+
+        if (modelPlayerMananger.getCurrentPlayer().getLastPlayed() != null) {
+            modelGame.rebuildProject(modelPlayerManager.getCurrentPlayer().getLastPlayed());
+        }
     }
 
     //METHODEN
@@ -82,11 +86,10 @@ public class GamePresenter {
                     default:
                         event.consume();
                 }
-                modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
                 updateView(event.getCode());
-
-
-
+                modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
+                /** remembers the last move of the current player **/
+                modelPlayerMananger.getCurrentPlayer().setLastPlayed(modelGame.getCurrentMove());
             }
         });
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
