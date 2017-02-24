@@ -38,7 +38,6 @@ public class ResultPresenter {
         view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPM.getCurrentPlayer().setLastMove("");
                 modelPM.setCurrentPlayerToNull();
                 StartView startView = new StartView();
                 new StartPresenter(modelPM, startView);
@@ -48,7 +47,6 @@ public class ResultPresenter {
         view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPM.getCurrentPlayer().setLastMove("");
                 gameView.layoutNodes();
                 gameView.getLblScoreInput().setText("0");
                 modelGame = new Game(modelPM);

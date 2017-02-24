@@ -37,7 +37,7 @@ public class GamePresenter {
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
         this.modelGame = modelGame;
         this.modelPlayerMananger = modelPlayerManager;
-        this.modelPlayerMananger.getCurrentPlayer().setLastScore(modelGame.getScore().getScore());
+        this.modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
         this.view = view;
         this.bottomView = view.getBottomView();
         this.midView = view.getMiddleView();
@@ -64,7 +64,6 @@ public class GamePresenter {
         bottomView.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPlayerMananger.getCurrentPlayer().setLastMove(modelGame.toString());
                 modelPlayerMananger.saveInfoCurrentPlayer();
                 modelPlayerMananger.setCurrentPlayerToNull();
                 StartView startView = new StartView();
@@ -93,18 +92,11 @@ public class GamePresenter {
                 }
                 updateView(event.getCode());
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
-
-                //Saves the current move from the existing player.
-                modelPlayerMananger.getCurrentPlayer().setLastMove(modelGame.toString());
-
-                //Saves the current score from the existing player.
-                modelPlayerMananger.getCurrentPlayer().setLastScore(modelGame.getScore().getScore());
             }
         });
         bottomView.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                modelPlayerMananger.getCurrentPlayer().setLastMove("");
                 alreadyWon = false;
                 firstRun = true;
                 modelPlayerMananger.saveInfoCurrentPlayer();

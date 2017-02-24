@@ -46,10 +46,6 @@ public class DataReaderWriter {
                 Player player = new Player(decodedName, Integer.parseInt(decodedScore));
                 playerList.add(player);
 
-                if (splittedData.length == 3) {
-                    player.setLastMove(splittedData[2]);
-                }
-
                 info = reader.readLine();
             }
         } catch (IOException e) {
@@ -87,14 +83,9 @@ public class DataReaderWriter {
                     encodedScore = encodedScore + encodedNumber;
                 }
 
-                System.out.println(player.getLastMove());
-                if (player.getLastMove().isEmpty() || player.getLastMove() == null) {
-                    playerInfo += encodedName + ":" + encodedScore + ":\n";
-                } else {
-                    playerInfo += encodedName + ":" + encodedScore + ":" + player.getLastMove() + "\n";
-                }
 
-                System.out.println(player.getLastScore());
+                playerInfo += encodedName + ":" + encodedScore + "\n";
+
             }
             writer.write(playerInfo);
             Formatter formatter = new Formatter(encription.toFile());

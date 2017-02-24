@@ -22,17 +22,13 @@ public final class Game {
         this.playground = new Playground(this.score);
         this.manager = playerManager;
 
-        if (manager.getCurrentPlayer().getLastMove().length() > 1) {
-            //the code between the brackets returns en Section[][] object.
-            playground.initialiseSections(rebuildGame(manager.getCurrentPlayer().getLastMove()));
-        } else {
-            playground.initialiseSections();
-            this.playground.addRandomBlock();
-            this.playground.addRandomBlock();
-        }
+        playground.initialiseSections();
+        this.playground.addRandomBlock();
+        this.playground.addRandomBlock();
+
     }
 
-    private Section[][] rebuildGame(String playgroundString) {
+    /*private Section[][] rebuildGame(String playgroundString) {
         String fields[] = playgroundString.split(" ");
         Section[][] sections = new Section[4][4];
 
@@ -47,7 +43,7 @@ public final class Game {
             }
         }
         return sections;
-    }
+    }*/
 
     public int getCoordRandomBlockX() {
         return playground.getCoordRandomBlockX();

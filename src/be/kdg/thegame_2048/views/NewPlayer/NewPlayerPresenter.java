@@ -39,6 +39,7 @@ public class NewPlayerPresenter {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
+                    System.out.println(model.checkIfExists("hallo"));
                     checkInput(view.getTfNewPlayer().getText());
 
                 } else {
