@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import jdk.nashorn.internal.ir.Block;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
@@ -17,6 +18,7 @@ import javafx.util.Duration;
 class GameMiddleView extends BorderPane {
     private static final Image BG = new Image("be/kdg/thegame_2048/views/img/bg.png");
     private GridPane sectionGrid;
+    private BlockView[][] blocks;
 
     GameMiddleView() {
         initialiseNodes();
@@ -24,14 +26,22 @@ class GameMiddleView extends BorderPane {
     }
 
     private void initialiseNodes() {
-    }
-
-    void layoutNodes() {
-        //fill grid with 0's
-        this.sectionGrid = new GridPane();
+        //16 blocks worden aangemaakt
+        this.blocks = new BlockView[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                sectionGrid.add(new BlockView(0), i, j);
+                blocks[i][j] = new BlockView(0);
+            }
+        }
+    }
+
+    private void layoutNodes() {
+        //fill grid with 0's
+        this.sectionGrid = new GridPane();
+        blocks[0][0].setValue(4);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                sectionGrid.add(blocks[i][j], i, j);
             }
         }
         sectionGrid.setVgap(10);
@@ -48,9 +58,12 @@ class GameMiddleView extends BorderPane {
     }
 
     void putBlockOnGrid(int value, int x, int y, boolean animate) {
-        BlockView blockView = new BlockView(value);
-        if (animate) popIn(blockView);
-        this.sectionGrid.add(blockView, y, x);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                blocks[y][x].setValue(value);
+            }
+        }
+        if (animate) popIn(blocks[y][x]);
     }
 
     private void popIn(StackPane block) {
@@ -71,8 +84,11 @@ class GameMiddleView extends BorderPane {
         return block.getValue();
     }
 
-//    int getBlockCoords(int i) {
-//        sectionGrid.getChildren().get(i);
-//    }
-//
+    void resetGrid() {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                blocks[i][j].setValue(0);
+            }
+        }
+    }
 }

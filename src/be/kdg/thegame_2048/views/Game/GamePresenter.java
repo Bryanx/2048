@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -26,6 +27,9 @@ public class GamePresenter {
     private Game modelGame;
     private PlayerManager modelPlayerMananger;
     private GameView view;
+    private GameBottomView bottomView;
+    private GameMiddleView midView;
+    private GameTopView topView;
     private boolean alreadyWon;
     private boolean firstRun;
 
@@ -35,9 +39,12 @@ public class GamePresenter {
         this.modelPlayerMananger = modelPlayerManager;
         this.modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
         this.view = view;
+        this.bottomView = view.getBottomView();
+        this.midView = view.getMiddleView();
+        this.topView = view.getTopView();
         this.firstRun = true;
         this.addEventHandlers();
-        view.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
+        topView.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         //eenmalige updateview
         updateView(KeyCode.A);
 
@@ -50,7 +57,7 @@ public class GamePresenter {
 
     //METHODEN
     private void addEventHandlers() {
-        view.getBottomView().getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
+        bottomView.getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 modelPlayerMananger.saveInfoCurrentPlayer();
@@ -59,7 +66,7 @@ public class GamePresenter {
                 view.getScene().setRoot(hsView);
             }
         });
-        view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
+        bottomView.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 modelPlayerMananger.saveInfoCurrentPlayer();
@@ -95,7 +102,7 @@ public class GamePresenter {
                 modelPlayerMananger.getCurrentPlayer().setLastPlayed(modelGame.getCurrentMove());
             }
         });
-        view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
+        bottomView.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 alreadyWon = false;
@@ -103,16 +110,16 @@ public class GamePresenter {
                 modelPlayerMananger.getCurrentPlayer().setLastPlayed(null);
                 modelPlayerMananger.saveInfoCurrentPlayer();
                 modelGame = new Game(modelPlayerMananger);
-                view.getLblScoreInput().setText("0");
+                topView.getLblScoreInput().setText("0");
                 updateView(KeyCode.A);
             }
         });
     }
 
     void moveAnimation(KeyCode dir) {
-        ObservableList<Node> children = view.getSectionGrid().getChildren();
+        ObservableList<Node> children = midView.getSectionGrid().getChildren();
         for (int i = 0; i < children.size(); i++) {
-            if (view.getBlockValue(i) > 0) {
+            if (midView.getBlockValue(i) > 0) {
                 TranslateTransition tt = new TranslateTransition(Duration.millis(500), children.get(i));
                 switch (dir.toString()) {
                     case ("UP"):
@@ -126,7 +133,7 @@ public class GamePresenter {
                         }
                         break;
                     case ("RIGHT"):
-                            tt.setToX(110);
+                        tt.setToX(110);
                         break;
                     case ("LEFT"):
                         tt.setToX(-110);
@@ -136,7 +143,6 @@ public class GamePresenter {
                 tt.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        view.resetGrid();
                         updateView(dir);
                     }
                 });
@@ -158,17 +164,17 @@ public class GamePresenter {
                     value = modelGame.getPieceValue(i, j);
                 }
                 if (firstRun) {
-                    view.putBlockOnGrid(value, i, j, true);
+                    midView.putBlockOnGrid(value, i, j, true);
                 } else if (!(i == randomblockX && j == randomblockY)) {
-                    view.putBlockOnGrid(value, i, j, false);
+                    midView.putBlockOnGrid(value, i, j, false);
                 }
             }
         }
         if (!firstRun) {
             if (!isMovable()) {
-                view.putBlockOnGrid(2, randomblockX, randomblockY, true);
+                midView.putBlockOnGrid(2, randomblockX, randomblockY, true);
             } else {
-                view.putBlockOnGrid(2, randomblockX, randomblockY, false);
+                midView.putBlockOnGrid(2, randomblockX, randomblockY, false);
             }
         }
         this.firstRun = false;
@@ -177,10 +183,11 @@ public class GamePresenter {
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
         int score = modelGame.getScore().getScore();
-        if (Integer.parseInt(view.getLblScoreInput().getText()) >= Integer.parseInt(view.getLblBestScoreInput().getText())) {
-            view.getLblBestScoreInput().setText(score + "");
+        Label input = topView.getLblScoreInput();
+        if (Integer.parseInt(input.getText()) >= Integer.parseInt(input.getText())) {
+            input.setText(score + "");
         }
-        view.getLblScoreInput().setText(score + "");
+        input.setText(score + "");
         checkIfLostOrWin();
     }
 

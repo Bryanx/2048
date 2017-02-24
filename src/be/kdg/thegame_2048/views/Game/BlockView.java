@@ -20,6 +20,7 @@ class BlockView extends StackPane {
     BlockView(int value) {
         this.value = value;
         initialiseNodes();
+        changeAppearance();
         updateView();
     }
 
@@ -29,10 +30,17 @@ class BlockView extends StackPane {
     }
 
     private void updateView() {
-        if (value == 0)
+        this.getChildren().add(rect);
+        this.getChildren().add(number);
+    }
+
+    private void changeAppearance() {
+        if (value == 0) {
+            number.setText("");
             rect.setFill(Color.web("#cdc1b4"));
+        }
         if (value != 0) {
-            number = new Text(Integer.toString(value));
+            number.setText(Integer.toString(value));
             number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 55));
             number.setFill(Color.web("#776e65"));
         }
@@ -54,11 +62,14 @@ class BlockView extends StackPane {
             case 1024:rect.setFill(Color.web("#edc53f"));break;
             case 2048:rect.setFill(Color.web("#edc22e"));break;
         }
-        this.getChildren().add(rect);
-        this.getChildren().add(number);
     }
 
     int getValue() {
         return value;
+    }
+
+    private void setValue(int value) {
+        this.value = value;
+        changeAppearance();
     }
 }

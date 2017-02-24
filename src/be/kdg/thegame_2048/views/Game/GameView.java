@@ -48,10 +48,6 @@ public final class GameView extends BorderPane {
         this.setCenter(stack);
     }
 
-    void putBlockOnGrid(int value, int x , int y, boolean animate) {
-        gameMiddleView.putBlockOnGrid(value, x, y, animate);
-    }
-
     GameTopView getTopView() {
         return gameTopView;
     }
@@ -64,31 +60,11 @@ public final class GameView extends BorderPane {
         return gameBottomView;
     }
 
-    GridPane getSectionGrid() {
-        return gameMiddleView.getSectionGrid();
-    }
-
-    Button getBtnExit() {
-        return gameBottomView.getBtnExit();
-    }
-
     public Label getLblBestScoreInput() {
         return gameTopView.getLblBestScoreInput();
     }
 
     public Label getLblScoreInput() {
         return gameTopView.getLblScoreInput();
-    }
-
-    void resetGrid() {
-        gameMiddleView.getSectionGrid().getChildren().clear();
-    }
-
-    Button getBtnRestart() {
-        return gameBottomView.getBtnRestart();
-    }
-
-    int getBlockValue(int i) {
-        return gameMiddleView.getBlockValue(i);
     }
 }

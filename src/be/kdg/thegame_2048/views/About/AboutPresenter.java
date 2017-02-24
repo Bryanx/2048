@@ -62,46 +62,50 @@ public class AboutPresenter {
     }
 
     private void moveAnimation(int oldIndex, int newIndex) {
-        //move current slide
-        TranslateTransition tt = new TranslateTransition(Duration.millis(150), AboutView.getImg(oldIndex));
-        if (newIndex > oldIndex) {
-            tt.setToX(500);
-        } else if (newIndex == oldIndex){
-            tt.setToX(0);
-            tt.setDuration(Duration.millis(1));
-        } else {
-            tt.setToX(-500);
-        }
-        tt.play();
-
-        //make next slide ready
-        TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
-        if (newIndex > oldIndex) {
-            tt2.setToX(-500);
-        } else if (newIndex == oldIndex){
-            tt.setToX(0);
-        } else {
-            tt2.setToX(500);
-        }
-        tt2.play();
-
-        //TODO: add to eventhandlers()
-        //move next slide into view
-        tt.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
-                if (newIndex > oldIndex) {
-                    tt2.setFromX(-500);
-                } else if (newIndex == oldIndex){
-                    tt2.setToX(0);
+        int[] indexes = {oldIndex, newIndex};
+        for (int index : indexes) {
+            TranslateTransition tt = new TranslateTransition(Duration.millis(150), AboutView.getImg(index));
+            if (newIndex > oldIndex) {
+                if (index == newIndex) {
+                    tt.setToX(-500);
                 } else {
-                    tt2.setFromX(500);
+                    tt.setToX(500);
                 }
-                tt2.setToX(0);
-                tt2.play();
-                view.layoutNodes(newIndex);
+            } else if (newIndex == oldIndex){
+                tt.setToX(0);
+                if (index == oldIndex) {
+                    tt.setDuration(Duration.millis(1));
+                }
+            } else {
+                if (index == newIndex) {
+                    tt.setToX(500);
+                } else {
+                    tt.setToX(-500);
+                }
             }
-        });
+            tt.play();  
+            if (index == newIndex) {
+                //TODO: add to eventhandlers()
+                //move next slide into view
+                tt.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
+                        if (newIndex > oldIndex) {
+                            tt2.setFromX(-500);
+                        } else if (newIndex == oldIndex) {
+                            tt2.setToX(0);
+                        } else {
+                            tt2.setFromX(500);
+                        }
+                        tt2.setToX(0);
+                        tt2.play();
+                        view.layoutNodes(newIndex);
+                    }
+                });
+            }
+        }
+
+
     }
 }
