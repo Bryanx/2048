@@ -52,12 +52,20 @@ public final class GameView extends BorderPane {
         gameMiddleView.putBlockOnGrid(value, x, y, animate);
     }
 
-    GridPane getSectionGrid() {
-        return gameMiddleView.getSectionGrid();
+    GameTopView getTopView() {
+        return gameTopView;
     }
 
-    Button getBtnHighScores() {
-        return gameBottomView.getBtnHighScores();
+    GameMiddleView getMiddleView() {
+        return gameMiddleView;
+    }
+
+    GameBottomView getBottomView() {
+        return gameBottomView;
+    }
+
+    GridPane getSectionGrid() {
+        return gameMiddleView.getSectionGrid();
     }
 
     Button getBtnExit() {

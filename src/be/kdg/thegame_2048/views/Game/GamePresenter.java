@@ -15,9 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import jdk.nashorn.internal.ir.Block;
 
 /**
  * @author Jarne Van Aerde
@@ -46,7 +44,7 @@ public class GamePresenter {
 
     //METHODEN
     private void addEventHandlers() {
-        view.getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBottomView().getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 modelPlayerMananger.saveInfoCurrentPlayer();
