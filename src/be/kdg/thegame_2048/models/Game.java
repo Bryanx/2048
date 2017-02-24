@@ -97,6 +97,29 @@ public final class Game {
         return true;
     }
 
+    public void rebuildProject(String playgroundString) {
+        String[] fields = playgroundString.split(" ");
+        if (fields.length != 16) return;
+
+        Section[][] sections = new Section[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Section section = new Section();
+                if (!fields[(i*4)+j].equals("E")) {
+                    section.putBlock(new Block(Integer.parseInt(fields[(i*4)+j])));
+                }
+                sections[j][i] = section;
+            }
+        }
+        playground.setSections(sections);
+        System.out.println(playground.toString());
+    }
+
+    @Override
+    public String toString() {
+        return playground.toString();
+    }
+
     public Score getScore() {
         return score;
     }
