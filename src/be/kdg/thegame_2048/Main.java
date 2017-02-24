@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048;
 
+import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
@@ -19,6 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         //MAKING CLASSES
         PlayerManager model = new PlayerManager();
+        model.getPlayerList().addAll(DataReaderWriter.loadPlayerData());
         StartView view = new StartView();
         StartPresenter presenter = new StartPresenter(model, view);
 
@@ -39,7 +41,7 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent event) {
                 if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();
-                model.savePlayerData();
+                DataReaderWriter.savePlayerData(model.getPlayerList());
             }
         });
     }
