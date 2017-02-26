@@ -8,12 +8,10 @@ import be.kdg.thegame_2048.views.Result.ResultPresenter;
 import be.kdg.thegame_2048.views.Result.ResultView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
+import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -75,22 +73,14 @@ public class GamePresenter {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case DOWN:
-                        updateViewBlocks(Game.Direction.DOWN);
-                        break;
-                    case UP:
-                        updateViewBlocks(Game.Direction.TOP);
-                        break;
-                    case RIGHT:
-                        updateViewBlocks(Game.Direction.RIGHT);
-                        break;
-                    case LEFT:
-                        updateViewBlocks(Game.Direction.LEFT);
-                        break;
-                    default:
-                        event.consume();
+                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
+                    case UP:updateViewBlocks(Game.Direction.TOP);break;
+                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
+                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
+                    default:event.consume();
                 }
-                updateView(event.getCode());
+                moveAnimation(event.getCode());
+//                updateView(event.getCode());
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
             }
         });
@@ -108,38 +98,111 @@ public class GamePresenter {
     }
 
     void moveAnimation(KeyCode dir) {
-        ObservableList<Node> children = midView.getSectionGrid().getChildren();
-        for (int i = 0; i < children.size(); i++) {
-            if (midView.getBlockValue(i) > 0) {
-                TranslateTransition tt = new TranslateTransition(Duration.millis(500), children.get(i));
-                switch (dir.toString()) {
-                    case ("UP"):
-                        if (i > 4) {
-                            tt.setToY(-110);
+        //TODO: Refactor
+        ParallelTransition p = new ParallelTransition();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                TranslateTransition tt = new TranslateTransition(Duration.millis(200), midView.getBlock(i,j));
+                if (!isMovable()) {
+                    if (midView.getBlock(i,j).getValue() != 0) {
+                        switch (dir.toString()) {
+                            case ("UP"):
+                                if (j > 0 && (midView.getBlock(i, j - 1).getValue() == midView.getBlock(i, j).getValue() ||
+                                        midView.getBlock(i, j - 1).getValue() == 0)) {
+                                    if (j > 1 && (midView.getBlock(i, j - 2).getValue() == 0 ||
+                                            midView.getBlock(i, j - 2).getValue() == midView.getBlock(i, j).getValue())) {
+                                        if (j > 2 && (midView.getBlock(i, j - 3).getValue() == 0 ||
+                                                midView.getBlock(i, j - 3).getValue() == midView.getBlock(i, j).getValue())) {
+                                            midView.getBlock(i,j).toFront();
+                                            tt.setToY(-330);
+                                        } else {
+                                            midView.getBlock(i,j).toFront();
+                                            tt.setToY(-220);
+                                        }
+                                    } else {
+                                        midView.getBlock(i,j).toFront();
+                                        tt.setToY(-110);
+                                    }
+                            }break;
+                            case ("DOWN"):
+                                if (j < 3 && (midView.getBlock(i, j + 1).getValue() == midView.getBlock(i, j).getValue() ||
+                                        midView.getBlock(i, j + 1).getValue() == 0)) {
+                                    if (j < 2 && (midView.getBlock(i, j + 2).getValue() == 0 ||
+                                            midView.getBlock(i, j + 2).getValue() == midView.getBlock(i, j).getValue())) {
+                                        if (j < 1 && (midView.getBlock(i, j + 3).getValue() == 0 ||
+                                                midView.getBlock(i, j + 3).getValue() == midView.getBlock(i, j).getValue())) {
+                                            midView.getBlock(i,j).toFront();
+                                            tt.setToY(330);
+                                        } else {
+                                            midView.getBlock(i,j).toFront();
+                                            tt.setToY(220);
+                                        }
+                                    } else {
+                                        midView.getBlock(i,j).toFront();
+                                        tt.setToY(110);
+                                    }
+                            }break;
+                            case ("RIGHT"):
+                                if (i < 3 && (midView.getBlock(i + 1, j).getValue() == midView.getBlock(i, j).getValue() ||
+                                        midView.getBlock(i + 1, j).getValue() == 0)) {
+                                    if (i < 2 && (midView.getBlock(i + 2, j).getValue() == 0 ||
+                                            midView.getBlock(i + 2, j).getValue() == midView.getBlock(i, j).getValue())) {
+                                        if (i < 1 && (midView.getBlock(i + 3, j).getValue() == 0 ||
+                                                midView.getBlock(i + 3, j).getValue() == midView.getBlock(i, j).getValue())) {
+                                            midView.getBlock(i, j).toFront();
+                                            tt.setToX(330);
+                                        } else {
+                                            midView.getBlock(i, j).toFront();
+                                            tt.setToX(220);
+                                        }
+                                    } else {
+                                        midView.getBlock(i, j).toFront();
+                                        tt.setToX(110);
+                                    }
+                            }break;
+                            case ("LEFT"):
+                                if (i > 0 && (midView.getBlock(i - 1, j).getValue() == midView.getBlock(i, j).getValue() ||
+                                        midView.getBlock(i - 1, j).getValue() == 0)) {
+                                    if (i > 1 && (midView.getBlock(i - 2, j).getValue() == 0 ||
+                                            midView.getBlock(i - 2, j).getValue() == midView.getBlock(i, j).getValue())) {
+                                        if (i > 2 && (midView.getBlock(i - 3, j).getValue() == 0 ||
+                                                midView.getBlock(i - 3, j).getValue() == midView.getBlock(i, j).getValue())) {
+                                            midView.getBlock(i, j).toFront();
+                                            tt.setToX(-330);
+                                        } else {
+                                            midView.getBlock(i, j).toFront();
+                                            tt.setToX(-220);
+                                        }
+                                    } else {
+                                        midView.getBlock(i, j).toFront();
+                                        tt.setToX(-110);
+                                    }
+                            }break;
                         }
-                        break;
-                    case ("DOWN"):
-                        if (i < 11) {
-                            tt.setToY(110);
-                        }
-                        break;
-                    case ("RIGHT"):
-                        tt.setToX(110);
-                        break;
-                    case ("LEFT"):
-                        tt.setToX(-110);
-                        break;
-                }
-                tt.play();
-                tt.setOnFinished(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        updateView(dir);
                     }
-                });
+                }
+                p.getChildren().addAll(tt);
             }
         }
-
+        p.play();
+        p.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ParallelTransition p = new ParallelTransition();
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        TranslateTransition tt = new TranslateTransition(Duration.millis(1), midView.getBlock(i,j));
+                        if (midView.getBlock(i,j).getValue() != 0) {
+                            tt.setToX(0);
+                            tt.setToY(0);
+                        }
+                        p.getChildren().addAll(tt);
+                    }
+                }
+                p.play();
+                updateView(dir);
+            }
+        });
     }
 
     private void updateView(KeyCode dir) {
@@ -195,21 +258,7 @@ public class GamePresenter {
         }
     }
 
-//    public Node getGridNode(int row, int column) {
-//        Node result = null;
-//        ObservableList<Node> childrens = view.getSectionGrid().getChildren();
-//
-//        for (Node node : childrens) {
-//            if(view.getSectionGrid().getRowIndex(node) == row && view.getSectionGrid().getColumnIndex(node) == column) {
-//                result = node;
-//                break;
-//            }
-//        }
-//
-//        return result;
-//    }
-
-    private boolean isMovable() {
+    boolean isMovable() {
         if (modelGame.getLastMove() == null) {
             return true;
         } else {

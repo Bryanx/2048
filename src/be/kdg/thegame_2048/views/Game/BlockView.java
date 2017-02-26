@@ -21,7 +21,7 @@ class BlockView extends StackPane {
         this.value = value;
         initialiseNodes();
         changeAppearance();
-        updateView();
+        layoutNodes();
     }
 
     private void initialiseNodes() {
@@ -29,7 +29,7 @@ class BlockView extends StackPane {
         this.number = new Text();
     }
 
-    private void updateView() {
+    private void layoutNodes() {
         this.getChildren().add(rect);
         this.getChildren().add(number);
     }

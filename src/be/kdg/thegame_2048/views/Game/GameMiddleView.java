@@ -67,7 +67,7 @@ class GameMiddleView extends BorderPane {
     }
 
     private void popIn(StackPane block) {
-        ScaleTransition st = new ScaleTransition(Duration.millis(250), block);
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), block);
         st.setFromX(0.0);
         st.setFromY(0.0);
         st.setToX(1.0);
@@ -75,13 +75,8 @@ class GameMiddleView extends BorderPane {
         st.play();
     }
 
-    GridPane getSectionGrid() {
-        return sectionGrid;
-    }
-
-    int getBlockValue(int i) {
-        BlockView block = (BlockView) sectionGrid.getChildren().get(i);
-        return block.getValue();
+    BlockView getBlock(int x, int y) {
+        return blocks[x][y];
     }
 
     void resetGrid() {
