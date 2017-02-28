@@ -12,6 +12,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.CacheHint;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -121,8 +122,9 @@ public class GamePresenter {
                     ygt1 = y > 1;
                     ygt2 = y > 2;
                     increment = -110;
-                    y1=-1;y2=-2;y3=-3;
-                    x1=0;x2=0;x3=0;
+                    y1 = -1;
+                    y2 = -2;
+                    y3 = -3;
                 } else if (dir.toString().equals("DOWN")) {
                     ygt0 = y < 3;
                     ygt1 = y < 2;
@@ -131,17 +133,11 @@ public class GamePresenter {
                     y1 = 1;
                     y2 = 2;
                     y3 = 3;
-                    x1 = 0;
-                    x2 = 0;
-                    x3 = 0;
                 } else if (dir.toString().equals("LEFT")) {
                     ygt0 = x > 0;
                     ygt1 = x > 1;
                     ygt2 = x > 2;
                     increment = -110;
-                    y1 = 0;
-                    y2 = 0;
-                    y3 = 0;
                     x1 = -1;
                     x2 = -2;
                     x3 = -3;
@@ -150,16 +146,13 @@ public class GamePresenter {
                     ygt1 = x < 2;
                     ygt2 = x < 1;
                     increment = 110;
-                    y1 = 0;
-                    y2 = 0;
-                    y3 = 0;
                     x1 = 1;
                     x2 = 2;
                     x3 = 3;
                 } else {
                     //do nothing
                 }
-                TranslateTransition tt = new TranslateTransition(Duration.millis(500), midView.getBlock(x, y));
+                TranslateTransition tt = new TranslateTransition(Duration.millis(100), midView.getBlock(x, y));
                 int thisBlock = BlockValue(x, y);
                 if (!isMovable() && thisBlock != 0) {
                     if (ygt0 && (BlockValue(x + x1, y + y1) == 0 || BlockValue(x + x1, y + y1) == thisBlock)) {
@@ -170,7 +163,6 @@ public class GamePresenter {
                                                 BlockValue(x + x2, y + y2) == thisBlock)) {
                                     increment *= 2;
                                 } else {
-                                    System.out.println("hai");
                                     increment *= 3;
                                 }
                             } else if (BlockValue(x + x1, y + y1) == thisBlock && BlockValue(x + x2, y + y2) == thisBlock) {
@@ -198,6 +190,9 @@ public class GamePresenter {
                         tt.setToX(increment);
                     }
                     midView.getBlock(x, y).toFront();
+                    midView.getBlock(x,y).setCache(true);
+                    midView.getBlock(x,y).setCacheShape(true);
+                    midView.getBlock(x,y).setCacheHint(CacheHint.SPEED);
                 }
                 p.getChildren().addAll(tt);
             }
