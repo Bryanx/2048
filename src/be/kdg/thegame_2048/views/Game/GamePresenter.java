@@ -73,11 +73,20 @@ public class GamePresenter {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
-                    case UP:updateViewBlocks(Game.Direction.TOP);break;
-                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
-                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
-                    default:event.consume();
+                    case DOWN:
+                        updateViewBlocks(Game.Direction.DOWN);
+                        break;
+                    case UP:
+                        updateViewBlocks(Game.Direction.TOP);
+                        break;
+                    case RIGHT:
+                        updateViewBlocks(Game.Direction.RIGHT);
+                        break;
+                    case LEFT:
+                        updateViewBlocks(Game.Direction.LEFT);
+                        break;
+                    default:
+                        event.consume();
                 }
                 moveAnimation(event.getCode());
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
@@ -97,46 +106,71 @@ public class GamePresenter {
     }
 
     private int BlockValue(int x, int y) {
-        return midView.getBValue(x,y);
+        return midView.getBValue(x, y);
     }
 
     private ParallelTransition move(KeyCode dir) {
-        int increment;
-        boolean bool0, bool1, bool2;
-        int x1, x2, x3, y1, y2, y3;
+        int increment = 0;
+        boolean ygt0 = false, ygt1 = false, ygt2 = false;
+        int x1 = 0, x2 = 0, x3 = 0, y1 = 0, y2 = 0, y3 = 0;
         ParallelTransition p = new ParallelTransition();
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 if (dir.toString().equals("UP")) {
-                    bool0 = y > 0; bool1 = y > 1; bool2 = y > 2;
+                    ygt0 = y > 0;
+                    ygt1 = y > 1;
+                    ygt2 = y > 2;
                     increment = -110;
                     y1=-1;y2=-2;y3=-3;
                     x1=0;x2=0;x3=0;
                 } else if (dir.toString().equals("DOWN")) {
-                    bool0 = y < 3; bool1 = y < 2; bool2 = y < 1;
+                    ygt0 = y < 3;
+                    ygt1 = y < 2;
+                    ygt2 = y < 1;
                     increment = 110;
-                    y1=1;y2=2;y3=3;
-                    x1=0;x2=0;x3=0;
-                } else if (dir.toString().equals("LEFT")){
-                    bool0 = x > 0; bool1 = x > 1; bool2 = x > 2;
+                    y1 = 1;
+                    y2 = 2;
+                    y3 = 3;
+                    x1 = 0;
+                    x2 = 0;
+                    x3 = 0;
+                } else if (dir.toString().equals("LEFT")) {
+                    ygt0 = x > 0;
+                    ygt1 = x > 1;
+                    ygt2 = x > 2;
                     increment = -110;
-                    y1=0;y2=0;y3=0;
-                    x1=-1;x2=-2;x3=-3;
-                } else {
-                    bool0 = x < 3; bool1 = x < 2; bool2 = x < 1;
+                    y1 = 0;
+                    y2 = 0;
+                    y3 = 0;
+                    x1 = -1;
+                    x2 = -2;
+                    x3 = -3;
+                } else if (dir.toString().equals("RIGHT")) {
+                    ygt0 = x < 3;
+                    ygt1 = x < 2;
+                    ygt2 = x < 1;
                     increment = 110;
-                    y1=0;y2=0;y3=0;
-                    x1=1;x2=2;x3=3;
+                    y1 = 0;
+                    y2 = 0;
+                    y3 = 0;
+                    x1 = 1;
+                    x2 = 2;
+                    x3 = 3;
+                } else {
+                    //do nothing
                 }
-                TranslateTransition tt = new TranslateTransition(Duration.millis(250), midView.getBlock(x, y));
+                TranslateTransition tt = new TranslateTransition(Duration.millis(500), midView.getBlock(x, y));
                 int thisBlock = BlockValue(x, y);
                 if (!isMovable() && thisBlock != 0) {
-                    if (bool0 && (BlockValue(x + x1, y + y1) == 0 || BlockValue(x + x1, y + y1) == thisBlock)) {
-                        if (bool1 && (BlockValue(x + x2, y + y2) == 0 || BlockValue(x + x2, y + y2) == thisBlock)) {
-                            if (bool2 && (BlockValue(x + x3, y + y3) == 0 || BlockValue(x + x3, y + y3) == thisBlock)) {
-                                if (BlockValue(x + x1, y + y1) == thisBlock && BlockValue(x + x2, y + y2) == BlockValue(x + x1, y + y1)) {
+                    if (ygt0 && (BlockValue(x + x1, y + y1) == 0 || BlockValue(x + x1, y + y1) == thisBlock)) {
+                        if (ygt1 && (BlockValue(x + x2, y + y2) == 0 || BlockValue(x + x2, y + y2) == thisBlock)) {
+                            if (ygt2 && (BlockValue(x + x3, y + y3) == 0 || BlockValue(x + x3, y + y3) == thisBlock)) {
+                                if (BlockValue(x + x1, y + y1) == thisBlock &&
+                                        (BlockValue(x + x1, y + y1) == BlockValue(x + x2, y + y2) ||
+                                                BlockValue(x + x2, y + y2) == thisBlock)) {
                                     increment *= 2;
                                 } else {
+                                    System.out.println("hai");
                                     increment *= 3;
                                 }
                             } else if (BlockValue(x + x1, y + y1) == thisBlock && BlockValue(x + x2, y + y2) == thisBlock) {
@@ -144,21 +178,15 @@ public class GamePresenter {
                             } else {
                                 increment *= 2;
                             }
-                        } else if (bool2 && (BlockValue(x + x3, y + y3) == 0 || BlockValue(x + x3, y + y3) == BlockValue(x + x2, y + y2))) {
+                        } else if (ygt2 && (BlockValue(x + x3, y + y3) == 0 || BlockValue(x + x3, y + y3) == BlockValue(x + x2, y + y2))) {
                             increment *= 2;
                         }
-                    } else if (bool1 && (BlockValue(x + x2, y + y2) == BlockValue(x + x1, y + y1) || BlockValue(x + x2, y + y2) == 0)) {
-                        if (bool2 && (BlockValue(x + x3, y + y3) == BlockValue(x + x1, y + y1) || BlockValue(x + x2, y + y2) == 0)) {
-                            if (BlockValue(x + x1, y + y1) != thisBlock) {
-                                if (BlockValue(x + x3, y + y3) == 0) increment *= 3;
-                            } else {
-                                increment *= 2;
-                            }
-                        } else if (bool2 && (BlockValue(x + x3, y + y3) == 0)) {
+                    } else if (ygt1 && (BlockValue(x + x2, y + y2) == 0 || BlockValue(x + x2, y + y2) == BlockValue(x + x1, y + y1))) {
+                        if (ygt2 && (BlockValue(x + x3, y + y3) == 0 || BlockValue(x + x3, y + y3) == BlockValue(x + x1, y + y1))) {
                             increment *= 2;
                         }
-                    } else if (bool2 && (BlockValue(x + x3, y + y3) == BlockValue(x + x2, y + y2) || BlockValue(x + x3, y + y3) == 0)) {
-                        // do nothing
+                    } else if (ygt2 && (BlockValue(x + x3, y + y3) == 0 || BlockValue(x + x3, y + y3) == BlockValue(x + x2, y + y2))) {
+                        //do nothing
                     } else {
                         increment = 0;
                     }
@@ -180,6 +208,223 @@ public class GamePresenter {
 
     private void moveAnimation(KeyCode dir) {
         ParallelTransition p = new ParallelTransition(move(dir));
+        //        for (int x = 0; x < 4; x++) {
+//            for (int y = 0; y < 4; y++) {
+//                TranslateTransition tt = new TranslateTransition(Duration.millis(100), midView.getBlock(x,y));
+//                int thisBlock = BlockValue(x,y);
+//                if (!isMovable()) {
+//                    if (thisBlock != 0) {
+//                        switch (dir.toString()) {
+//                            case ("UP"):
+//                                if (y > 0 && (BlockValue(x, y - 1) == 0 ||
+//                                        BlockValue(x, y - 1) == thisBlock)) {
+//                                    if (y > 1 && (BlockValue(x, y - 2) == 0 ||
+//                                            BlockValue(x, y - 2) == thisBlock)) {
+//                                        if (y > 2 && (BlockValue(x, y - 3) == 0 ||
+//                                                BlockValue(x, y - 3) == thisBlock)) {
+//                                            if (BlockValue(x, y - 1) == thisBlock &&
+//                                                    BlockValue(x, y - 2) == BlockValue(x, y - 1)) {
+//                                                tt.setToY(-220);
+//                                            } else {
+//                                                tt.setToY(-330);
+//                                            }
+//                                        } else if (BlockValue(x, y - 1) == thisBlock &&
+//                                                BlockValue(x, y - 2) == thisBlock) {
+//                                            tt.setToY(-110);
+//                                        } else {
+//                                            tt.setToY(-220);
+//                                        }
+//                                    } else if (y > 2 && (BlockValue(x, y - 3) == 0 ||
+//                                            BlockValue(x, y - 3) == BlockValue(x, y - 2))) {
+//                                        tt.setToY(-220);
+//                                    } else {
+//                                        tt.setToY(-110);
+//                                    }
+//                                } else if (y > 1 && (BlockValue(x, y - 2) == BlockValue(x, y - 1) ||
+//                                        BlockValue(x, y - 2) == 0)) {
+//                                    if (y > 2 && (BlockValue(x, y - 3) == BlockValue(x, y - 1) ||
+//                                            BlockValue(x, y - 2) == 0)) {
+//                                        if (BlockValue(x, y - 1) != thisBlock) {
+//                                            if (BlockValue(x, y - 3) == 0) {
+//                                                tt.setToY(-220);
+//                                            } else {
+//                                                tt.setToY(-110);
+//                                            }
+//                                        } else {
+//                                            tt.setToY(-220);
+//                                        }
+//                                    } else if (y > 2 && (BlockValue(x, y - 3) == 0)) {
+//                                        tt.setToY(-220);
+//                                    } else {
+//                                        tt.setToY(-110);
+//                                    }
+//                                } else if (y > 2 && (BlockValue(x, y - 3) == BlockValue(x, y - 2) ||
+//                                        BlockValue(x, y - 3) == 0)) {
+//                                    tt.setToY(-110);
+//                                }midView.getBlock(x, y).toFront();
+//                                break;
+//                                case ("DOWN"):
+//                                    if (y < 3 && (BlockValue(x, y + 1) == BlockValue(x, y) ||
+//                                            BlockValue(x, y + 1) == 0)) {
+//                                        if (y < 2 && (BlockValue(x, y + 2) == 0 ||
+//                                                BlockValue(x, y + 2) == BlockValue(x, y))) {
+//                                            if (y < 1 && (BlockValue(x, y + 3) == 0 ||
+//                                                    BlockValue(x, y + 3) == BlockValue(x, y))) {
+//                                                if (BlockValue(x, y + 1) == BlockValue(x, y) &&
+//                                                        BlockValue(x, y + 2) == BlockValue(x, y + 1)) {
+//                                                    tt.setToY(+220);
+//                                                } else {
+//                                                    tt.setToY(+330);
+//                                                }
+//                                            } else {
+//                                                if (BlockValue(x, y + 1) == BlockValue(x, y) &&
+//                                                        BlockValue(x, y + 2) == BlockValue(x, y)) {
+//                                                    tt.setToY(+110);
+//                                                } else {
+//                                                    tt.setToY(+220);
+//                                                }
+//                                            }
+//                                        } else if (y < 1 && (BlockValue(x, y + 3) == 0 ||
+//                                                BlockValue(x, y + 3) == BlockValue(x, y + 2))) {
+//                                            tt.setToY(+220);
+//                                        } else {
+//                                            tt.setToY(+110);
+//                                        }
+//                                    } else if (y < 2 && (BlockValue(x, y + 2) == BlockValue(x, y + 1) ||
+//                                            BlockValue(x, y + 2) == 0)) {
+//                                        if (y < 1 && (BlockValue(x, y + 3) == BlockValue(x, y + 1) ||
+//                                                BlockValue(x, y + 2) == 0)) {
+//                                            if (BlockValue(x, y + 1) != BlockValue(x, y)) {
+//                                                if (BlockValue(x, y + 3) == 0) {
+//                                                    tt.setToY(+220);
+//                                                } else {
+//                                                    tt.setToY(+110);
+//                                                }
+//                                            } else {
+//                                                tt.setToY(+220);
+//                                            }
+//                                        } else {
+//                                            if (y < 1 && (BlockValue(x, y + 3) == 0)) {
+//                                                tt.setToY(+220);
+//                                            } else {
+//                                                tt.setToY(+110);
+//                                            }
+//                                        }
+//                                    } else if (y < 1 && (BlockValue(x, y + 3) == BlockValue(x, y + 2) ||
+//                                            BlockValue(x, y + 3) == 0)) {
+//                                        tt.setToY(+110);
+//                                    }midView.getBlock(x, y).toFront();
+//                                    break;
+//                            case ("RIGHT"):
+//                                if (x < 3 && (BlockValue(x+1, y) == BlockValue(x, y) ||
+//                                        BlockValue(x+1,y) == 0)) {
+//                                    if (x < 2 && (BlockValue(x+2,y) == 0 ||
+//                                            BlockValue(x+2, y) == BlockValue(x, y))) {
+//                                        if (x < 1 && (BlockValue(x+3, y) == 0 ||
+//                                                BlockValue(x+3, y) == BlockValue(x, y))) {
+//                                            if (BlockValue(x+1, y) == BlockValue(x, y) &&
+//                                                    BlockValue(x+2, y) == BlockValue(x+1, y)) {
+//                                                tt.setToX(+220);
+//                                            } else {
+//                                                tt.setToX(+330);
+//                                            }
+//                                        } else {
+//                                            if (BlockValue(x+1, y) == BlockValue(x, y) &&
+//                                                    BlockValue(x+2, y) == BlockValue(x, y)) {
+//                                                tt.setToX(+110);
+//                                            } else {
+//                                                tt.setToX(+220);
+//                                            }
+//                                        }
+//                                    } else if (x < 1 && (BlockValue(x+3, y) == 0 ||
+//                                            BlockValue(x+3, y) == BlockValue(x+2, y))) {
+//                                        tt.setToX(+220);
+//                                    } else {
+//                                        tt.setToX(+110);
+//                                    }
+//                                } else if (x < 2 && (BlockValue(x+2, y) == BlockValue(x+1, y) ||
+//                                        BlockValue(x+2, y) == 0)) {
+//                                    if (x < 1 && (BlockValue(x+3, y) == BlockValue(x+1, y) ||
+//                                            BlockValue(x+2, y) == 0)) {
+//                                        if (BlockValue(x+1, y) != BlockValue(x, y)) {
+//                                            if (BlockValue(x+3, y) == 0) {
+//                                                tt.setToX(+220);
+//                                            } else {
+//                                                tt.setToX(+110);
+//                                            }
+//                                        } else {
+//                                            tt.setToX(+220);
+//                                        }
+//                                    } else {
+//                                        if (x < 1 && (BlockValue(x+3, y) == 0)) {
+//                                            tt.setToX(+220);
+//                                        } else {
+//                                            tt.setToX(+110);
+//                                        }
+//                                    }
+//                                } else if (x < 1 && (BlockValue(x+3, y) == BlockValue(x+2, y) ||
+//                                        BlockValue(x+3, y) == 0)) {
+//                                    tt.setToX(+110);
+//                                }midView.getBlock(x, y).toFront();
+//                                break;
+//                            case ("LEFT"):
+//                                if (x > 0 && (BlockValue(x-1, y) == BlockValue(x, y) ||
+//                                        BlockValue(x-1,y) == 0)) {
+//                                    if (x > 1 && (BlockValue(x-2,y) == 0 ||
+//                                            BlockValue(x-2, y) == BlockValue(x, y))) {
+//                                        if (x > 2 && (BlockValue(x-3, y) == 0 ||
+//                                                BlockValue(x-3, y) == BlockValue(x, y))) {
+//                                            if (BlockValue(x-1, y) == BlockValue(x, y) &&
+//                                                    BlockValue(x-2, y) == BlockValue(x-1, y)) {
+//                                                tt.setToX(-220);
+//                                            } else {
+//                                                tt.setToX(-330);
+//                                            }
+//                                        } else {
+//                                            if (BlockValue(x-1, y) == BlockValue(x, y) &&
+//                                                    BlockValue(x-2, y) == BlockValue(x, y)) {
+//                                                tt.setToX(-110);
+//                                            } else {
+//                                                tt.setToX(-220);
+//                                            }
+//                                        }
+//                                    } else if (x > 2 && (BlockValue(x-3, y) == 0 ||
+//                                            BlockValue(x-3, y) == BlockValue(x-2, y))) {
+//                                        tt.setToX(-220);
+//                                    } else {
+//                                        tt.setToX(-110);
+//                                    }
+//                                } else if (x > 1 && (BlockValue(x-2, y) == BlockValue(x-1, y) ||
+//                                        BlockValue(x-2, y) == 0)) {
+//                                    if (x > 2 && (BlockValue(x-3, y) == BlockValue(x-1, y) ||
+//                                            BlockValue(x-2, y) == 0)) {
+//                                        if (BlockValue(x-1, y) != BlockValue(x, y)) {
+//                                            if (BlockValue(x-3, y) == 0) {
+//                                                tt.setToX(-220);
+//                                            } else {
+//                                                tt.setToX(-110);
+//                                            }
+//                                        } else {
+//                                            tt.setToX(-220);
+//                                        }
+//                                    } else {
+//                                        if (x > 2 && (BlockValue(x-3, y) == 0)) {
+//                                            tt.setToX(-220);
+//                                        } else {
+//                                            tt.setToX(-110);
+//                                        }
+//                                    }
+//                                } else if (x > 2 && (BlockValue(x-3, y) == BlockValue(x-2, y) ||
+//                                        BlockValue(x-3, y) == 0)) {
+//                                    tt.setToX(-110);
+//                                }midView.getBlock(x, y).toFront();
+//                                break;
+//                        }
+//                    }
+//                }
+//                p.getChildren().addAll(tt);
+//            }
+//        }
         p.play();
         p.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
@@ -187,8 +432,8 @@ public class GamePresenter {
                 ParallelTransition p = new ParallelTransition();
                 for (int i = 0; i < 4; i++) {
                     for (int j = 0; j < 4; j++) {
-                        TranslateTransition tt = new TranslateTransition(Duration.millis(0.1), midView.getBlock(i,j));
-                        if (midView.getBlock(i,j).getValue() != 0) {
+                        TranslateTransition tt = new TranslateTransition(Duration.millis(0.1), midView.getBlock(i, j));
+                        if (midView.getBlock(i, j).getValue() != 0) {
                             tt.setToX(0);
                             tt.setToY(0);
                         }

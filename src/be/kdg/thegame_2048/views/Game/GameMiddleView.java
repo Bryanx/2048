@@ -62,7 +62,7 @@ class GameMiddleView extends BorderPane {
     }
 
     private void popIn(StackPane block) {
-        ScaleTransition st = new ScaleTransition(Duration.millis(250), block);
+        ScaleTransition st = new ScaleTransition(Duration.millis(500), block);
         st.setFromX(0.0);
         st.setFromY(0.0);
         st.setToX(1.0);
