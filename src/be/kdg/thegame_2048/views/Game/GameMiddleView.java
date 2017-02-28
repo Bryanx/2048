@@ -1,15 +1,10 @@
 package be.kdg.thegame_2048.views.Game;
 
 import javafx.animation.*;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import jdk.nashorn.internal.ir.Block;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
@@ -67,7 +62,7 @@ class GameMiddleView extends BorderPane {
     }
 
     private void popIn(StackPane block) {
-        ScaleTransition st = new ScaleTransition(Duration.millis(200), block);
+        ScaleTransition st = new ScaleTransition(Duration.millis(250), block);
         st.setFromX(0.0);
         st.setFromY(0.0);
         st.setToX(1.0);
@@ -78,6 +73,11 @@ class GameMiddleView extends BorderPane {
     BlockView getBlock(int x, int y) {
         return blocks[x][y];
     }
+
+    int getBValue(int x, int y) {
+        return blocks[x][y].getValue();
+    }
+
 
     void resetGrid() {
         for (int i = 0; i < 4; i++) {
