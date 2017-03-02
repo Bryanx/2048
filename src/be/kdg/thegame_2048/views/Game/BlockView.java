@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
  */
 
 class BlockView extends StackPane {
+    private static final int BLOCK_SIZE = 100;
     private int value;
     private Rectangle rect;
     private Text number;
@@ -25,7 +26,7 @@ class BlockView extends StackPane {
     }
 
     private void initialiseNodes() {
-        this.rect = new Rectangle(100,100);
+        this.rect = new Rectangle(BLOCK_SIZE,BLOCK_SIZE);
         this.number = new Text();
     }
 
