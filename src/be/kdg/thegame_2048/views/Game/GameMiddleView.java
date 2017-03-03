@@ -53,22 +53,12 @@ class GameMiddleView extends BorderPane {
         this.setCenter(new BorderPane(playground));
     }
 
-    void putBlockOnGrid(int value, int x, int y, boolean animate) {
+    void putBlockOnGrid(int value, int x, int y) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 blocks[y][x].setValue(value);
             }
         }
-        if (animate) popIn(blocks[y][x]);
-    }
-
-    private void popIn(StackPane block) {
-        ScaleTransition st = new ScaleTransition(Duration.millis(100), block);
-        st.setFromX(0.0);
-        st.setFromY(0.0);
-        st.setToX(1.0);
-        st.setToY(1.0);
-        st.play();
     }
 
     BlockView getBlock(int x, int y) {

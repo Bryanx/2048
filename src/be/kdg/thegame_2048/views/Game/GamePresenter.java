@@ -85,20 +85,24 @@ public class GamePresenter {
         view.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case DOWN:
-                        updateViewBlocks(Game.Direction.DOWN);
-                        animationView.moveDown();break;
-                    case UP:
-                        updateViewBlocks(Game.Direction.TOP);
-                        animationView.moveUp();break;
-                    case RIGHT:
-                        updateViewBlocks(Game.Direction.RIGHT);
-                        animationView.moveRight();break;
-                    case LEFT:
-                        updateViewBlocks(Game.Direction.LEFT);
-                        animationView.moveLeft();break;
-                    default:event.consume();
+                try {
+                    switch (event.getCode()) {
+                        case DOWN:
+                            updateViewBlocks(Game.Direction.DOWN);
+                            animationView.moveDown();break;
+                        case UP:
+                            updateViewBlocks(Game.Direction.TOP);
+                            animationView.moveUp();break;
+                        case RIGHT:
+                            updateViewBlocks(Game.Direction.RIGHT);
+                            animationView.moveRight();break;
+                        case LEFT:
+                            updateViewBlocks(Game.Direction.LEFT);
+                            animationView.moveLeft();break;
+                        default:event.consume();
+                    }
+                } catch (IllegalArgumentException e) {
+                    //TODO: write to log
                 }
                 animationView.getParallelTransition().play();
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
@@ -117,6 +121,11 @@ public class GamePresenter {
         int randomblockX = modelGame.getCoordRandomBlockX();
         int randomblockY = modelGame.getCoordRandomBlockY();
 
+        if (!firstRun && !isMovable()) {
+            animationView.popIn(randomblockY, randomblockX);
+            midView.putBlockOnGrid(2, randomblockX, randomblockY);
+        }
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int value;
@@ -126,17 +135,11 @@ public class GamePresenter {
                     value = modelGame.getPieceValue(i, j);
                 }
                 if (firstRun) {
-                    midView.putBlockOnGrid(value, i, j, true);
+                    midView.putBlockOnGrid(value, i, j);
+                    animationView.popIn(i, j);
                 } else if (!(i == randomblockX && j == randomblockY)) {
-                    midView.putBlockOnGrid(value, i, j, false);
+                    midView.putBlockOnGrid(value, i, j);
                 }
-            }
-        }
-        if (!firstRun) {
-            if (!isMovable()) {
-                midView.putBlockOnGrid(2, randomblockX, randomblockY, true);
-            } else {
-                midView.putBlockOnGrid(2, randomblockX, randomblockY, false);
             }
         }
         this.firstRun = false;

@@ -1,7 +1,9 @@
 package be.kdg.thegame_2048.views.Game;
 
 import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +13,16 @@ import java.util.List;
  * @version 1.0 02-03-17 06:18
  */
 class AnimationView {
-    private static final Duration DURATION = Duration.millis(100);
+    private static final Duration MOVE_DURATION = Duration.millis(100);
+    private static final Duration POPIN_DURATION = Duration.millis(200);
+    private static final Duration POPOUT_DURATION = Duration.millis(100);
     private int increment = 110;
-    private ParallelTransition parallelTransition;
-    private List<TranslateTransition> tt;
     private GameMiddleView midView;
     private GamePresenter gamePresenter;
+
+    private ParallelTransition parallelTransition;
+    private List<TranslateTransition> translateTransitions;
+    private ScaleTransition scaleTransition;
 
     AnimationView(GameMiddleView midView, GamePresenter gamePresenter) {
         this.gamePresenter = gamePresenter;
@@ -26,9 +32,9 @@ class AnimationView {
 
     private void initialiseNodes() {
         this.parallelTransition = new ParallelTransition();
-        this.tt = new ArrayList<>();
+        this.translateTransitions = new ArrayList<>();
         for (int i = 0; i < 16; i++) {
-            this.tt.add(new TranslateTransition(DURATION));
+            this.translateTransitions.add(new TranslateTransition(MOVE_DURATION));
         }
     }
 
@@ -55,7 +61,7 @@ class AnimationView {
                             } else {
                                 increment *= 2;
                             }
-                        } else if (y > 2 && (BlockValue(x, y - 3) == 0 || BlockValue(x, y - 3) == BlockValue(x, y - 2))) {
+                        } else if (y > 2 && (BlockValue(x, y - 3) == BlockValue(x, y - 2))) {
                             increment *= 2;
                         }
                     } else if (y > 1 && (BlockValue(x, y - 2) == 0 || BlockValue(x, y - 2) == BlockValue(x, y - 1))) {
@@ -67,7 +73,6 @@ class AnimationView {
                     } else {
                         increment = 0;
                     }
-                    System.out.println(-increment);
                     gettTransitions(index).setToY(-increment);
                     midView.getBlock(x, y).toFront();
                     parallelTransition.getChildren().addAll(gettTransitions(index));
@@ -100,7 +105,7 @@ class AnimationView {
                             } else {
                                 increment *= 2;
                             }
-                        } else if (y < 1 && (BlockValue(x, y + 3) == 0 || BlockValue(x, y + 3) == BlockValue(x, y + 2))) {
+                        } else if (y < 1 && BlockValue(x, y + 3) == BlockValue(x, y + 2)) {
                             increment *= 2;
                         }
                     } else if (y < 2 && (BlockValue(x, y + 2) == 0 || BlockValue(x, y + 2) == BlockValue(x, y + 1))) {
@@ -144,7 +149,7 @@ class AnimationView {
                             } else {
                                 increment *= 2;
                             }
-                        } else if (x < 1 && (BlockValue(x + 3, y) == 0 || BlockValue(x + 3, y) == BlockValue(x + 2, y))) {
+                        } else if (x < 1 && BlockValue(x + 3, y) == BlockValue(x + 2, y)) {
                             increment *= 2;
                         }
                     } else if (x < 2 && (BlockValue(x + 2, y) == 0 || BlockValue(x + 2, y) == BlockValue(x + 1, y))) {
@@ -188,7 +193,7 @@ class AnimationView {
                             } else {
                                 increment *= 2;
                             }
-                        } else if (x > 2 && (BlockValue(x-3, y) == 0 || BlockValue(x-3, y) == BlockValue(x-2, y))) {
+                        } else if (x > 2 && BlockValue(x-3, y) == BlockValue(x-2, y)) {
                             increment *= 2;
                         }
                     } else if (x > 1 && (BlockValue(x-2, y) == 0 || BlockValue(x-2, y) == BlockValue(x-1, y))) {
@@ -207,6 +212,26 @@ class AnimationView {
                 }
             }
         }
+    }
+
+    void popIn(int x, int y) {
+        this.scaleTransition = new ScaleTransition(POPIN_DURATION, midView.getBlock(x, y));
+        scaleTransition.setFromX(0.0);
+        scaleTransition.setFromY(0.0);
+        scaleTransition.setToX(1.0);
+        scaleTransition.setToY(1.0);
+        scaleTransition.play();
+    }
+
+    void popOut(int x, int y) {
+        this.scaleTransition = new ScaleTransition(POPOUT_DURATION, midView.getBlock(x, y));
+        scaleTransition.setFromX(1.0);
+        scaleTransition.setFromY(1.0);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setToY(1.2);
+        scaleTransition.setCycleCount(2);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
     }
 
     private int BlockValue(int x, int y) {
@@ -231,14 +256,14 @@ class AnimationView {
         }
         p.play();
 
-        this.parallelTransition.getChildren().removeAll(tt);
-        this.tt.clear();
+        this.parallelTransition.getChildren().removeAll(translateTransitions);
+        this.translateTransitions.clear();
         for (int i = 0; i < 16; i++) {
-            this.tt.add(new TranslateTransition(DURATION));
+            this.translateTransitions.add(new TranslateTransition(MOVE_DURATION));
         }
     }
 
     private TranslateTransition gettTransitions(int i) {
-        return tt.get(i);
+        return translateTransitions.get(i);
     }
 }
