@@ -12,8 +12,10 @@ import java.util.*;
  */
 public class DataReaderWriter {
     //ATTRIBUTES
+    //None.
 
     //CONSTRUCTORS
+    //None.
 
     //METHODS
 
@@ -49,7 +51,8 @@ public class DataReaderWriter {
                 info = reader.readLine();
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong, contact support!");
+            //TODO: implement proper error handling
+            e.printStackTrace();
         }
         return playerList;
     }
@@ -92,7 +95,25 @@ public class DataReaderWriter {
             formatter.format(String.valueOf(randomEncriptionCode));
             formatter.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            //TODO: implement proper error handling
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Writes all error messages to a text file
+     **/
+    public static void writeToLog(String message) {
+        Path playerData = Paths.get("playerdata");
+        Path errorMessage = playerData.resolve("error.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()))) {
+            if (!Files.exists(playerData)) Files.createDirectory(playerData);
+            if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
+
+            writer.write(message);
+        } catch (IOException e) {
+            //TODO: implement proper error handling
+            e.printStackTrace();
         }
     }
 }

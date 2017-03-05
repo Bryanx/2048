@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.Game;
 
+import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
@@ -102,7 +103,9 @@ public class GamePresenter {
                         default:event.consume();
                     }
                 } catch (IllegalArgumentException e) {
-                    //TODO: write to log
+                    System.out.println("Something went wrong, contact support!");
+                    DataReaderWriter.writeToLog(e.getMessage());
+                    System.exit(1);
                 }
                 animationView.getParallelTransition().play();
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
