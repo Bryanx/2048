@@ -9,13 +9,9 @@ import be.kdg.thegame_2048.views.Result.ResultPresenter;
 import be.kdg.thegame_2048.views.Result.ResultView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
 
 /**
  * @author Jarne Van Aerde
@@ -103,9 +99,7 @@ public class GamePresenter {
                         default:event.consume();
                     }
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Something went wrong, contact support!");
                     DataReaderWriter.writeToLog(e.getMessage());
-                    System.exit(1);
                 }
                 animationView.getParallelTransition().play();
                 modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());

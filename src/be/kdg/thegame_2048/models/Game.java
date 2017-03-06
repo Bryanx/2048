@@ -58,17 +58,10 @@ public final class Game {
     public void runGameCycle(Direction direction) {
         this.lastMove = playground.toString();
         switch (direction) {
-            case TOP:
-                playground.moveBlocksTop();
-                break;
-            case DOWN:
-                playground.moveBlocksBottom();
-                break;
-            case LEFT:
-                playground.moveBlocksLeft();
-                break;
-            case RIGHT:
-                playground.moveBlocksRight();
+            case TOP:playground.moveBlocksTop();break;
+            case DOWN:playground.moveBlocksBottom();break;
+            case LEFT:playground.moveBlocksLeft();break;
+            case RIGHT:playground.moveBlocksRight();
         }
         this.currentMove = playground.toString();
         if (!lastMove.equals(currentMove)) {

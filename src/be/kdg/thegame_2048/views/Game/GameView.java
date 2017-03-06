@@ -1,9 +1,7 @@
 package be.kdg.thegame_2048.views.Game;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
 /**

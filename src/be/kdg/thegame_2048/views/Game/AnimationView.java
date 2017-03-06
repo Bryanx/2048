@@ -3,7 +3,6 @@ package be.kdg.thegame_2048.views.Game;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -214,6 +213,7 @@ class AnimationView {
         }
     }
 
+    //popIn animation for spawning blocks
     void popIn(int x, int y) {
         this.scaleTransition = new ScaleTransition(POPIN_DURATION, midView.getBlock(x, y));
         scaleTransition.setFromX(0.0);
@@ -223,6 +223,7 @@ class AnimationView {
         scaleTransition.play();
     }
 
+    //popOut animation for merged blocks
     void popOut(int x, int y) {
         this.scaleTransition = new ScaleTransition(POPOUT_DURATION, midView.getBlock(x, y));
         scaleTransition.setFromX(1.0);

@@ -23,8 +23,8 @@ public class DataReaderWriter {
      * Decription was used
      **/
     public static List<Player> loadPlayerData() {
-        Path data = Paths.get("playerdata" + File.separator + "data.txt");
-        Path decoderData = Paths.get("playerdata" + File.separator + "encripted.txt");
+        Path data = Paths.get("data" + File.separator + "data.txt");
+        Path decoderData = Paths.get("data" + File.separator + "encripted.txt");
         List<Player> playerList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))) {
@@ -61,7 +61,7 @@ public class DataReaderWriter {
      * Incription was used
      **/
     public static void savePlayerData(List<Player> playerList) {
-        Path playerdata = Paths.get("playerdata");
+        Path playerdata = Paths.get("data");
         Path data = playerdata.resolve("data.txt");
         Path encription = playerdata.resolve("encripted.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(data.toFile()))) {
@@ -104,7 +104,7 @@ public class DataReaderWriter {
      * Writes all error messages to a text file
      **/
     public static void writeToLog(String message) {
-        Path playerData = Paths.get("playerdata");
+        Path playerData = Paths.get("data");
         Path errorMessage = playerData.resolve("error.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()))) {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
