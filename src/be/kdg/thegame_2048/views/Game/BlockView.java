@@ -45,23 +45,32 @@ class BlockView extends StackPane {
             number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 55));
             number.setFill(Color.web("#776e65"));
         }
-        if (value > 4) number.setFill(Color.web("#f9f6f2"));
-        if (value > 64) number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 43));
-        if (value > 512) number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 34));
+        if (value >= 8) number.setFill(Color.web("#f9f6f2"));
+        if (value >= 128) number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 43));
+        if (value >= 1024) number.setFont(Font.font("Clear Sans", FontWeight.BOLD, 34));
 
-        switch (value) {
-            case 0:rect.setFill(Color.web("#cdc1b4"));break;
-            case 2:rect.setFill(Color.web("#eee4da"));break;
-            case 4:rect.setFill(Color.web("#ede0c8"));break;
-            case 8:rect.setFill(Color.web("#f2b179"));break;
-            case 16:rect.setFill(Color.web("#f59563"));break;
-            case 32:rect.setFill(Color.web("#f67c5f"));break;
-            case 64:rect.setFill(Color.web("#f65e3b"));break;
-            case 128:rect.setFill(Color.web("#edcf72"));break;
-            case 256:rect.setFill(Color.web("#edcc61"));break;
-            case 512:rect.setFill(Color.web("#f1c85d"));break;
-            case 1024:rect.setFill(Color.web("#edc53f"));break;
-            case 2048:rect.setFill(Color.web("#edc22e"));break;
+        if (value >= 2048) {
+            rect.setFill(Color.web("#edc22e"));
+        } else if (value >= 1024) {
+            rect.setFill(Color.web("#edc53f"));
+        } else if (value >= 512) {
+            rect.setFill(Color.web("#f1c85d"));
+        } else if (value >= 256) {
+            rect.setFill(Color.web("#edcc61"));
+        } else if (value >= 128) {
+            rect.setFill(Color.web("#edcf72"));
+        } else if (value >= 64) {
+            rect.setFill(Color.web("#f65e3b"));
+        } else if (value >= 32) {
+            rect.setFill(Color.web("#f67c5f"));
+        } else if (value >= 16) {
+            rect.setFill(Color.web("#f59563"));
+        } else if (value >= 8) {
+            rect.setFill(Color.web("#f2b179"));
+        } else if (value >= 4) {
+            rect.setFill(Color.web("#ede0c8"));
+        } else if (value > 0) {
+            rect.setFill(Color.web("#eee4da"));
         }
     }
 

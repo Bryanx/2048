@@ -40,14 +40,14 @@ final class Playground {
         this.sections = sections;
     }
 
-    void addRandomBlock() {
+    void addRandomBlock(int value) {
         if (playGroundFull()) return;
         boolean blockFound = false;
         while (!blockFound) {
             int x = blockGen.nextInt(NUMBER_OF_H_SECTIONS);
             int y = blockGen.nextInt(NUMBER_OF_V_SECTIONS);
             if (!this.sections[x][y].hasBlock()) {
-                this.sections[x][y].putBlock(new Block(2));
+                this.sections[x][y].putBlock(new Block(value));
                 this.coordRandomBlockX = x;
                 this.coordRandomBlockY = y;
                 blockFound = true;

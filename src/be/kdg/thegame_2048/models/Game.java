@@ -15,6 +15,7 @@ public final class Game {
     private Playground playground;
     private String lastMove;
     private String currentMove;
+    private int startValue = 9;
 
     //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
@@ -23,27 +24,27 @@ public final class Game {
         this.manager = playerManager;
 
         playground.initialiseSections();
-        this.playground.addRandomBlock();
-        this.playground.addRandomBlock();
+        this.playground.addRandomBlock(startValue);
+        this.playground.addRandomBlock(startValue);
 
     }
 
-    /*private Section[][] rebuildGame(String playgroundString) {
-        String fields[] = playgroundString.split(" ");
-        Section[][] sections = new Section[4][4];
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                Section section = new Section();
-                if (!fields[(i*4)+j].contains("E")) {
-                    section.putBlock(new Block(Integer.parseInt(fields[(i*4)+j])));
-                }
-                sections[i][j] = section;
-                System.out.print(section.toString() + " ");
-            }
-        }
-        return sections;
-    }*/
+//    private Section[][] rebuildGame(String playgroundString) {
+//        String fields[] = playgroundString.split(" ");
+//        Section[][] sections = new Section[4][4];
+//
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                Section section = new Section();
+//                if (!fields[(i*4)+j].contains("E")) {
+//                    section.putBlock(new Block(Integer.parseInt(fields[(i*4)+j])));
+//                }
+//                sections[i][j] = section;
+//                System.out.print(section.toString() + " ");
+//            }
+//        }
+//        return sections;
+//    }
 
     public int getCoordRandomBlockX() {
         return playground.getCoordRandomBlockX();
@@ -65,7 +66,7 @@ public final class Game {
         }
         this.currentMove = playground.toString();
         if (!lastMove.equals(currentMove)) {
-            playground.addRandomBlock();
+            playground.addRandomBlock(startValue);
         }
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
@@ -130,5 +131,9 @@ public final class Game {
 
     public String getCurrentMove() {
         return currentMove;
+    }
+
+    public int getStartValue() {
+        return startValue;
     }
 }

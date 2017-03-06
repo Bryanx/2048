@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.Game;
 
+import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -34,6 +35,7 @@ class AnimationView {
         this.translateTransitions = new ArrayList<>();
         for (int i = 0; i < 16; i++) {
             this.translateTransitions.add(new TranslateTransition(MOVE_DURATION));
+            this.translateTransitions.get(i).setInterpolator(Interpolator.EASE_BOTH);
         }
     }
 

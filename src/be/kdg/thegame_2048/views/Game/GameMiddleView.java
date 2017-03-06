@@ -1,9 +1,11 @@
 package be.kdg.thegame_2048.views.Game;
 
 import javafx.animation.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**

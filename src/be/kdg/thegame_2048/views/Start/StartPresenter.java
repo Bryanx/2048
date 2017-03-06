@@ -7,6 +7,8 @@ import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerPresenter;
 import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerView;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
+import be.kdg.thegame_2048.views.Settings.SettingsPresenter;
+import be.kdg.thegame_2048.views.Settings.SettingsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -51,6 +53,14 @@ public class StartPresenter {
                 AboutView aboutView = new AboutView();
                 AboutPresenter presenter = new AboutPresenter(model, aboutView);
                 view.getScene().setRoot(aboutView);
+            }
+        });
+        view.getBtnSettings().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SettingsView settingsView = new SettingsView();
+                new SettingsPresenter(model, settingsView);
+                view.getScene().setRoot(settingsView);
             }
         });
     }

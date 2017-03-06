@@ -16,9 +16,11 @@ public final class StartView extends BorderPane {
     private static final ImageView IMG_UFO = new ImageView("be/kdg/thegame_2048/views/img/ufo.png");
     private static final ImageView IMG_MAN = new ImageView("be/kdg/thegame_2048/views/img/user.png");
     private static final ImageView IMG_JOYSTICK = new ImageView("be/kdg/thegame_2048/views/img/about.png");
+    private static final ImageView IMG_SETTINGS = new ImageView("be/kdg/thegame_2048/views/img/settings.png");
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
     private Button btnAbout;
+    private Button btnSettings;
 
     public StartView() {
         initialiseNodes();
@@ -35,6 +37,9 @@ public final class StartView extends BorderPane {
         //Creates the About button and adds an icon:
         this.btnAbout = new Button("How to play", IMG_JOYSTICK);
 
+        //Creates the Settings button and adds an icon:
+        this.btnSettings = new Button("Settings", IMG_SETTINGS);
+
         addStyles();
     }
 
@@ -49,6 +54,7 @@ public final class StartView extends BorderPane {
         middle.add(btnNewPlayer, 0, 0);
         middle.add(btnExistingPlayer, 0, 1);
         middle.add(btnAbout, 0, 2);
+        middle.add(btnSettings, 0, 3);
         middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
         this.setPadding(new Insets(OVERALL_PADDING));
@@ -58,6 +64,7 @@ public final class StartView extends BorderPane {
         btnNewPlayer.getStyleClass().add("btnStartView");
         btnExistingPlayer.getStyleClass().add("btnStartView");
         btnAbout.getStyleClass().add("btnStartView");
+        btnSettings.getStyleClass().add("btnStartView");
     }
 
     Button getBtnNewPlayer() {
@@ -70,5 +77,9 @@ public final class StartView extends BorderPane {
 
     Button getBtnAbout() {
         return btnAbout;
+    }
+
+    Button getBtnSettings() {
+        return btnSettings;
     }
 }
