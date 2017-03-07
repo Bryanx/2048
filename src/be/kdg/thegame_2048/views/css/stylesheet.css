@@ -46,6 +46,11 @@ BG darker:
     -fx-font-size: 16pt;
     -fx-text-fill: white;
 }
+.lblScoreAnimation {
+    -fx-font-size: 16pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: gray;
+}
 
 .btnHighScores {
     -fx-background-color: none;

@@ -6,8 +6,8 @@ package be.kdg.thegame_2048.models;
  */
 public final class Game {
     /**
-     * The Game class puts everyting together. It represents the game in it's whole form.
-     * The class has access to a lot of classes
+     * The Game class puts everyting together. It represents the game as a whole.
+     * This has access to most of the other model classes.
      **/
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
@@ -95,7 +95,7 @@ public final class Game {
 
     /**
      * Decides if the current player has won the game.
-     * After he won the game, he can choose to continue or to stop playing.
+     * After the player has won the game, he can choose to continue or to stop playing.
      **/
     public boolean hasWon() {
         Section[][] sections = playground.getSections();
@@ -111,7 +111,7 @@ public final class Game {
 
     /**
      * Decides if the current player has lost the game.
-     * If the player loses the game, than he has no other chose than to start over again.
+     * If the player loses the game, than he has no other choice than to restart.
      **/
     public boolean hasLost() {
         if (!playground.playGroundFull()) return false;

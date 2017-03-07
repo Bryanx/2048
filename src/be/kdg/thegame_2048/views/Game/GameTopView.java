@@ -66,6 +66,7 @@ class GameTopView extends BorderPane {
         lblBestScoreInput.getStyleClass().add("inGameScore");
         lblScore.getStyleClass().add("inGameScore");
         lblScoreInput.getStyleClass().add("inGameScore");
+        lblScoreChange.getStyleClass().add("lblScoreAnimation");
     }
 
     Label getLblBestScoreInput() {

@@ -37,16 +37,16 @@ public class StartPresenter {
     //METHODS
     private void addEventHandlers() {
         //FADE IN EFFECTS
-        view.getBtnNewPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnNewPlayer());});
-        view.getBtnExistingPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnExistingPlayer());});
-        view.getBtnAbout().setOnMouseEntered(event -> {fadeIn(view.getBtnAbout());});
-        view.getBtnSettings().setOnMouseEntered(event -> {fadeIn(view.getBtnSettings());});
+        view.getBtnNewPlayer().setOnMouseEntered(event -> {scaleIn(view.getBtnNewPlayer());});
+        view.getBtnExistingPlayer().setOnMouseEntered(event -> {scaleIn(view.getBtnExistingPlayer());});
+        view.getBtnAbout().setOnMouseEntered(event -> {scaleIn(view.getBtnAbout());});
+        view.getBtnSettings().setOnMouseEntered(event -> {scaleIn(view.getBtnSettings());});
 
         //SCALE OUT EFFECTS
-        view.getBtnNewPlayer().setOnMouseExited(event -> {fadeOut(view.getBtnNewPlayer());});
-        view.getBtnExistingPlayer().setOnMouseExited(event -> {fadeOut(view.getBtnExistingPlayer());});
-        view.getBtnAbout().setOnMouseExited(event -> {fadeOut(view.getBtnAbout());});
-        view.getBtnSettings().setOnMouseExited(event -> {fadeOut(view.getBtnSettings());});
+        view.getBtnNewPlayer().setOnMouseExited(event -> {scaleOut(view.getBtnNewPlayer());});
+        view.getBtnExistingPlayer().setOnMouseExited(event -> {scaleOut(view.getBtnExistingPlayer());});
+        view.getBtnAbout().setOnMouseExited(event -> {scaleOut(view.getBtnAbout());});
+        view.getBtnSettings().setOnMouseExited(event -> {scaleOut(view.getBtnSettings());});
 
         view.getBtnNewPlayer().setOnAction(event -> {
             NewPlayerView playerView = new NewPlayerView();
