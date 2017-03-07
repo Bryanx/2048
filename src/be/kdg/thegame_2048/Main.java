@@ -19,8 +19,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         //MAKING CLASSES
+        DataReaderWriter drw = new DataReaderWriter();
         PlayerManager model = new PlayerManager();
-        model.getPlayerList().addAll(DataReaderWriter.loadPlayerData());
+        model.getPlayerList().addAll(drw.loadPlayerData());
         StartView view = new StartView();
         StartPresenter presenter = new StartPresenter(model, view);
 
@@ -37,13 +38,11 @@ public class Main extends Application {
         primaryStage.setMinWidth(550);
         primaryStage.setTitle("2048");
         primaryStage.show();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();
-                System.out.println(model.getPlayerList().toString());
-                DataReaderWriter.savePlayerData(model.getPlayerList());
-            }
+        primaryStage.setOnCloseRequest(event -> {
+            if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();
+            System.out.println(model.getPlayerList().toString());
+            drw.savePlayerData(model.getPlayerList());
+            drw.writeToLog();
         });
     }
 

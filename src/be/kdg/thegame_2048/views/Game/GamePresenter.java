@@ -97,7 +97,7 @@ public class GamePresenter {
                         event.consume();
                 }
             } catch (IllegalArgumentException e) {
-                DataReaderWriter.writeToLog(e.getMessage());
+                //TODO: IMPLEMENT PROPER ERROR HANDLING.
             }
             animationView.getParallelTransition().play();
             modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
@@ -136,9 +136,6 @@ public class GamePresenter {
         this.firstRun = false;
     }
 
-    /**
-     * Zo laten staan AUB
-     **/
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
         int score = modelGame.getScore().getScore();

@@ -49,6 +49,8 @@ public class ExistingPlayerPresenter {
             model.setCurrentPlayer(name);
             updateScene();
         } else {
+            IllegalArgumentException iae = new IllegalArgumentException("Name was already used.");
+            //TODO: IMPLEMENT PROPER ERROR HANDLING.
             view.getNameDoesntExistError().setText("Player doesn't exist.");
             view.getNameDoesntExistError().setVisible(true);
         }

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -12,18 +13,20 @@ import java.util.*;
  * @version 1.0 24/02/2017 10:08
  */
 public class DataReaderWriter {
-    //ATTRIBUTES
-    //None.
-
-    //CONSTRUCTORS
-    //None.
-
-    //METHODS
+    private String log = "";
 
     /**
-     * Decription was used
+     * Used to store all the exceptions in one string.
      **/
-    public static List<Player> loadPlayerData() {
+    public void setLog(String exception) {
+        String logMessage = LocalTime.now() + "\n" + exception + "\n\n";
+        this.log = logMessage;
+    }
+
+    /**
+     * Decription was used while loading the playerdata.
+     **/
+    public List<Player> loadPlayerData() {
         Path data = Paths.get("data" + File.separator + "playerdata.txt");
         Path decoderData = Paths.get("data" + File.separator + "encripted.txt");
         List<Player> playerList = new ArrayList<>();
@@ -52,16 +55,16 @@ public class DataReaderWriter {
                 info = reader.readLine();
             }
         } catch (IOException e) {
-            //TODO: implement proper error handling
-            e.printStackTrace();
+            setLog(e.getMessage() + "\n");
+            //TODO: give the user feedback
         }
         return playerList;
     }
 
     /**
-     * Incription was used
+     * Incription was used while writing the playerdata.
      **/
-    public static void savePlayerData(List<Player> playerList) {
+    public void savePlayerData(List<Player> playerList) {
         Path playerdata = Paths.get("data");
         Path data = playerdata.resolve("playerdata.txt");
         Path encription = playerdata.resolve("encripted.txt");
@@ -96,27 +99,25 @@ public class DataReaderWriter {
             formatter.format(String.valueOf(randomEncriptionCode));
             formatter.close();
         } catch (IOException e) {
-            //TODO: implement proper error handling
-            e.printStackTrace();
+            setLog(e.getMessage());
+            //TODO: give the user feedback
         }
     }
 
     /**
      * Writes all error messages to a text file
      **/
-    public static void writeToLog(String message) {
+    public void writeToLog() {
         Path playerData = Paths.get("data");
         Path errorMessage = playerData.resolve("error.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()))) {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
-            String log = LocalDateTime.now().getHour() + "\n" + message;
-
-            writer.write(log);
+            writer.append(log);
         } catch (IOException e) {
-            //TODO: implement proper error handling
-            e.printStackTrace();
+            System.out.println("Fundamental problem to the log-IO. Contact support!");
+            System.exit(1);
         }
     }
 }

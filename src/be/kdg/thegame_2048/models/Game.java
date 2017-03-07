@@ -5,7 +5,6 @@ package be.kdg.thegame_2048.models;
  * @version 1.0 12/02/2017 19:40
  */
 public final class Game {
-    //ATTRIBUTES
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
     }
@@ -18,7 +17,6 @@ public final class Game {
     private String lastMove;
     private String currentMove;
 
-    //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
         this.score = new Score();
         this.playground = new Playground(this.score);
@@ -48,23 +46,37 @@ public final class Game {
 //        return sections;
 //    }
 
+    /**
+     * Gives back the x-coordinate of the last block that was put on the playground.
+     **/
     public int getCoordRandomBlockX() {
         return playground.getCoordRandomBlockX();
     }
 
+    /**
+     * Gives back the x-coordinate of the last block that was put on the playground.
+     **/
     public int getCoordRandomBlockY() {
         return playground.getCoordRandomBlockY();
     }
 
-
-    //METHODS
+    /**
+     * Runs one cycle of the game on the logical level.
+     **/
     public void runGameCycle(Direction direction) {
         this.lastMove = playground.toString();
         switch (direction) {
-            case TOP:playground.moveBlocksTop();break;
-            case DOWN:playground.moveBlocksBottom();break;
-            case LEFT:playground.moveBlocksLeft();break;
-            case RIGHT:playground.moveBlocksRight();
+            case TOP:
+                playground.moveBlocksTop();
+                break;
+            case DOWN:
+                playground.moveBlocksBottom();
+                break;
+            case LEFT:
+                playground.moveBlocksLeft();
+                break;
+            case RIGHT:
+                playground.moveBlocksRight();
         }
         this.currentMove = playground.toString();
         if (!lastMove.equals(currentMove)) {
@@ -73,6 +85,10 @@ public final class Game {
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
 
+    /**
+     * Decides if the current player has won the game.
+     * After he won the game, he can choose to continue or to stop playing.
+     **/
     public boolean hasWon() {
         Section[][] sections = playground.getSections();
         for (int i = 0; i < 4; i++) {
@@ -85,6 +101,10 @@ public final class Game {
         return false;
     }
 
+    /**
+     * Decides if the current player has lost the game.
+     * If the player loses the game, than he has no other chose than to start over again.
+     **/
     public boolean hasLost() {
         if (!playground.playGroundFull()) return false;
         Section[][] sections = playground.getSections();
@@ -140,7 +160,8 @@ public final class Game {
         int highestValue = 2;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (sections[i][j].getBlock().getValue() > highestValue) highestValue = sections[i][j].getBlock().getValue();
+                if (sections[i][j].getBlock().getValue() > highestValue)
+                    highestValue = sections[i][j].getBlock().getValue();
             }
         }
         return highestValue;
