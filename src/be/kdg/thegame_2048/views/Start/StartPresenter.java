@@ -36,7 +36,7 @@ public class StartPresenter {
 
     //METHODS
     private void addEventHandlers() {
-        //SCALE IN EFFECTS
+        //FADE IN EFFECTS
         view.getBtnNewPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnNewPlayer());});
         view.getBtnExistingPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnExistingPlayer());});
         view.getBtnAbout().setOnMouseEntered(event -> {fadeIn(view.getBtnAbout());});
@@ -70,22 +70,22 @@ public class StartPresenter {
         });
     }
 
-    private void fadeIn(Button button) {
+    private void scaleIn(Button button) {
         ScaleTransition st = new ScaleTransition();
         st.setNode(button);
         st.setFromX(1);
         st.setFromY(1);
-        st.setToX(1.2);
-        st.setToY(1.2);
+        st.setToX(1.15);
+        st.setToY(1.15);
         st.setDuration(Duration.millis(100));
         st.play();
     }
 
-    private void fadeOut(Button button) {
+    private void scaleOut(Button button) {
         ScaleTransition st = new ScaleTransition();
         st.setNode(button);
-        st.setFromX(1.2);
-        st.setFromY(1.2);
+        st.setFromX(1.15);
+        st.setFromY(1.15);
         st.setToX(1);
         st.setToY(1);
         st.setDuration(Duration.millis(100));

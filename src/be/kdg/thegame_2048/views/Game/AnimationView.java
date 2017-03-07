@@ -1,6 +1,7 @@
 package be.kdg.thegame_2048.views.Game;
 
 import javafx.animation.*;
+import javafx.scene.control.Label;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,20 +11,24 @@ import java.util.List;
  * @version 1.0 02-03-17 06:18
  */
 class AnimationView {
+    private static final Duration SCORE_MOVE_DURATION = Duration.millis(1000);
     private static final Duration MOVE_DURATION = Duration.millis(100);
     private static final Duration POPIN_DURATION = Duration.millis(200);
     private static final Duration POPOUT_DURATION = Duration.millis(100);
     private int increment = 110;
+    private GameTopView topView;
     private GameMiddleView midView;
     private GamePresenter gamePresenter;
 
     private ParallelTransition parallelTransition;
     private List<TranslateTransition> translateTransitions;
     private ScaleTransition scaleTransition;
+    private TranslateTransition ttScore;
 
-    AnimationView(GameMiddleView midView, GamePresenter gamePresenter) {
+    AnimationView(GameTopView topView,  GameMiddleView midView, GamePresenter gamePresenter) {
         this.gamePresenter = gamePresenter;
         this.midView = midView;
+        this.topView = topView;
         initialiseNodes();
     }
 
@@ -234,6 +239,28 @@ class AnimationView {
         scaleTransition.play();
     }
 
+    void animateScore(int score) {
+        topView.getLblScoreChange().setText("+" + score);
+        topView.getLblScoreChange().setVisible(true);
+        Label lblScore = topView.getLblScoreChange();
+
+        FadeTransition ft = new FadeTransition();
+        ft.setDuration(Duration.millis(750));
+        ft.setNode(lblScore);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.0);
+        ft.play();
+
+        this.ttScore = new TranslateTransition();
+        ttScore.setNode(lblScore);
+        ttScore.setDuration(SCORE_MOVE_DURATION);
+        ttScore.setFromY(0);
+        ttScore.setToY(-100);
+        ttScore.setCycleCount(2);
+        ttScore.setAutoReverse(true);
+        ttScore.setInterpolator(Interpolator.EASE_BOTH);
+        ttScore.play();
+    }
     private int BlockValue(int x, int y) {
         return midView.getBValue(x, y);
     }
@@ -265,5 +292,9 @@ class AnimationView {
 
     private TranslateTransition gettTransitions(int i) {
         return translateTransitions.get(i);
+    }
+
+    TranslateTransition getTtScore() {
+        return ttScore;
     }
 }

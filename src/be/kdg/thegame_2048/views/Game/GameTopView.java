@@ -18,7 +18,9 @@ class GameTopView extends BorderPane {
     private Label lblBestScore;
     private Label lblBestScoreInput;
     private Label lblScore;
+    private StackPane spScore;
     private Label lblScoreInput;
+    private Label lblScoreChange;
 
     GameTopView() {
         initialiseNodes();
@@ -30,13 +32,18 @@ class GameTopView extends BorderPane {
         this.lblBestScoreInput = new Label("0");
         this.lblScore = new Label("Current score: ");
         this.lblScoreInput = new Label("0");
+        this.lblScoreChange = new Label("0");
+        this.lblScoreChange.setVisible(false);
+
+        this.spScore = new StackPane(lblScoreInput, lblScoreChange);
+
         addStyles();
     }
 
     private void layoutNodes() {
         GridPane gridTop = new GridPane();
         VBox vboxScore = new VBox(lblBestScore, lblScore);
-        VBox vboxScoreInput = new VBox(lblBestScoreInput, lblScoreInput);
+        VBox vboxScoreInput = new VBox(lblBestScoreInput, spScore);
         gridTop.add(IMG_LOGO, 0, 0, 1, 2);
         gridTop.add(vboxScore, 1, 0);
         gridTop.add(vboxScoreInput, 2, 0);
@@ -67,5 +74,9 @@ class GameTopView extends BorderPane {
 
     Label getLblScoreInput() {
         return lblScoreInput;
+    }
+
+    Label getLblScoreChange() {
+        return lblScoreChange;
     }
 }
