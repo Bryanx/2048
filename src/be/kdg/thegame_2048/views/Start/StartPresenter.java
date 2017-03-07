@@ -9,9 +9,13 @@ import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
 import be.kdg.thegame_2048.views.Settings.SettingsPresenter;
 import be.kdg.thegame_2048.views.Settings.SettingsView;
+import javafx.animation.ScaleTransition;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseDragEvent;
+import javafx.util.Duration;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
@@ -32,12 +36,18 @@ public class StartPresenter {
 
     //METHODS
     private void addEventHandlers() {
-        view.getBtnNewPlayer().setOnMouseDragOver(new EventHandler<MouseDragEvent>() {
-            @Override
-            public void handle(MouseDragEvent event) {
-                new StartAnimations();
-            }
-        });
+        //FADE IN EFFECTS
+        view.getBtnNewPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnNewPlayer());});
+        view.getBtnExistingPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnExistingPlayer());});
+        view.getBtnAbout().setOnMouseEntered(event -> {fadeIn(view.getBtnAbout());});
+        view.getBtnSettings().setOnMouseEntered(event -> {fadeIn(view.getBtnSettings());});
+
+        //FADE OUT EFFECTS
+        view.getBtnNewPlayer().setOnMouseExited(event -> {fadeOut(view.getBtnNewPlayer());});
+        view.getBtnExistingPlayer().setOnMouseExited(event -> {fadeOut(view.getBtnExistingPlayer());});
+        view.getBtnAbout().setOnMouseExited(event -> {fadeOut(view.getBtnAbout());});
+        view.getBtnSettings().setOnMouseExited(event -> {fadeOut(view.getBtnSettings());});
+
         view.getBtnNewPlayer().setOnAction(event -> {
             NewPlayerView playerView = new NewPlayerView();
             new NewPlayerPresenter(model, playerView);
@@ -58,6 +68,28 @@ public class StartPresenter {
             new SettingsPresenter(model, settingsView);
             view.getScene().setRoot(settingsView);
         });
+    }
+
+    private void fadeIn(Button button) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode(button);
+        st.setFromX(1);
+        st.setFromY(1);
+        st.setToX(1.2);
+        st.setToY(1.2);
+        st.setDuration(Duration.millis(100));
+        st.play();
+    }
+
+    private void fadeOut(Button button) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode(button);
+        st.setFromX(1.2);
+        st.setFromY(1.2);
+        st.setToX(1);
+        st.setToY(1);
+        st.setDuration(Duration.millis(100));
+        st.play();
     }
 
 }
