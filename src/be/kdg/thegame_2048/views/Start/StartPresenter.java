@@ -36,13 +36,13 @@ public class StartPresenter {
 
     //METHODS
     private void addEventHandlers() {
-        //FADE IN EFFECTS
+        //SCALE IN EFFECTS
         view.getBtnNewPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnNewPlayer());});
         view.getBtnExistingPlayer().setOnMouseEntered(event -> {fadeIn(view.getBtnExistingPlayer());});
         view.getBtnAbout().setOnMouseEntered(event -> {fadeIn(view.getBtnAbout());});
         view.getBtnSettings().setOnMouseEntered(event -> {fadeIn(view.getBtnSettings());});
 
-        //FADE OUT EFFECTS
+        //SCALE OUT EFFECTS
         view.getBtnNewPlayer().setOnMouseExited(event -> {fadeOut(view.getBtnNewPlayer());});
         view.getBtnExistingPlayer().setOnMouseExited(event -> {fadeOut(view.getBtnExistingPlayer());});
         view.getBtnAbout().setOnMouseExited(event -> {fadeOut(view.getBtnAbout());});
