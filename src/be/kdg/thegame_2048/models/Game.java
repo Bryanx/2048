@@ -5,6 +5,10 @@ package be.kdg.thegame_2048.models;
  * @version 1.0 12/02/2017 19:40
  */
 public final class Game {
+    /**
+     * The Game class puts everyting together. It represents the game in it's whole form.
+     * The class has access to a lot of classes
+     **/
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
     }
@@ -29,22 +33,26 @@ public final class Game {
 
     }
 
-//    private Section[][] rebuildGame(String playgroundString) {
-//        String fields[] = playgroundString.split(" ");
-//        Section[][] sections = new Section[4][4];
-//
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 0; j < 4; j++) {
-//                Section section = new Section();
-//                if (!fields[(i*4)+j].contains("E")) {
-//                    section.putBlock(new Block(Integer.parseInt(fields[(i*4)+j])));
-//                }
-//                sections[i][j] = section;
-//                System.out.print(section.toString() + " ");
-//            }
-//        }
-//        return sections;
-//    }
+    /**
+     * Goes back to the last move.
+     * Only used when player presses on the undo-button.
+     **/
+    public void goToLastMove() {
+        String fields[] = this.lastMove.replaceAll("\n", "").split(" ");
+        Section[][] sections = new Section[4][4];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Section section = new Section();
+                if (!fields[(i * 4) + j].contains("E")) {
+                    section.putBlock(new Block(Integer.parseInt(fields[(i * 4) + j])));
+                }
+                sections[i][j] = section;
+                System.out.print(section.toString() + " ");
+            }
+        }
+        playground.initialiseSections(sections);
+    }
 
     /**
      * Gives back the x-coordinate of the last block that was put on the playground.
@@ -130,11 +138,19 @@ public final class Game {
         return true;
     }
 
+    /**
+     * Gives back a grind of the positions of the sections and their values.
+     * An E stands for an empty space.
+     * The numbers represent a block with their current value.
+     **/
     @Override
     public String toString() {
         return playground.toString();
     }
 
+    /**
+     * Returns the current score of the game.
+     **/
     public Score getScore() {
         return score;
     }
@@ -147,14 +163,23 @@ public final class Game {
         return playground.getSections()[x][y].getBlock();
     }
 
+    /**
+     * Returns a string of the last move
+     **/
     public String getLastMove() {
         return lastMove;
     }
 
+    /**
+     * Returns a string of the current move
+     **/
     public String getCurrentMove() {
         return currentMove;
     }
 
+    /**
+     * Gives back the highest block value that's currently on the playground
+     **/
     public int getHighestBlockValue() {
         Section[][] sections = playground.getSections();
         int highestValue = 2;
@@ -165,9 +190,5 @@ public final class Game {
             }
         }
         return highestValue;
-    }
-
-    public int getStartValue() {
-        return STAETVALUE;
     }
 }
