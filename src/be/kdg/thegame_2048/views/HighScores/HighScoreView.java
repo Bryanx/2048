@@ -23,6 +23,7 @@ public final class HighScoreView extends BorderPane {
     private List<Label> lblHsRanks;
     private List<Label> lblHsNames;
     private List<Label> lblHsScores;
+    private List<Label> lblHsBlock;
 
     private Button goBack;
 
@@ -39,13 +40,13 @@ public final class HighScoreView extends BorderPane {
         this.lblHsRanks = new ArrayList<>();
         this.lblHsNames = new ArrayList<>();
         this.lblHsScores = new ArrayList<>();
+        this.lblHsBlock = new ArrayList<>();
 
         //Adds the Column lblHsNames to the highscorelist
         lblHsRanks.add(new Label("Rank"));
         lblHsNames.add(new Label("Name"));
         lblHsScores.add(new Label("Score"));
-
-
+        lblHsBlock.add(new Label("HighestBlock"));
 
         //back button
         goBack = new Button();
@@ -65,6 +66,7 @@ public final class HighScoreView extends BorderPane {
         lblHsRanks.get(0).getStyleClass().add("hsColumnNames");
         lblHsNames.get(0).getStyleClass().add("hsColumnNames");
         lblHsScores.get(0).getStyleClass().add("hsColumnNames");
+        lblHsBlock.get(0).getStyleClass().add("hsColumnNames");
         goBack.getStyleClass().add("btnGoBack");
     }
 

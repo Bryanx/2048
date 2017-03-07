@@ -28,7 +28,7 @@ public class Main extends Application {
         Scene scene = new Scene(view);
 
         //add stylesheet:
-        scene.getStylesheets().add("be/kdg/thegame_2048/css/stylesheet.css");
+        scene.getStylesheets().add("be/kdg/thegame_2048/views/css/stylesheet.css");
         //add fonts:
         Font.loadFont(Main.class.getResource("views/fonts/ClearSans-Bold.TTF").toExternalForm(), 12);
 
