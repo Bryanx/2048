@@ -10,22 +10,24 @@ public final class Game {
         TOP, DOWN, LEFT, RIGHT
     }
 
+    final static private int STAETVALUE = 2;
+
     private Score score;
     private PlayerManager manager;
     private Playground playground;
     private String lastMove;
     private String currentMove;
-    private int startValue = 9;
 
     //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
         this.score = new Score();
         this.playground = new Playground(this.score);
+
         this.manager = playerManager;
 
         playground.initialiseSections();
-        this.playground.addRandomBlock(startValue);
-        this.playground.addRandomBlock(startValue);
+        this.playground.addRandomBlock(STAETVALUE);
+        this.playground.addRandomBlock(STAETVALUE);
 
     }
 
@@ -66,7 +68,7 @@ public final class Game {
         }
         this.currentMove = playground.toString();
         if (!lastMove.equals(currentMove)) {
-            playground.addRandomBlock(startValue);
+            playground.addRandomBlock(STAETVALUE);
         }
         System.out.println(score.getScore() + "\n" + playground.toString());
     }
@@ -133,7 +135,18 @@ public final class Game {
         return currentMove;
     }
 
+    public int getHighestBlockValue() {
+        Section[][] sections = playground.getSections();
+        int highestValue = 2;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (sections[i][j].getBlock().getValue() > highestValue) highestValue = sections[i][j].getBlock().getValue();
+            }
+        }
+        return highestValue;
+    }
+
     public int getStartValue() {
-        return startValue;
+        return STAETVALUE;
     }
 }

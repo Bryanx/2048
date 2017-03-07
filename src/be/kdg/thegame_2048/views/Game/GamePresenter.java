@@ -9,9 +9,13 @@ import be.kdg.thegame_2048.views.Result.ResultPresenter;
 import be.kdg.thegame_2048.views.Result.ResultView;
 import be.kdg.thegame_2048.views.Start.StartPresenter;
 import be.kdg.thegame_2048.views.Start.StartView;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 
 /**
  * @author Jarne Van Aerde
@@ -120,7 +124,7 @@ public class GamePresenter {
 
         if (!firstRun && !isMovable()) {
             animationView.popIn(randomblockY, randomblockX);
-            midView.putBlockOnGrid(modelGame.getPieceValue(randomblockX, randomblockY), randomblockX, randomblockY);
+            midView.putBlockOnGrid(2, randomblockX, randomblockY);
         }
 
         for (int i = 0; i < 4; i++) {

@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -23,7 +24,7 @@ public class DataReaderWriter {
      * Decription was used
      **/
     public static List<Player> loadPlayerData() {
-        Path data = Paths.get("data" + File.separator + "data.txt");
+        Path data = Paths.get("data" + File.separator + "playerdata.txt");
         Path decoderData = Paths.get("data" + File.separator + "encripted.txt");
         List<Player> playerList = new ArrayList<>();
 
@@ -62,7 +63,7 @@ public class DataReaderWriter {
      **/
     public static void savePlayerData(List<Player> playerList) {
         Path playerdata = Paths.get("data");
-        Path data = playerdata.resolve("data.txt");
+        Path data = playerdata.resolve("playerdata.txt");
         Path encription = playerdata.resolve("encripted.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(data.toFile()))) {
             if (!Files.exists(playerdata)) Files.createDirectory(playerdata);
@@ -110,7 +111,9 @@ public class DataReaderWriter {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
-            writer.write(message);
+            String log = LocalDateTime.now().getHour() + "\n" + message;
+
+            writer.write(log);
         } catch (IOException e) {
             //TODO: implement proper error handling
             e.printStackTrace();
