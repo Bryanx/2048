@@ -10,12 +10,12 @@ public final class Game {
         TOP, DOWN, LEFT, RIGHT
     }
 
+    private final int startValue = 2;
     private Score score;
     private PlayerManager manager;
     private Playground playground;
     private String lastMove;
     private String currentMove;
-    private int startValue = 9;
 
     //CONSTRUCTORS
     public Game(PlayerManager playerManager) {
@@ -131,9 +131,5 @@ public final class Game {
 
     public String getCurrentMove() {
         return currentMove;
-    }
-
-    public int getStartValue() {
-        return startValue;
     }
 }

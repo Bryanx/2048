@@ -23,9 +23,10 @@ BG darker:
 }
 
 .btnStartView {
+    -fx-content-display: top;
     -fx-background-color: none;
     -fx-font-family: "Calibri";
-    -fx-font-size: 26pt;
+    -fx-font-size: 24pt;
     -fx-text-fill: #006464;
     -fx-cursor: hand;
     -fx-graphic-text-gap: 10px;
@@ -52,54 +53,54 @@ BG darker:
 }
 
 .btnHighScores:hover {
-    -fx-graphic: url("../views/img/highscores-hover.png");
+    -fx-graphic: url("../img/highscores-hover.png");
 }
 
 .btnHighScores:pressed {
-    -fx-graphic: url("../views/img/highscores-pressed.png");
+    -fx-graphic: url("../img/highscores-pressed.png");
 }
 
 .btnRestart {
-    -fx-graphic: url("../views/img/restart.png");
+    -fx-graphic: url("../img/restart.png");
     -fx-background-color: none;
     -fx-cursor: hand;
 }
 
 .btnRestart:hover {
-    -fx-graphic: url("../views/img/restart-hover.png");
+    -fx-graphic: url("../img/restart-hover.png");
 }
 
 .btnRestart:pressed {
-    -fx-graphic: url("../views/img/restart-pressed.png");
+    -fx-graphic: url("../img/restart-pressed.png");
 }
 
 .btnExit {
     -fx-background-color: none;
-    -fx-graphic: url("../views/img/exit.png");
+    -fx-graphic: url("../img/exit.png");
     -fx-cursor: hand;
 }
 
 .btnExit:hover {
-    -fx-graphic: url("../views/img/exit-hover.png");
+    -fx-graphic: url("../img/exit-hover.png");
 }
 
 .btnExit:pressed {
-    -fx-graphic: url("../views/img/exit-pressed.png");
+    -fx-graphic: url("../img/exit-pressed.png");
 }
 
 /* ========== NewPlayerView & ExistingPlayerView ========== */
 .btnGoBack {
     -fx-background-color: none;
-    -fx-graphic: url("../views/img/goback.png");
+    -fx-graphic: url("../img/goback.png");
     -fx-cursor: hand;
 }
 
 .btnGoBack:hover {
-    -fx-graphic: url("../views/img/goback-hover.png");
+    -fx-graphic: url("../img/goback-hover.png");
 }
 
 .btnGoBack:pressed {
-    -fx-graphic: url("../views/img/goback-pressed.png");
+    -fx-graphic: url("../img/goback-pressed.png");
 }
 
 .inputError {
@@ -121,19 +122,19 @@ BG darker:
     -fx-padding: 20px;
 }
 .toggle-button {
-    -fx-graphic: url("../views/img/togglebutton.png");
+    -fx-graphic: url("../img/togglebutton.png");
     -fx-cursor: hand;
     -fx-background-color: none;
     -fx-padding: 10px;
 }
 .toggle-button:selected {
-    -fx-graphic: url("../views/img/togglebutton-selected.png");
+    -fx-graphic: url("../img/togglebutton-selected.png");
 }
 
 /* ========== HighScoreView ========== */
 .hsHeader {
     -fx-text-fill: white;
-    -fx-graphic: url("../views/img/cup.png");
+    -fx-graphic: url("../img/cup.png");
     -fx-graphic-text-gap: 20px;
 }
 

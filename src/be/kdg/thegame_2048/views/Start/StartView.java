@@ -50,11 +50,16 @@ public final class StartView extends BorderPane {
         this.setTop(top);
 
         //Middle of the StartView, 2 buttons are stacked inside a GridPane:
-        GridPane middle = new GridPane();
-        middle.add(btnNewPlayer, 0, 0);
-        middle.add(btnExistingPlayer, 0, 1);
-        middle.add(btnAbout, 0, 2);
-        middle.add(btnSettings, 0, 3);
+        VBox vBox1 = new VBox(btnNewPlayer, btnAbout);
+        vBox1.setAlignment(Pos.CENTER);
+        VBox vBox2 = new VBox(btnExistingPlayer, btnSettings);
+        vBox2.setAlignment(Pos.CENTER);
+        HBox middle = new HBox(vBox1,vBox2);
+//        GridPane middle = new GridPane();
+//        middle.add(btnNewPlayer, 0, 0);
+//        middle.add(btnExistingPlayer, 0, 1);
+//        middle.add(btnAbout, 1, 0);
+//        middle.add(btnSettings, 1, 2);
         middle.setAlignment(Pos.CENTER);
         this.setCenter(middle);
         this.setPadding(new Insets(OVERALL_PADDING));
