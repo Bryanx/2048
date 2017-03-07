@@ -11,6 +11,7 @@ import be.kdg.thegame_2048.views.Settings.SettingsPresenter;
 import be.kdg.thegame_2048.views.Settings.SettingsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseDragEvent;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
@@ -31,37 +32,31 @@ public class StartPresenter {
 
     //METHODS
     private void addEventHandlers() {
-        view.getBtnNewPlayer().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnNewPlayer().setOnMouseDragOver(new EventHandler<MouseDragEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                NewPlayerView playerView = new NewPlayerView();
-                NewPlayerPresenter presenter = new NewPlayerPresenter(model, playerView);
-                view.getScene().setRoot(playerView);
+            public void handle(MouseDragEvent event) {
+                new StartAnimations();
             }
         });
-        view.getBtnExistingPlayer().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ExistingPlayerView playerView = new ExistingPlayerView();
-                ExistingPlayerPresenter presenter = new ExistingPlayerPresenter(model, playerView);
-                view.getScene().setRoot(playerView);
-            }
+        view.getBtnNewPlayer().setOnAction(event -> {
+            NewPlayerView playerView = new NewPlayerView();
+            new NewPlayerPresenter(model, playerView);
+            view.getScene().setRoot(playerView);
         });
-        view.getBtnAbout().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                AboutView aboutView = new AboutView();
-                AboutPresenter presenter = new AboutPresenter(model, aboutView);
-                view.getScene().setRoot(aboutView);
-            }
+        view.getBtnExistingPlayer().setOnAction(event -> {
+            ExistingPlayerView playerView = new ExistingPlayerView();
+            new ExistingPlayerPresenter(model, playerView);
+            view.getScene().setRoot(playerView);
         });
-        view.getBtnSettings().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                SettingsView settingsView = new SettingsView();
-                new SettingsPresenter(model, settingsView);
-                view.getScene().setRoot(settingsView);
-            }
+        view.getBtnAbout().setOnAction(event -> {
+            AboutView aboutView = new AboutView();
+            new AboutPresenter(model, aboutView);
+            view.getScene().setRoot(aboutView);
+        });
+        view.getBtnSettings().setOnAction(event -> {
+            SettingsView settingsView = new SettingsView();
+            new SettingsPresenter(model, settingsView);
+            view.getScene().setRoot(settingsView);
         });
     }
 
