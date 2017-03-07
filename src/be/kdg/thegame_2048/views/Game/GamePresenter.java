@@ -42,13 +42,12 @@ public class GamePresenter {
         this.bottomView = view.getBottomView();
         this.midView = view.getMiddleView();
         this.topView = view.getTopView();
-        this.animationView = new AnimationView(midView, this);
+        this.animationView = new AnimationView(topView, midView, this);
         this.firstRun = true;
         this.addEventHandlers();
         topView.getLblBestScoreInput().setText(String.valueOf(modelPlayerManager.getCurrentPlayer().getBestScore()));
         //eenmalige updateview
         updateView();
-
     }
 
     //METHODEN
@@ -75,32 +74,29 @@ public class GamePresenter {
             updateView();
         });
         view.setOnKeyPressed(event -> {
+            final int prevScore = modelGame.getScore().getScore();
             try {
                 switch (event.getCode()) {
-                    case DOWN:
-                        updateViewBlocks(Game.Direction.DOWN);
-                        animationView.moveDown();
-                        break;
-                    case UP:
-                        updateViewBlocks(Game.Direction.TOP);
-                        animationView.moveUp();
-                        break;
-                    case RIGHT:
-                        updateViewBlocks(Game.Direction.RIGHT);
-                        animationView.moveRight();
-                        break;
-                    case LEFT:
-                        updateViewBlocks(Game.Direction.LEFT);
-                        animationView.moveLeft();
-                        break;
-                    default:
-                        event.consume();
+                    case DOWN:updateViewBlocks(Game.Direction.DOWN);
+                        animationView.moveDown();break;
+                    case UP:updateViewBlocks(Game.Direction.TOP);
+                        animationView.moveUp();break;
+                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);
+                        animationView.moveRight();break;
+                    case LEFT:updateViewBlocks(Game.Direction.LEFT);
+                        animationView.moveLeft();break;
+                    default:event.consume();
                 }
             } catch (IllegalArgumentException e) {
                 //TODO: IMPLEMENT PROPER ERROR HANDLING.
             }
+            final int currScore = modelGame.getScore().getScore();
+            if (currScore-prevScore > 0) {
+                animationView.animateScore(currScore-prevScore);
+            }
+
             animationView.getParallelTransition().play();
-            modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
+            modelPlayerMananger.setCurrentPlayerScore(currScore);
         });
         animationView.getParallelTransition().setOnFinished(event ->  {
                 animationView.resetAnimation();
