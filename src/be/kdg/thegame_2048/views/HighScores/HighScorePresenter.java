@@ -26,14 +26,9 @@ public class HighScorePresenter {
         this.addEventHandlers();
         this.updateView();
     }
-    private void addEventHandlers() {
-        view.getGoBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                updateScene();
-            }
-        });
 
+    private void addEventHandlers() {
+        view.getGoBack().setOnAction(event -> { updateScene();});
     }
 
     private void updateScene() {

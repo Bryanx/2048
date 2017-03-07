@@ -1,0 +1,2 @@
+13
+Attempting to add a duplicate to the list of children

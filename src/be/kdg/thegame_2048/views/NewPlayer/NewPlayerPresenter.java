@@ -26,25 +26,18 @@ public class NewPlayerPresenter {
     }
 
     private void addEventHandlers() {
-        view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                model.setCurrentPlayerToNull();
-                StartView startView = new StartView();
-                StartPresenter presenter = new StartPresenter(model, startView);
-                view.getScene().setRoot(startView);
-            }
+        view.getBtnGoBack().setOnAction(event -> {
+            model.setCurrentPlayerToNull();
+            StartView startView = new StartView();
+            StartPresenter presenter = new StartPresenter(model, startView);
+            view.getScene().setRoot(startView);
         });
-        view.getTfNewPlayer().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    System.out.println(model.checkIfExists("hallo"));
-                    checkInput(view.getTfNewPlayer().getText());
-
-                } else {
-                    view.getLblInputError().setVisible(false);
-                }
+        view.getTfNewPlayer().setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                System.out.println(model.checkIfExists("hallo"));
+                checkInput(view.getTfNewPlayer().getText());
+            } else {
+                view.getLblInputError().setVisible(false);
             }
         });
     }

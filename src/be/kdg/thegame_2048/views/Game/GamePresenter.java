@@ -53,68 +53,58 @@ public class GamePresenter {
 
     //METHODEN
     private void addEventHandlers() {
-        bottomView.getBtnHighScores().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                modelPlayerMananger.saveInfoCurrentPlayer();
-                HighScoreView hsView = new HighScoreView();
-                new HighScorePresenter(modelGame, modelPlayerMananger, hsView);
-                view.getScene().setRoot(hsView);
-            }
+        bottomView.getBtnHighScores().setOnAction(event -> {
+            modelPlayerMananger.saveInfoCurrentPlayer();
+            HighScoreView hsView = new HighScoreView();
+            new HighScorePresenter(modelGame, modelPlayerMananger, hsView);
+            view.getScene().setRoot(hsView);
         });
-        bottomView.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                modelPlayerMananger.saveInfoCurrentPlayer();
-                modelPlayerMananger.setCurrentPlayerToNull();
-                StartView startView = new StartView();
-                new StartPresenter(modelPlayerMananger, startView);
-                view.getScene().setRoot(startView);
-            }
+        bottomView.getBtnExit().setOnAction(event -> {
+            modelPlayerMananger.saveInfoCurrentPlayer();
+            modelPlayerMananger.setCurrentPlayerToNull();
+            StartView startView = new StartView();
+            new StartPresenter(modelPlayerMananger, startView);
+            view.getScene().setRoot(startView);
         });
-        bottomView.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                alreadyWon = false;
-                firstRun = true;
-                modelPlayerMananger.saveInfoCurrentPlayer();
-                modelGame = new Game(modelPlayerMananger);
-                topView.getLblScoreInput().setText("0");
-                updateView();
-            }
+        bottomView.getBtnRestart().setOnAction(event -> {
+            alreadyWon = false;
+            firstRun = true;
+            modelPlayerMananger.saveInfoCurrentPlayer();
+            modelGame = new Game(modelPlayerMananger);
+            topView.getLblScoreInput().setText("0");
+            updateView();
         });
-        view.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                try {
-                    switch (event.getCode()) {
-                        case DOWN:
-                            updateViewBlocks(Game.Direction.DOWN);
-                            animationView.moveDown();break;
-                        case UP:
-                            updateViewBlocks(Game.Direction.TOP);
-                            animationView.moveUp();break;
-                        case RIGHT:
-                            updateViewBlocks(Game.Direction.RIGHT);
-                            animationView.moveRight();break;
-                        case LEFT:
-                            updateViewBlocks(Game.Direction.LEFT);
-                            animationView.moveLeft();break;
-                        default:event.consume();
-                    }
-                } catch (IllegalArgumentException e) {
-                    DataReaderWriter.writeToLog(e.getMessage());
+        view.setOnKeyPressed(event -> {
+            try {
+                switch (event.getCode()) {
+                    case DOWN:
+                        updateViewBlocks(Game.Direction.DOWN);
+                        animationView.moveDown();
+                        break;
+                    case UP:
+                        updateViewBlocks(Game.Direction.TOP);
+                        animationView.moveUp();
+                        break;
+                    case RIGHT:
+                        updateViewBlocks(Game.Direction.RIGHT);
+                        animationView.moveRight();
+                        break;
+                    case LEFT:
+                        updateViewBlocks(Game.Direction.LEFT);
+                        animationView.moveLeft();
+                        break;
+                    default:
+                        event.consume();
                 }
-                animationView.getParallelTransition().play();
-                modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
+            } catch (IllegalArgumentException e) {
+                DataReaderWriter.writeToLog(e.getMessage());
             }
+            animationView.getParallelTransition().play();
+            modelPlayerMananger.setCurrentPlayerScore(modelGame.getScore().getScore());
         });
-        animationView.getParallelTransition().setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        animationView.getParallelTransition().setOnFinished(event ->  {
                 animationView.resetAnimation();
                 updateView();
-            }
         });
     }
 

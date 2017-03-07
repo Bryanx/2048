@@ -25,38 +25,29 @@ public class AboutPresenter {
         this.addEventHandlers();
         this.updateView();
     }
+
     private void addEventHandlers() {
-        view.getToggleButton(0).setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                moveAnimation(currentIndex, 0);
-                currentIndex = 0;
-            }
+        view.getToggleButton(0).setOnAction(event -> {
+            moveAnimation(currentIndex, 0);
+            currentIndex = 0;
         });
-        view.getToggleButton(1).setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                moveAnimation(currentIndex, 1);
-                currentIndex = 1;
-            }
+        view.getToggleButton(1).setOnAction(event -> {
+            moveAnimation(currentIndex, 1);
+            currentIndex = 1;
         });
-        view.getToggleButton(2).setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                moveAnimation(currentIndex, 2);
-                currentIndex = 2;
-            }
+        view.getToggleButton(2).setOnAction(event -> {
+            moveAnimation(currentIndex, 2);
+            currentIndex = 2;
         });
-        view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                StartView startView = new StartView();
-                new StartPresenter(model, startView);
-                view.getScene().setRoot(startView);
-            }
+        view.getBtnGoBack().setOnAction(event -> {
+            StartView startView = new StartView();
+            new StartPresenter(model, startView);
+            view.getScene().setRoot(startView);
+
         });
 
     }
+
     private void updateView() {
         moveAnimation(0, 0);
     }
@@ -71,7 +62,7 @@ public class AboutPresenter {
                 } else {
                     tt.setToX(500);
                 }
-            } else if (newIndex == oldIndex){
+            } else if (newIndex == oldIndex) {
                 tt.setToX(0);
                 if (index == oldIndex) {
                     tt.setDuration(Duration.millis(1));
@@ -83,7 +74,7 @@ public class AboutPresenter {
                     tt.setToX(-500);
                 }
             }
-            tt.play();  
+            tt.play();
             if (index == newIndex) {
                 //TODO: add to eventhandlers()
                 //move next slide into view

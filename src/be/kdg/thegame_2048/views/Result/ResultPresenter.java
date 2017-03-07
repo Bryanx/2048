@@ -29,36 +29,22 @@ public class ResultPresenter {
         this.updateView();
     }
     private void addEventHandlers() {
-        view.getBtnContinue().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameView.layoutNodes();
-            }
+        view.getBtnContinue().setOnAction(event -> gameView.layoutNodes());
+        view.getBtnExit().setOnAction(event -> {
+            modelPM.setCurrentPlayerToNull();
+            StartView startView = new StartView();
+            new StartPresenter(modelPM, startView);
+            view.getScene().setRoot(startView);
         });
-        view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                modelPM.setCurrentPlayerToNull();
-                StartView startView = new StartView();
-                new StartPresenter(modelPM, startView);
-                view.getScene().setRoot(startView);
-            }
+        view.getBtnRestart().setOnAction(event -> {
+            gameView.layoutNodes();
+            gameView.getLblScoreInput().setText("0");
+            modelGame = new Game(modelPM);
+            new GamePresenter(modelGame, modelPM, gameView);
         });
-        view.getBtnRestart().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameView.layoutNodes();
-                gameView.getLblScoreInput().setText("0");
-                modelGame = new Game(modelPM);
-                new GamePresenter(modelGame, modelPM, gameView);
-            }
-        });
-        view.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                //Keyboard is blocked when resultpresenter is active
-                event.consume();
-            }
+        view.setOnKeyPressed(event -> {
+            //Keyboard is blocked when resultpresenter is active
+            event.consume();
         });
 
     }

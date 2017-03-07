@@ -7,30 +7,29 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 /**
- * Created by Bryan on 06/03/2017.
+ * @author Jarne van Aerde, Bryan de Ridder
+ * @version 1.0 12/02/2017 19:40
  */
 public class SettingsPresenter {
-        private PlayerManager model;
-        private SettingsView view;
-        private int currentIndex;
+    private PlayerManager model;
+    private SettingsView view;
+    private int currentIndex;
 
-        public SettingsPresenter(PlayerManager model, SettingsView view) {
-            this.model = model;
-            this.view = view;
-            this.addEventHandlers();
-            this.updateView();
-        }
+    public SettingsPresenter(PlayerManager model, SettingsView view) {
+        this.model = model;
+        this.view = view;
+        this.addEventHandlers();
+        this.updateView();
+    }
 
     private void addEventHandlers() {
-        view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                StartView startView = new StartView();
-                new StartPresenter(model, startView);
-                view.getScene().setRoot(startView);
-            }
+        view.getBtnGoBack().setOnAction(event -> {
+            StartView startView = new StartView();
+            new StartPresenter(model, startView);
+            view.getScene().setRoot(startView);
         });
     }
+
     private void updateView() {
     }
 }

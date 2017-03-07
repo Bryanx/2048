@@ -1,9 +1,6 @@
 package be.kdg.thegame_2048.views.Game;
 
-import javafx.animation.Interpolator;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;

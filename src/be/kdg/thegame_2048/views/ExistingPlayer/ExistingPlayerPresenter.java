@@ -29,23 +29,17 @@ public class ExistingPlayerPresenter {
 
     //METHODS
     private void addEventHandlers() {
-        view.getBtnGoBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                model.setCurrentPlayerToNull();
-                StartView startView = new StartView();
-                StartPresenter presenter = new StartPresenter(model, startView);
-                view.getScene().setRoot(startView);
-            }
+        view.getBtnGoBack().setOnAction(event -> {
+            model.setCurrentPlayerToNull();
+            StartView startView = new StartView();
+            StartPresenter presenter = new StartPresenter(model, startView);
+            view.getScene().setRoot(startView);
         });
-        view.getTfExistingPlayer().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    searchPlayer(view.getTfExistingPlayer().getText());
-                } else {
-                    view.getNameDoesntExistError().setVisible(false);
-                }
+        view.getTfExistingPlayer().setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                searchPlayer(view.getTfExistingPlayer().getText());
+            } else {
+                view.getNameDoesntExistError().setVisible(false);
             }
         });
     }

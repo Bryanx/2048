@@ -9,6 +9,7 @@ public class Player implements Comparable<Player> {
     private String name;
     private int bestScore;
     private String lastMove;
+    private int highestBlockValue;
 
     //CONSTRUCTORS
     Player(String name, int bestScore) {
@@ -36,6 +37,14 @@ public class Player implements Comparable<Player> {
 
     void setBestScore(int bestScore) {
         this.bestScore = bestScore;
+    }
+
+    public int getHighestBlockValue() {
+        return highestBlockValue;
+    }
+
+    public void setHighestBlockValue(int highestBlockValue) {
+        this.highestBlockValue = highestBlockValue;
     }
 
     @Override
