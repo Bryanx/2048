@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.HighScores;
+package be.kdg.thegame_2048.views.highscores;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -18,8 +18,6 @@ public final class HighScoreView extends BorderPane {
     private static final double SCENE_WIDTH = 550;
     private int playerAmount;
     private Label lblHighScores;
-    //lblHsNames.get(1) the name of rank 1
-    //lblHsScores.get(1) is the score of rank 1
     private List<Label> lblHsRanks;
     private List<Label> lblHsNames;
     private List<Label> lblHsScores;

@@ -1,23 +1,20 @@
-package be.kdg.thegame_2048.views.NewPlayer;
+package be.kdg.thegame_2048.views.newPlayer;
 
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Game.GamePresenter;
-import be.kdg.thegame_2048.views.Game.GameView;
-import be.kdg.thegame_2048.views.Start.StartPresenter;
-import be.kdg.thegame_2048.views.Start.StartView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import be.kdg.thegame_2048.views.game.GamePresenter;
+import be.kdg.thegame_2048.views.game.GameView;
+import be.kdg.thegame_2048.views.start.StartPresenter;
+import be.kdg.thegame_2048.views.start.StartView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 14-02-17 14:24
  */
 public class NewPlayerPresenter {
-    private PlayerManager model;
-    private NewPlayerView view;
+    private final PlayerManager model;
+    private final NewPlayerView view;
 
     public NewPlayerPresenter(PlayerManager model, NewPlayerView view) {
         this.model = model;
@@ -47,7 +44,7 @@ public class NewPlayerPresenter {
             view.getLblInputError().setText("Name already exists");
             view.getLblInputError().setVisible(true);
         } else if (name.length() < 3 || name.length() > 15) {
-            IllegalArgumentException iae = new IllegalArgumentException("Name was to short or to long.");
+            new IllegalArgumentException("Name was to short or to long.");
             //TODO: IMPLEMENT PROPER ERROR HANDLING.
             view.getLblInputError().setText("Name has to be between 3 and 15 characters long");
             view.getLblInputError().setVisible(true);
@@ -61,7 +58,7 @@ public class NewPlayerPresenter {
     private void updateScene() {
         GameView gameView = new GameView();
         Game gameModel = new Game(model);
-        GamePresenter presenter = new GamePresenter(gameModel, model, gameView);
+        new GamePresenter(gameModel, model, gameView);
         view.getScene().setRoot(gameView);
     }
 }

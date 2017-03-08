@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.Alert;
+package be.kdg.thegame_2048.views.undo;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,16 +16,16 @@ import javafx.scene.text.TextAlignment;
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-03-17 14:39
  */
-public class AlertView extends BorderPane {
-    private final int WIDTH = 400;
-    private final int HEIGHT = 300;
+public class UndoView extends BorderPane {
+    private static final int WIDTH = 400;
+    private static final int HEIGHT = 300;
     private Label lblMessage;
     private Label lblHeader;
     private Rectangle box;
     private Button btnAccept;
     private Button btnCancel;
 
-    public AlertView() {
+    public UndoView() {
         initialiseNodes();
         layoutNodes();
     }

@@ -1,11 +1,5 @@
 package be.kdg.thegame_2048.models;
 
-import javax.crypto.EncryptedPrivateKeyInfo;
-import java.beans.Encoder;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -14,7 +8,7 @@ import java.util.*;
  */
 public final class PlayerManager {
     //EIGENSCHAPPEN
-    private List<Player> playerList;
+    private final List<Player> playerList;
     private Player currentPlayer;
     private int currentPlayerScore;
 
@@ -51,9 +45,7 @@ public final class PlayerManager {
     public void addPlayer(String name) {
         playerList.add(new Player(name, 0));
         System.out.println("New player added: " + name);
-        for (Player player : playerList) {
-            System.out.println(player);
-        }
+        playerList.forEach(System.out::println);
     }
 
     public boolean checkIfExists(String name) {
@@ -75,7 +67,7 @@ public final class PlayerManager {
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (Player player : this.playerList) {
-            s.append(player.toString() + "\n");
+            s.append(player.toString()).append("\n");
         }
         return s.toString();
     }

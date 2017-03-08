@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.ExistingPlayer;
+package be.kdg.thegame_2048.views.existingplayer;
 
 import be.kdg.thegame_2048.views.SuperView;
 import javafx.geometry.Insets;

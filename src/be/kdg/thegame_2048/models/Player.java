@@ -6,7 +6,7 @@ package be.kdg.thegame_2048.models;
  */
 public class Player implements Comparable<Player> {
     //EIGENSCHAPPEN
-    private String name;
+    private final String name;
     private int bestScore;
     private String lastMove;
     private int highestBlockValue;

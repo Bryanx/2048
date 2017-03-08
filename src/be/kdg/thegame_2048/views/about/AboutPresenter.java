@@ -1,13 +1,9 @@
-package be.kdg.thegame_2048.views.About;
+package be.kdg.thegame_2048.views.about;
 
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Start.StartPresenter;
-import be.kdg.thegame_2048.views.Start.StartView;
-import javafx.animation.FadeTransition;
+import be.kdg.thegame_2048.views.start.StartPresenter;
+import be.kdg.thegame_2048.views.start.StartView;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 /**
@@ -15,8 +11,8 @@ import javafx.util.Duration;
  * @version 1.0 17-02-17 12:17
  */
 public class AboutPresenter {
-    private PlayerManager model;
-    private AboutView view;
+    private final PlayerManager model;
+    private final AboutView view;
     private int currentIndex;
 
     public AboutPresenter(PlayerManager model, AboutView view) {
@@ -78,21 +74,18 @@ public class AboutPresenter {
             if (index == newIndex) {
                 //TODO: add to eventhandlers()
                 //move next slide into view
-                tt.setOnFinished(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
-                        if (newIndex > oldIndex) {
-                            tt2.setFromX(-500);
-                        } else if (newIndex == oldIndex) {
-                            tt2.setToX(0);
-                        } else {
-                            tt2.setFromX(500);
-                        }
+                tt.setOnFinished(event -> {
+                    TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
+                    if (newIndex > oldIndex) {
+                        tt2.setFromX(-500);
+                    } else if (newIndex == oldIndex) {
                         tt2.setToX(0);
-                        tt2.play();
-                        view.layoutNodes(newIndex);
+                    } else {
+                        tt2.setFromX(500);
                     }
+                    tt2.setToX(0);
+                    tt2.play();
+                    view.layoutNodes(newIndex);
                 });
             }
         }

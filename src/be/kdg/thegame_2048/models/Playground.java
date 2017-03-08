@@ -13,7 +13,7 @@ final class Playground {
     private static final int NUMBER_OF_V_SECTIONS = 4;
 
     private Section[][] sections;
-    private Score score;
+    private final Score score;
     private int coordRandomBlockX;
     private int coordRandomBlockY;
 
@@ -374,7 +374,7 @@ final class Playground {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             for (int j = 0; j < NUMBER_OF_V_SECTIONS; j++) {
-                s.append(this.sections[i][j].toString() + "  ");
+                s.append(this.sections[i][j].toString()).append("  ");
             }
             s.append("\n");
         }

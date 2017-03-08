@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.Game;
+package be.kdg.thegame_2048.views.game;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

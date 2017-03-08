@@ -1,20 +1,16 @@
-package be.kdg.thegame_2048.views.Start;
+package be.kdg.thegame_2048.views.start;
 
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.About.AboutPresenter;
-import be.kdg.thegame_2048.views.About.AboutView;
-import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerPresenter;
-import be.kdg.thegame_2048.views.ExistingPlayer.ExistingPlayerView;
-import be.kdg.thegame_2048.views.NewPlayer.NewPlayerPresenter;
-import be.kdg.thegame_2048.views.NewPlayer.NewPlayerView;
-import be.kdg.thegame_2048.views.Settings.SettingsPresenter;
-import be.kdg.thegame_2048.views.Settings.SettingsView;
+import be.kdg.thegame_2048.views.about.AboutPresenter;
+import be.kdg.thegame_2048.views.about.AboutView;
+import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerPresenter;
+import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerView;
+import be.kdg.thegame_2048.views.newPlayer.NewPlayerPresenter;
+import be.kdg.thegame_2048.views.newPlayer.NewPlayerView;
+import be.kdg.thegame_2048.views.settings.SettingsPresenter;
+import be.kdg.thegame_2048.views.settings.SettingsView;
 import javafx.animation.ScaleTransition;
-import javafx.beans.property.DoubleProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseDragEvent;
 import javafx.util.Duration;
 
 /**
@@ -23,8 +19,8 @@ import javafx.util.Duration;
  */
 public class StartPresenter {
     //ATTRIBUTES
-    private PlayerManager model;
-    private StartView view;
+    private final PlayerManager model;
+    private final StartView view;
 
 
     //CONSTRUCTORS
@@ -37,16 +33,16 @@ public class StartPresenter {
     //METHODS
     private void addEventHandlers() {
         //FADE IN EFFECTS
-        view.getBtnNewPlayer().setOnMouseEntered(event -> {scaleIn(view.getBtnNewPlayer());});
-        view.getBtnExistingPlayer().setOnMouseEntered(event -> {scaleIn(view.getBtnExistingPlayer());});
-        view.getBtnAbout().setOnMouseEntered(event -> {scaleIn(view.getBtnAbout());});
-        view.getBtnSettings().setOnMouseEntered(event -> {scaleIn(view.getBtnSettings());});
+        view.getBtnNewPlayer().setOnMouseEntered(event -> scaleIn(view.getBtnNewPlayer()));
+        view.getBtnExistingPlayer().setOnMouseEntered(event -> scaleIn(view.getBtnExistingPlayer()));
+        view.getBtnAbout().setOnMouseEntered(event -> scaleIn(view.getBtnAbout()));
+        view.getBtnSettings().setOnMouseEntered(event -> scaleIn(view.getBtnSettings()));
 
         //SCALE OUT EFFECTS
-        view.getBtnNewPlayer().setOnMouseExited(event -> {scaleOut(view.getBtnNewPlayer());});
-        view.getBtnExistingPlayer().setOnMouseExited(event -> {scaleOut(view.getBtnExistingPlayer());});
-        view.getBtnAbout().setOnMouseExited(event -> {scaleOut(view.getBtnAbout());});
-        view.getBtnSettings().setOnMouseExited(event -> {scaleOut(view.getBtnSettings());});
+        view.getBtnNewPlayer().setOnMouseExited(event -> scaleOut(view.getBtnNewPlayer()));
+        view.getBtnExistingPlayer().setOnMouseExited(event -> scaleOut(view.getBtnExistingPlayer()));
+        view.getBtnAbout().setOnMouseExited(event -> scaleOut(view.getBtnAbout()));
+        view.getBtnSettings().setOnMouseExited(event -> scaleOut(view.getBtnSettings()));
 
         view.getBtnNewPlayer().setOnAction(event -> {
             NewPlayerView playerView = new NewPlayerView();

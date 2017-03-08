@@ -1,12 +1,10 @@
-package be.kdg.thegame_2048.views.HighScores;
+package be.kdg.thegame_2048.views.highscores;
 
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.Player;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Game.GamePresenter;
-import be.kdg.thegame_2048.views.Game.GameView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import be.kdg.thegame_2048.views.game.GamePresenter;
+import be.kdg.thegame_2048.views.game.GameView;
 
 import java.util.*;
 
@@ -15,9 +13,9 @@ import java.util.*;
  * @version 1.0 17-02-17 09:46
  */
 public class HighScorePresenter {
-    private PlayerManager modelPM;
-    private Game modelGame;
-    private HighScoreView view;
+    private final PlayerManager modelPM;
+    private final Game modelGame;
+    private final HighScoreView view;
 
     public HighScorePresenter(Game modelGame, PlayerManager modelPM, HighScoreView view) {
         this.modelGame = modelGame;
@@ -28,7 +26,7 @@ public class HighScorePresenter {
     }
 
     private void addEventHandlers() {
-        view.getGoBack().setOnAction(event -> { updateScene();});
+        view.getGoBack().setOnAction(event -> updateScene());
     }
 
     private void updateScene() {

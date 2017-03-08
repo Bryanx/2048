@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.Result;
+package be.kdg.thegame_2048.views.result;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

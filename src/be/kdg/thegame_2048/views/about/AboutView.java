@@ -1,16 +1,10 @@
-package be.kdg.thegame_2048.views.About;
+package be.kdg.thegame_2048.views.about;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
 
 /**
  * @author Bryan de Ridder
@@ -35,7 +29,7 @@ public class AboutView extends BorderPane {
         layoutNodes(0);
     }
 
-    protected void initialiseNodes() {
+    private void initialiseNodes() {
         //header
         this.lblHeader = new Label("How to play");
 
@@ -62,7 +56,7 @@ public class AboutView extends BorderPane {
         addStyles();
     }
 
-    protected void layoutNodes(int i) {
+    void layoutNodes(int i) {
         this.setTop(new BorderPane(lblHeader));
         ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
         Label[] explanations = {lblExplanation1, lblExplanation2, lblExplanation3};

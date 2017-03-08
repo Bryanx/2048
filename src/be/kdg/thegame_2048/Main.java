@@ -2,14 +2,12 @@ package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Start.StartPresenter;
-import be.kdg.thegame_2048.views.Start.StartView;
+import be.kdg.thegame_2048.views.start.StartPresenter;
+import be.kdg.thegame_2048.views.start.StartView;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * @author Bryan de Ridder, Jarne Van Aerde
@@ -23,7 +21,7 @@ public class Main extends Application {
         PlayerManager model = new PlayerManager();
         model.getPlayerList().addAll(drw.loadPlayerData());
         StartView view = new StartView();
-        StartPresenter presenter = new StartPresenter(model, view);
+        new StartPresenter(model, view);
 
         //PUTTING TOGETHER THE SCENE
         Scene scene = new Scene(view);

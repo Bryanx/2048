@@ -1,23 +1,15 @@
-package be.kdg.thegame_2048.views.Game;
+package be.kdg.thegame_2048.views.game;
 
-import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Alert.AlertView;
-import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
-import be.kdg.thegame_2048.views.HighScores.HighScoreView;
-import be.kdg.thegame_2048.views.Result.ResultPresenter;
-import be.kdg.thegame_2048.views.Result.ResultView;
-import be.kdg.thegame_2048.views.Start.StartPresenter;
-import be.kdg.thegame_2048.views.Start.StartView;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
+import be.kdg.thegame_2048.views.undo.UndoPresenter;
+import be.kdg.thegame_2048.views.undo.UndoView;
+import be.kdg.thegame_2048.views.highscores.HighScorePresenter;
+import be.kdg.thegame_2048.views.highscores.HighScoreView;
+import be.kdg.thegame_2048.views.result.ResultPresenter;
+import be.kdg.thegame_2048.views.result.ResultView;
+import be.kdg.thegame_2048.views.start.StartPresenter;
+import be.kdg.thegame_2048.views.start.StartView;
 
 /**
  * @author Jarne Van Aerde
@@ -26,12 +18,12 @@ import javafx.util.Duration;
 public class GamePresenter {
     //ATTRIBUTES
     private Game modelGame;
-    private PlayerManager modelPlayerMananger;
-    private GameView view;
-    private GameBottomView bottomView;
-    private GameMiddleView midView;
-    private GameTopView topView;
-    private AnimationView animationView;
+    private final PlayerManager modelPlayerMananger;
+    private final GameView view;
+    private final GameBottomView bottomView;
+    private final GameMiddleView midView;
+    private final GameTopView topView;
+    private final AnimationView animationView;
     private boolean alreadyWon;
     private boolean firstRun;
 
@@ -63,14 +55,10 @@ public class GamePresenter {
             updateView();
         });
         bottomView.getBtnUndo().setOnAction(event -> {
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setHeaderText("Are you sure you want to undo your last move?\n" +
-//                    "Your score will no longer be added to the highscores.");
-//            alert.setTitle("Undo");
-//            alert.showAndWait();
-            AlertView alert = new AlertView();
+            UndoView alert = new UndoView();
             alert.getLblMessage().setText("Are you sure you want to undo \nyour last move? " +
                     "Your score will no longer \nbe added to the highscores.");
+            new UndoPresenter(modelGame, alert, view);
             view.setView(alert);
         });
         bottomView.getBtnHighScores().setOnAction(event -> {

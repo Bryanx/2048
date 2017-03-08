@@ -1,10 +1,9 @@
-package be.kdg.thegame_2048.views.Game;
+package be.kdg.thegame_2048.views.game;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -13,7 +12,6 @@ import javafx.scene.paint.Color;
  * @version 1.0 17-02-17 10:45
  */
 class GameBottomView extends BorderPane {
-    private static final ImageView IMG_CUP = new ImageView("be/kdg/thegame_2048/views/img/highscores.png");
     private Button btnRestart;
     private Button btnUndo;
     private Button btnHighScores;

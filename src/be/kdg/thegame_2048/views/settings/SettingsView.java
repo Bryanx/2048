@@ -1,12 +1,8 @@
-package be.kdg.thegame_2048.views.Settings;
+package be.kdg.thegame_2048.views.settings;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 /**
  * @author Jarne van Aerde, Bryan de Ridder
@@ -24,9 +20,9 @@ public class SettingsView extends BorderPane {
         layoutNodes();
     }
 
-    protected void initialiseNodes() {
+    private void initialiseNodes() {
         //header
-        this.lblHeader = new Label("Settings");
+        this.lblHeader = new Label("settings");
 
         this.slBlockValue = new Slider(1,10,1);
 
@@ -36,7 +32,7 @@ public class SettingsView extends BorderPane {
         addStyles();
     }
 
-    protected void layoutNodes() {
+    private void layoutNodes() {
         this.setTop(new BorderPane(lblHeader));
 
         BorderPane bottom = new BorderPane(btnGoBack);

@@ -6,7 +6,7 @@ package be.kdg.thegame_2048.models;
  */
 public final class Game {
     /**
-     * The Game class puts everyting together. It represents the game as a whole.
+     * The game class puts everyting together. It represents the game as a whole.
      * This has access to most of the other model classes.
      **/
     public enum Direction {
@@ -15,9 +15,9 @@ public final class Game {
 
     final static private int STAETVALUE = 2;
 
-    private Score score;
-    private PlayerManager manager;
-    private Playground playground;
+    private final Score score;
+    private final PlayerManager manager;
+    private final Playground playground;
     private String lastMove;
     private String currentMove;
 
@@ -38,7 +38,8 @@ public final class Game {
      * Only used when player presses on the undo-button.
      **/
     public void goToLastMove() {
-        String fields[] = this.lastMove.replaceAll("\n", "").split(" ");
+        System.out.println(this.lastMove.replaceAll("\n", "").replaceAll("  "," "));
+        String fields[] = this.lastMove.replaceAll("\n", "").replaceAll("  "," ").split(" ");
         Section[][] sections = new Section[4][4];
 
         for (int i = 0; i < 4; i++) {
@@ -155,10 +156,16 @@ public final class Game {
         return score;
     }
 
+    /**
+     * Returns the value of an individual block after a move method has been performed.
+     **/
     public int getPieceValue(int x, int y) {
         return playground.getSections()[x][y].getBlock().getValue();
     }
 
+    /**
+     * Returns an individual block after a move method has been performed.
+     **/
     public Block getPiece(int x, int y) {
         return playground.getSections()[x][y].getBlock();
     }

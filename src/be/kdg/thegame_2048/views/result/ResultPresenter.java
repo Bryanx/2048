@@ -1,24 +1,22 @@
-package be.kdg.thegame_2048.views.Result;
+package be.kdg.thegame_2048.views.result;
 
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
-import be.kdg.thegame_2048.views.Game.GamePresenter;
-import be.kdg.thegame_2048.views.Game.GameView;
-import be.kdg.thegame_2048.views.Start.StartPresenter;
-import be.kdg.thegame_2048.views.Start.StartView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
+import be.kdg.thegame_2048.views.game.GamePresenter;
+import be.kdg.thegame_2048.views.game.GameView;
+import be.kdg.thegame_2048.views.start.StartPresenter;
+import be.kdg.thegame_2048.views.start.StartView;
+import javafx.event.Event;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 21:57
  */
 public class ResultPresenter {
-    private PlayerManager modelPM;
+    private final PlayerManager modelPM;
+    private final ResultView view;
+    private final GameView gameView;
     private Game modelGame;
-    private ResultView view;
-    private GameView gameView;
 
     public ResultPresenter(PlayerManager model, ResultView view, Game modelGame, GameView gameView) {
         this.modelPM = model;
@@ -42,10 +40,8 @@ public class ResultPresenter {
             modelGame = new Game(modelPM);
             new GamePresenter(modelGame, modelPM, gameView);
         });
-        view.setOnKeyPressed(event -> {
-            //Keyboard is blocked when resultpresenter is active
-            event.consume();
-        });
+        //Keyboard is blocked when resultpresenter is active
+        view.setOnKeyPressed(Event::consume);
 
     }
     private void updateView() {

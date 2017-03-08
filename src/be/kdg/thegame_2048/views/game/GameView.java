@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.Game;
+package be.kdg.thegame_2048.views.game;
 
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;

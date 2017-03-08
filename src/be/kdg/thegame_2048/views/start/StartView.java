@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.Start;
+package be.kdg.thegame_2048.views.start;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,12 +11,12 @@ import javafx.scene.layout.*;
  * @version 1.0 5/02/2017 18:49
  */
 public final class StartView extends BorderPane {
-    private static final int OVERALL_PADDING = 50;
     private static final ImageView IMG_LOGO = new ImageView("be/kdg/thegame_2048/views/img/logo.png");
     private static final ImageView IMG_UFO = new ImageView("be/kdg/thegame_2048/views/img/ufo.png");
     private static final ImageView IMG_MAN = new ImageView("be/kdg/thegame_2048/views/img/user.png");
     private static final ImageView IMG_JOYSTICK = new ImageView("be/kdg/thegame_2048/views/img/about.png");
     private static final ImageView IMG_SETTINGS = new ImageView("be/kdg/thegame_2048/views/img/settings.png");
+    private static final int OVERALL_PADDING = 50;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
     private Button btnAbout;
@@ -34,11 +34,11 @@ public final class StartView extends BorderPane {
         //Creates the Existing Player button and adds an icon:
         this.btnExistingPlayer = new Button("Existing Player", IMG_MAN);
 
-        //Creates the About button and adds an icon:
+        //Creates the about button and adds an icon:
         this.btnAbout = new Button("How to play", IMG_JOYSTICK);
 
-        //Creates the Settings button and adds an icon:
-        this.btnSettings = new Button("Settings", IMG_SETTINGS);
+        //Creates the settings button and adds an icon:
+        this.btnSettings = new Button("settings", IMG_SETTINGS);
 
         addStyles();
     }
