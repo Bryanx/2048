@@ -3,6 +3,7 @@ package be.kdg.thegame_2048.views.Game;
 import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.views.Alert.AlertView;
 import be.kdg.thegame_2048.views.HighScores.HighScorePresenter;
 import be.kdg.thegame_2048.views.HighScores.HighScoreView;
 import be.kdg.thegame_2048.views.Result.ResultPresenter;
@@ -13,6 +14,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -52,6 +54,25 @@ public class GamePresenter {
 
     //METHODEN
     private void addEventHandlers() {
+        bottomView.getBtnRestart().setOnAction(event -> {
+            alreadyWon = false;
+            firstRun = true;
+            modelPlayerMananger.saveInfoCurrentPlayer();
+            modelGame = new Game(modelPlayerMananger);
+            topView.getLblScoreInput().setText("0");
+            updateView();
+        });
+        bottomView.getBtnUndo().setOnAction(event -> {
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setHeaderText("Are you sure you want to undo your last move?\n" +
+//                    "Your score will no longer be added to the highscores.");
+//            alert.setTitle("Undo");
+//            alert.showAndWait();
+            AlertView alert = new AlertView();
+            alert.getLblMessage().setText("Are you sure you want to undo \nyour last move? " +
+                    "Your score will no longer \nbe added to the highscores.");
+            view.setView(alert);
+        });
         bottomView.getBtnHighScores().setOnAction(event -> {
             modelPlayerMananger.saveInfoCurrentPlayer();
             HighScoreView hsView = new HighScoreView();
@@ -64,14 +85,6 @@ public class GamePresenter {
             StartView startView = new StartView();
             new StartPresenter(modelPlayerMananger, startView);
             view.getScene().setRoot(startView);
-        });
-        bottomView.getBtnRestart().setOnAction(event -> {
-            alreadyWon = false;
-            firstRun = true;
-            modelPlayerMananger.saveInfoCurrentPlayer();
-            modelGame = new Game(modelPlayerMananger);
-            topView.getLblScoreInput().setText("0");
-            updateView();
         });
         view.setOnKeyPressed(event -> {
             final int prevScore = modelGame.getScore().getScore();

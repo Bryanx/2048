@@ -16,6 +16,11 @@ BG darker:
     -fx-text-fill: #006464;
 }
 
+.button {
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
 /*  ========== StartView ========== */
 .tfPlayer {
     -fx-font-size: 18pt;
@@ -24,11 +29,9 @@ BG darker:
 
 .btnStartView {
     -fx-content-display: top;
-    -fx-background-color: none;
     -fx-font-family: "Calibri";
     -fx-font-size: 24pt;
     -fx-text-fill: #006464;
-    -fx-cursor: hand;
     -fx-graphic-text-gap: 10px;
 }
 
@@ -52,45 +55,46 @@ BG darker:
     -fx-text-fill: gray;
 }
 
-.btnHighScores {
-    -fx-background-color: none;
-    -fx-cursor: hand;
-}
-
-.btnHighScores:hover {
-    -fx-graphic: url("../img/highscores-hover.png");
-}
-
-.btnHighScores:pressed {
-    -fx-graphic: url("../img/highscores-pressed.png");
-}
-
 .btnRestart {
     -fx-graphic: url("../img/restart.png");
-    -fx-background-color: none;
-    -fx-cursor: hand;
 }
 
 .btnRestart:hover {
     -fx-graphic: url("../img/restart-hover.png");
 }
 
-.btnRestart:pressed {
-    -fx-graphic: url("../img/restart-pressed.png");
+.btnUndo {
+    -fx-graphic: url("../img/undo.png");
 }
 
-.btnExit {
-    -fx-background-color: none;
+.btnUndo:hover {
+    -fx-graphic: url("../img/undo-hover.png");
+}
+
+.btnHighScores {
+    -fx-graphic: url("../img/highscores.png");
+}
+
+.btnHighScores:hover {
+    -fx-graphic: url("../img/highscores-hover.png");
+}
+
+.btnExit,.btnCancel {
     -fx-graphic: url("../img/exit.png");
-    -fx-cursor: hand;
 }
 
 .btnExit:hover {
     -fx-graphic: url("../img/exit-hover.png");
 }
 
-.btnExit:pressed {
-    -fx-graphic: url("../img/exit-pressed.png");
+.btnCancel:hover {
+    -fx-graphic: url("../img/cancel-hover.png");
+}
+.btnAccept {
+    -fx-graphic: url("../img/accept.png");
+}
+.btnAccept:hover {
+    -fx-graphic: url("../img/accept-hover.png");
 }
 
 /* ========== NewPlayerView & ExistingPlayerView ========== */
@@ -102,10 +106,6 @@ BG darker:
 
 .btnGoBack:hover {
     -fx-graphic: url("../img/goback-hover.png");
-}
-
-.btnGoBack:pressed {
-    -fx-graphic: url("../img/goback-pressed.png");
 }
 
 .inputError {

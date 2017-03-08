@@ -40,9 +40,9 @@ public final class GameView extends BorderPane {
         this.setCenter(container);
     }
 
-    void setView(BorderPane result) {
+    void setView(BorderPane pane) {
         container.setEffect(new GaussianBlur());
-        StackPane stack = new StackPane(container, result);
+        StackPane stack = new StackPane(container, pane);
         this.setCenter(stack);
     }
 

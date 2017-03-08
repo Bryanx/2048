@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 class GameBottomView extends BorderPane {
     private static final ImageView IMG_CUP = new ImageView("be/kdg/thegame_2048/views/img/highscores.png");
     private Button btnRestart;
+    private Button btnUndo;
     private Button btnHighScores;
     private Button btnExit;
 
@@ -25,7 +26,9 @@ class GameBottomView extends BorderPane {
 
     private void initialiseNodes() {
         this.btnRestart = new Button();
-        this.btnHighScores = new Button("", IMG_CUP);
+        this.btnUndo = new Button();
+        this.btnHighScores = new Button();
+        this.btnRestart = new Button();
         this.btnExit = new Button();
         addStyles();
     }
@@ -33,8 +36,9 @@ class GameBottomView extends BorderPane {
     private void layoutNodes() {
         GridPane gridBottom = new GridPane();
         gridBottom.add(btnRestart, 0, 0);
-        gridBottom.add(btnHighScores, 1, 0);
-        gridBottom.add(btnExit, 2, 0);
+        gridBottom.add(btnUndo, 1, 0);
+        gridBottom.add(btnHighScores, 2, 0);
+        gridBottom.add(btnExit, 3, 0);
         gridBottom.setMaxWidth(GameView.SCENE_WIDTH - GameView.OVERALL_PADDING * 2);
         gridBottom.setMinHeight(GameView.HEIGHT_OUTER_PANELS);
         Button[] buttons = {btnHighScores, btnRestart, btnExit};
@@ -51,6 +55,7 @@ class GameBottomView extends BorderPane {
     private void addStyles() {
         btnHighScores.getStyleClass().add("btnHighScores");
         btnRestart.getStyleClass().add("btnRestart");
+        btnUndo.getStyleClass().add("btnUndo");
         btnExit.getStyleClass().add("btnExit");
     }
 
@@ -64,5 +69,9 @@ class GameBottomView extends BorderPane {
 
     Button getBtnRestart() {
         return btnRestart;
+    }
+
+    Button getBtnUndo() {
+        return btnUndo;
     }
 }
