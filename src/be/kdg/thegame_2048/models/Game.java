@@ -173,14 +173,14 @@ public final class Game {
     }
 
     /**
-     * Returns a string of the last move
+     * Returns a string of the last move.
      **/
     public String getLastMove() {
         return lastMove;
     }
 
     /**
-     * Returns a string of the current move
+     * Returns a string of the current move.
      **/
     public String getCurrentMove() {
         return currentMove;
