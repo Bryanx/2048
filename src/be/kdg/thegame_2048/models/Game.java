@@ -40,7 +40,6 @@ public final class Game {
      * Only used when player presses on the undo-button.
      **/
     public void goToLastMove() {
-        System.out.println(this.lastMove.replaceAll("\n", "").replaceAll("  ", " "));
         String fields[] = this.lastMove.replaceAll("\n", "").replaceAll("  ", " ").split(" ");
         Section[][] sections = new Section[4][4];
 

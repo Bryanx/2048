@@ -10,6 +10,8 @@ import be.kdg.thegame_2048.views.result.ResultPresenter;
 import be.kdg.thegame_2048.views.result.ResultView;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
+import javafx.animation.Animation;
+import javafx.scene.input.KeyCode;
 
 /**
  * @author Jarne Van Aerde
@@ -54,19 +56,22 @@ public class GamePresenter {
             topView.getLblScoreInput().setText("0");
             updateView();
         });
+
         bottomView.getBtnUndo().setOnAction(event -> {
             UndoView alert = new UndoView();
-            alert.getLblMessage().setText("Are you sure you want to undo \nyour last move? " +
+            alert.getLblMessage().setText("Are you sure you want to undo \nyour last animateMovement? " +
                     "Your score will no longer \nbe added to the highscores.");
             new UndoPresenter(modelGame, alert, view, this);
             view.setView(alert);
         });
+
         bottomView.getBtnHighScores().setOnAction(event -> {
             if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             HighScoreView hsView = new HighScoreView();
             new HighScorePresenter(modelGame, modelPlayerMananger, hsView);
             view.getScene().setRoot(hsView);
         });
+
         bottomView.getBtnExit().setOnAction(event -> {
             if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             modelPlayerMananger.setCurrentPlayerToNull();
@@ -74,34 +79,30 @@ public class GamePresenter {
             new StartPresenter(modelPlayerMananger, startView);
             view.getScene().setRoot(startView);
         });
+
         view.setOnKeyPressed(event -> {
-            final int prevScore = modelGame.getScore().getScore();
-            try {
-                switch (event.getCode()) {
-                    case DOWN:updateViewBlocks(Game.Direction.DOWN);
-                        animationView.moveDown();break;
-                    case UP:updateViewBlocks(Game.Direction.TOP);
-                        animationView.moveUp();break;
-                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);
-                        animationView.moveRight();break;
-                    case LEFT:updateViewBlocks(Game.Direction.LEFT);
-                        animationView.moveLeft();break;
+            if (animationView.getParallelTransition().getStatus() != Animation.Status.RUNNING) {
+                final int prevScore = modelGame.getScore().getScore();
+                final KeyCode direction = event.getCode();
+                switch (direction) {
+                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
+                    case UP:updateViewBlocks(Game.Direction.TOP);break;
+                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
+                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
                     default:event.consume();
                 }
-            } catch (IllegalArgumentException e) {
-                //TODO: IMPLEMENT PROPER ERROR HANDLING.
+                final int currScore = modelGame.getScore().getScore();
+                animationView.animateMovement(direction);
+                modelPlayerMananger.setCurrentPlayerScore(currScore);
+                if (currScore - prevScore > 0) {
+                    animationView.animateScore(currScore - prevScore);
+                }
             }
-            final int currScore = modelGame.getScore().getScore();
-            if (currScore-prevScore > 0) {
-                animationView.animateScore(currScore-prevScore);
-            }
-
-            animationView.getParallelTransition().play();
-            modelPlayerMananger.setCurrentPlayerScore(currScore);
         });
-        animationView.getParallelTransition().setOnFinished(event ->  {
-                animationView.resetAnimation();
-                updateView();
+
+        animationView.getParallelTransition().setOnFinished(event -> {
+            animationView.resetAnimation();
+            updateView();
         });
     }
 

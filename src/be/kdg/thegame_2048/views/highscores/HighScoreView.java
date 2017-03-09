@@ -69,23 +69,17 @@ public final class HighScoreView extends BorderPane {
     }
 
     void updateHighScore(List<String> names, List<Integer> scores) {
-        //Adds the players to the highscorelist (max=10)
-        //Number 1 on the list is also rank 1 of the highscores
-        if (names.size() < 10) {
-            playerAmount = names.size();
-        } else {
-            playerAmount = 10;
-        }
+        setPlayerAmount(names.size());
 
         for (int i = 0; i < playerAmount; i++) {
             lblHsRanks.add(new Label(i + 1 + "")); //Rank
             lblHsNames.add(new Label(names.get(i).toUpperCase().charAt(0) + names.get(i).substring(1))); //Name
             lblHsScores.add(new Label(String.valueOf(scores.get(i)))); //Score
         }
-        for (int i = 0; i < playerAmount; i++) {
-            lblHsRanks.get(i + 1).getStyleClass().add("hsColumnFillRanks");
-            lblHsNames.get(i + 1).getStyleClass().add("hsColumnFill");
-            lblHsScores.get(i + 1).getStyleClass().add("hsColumnFill");
+        for (int i = 1; i <= playerAmount; i++) {
+            lblHsRanks.get(i).getStyleClass().add("hsColumnFillRanks");
+            lblHsNames.get(i).getStyleClass().add("hsColumnFill");
+            lblHsScores.get(i).getStyleClass().add("hsColumnFill");
         }
 
         //MIDDLE (Actual highscores, including the column lblHsNames)
@@ -106,6 +100,17 @@ public final class HighScoreView extends BorderPane {
         VBox vBox = new VBox(new BorderPane(grid), new BorderPane(goBack));
         vBox.setMaxWidth(SCENE_WIDTH-OVERALL_PADDING*2);
         this.setCenter(vBox);
+    }
+
+    /**
+     * Adds the players to the highscorelist (max=10)
+     **/
+    private void setPlayerAmount(int amount) {
+        if (amount < 10) {
+            playerAmount = amount;
+        } else {
+            playerAmount = 10;
+        }
     }
 
     void highlightPlayer(String naam) {

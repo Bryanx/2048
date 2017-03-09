@@ -65,6 +65,14 @@ public final class PlayerManager {
         return false;
     }
 
+    public void saveInfoCurrentPlayer() {
+        int bestScore = this.currentPlayer.getBestScore();
+
+        if (currentPlayerScore > bestScore) {
+            this.currentPlayer.setBestScore(currentPlayerScore);
+        }
+    }
+
     /**
      * Returns the list of players.
      * Its only use if for the highscoreView.

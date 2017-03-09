@@ -25,14 +25,12 @@ public class UndoPresenter {
     private void addEventHandlers() {
         view.getBtnAccept().setOnAction(event -> {
             model.setPlayingUndo(true);
-            this.model.goToLastMove();
+            if (model.getLastMove() != null) this.model.goToLastMove();
             this.gamePresenter.updateView();
             this.gameView.layoutNodes();
             gamePresenter.disablrButtom();
         });
-        view.getBtnCancel().setOnAction(event -> {
-            this.gameView.layoutNodes();
-        });
+        view.getBtnCancel().setOnAction(event -> this.gameView.layoutNodes());
 
     }
     private void updateView() {
