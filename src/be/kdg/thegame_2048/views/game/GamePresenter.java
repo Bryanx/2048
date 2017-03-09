@@ -58,7 +58,7 @@ public class GamePresenter {
             UndoView alert = new UndoView();
             alert.getLblMessage().setText("Are you sure you want to undo \nyour last move? " +
                     "Your score will no longer \nbe added to the highscores.");
-            new UndoPresenter(modelGame, alert, view);
+            new UndoPresenter(modelGame, alert, view, this);
             view.setView(alert);
         });
         bottomView.getBtnHighScores().setOnAction(event -> {
@@ -105,7 +105,7 @@ public class GamePresenter {
         });
     }
 
-    private void updateView() {
+    public void updateView() {
         int randomblockX = modelGame.getCoordRandomBlockX();
         int randomblockY = modelGame.getCoordRandomBlockY();
 
