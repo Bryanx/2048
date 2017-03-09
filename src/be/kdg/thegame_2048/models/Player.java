@@ -9,19 +9,15 @@ public class Player implements Comparable<Player> {
      * This class is used to store all the relevant player-data
      **/
     //TODO: IMPLEMENT STORAGE OF LAST MOVE.
-    //EIGENSCHAPPEN
     private final String name;
     private int bestScore;
     private String lastMove;
     private int highestBlockValue;
 
-    //CONSTRUCTORS
     Player(String name, int bestScore) {
         this.name = name;
         this.bestScore = bestScore;
     }
-
-    //METHODEN
 
     /**
      * Returns a string of the last move.
