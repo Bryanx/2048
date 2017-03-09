@@ -69,7 +69,7 @@ class GameBottomView extends BorderPane {
         return btnRestart;
     }
 
-    Button getBtnUndo() {
+    public Button getBtnUndo() {
         return btnUndo;
     }
 }

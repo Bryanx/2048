@@ -20,10 +20,12 @@ public final class Game {
     private final Playground playground;
     private String lastMove;
     private String currentMove;
+    private boolean isPlayingUndo;
 
     public Game(PlayerManager playerManager) {
         this.score = new Score();
         this.playground = new Playground(this.score);
+        this.isPlayingUndo = false;
 
         this.manager = playerManager;
 
@@ -38,8 +40,8 @@ public final class Game {
      * Only used when player presses on the undo-button.
      **/
     public void goToLastMove() {
-        System.out.println(this.lastMove.replaceAll("\n", "").replaceAll("  "," "));
-        String fields[] = this.lastMove.replaceAll("\n", "").replaceAll("  "," ").split(" ");
+        System.out.println(this.lastMove.replaceAll("\n", "").replaceAll("  ", " "));
+        String fields[] = this.lastMove.replaceAll("\n", "").replaceAll("  ", " ").split(" ");
         Section[][] sections = new Section[4][4];
 
         for (int i = 0; i < 4; i++) {
@@ -182,6 +184,20 @@ public final class Game {
      **/
     public String getCurrentMove() {
         return currentMove;
+    }
+
+    /**
+     * If the player is playing with the undo, then the score won't be saved.
+     **/
+    public boolean isPlayingUndo() {
+        return isPlayingUndo;
+    }
+
+    /**
+     * Sets the boolean to true if the player decides to play with the undo button
+     **/
+    public void setPlayingUndo(boolean playingUndo) {
+        isPlayingUndo = playingUndo;
     }
 
     /**

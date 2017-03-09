@@ -49,7 +49,7 @@ public class GamePresenter {
         bottomView.getBtnRestart().setOnAction(event -> {
             alreadyWon = false;
             firstRun = true;
-            modelPlayerMananger.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             modelGame = new Game(modelPlayerMananger);
             topView.getLblScoreInput().setText("0");
             updateView();
@@ -62,13 +62,13 @@ public class GamePresenter {
             view.setView(alert);
         });
         bottomView.getBtnHighScores().setOnAction(event -> {
-            modelPlayerMananger.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             HighScoreView hsView = new HighScoreView();
             new HighScorePresenter(modelGame, modelPlayerMananger, hsView);
             view.getScene().setRoot(hsView);
         });
         bottomView.getBtnExit().setOnAction(event -> {
-            modelPlayerMananger.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             modelPlayerMananger.setCurrentPlayerToNull();
             StartView startView = new StartView();
             new StartPresenter(modelPlayerMananger, startView);
@@ -147,7 +147,7 @@ public class GamePresenter {
         if (alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
             alreadyWon = true;
-            modelPlayerMananger.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             ResultView resultView = new ResultView();
             new ResultPresenter(modelPlayerMananger, resultView, modelGame, view);
             view.setView(resultView);
@@ -157,5 +157,9 @@ public class GamePresenter {
     boolean isMovable() {
         return modelGame.getLastMove() == null ||
                 modelGame.getLastMove().equals(modelGame.getCurrentMove());
+    }
+
+    public void disablrButtom() {
+        bottomView.getBtnUndo().setDisable(true);
     }
 }

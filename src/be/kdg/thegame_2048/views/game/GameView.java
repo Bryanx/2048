@@ -54,7 +54,7 @@ public final class GameView extends BorderPane {
         return gameMiddleView;
     }
 
-    GameBottomView getBottomView() {
+    public GameBottomView getBottomView() {
         return gameBottomView;
     }
 
