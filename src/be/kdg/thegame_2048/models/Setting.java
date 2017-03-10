@@ -1,7 +1,7 @@
 package be.kdg.thegame_2048.models;
 
 /**
- * @author Jarne Van Aerde
+ * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 10/03/2017 9:23
  */
 public class Setting {

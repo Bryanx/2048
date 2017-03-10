@@ -14,7 +14,7 @@ import javafx.animation.Animation;
 import javafx.scene.input.KeyCode;
 
 /**
- * @author Jarne Van Aerde
+ * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 17/02/2017 9:28
  */
 public class GamePresenter {
@@ -28,6 +28,7 @@ public class GamePresenter {
     private final AnimationView animationView;
     private boolean alreadyWon;
     private boolean firstRun;
+    private boolean undoGreyedOut;
     private int prevScore;
 
     //CONSTRUCTORS
@@ -87,11 +88,20 @@ public class GamePresenter {
                 final KeyCode direction = event.getCode();
                 prevScore = modelGame.getScore().getScore();
                 switch (direction) {
-                    case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
-                    case UP:updateViewBlocks(Game.Direction.TOP);break;
-                    case RIGHT:updateViewBlocks(Game.Direction.RIGHT);break;
-                    case LEFT:updateViewBlocks(Game.Direction.LEFT);break;
-                    default:event.consume();
+                    case DOWN:
+                        updateViewBlocks(Game.Direction.DOWN);
+                        break;
+                    case UP:
+                        updateViewBlocks(Game.Direction.TOP);
+                        break;
+                    case RIGHT:
+                        updateViewBlocks(Game.Direction.RIGHT);
+                        break;
+                    case LEFT:
+                        updateViewBlocks(Game.Direction.LEFT);
+                        break;
+                    default:
+                        event.consume();
                 }
                 final int currScore = modelGame.getScore().getScore();
                 animationView.animateMovement(direction);
@@ -149,7 +159,6 @@ public class GamePresenter {
         }
         topView.getLblScoreInput().setText(String.valueOf(score));
     }
-
 
 
     private void checkIfLostOrWin() {

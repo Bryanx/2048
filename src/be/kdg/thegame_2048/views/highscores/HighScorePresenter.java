@@ -9,7 +9,7 @@ import be.kdg.thegame_2048.views.game.GameView;
 import java.util.*;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 17-02-17 09:46
  */
 public class HighScorePresenter {

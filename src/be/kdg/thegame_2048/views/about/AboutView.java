@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 17-02-17 12:11
  */
 public class AboutView extends BorderPane {

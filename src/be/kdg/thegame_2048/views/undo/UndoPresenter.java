@@ -5,7 +5,7 @@ import be.kdg.thegame_2048.views.game.GamePresenter;
 import be.kdg.thegame_2048.views.game.GameView;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 08-03-17 16:21
  */
 public class UndoPresenter {
