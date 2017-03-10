@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.settings;
 
+import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
@@ -22,6 +23,7 @@ public class SettingsPresenter {
 
     private void addEventHandlers() {
         view.getBtnGoBack().setOnAction(event -> {
+            //DataReaderWriter.saveSettings();
             StartView startView = new StartView();
             new StartPresenter(model, startView);
             view.getScene().setRoot(startView);

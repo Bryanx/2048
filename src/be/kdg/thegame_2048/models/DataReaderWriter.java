@@ -101,10 +101,43 @@ public class DataReaderWriter {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
-            writer.append(message);
+            writer.write(message);
         } catch (IOException e) {
             System.out.println("Fundamental problem to the log-IO. Contact support!");
             System.exit(1);
+        }
+    }
+
+    /**
+     * Writes all the current settings to a text file
+     **/
+    public static void saveSettings(String backgroundcolor) {
+        Path playerData = Paths.get("data");
+        Path settings = playerData.resolve("settings.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(settings.toFile()))) {
+            if (!Files.exists(playerData)) Files.createDirectory(playerData);
+            if (!Files.exists(settings)) Files.createFile(settings);
+
+            writer.write(backgroundcolor);
+        } catch (IOException e) {
+            writeToLog(e.getMessage());
+        }
+    }
+
+    /**
+     * Loads all the current settings form the text file.
+     **/
+    public static void loadSettings(Setting setting) {
+        Path playerData = Paths.get("data");
+        Path settings = playerData.resolve("settings.txt");
+        try (BufferedReader reader = new BufferedReader(new FileReader(settings.toFile()))) {
+            if (!Files.exists(playerData)) return;
+            if (!Files.exists(settings)) return;
+
+            String[] settingSplitted = reader.readLine().split(":");
+            setting.setBackgroundcolor(settingSplitted[1]);
+        } catch (IOException e) {
+            writeToLog(e.getMessage());
         }
     }
 }

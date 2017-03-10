@@ -2,6 +2,7 @@ package be.kdg.thegame_2048;
 
 import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.PlayerManager;
+import be.kdg.thegame_2048.models.Setting;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
 import javafx.application.Application;
@@ -18,6 +19,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         //MAKING CLASSES
         PlayerManager model = new PlayerManager();
+        Setting setting = new Setting();
+        DataReaderWriter.loadSettings(setting);
         model.getPlayerList().addAll(DataReaderWriter.loadPlayerData());
         StartView view = new StartView();
         new StartPresenter(model, view);
