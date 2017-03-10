@@ -8,7 +8,6 @@ public class Player implements Comparable<Player> {
     /**
      * This class is used to store all the relevant player-data
      **/
-    //TODO: IMPLEMENT STORAGE OF LAST MOVE.
     private final String name;
     private int bestScore;
     private String lastMove;

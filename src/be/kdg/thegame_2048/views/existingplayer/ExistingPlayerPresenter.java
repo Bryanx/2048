@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.existingplayer;
 
+import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.game.GamePresenter;
@@ -46,10 +47,10 @@ public class ExistingPlayerPresenter {
             model.setCurrentPlayer(name);
             updateScene();
         } else {
-            new IllegalArgumentException("Name was already used.");
-            //TODO: IMPLEMENT PROPER ERROR HANDLING.
             view.getNameDoesntExistError().setText("Player doesn't exist.");
             view.getNameDoesntExistError().setVisible(true);
+            IllegalArgumentException iea = new IllegalArgumentException("Name was already used.");
+            DataReaderWriter.writeToLog(iea.getMessage());
         }
     }
 

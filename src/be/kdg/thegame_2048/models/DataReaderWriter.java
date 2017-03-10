@@ -12,20 +12,10 @@ import java.util.*;
  * @version 1.0 24/02/2017 10:08
  */
 public class DataReaderWriter {
-    private String log = "";
-
-    /**
-     * Used to store all the exceptions in one string.
-     **/
-    public void setLog(String exception) {
-        String logMessage = LocalTime.now() + "\n" + exception + "\n\n";
-        this.log = logMessage;
-    }
-
     /**
      * Decription was used while loading the playerdata.
      **/
-    public List<Player> loadPlayerData() {
+    public static List<Player> loadPlayerData() {
         Path data = Paths.get("data" + File.separator + "playerdata.txt");
         Path decoderData = Paths.get("data" + File.separator + "encripted.txt");
         List<Player> playerList = new ArrayList<>();
@@ -54,8 +44,7 @@ public class DataReaderWriter {
                 info = reader.readLine();
             }
         } catch (IOException e) {
-            setLog(e.getMessage() + "\n");
-            //TODO: give the user feedback
+            writeToLog(e.getMessage());
         }
         return playerList;
     }
@@ -63,7 +52,7 @@ public class DataReaderWriter {
     /**
      * Incription was used while writing the playerdata.
      **/
-    public void savePlayerData(List<Player> playerList) {
+    public static void savePlayerData(List<Player> playerList) {
         Path playerdata = Paths.get("data");
         Path data = playerdata.resolve("playerdata.txt");
         Path encription = playerdata.resolve("encripted.txt");
@@ -98,22 +87,21 @@ public class DataReaderWriter {
             formatter.format(String.valueOf(randomEncriptionCode));
             formatter.close();
         } catch (IOException e) {
-            setLog(e.getMessage());
-            //TODO: give the user feedback
+            writeToLog(e.getMessage());
         }
     }
 
     /**
      * Writes all error messages to a text file
      **/
-    public void writeToLog() {
+    public static void writeToLog(String message) {
         Path playerData = Paths.get("data");
-        Path errorMessage = playerData.resolve("error.txt");
+        Path errorMessage = playerData.resolve("errorLog.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()))) {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
-            writer.append(log);
+            writer.append(message);
         } catch (IOException e) {
             System.out.println("Fundamental problem to the log-IO. Contact support!");
             System.exit(1);

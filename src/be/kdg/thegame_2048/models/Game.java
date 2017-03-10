@@ -198,19 +198,4 @@ public final class Game {
     public void setPlayingUndo(boolean playingUndo) {
         isPlayingUndo = playingUndo;
     }
-
-    /**
-     * Gives back the highest block value that's currently on the playground
-     **/
-    public int getHighestBlockValue() {
-        Section[][] sections = playground.getSections();
-        int highestValue = 2;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (sections[i][j].getBlock().getValue() > highestValue)
-                    highestValue = sections[i][j].getBlock().getValue();
-            }
-        }
-        return highestValue;
-    }
 }

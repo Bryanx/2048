@@ -1,5 +1,6 @@
 package be.kdg.thegame_2048.views.newPlayer;
 
+import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.Game;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.game.GamePresenter;
@@ -44,10 +45,10 @@ public class NewPlayerPresenter {
             view.getLblInputError().setText("Name already exists");
             view.getLblInputError().setVisible(true);
         } else if (name.length() < 3 || name.length() > 15) {
-            new IllegalArgumentException("Name was to short or to long.");
-            //TODO: IMPLEMENT PROPER ERROR HANDLING.
             view.getLblInputError().setText("Name has to be between 3 and 15 characters long");
             view.getLblInputError().setVisible(true);
+            IllegalArgumentException iae = new IllegalArgumentException("Name was to short or to long.");
+            DataReaderWriter.writeToLog(iae.getMessage());
         } else {
             model.addPlayer(name);
             model.setCurrentPlayer(name);
