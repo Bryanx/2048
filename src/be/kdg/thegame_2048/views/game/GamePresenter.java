@@ -138,12 +138,15 @@ public class GamePresenter {
 
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
-        int score = modelGame.getScore().getScore();
+        updateViewScore(modelGame.getScore().getScore());
+        checkIfLostOrWin();
+    }
+
+    public void updateViewScore(int score) {
         if (modelPlayerMananger.getCurrentPlayer().getBestScore() <= score) {
             topView.getLblBestScoreInput().setText(String.valueOf(score));
         }
         topView.getLblScoreInput().setText(String.valueOf(score));
-        checkIfLostOrWin();
     }
 
 
@@ -168,7 +171,7 @@ public class GamePresenter {
         return prevScore;
     }
 
-    public void disableButtom() {
+    public void disableButton() {
         bottomView.getBtnUndo().setDisable(true);
     }
 }

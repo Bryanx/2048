@@ -20,7 +20,6 @@ class AnimationView {
     private final GameTopView topView;
     private final GameMiddleView midView;
     private final GamePresenter gamePresenter;
-    private int increment = 110;
 
     private ParallelTransition parallelTransition;
     private List<TranslateTransition> translateTransitions;
@@ -44,18 +43,19 @@ class AnimationView {
 
     void animateMovement(KeyCode direction) {
         int index = 0;
+        int increment;
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 if (!gamePresenter.isMovable() && getBlockValue(x, y) != 0) {
                     gettTransitions(index).setNode(midView.getBlock(x, y));
 
-                    this.increment = getMoveIncrement(x, y, direction);
+                    increment = getMoveIncrement(x, y, direction);
 
                     switch (direction) {
-                        case UP : gettTransitions(index).setToY(-this.increment); break;
-                        case DOWN : gettTransitions(index).setToY(this.increment); break;
-                        case RIGHT : gettTransitions(index).setToX(this.increment); break;
-                        case LEFT : gettTransitions(index).setToX(-this.increment); break;
+                        case UP : gettTransitions(index).setToY(-increment); break;
+                        case DOWN : gettTransitions(index).setToY(increment); break;
+                        case RIGHT : gettTransitions(index).setToX(increment); break;
+                        case LEFT : gettTransitions(index).setToX(-increment); break;
                     }
 
                     midView.getBlock(x, y).toFront();
