@@ -6,7 +6,7 @@ package be.kdg.thegame_2048.models;
  */
 public class Setting {
     /**
-     * A pojo that is used to store the settings.
+     * A pojo that is used to store the credits.
      **/
     private String backgroundcolor;
 

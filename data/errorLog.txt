@@ -1,1 +1,1 @@
-data\settings.txt (Het systeem kan het opgegeven bestand niet vinden)
+data/credits.txt (No such file or directory)

@@ -37,8 +37,8 @@ public final class StartView extends BorderPane {
         //Creates the about button and adds an icon:
         this.btnAbout = new Button("How to play", IMG_JOYSTICK);
 
-        //Creates the settings button and adds an icon:
-        this.btnSettings = new Button("settings", IMG_SETTINGS);
+        //Creates the credits button and adds an icon:
+        this.btnSettings = new Button("credits", IMG_SETTINGS);
 
         addStyles();
     }

@@ -1,4 +1,4 @@
-package be.kdg.thegame_2048.views.settings;
+package be.kdg.thegame_2048.views.credits;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -9,22 +9,22 @@ import javafx.scene.layout.BorderPane;
  * @version 1.0 12/02/2017 19:40
  */
 
-public class SettingsView extends BorderPane {
+public class CreditsView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
     private Button btnGoBack;
     private Label lblHeader;
-    private Slider slBlockValue;
+    private Label lblCredits;
 
-    public SettingsView() {
+    public CreditsView() {
         initialiseNodes();
         layoutNodes();
     }
 
     private void initialiseNodes() {
         //header
-        this.lblHeader = new Label("settings");
+        this.lblHeader = new Label("credits");
 
-        this.slBlockValue = new Slider(1,10,1);
+        this.lblCredits = new Label("Made by Bryan and Jarne");
 
 
 
@@ -35,6 +35,8 @@ public class SettingsView extends BorderPane {
     private void layoutNodes() {
         this.setTop(new BorderPane(lblHeader));
 
+        this.setCenter(lblCredits);
+
         BorderPane bottom = new BorderPane(btnGoBack);
         this.setBottom(bottom);
         this.setPadding(new Insets(OVERALL_PADDING));
@@ -43,6 +45,7 @@ public class SettingsView extends BorderPane {
     private void addStyles() {
         btnGoBack.getStyleClass().add("btnGoBack");
         lblHeader.getStyleClass().add("lblHeader");
+        lblCredits.getStyleClass().add("hsColumnFill");
     }
 
     Button getBtnGoBack() {

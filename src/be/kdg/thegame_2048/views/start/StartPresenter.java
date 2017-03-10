@@ -7,8 +7,8 @@ import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerPresenter;
 import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerView;
 import be.kdg.thegame_2048.views.newPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.newPlayer.NewPlayerView;
-import be.kdg.thegame_2048.views.settings.SettingsPresenter;
-import be.kdg.thegame_2048.views.settings.SettingsView;
+import be.kdg.thegame_2048.views.credits.CreditsPresenter;
+import be.kdg.thegame_2048.views.credits.CreditsView;
 import javafx.animation.ScaleTransition;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
@@ -60,8 +60,8 @@ public class StartPresenter {
             view.getScene().setRoot(aboutView);
         });
         view.getBtnSettings().setOnAction(event -> {
-            SettingsView settingsView = new SettingsView();
-            new SettingsPresenter(model, settingsView);
+            CreditsView settingsView = new CreditsView();
+            new CreditsPresenter(model, settingsView);
             view.getScene().setRoot(settingsView);
         });
     }

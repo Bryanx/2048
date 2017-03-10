@@ -3,6 +3,7 @@ package be.kdg.thegame_2048.views.about;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
+import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
@@ -54,9 +55,9 @@ public class AboutPresenter {
             TranslateTransition tt = new TranslateTransition(Duration.millis(150), AboutView.getImg(index));
             if (newIndex > oldIndex) {
                 if (index == newIndex) {
-                    tt.setToX(-500);
-                } else {
                     tt.setToX(500);
+                } else {
+                    tt.setToX(-500);
                 }
             } else if (newIndex == oldIndex) {
                 tt.setToX(0);
@@ -65,23 +66,25 @@ public class AboutPresenter {
                 }
             } else {
                 if (index == newIndex) {
-                    tt.setToX(500);
-                } else {
                     tt.setToX(-500);
+                } else {
+                    tt.setToX(500);
                 }
             }
+            tt.setInterpolator(Interpolator.EASE_BOTH);
             tt.play();
             if (index == newIndex) {
                 tt.setOnFinished(event -> {
                     TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
                     if (newIndex > oldIndex) {
-                        tt2.setFromX(-500);
+                        tt2.setFromX(500);
                     } else if (newIndex == oldIndex) {
                         tt2.setToX(0);
                     } else {
-                        tt2.setFromX(500);
+                        tt2.setFromX(-500);
                     }
                     tt2.setToX(0);
+                    tt2.setInterpolator(Interpolator.EASE_BOTH);
                     tt2.play();
                     view.layoutNodes(newIndex);
                 });

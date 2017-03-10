@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Bryan de Ridder, Jarne Van Aerde
+ * @author Bryan de Ridder
  * @version 1.0 02-03-17 06:18
  */
 class AnimationView {
@@ -41,6 +41,10 @@ class AnimationView {
         }
     }
 
+    /**
+     * Moves the blocks according to their position.
+     * This method is used on graphical level.
+     **/
     void animateMovement(KeyCode direction) {
         int index = 0;
         int increment;
@@ -67,6 +71,9 @@ class AnimationView {
         this.parallelTransition.play();
     }
 
+    /**
+     * Checks if the x or y parameter is within the boundaries of the game.
+     **/
     private boolean isGreaterThan(int x, int y, KeyCode direction, int value) {
         switch (direction) {
             case UP : return y > value;
@@ -77,6 +84,9 @@ class AnimationView {
         return false;
     }
 
+    /**
+     * Returns the value of a block that is on a different position.
+     **/
     private int BlockValueLookatDir(int x, int y, KeyCode direction, int lookat) {
         if (isGreaterThan(x, y, direction, lookat - 1)) {
             switch (direction) {
@@ -89,6 +99,10 @@ class AnimationView {
         return 0;
     }
 
+    /**
+     * Returns the appropriate amount the block needs to
+     * move across the screen without going out of boundaries or overlapping other blocks.
+     **/
     private int getMoveIncrement(int x , int y, KeyCode direction) {
         int thisBlock = getBlockValue(x, y);
         boolean greaterThan0 = isGreaterThan(x, y, direction, 0);
@@ -127,7 +141,9 @@ class AnimationView {
         return incr;
     }
 
-    //popIn animation for spawning blocks
+    /**
+     * Pop in animation for spawning blocks.
+     **/
     void popIn(int x, int y) {
         this.scaleTransition = new ScaleTransition(POPIN_DURATION, midView.getBlock(x, y));
         scaleTransition.setFromX(0.0);
@@ -137,7 +153,9 @@ class AnimationView {
         scaleTransition.play();
     }
 
-    //popOut animation for merged blocks
+    /**
+     * Pop out animation for merged blocks.
+     **/
     void popOut(int x, int y) {
         this.scaleTransition = new ScaleTransition(POPOUT_DURATION, midView.getBlock(x, y));
         scaleTransition.setFromX(1.0);
@@ -149,6 +167,9 @@ class AnimationView {
         scaleTransition.play();
     }
 
+    /**
+     * Animates the score
+     **/
     void animateScore(int score) {
         topView.getLblScoreChange().setText("+" + score);
         topView.getLblScoreChange().setVisible(true);

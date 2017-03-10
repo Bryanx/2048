@@ -1,6 +1,5 @@
-package be.kdg.thegame_2048.views.settings;
+package be.kdg.thegame_2048.views.credits;
 
-import be.kdg.thegame_2048.models.DataReaderWriter;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
@@ -9,27 +8,21 @@ import be.kdg.thegame_2048.views.start.StartView;
  * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
  */
-public class SettingsPresenter {
+public class CreditsPresenter {
     private final PlayerManager model;
-    private final SettingsView view;
-    private int currentIndex;
+    private final CreditsView view;
 
-    public SettingsPresenter(PlayerManager model, SettingsView view) {
+    public CreditsPresenter(PlayerManager model, CreditsView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();
-        this.updateView();
     }
 
     private void addEventHandlers() {
         view.getBtnGoBack().setOnAction(event -> {
-            //DataReaderWriter.saveSettings();
             StartView startView = new StartView();
             new StartPresenter(model, startView);
             view.getScene().setRoot(startView);
         });
-    }
-
-    private void updateView() {
     }
 }
