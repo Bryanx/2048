@@ -72,8 +72,6 @@ public class AboutPresenter {
             }
             tt.play();
             if (index == newIndex) {
-                //TODO: add to eventhandlers()
-                //move next slide into view
                 tt.setOnFinished(event -> {
                     TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
                     if (newIndex > oldIndex) {

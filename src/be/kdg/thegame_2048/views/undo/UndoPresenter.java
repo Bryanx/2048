@@ -20,20 +20,19 @@ public class UndoPresenter {
         this.gameView = gameView;
         this.gamePresenter = gamePresenter;
         this.addEventHandlers();
-        this.updateView();
     }
     private void addEventHandlers() {
-        view.getBtnAccept().setOnAction(event -> {
-            model.setPlayingUndo(true);
-            model.getScore().setScore(gamePresenter.getPrevScore());
-            if (model.getLastMove() != null) this.model.goToLastMove();
-            this.gamePresenter.updateView();
-            this.gameView.layoutNodes();
-            gamePresenter.disableButtom();
-        });
+        view.getBtnAccept().setOnAction(event -> updateViewUndo());
         view.getBtnCancel().setOnAction(event -> this.gameView.layoutNodes());
-
     }
-    private void updateView() {
+
+    private void updateViewUndo() {
+        this.model.setPlayingUndo(true);
+        this.model.getScore().setScore(gamePresenter.getPrevScore());
+        this.gamePresenter.updateViewScore(gamePresenter.getPrevScore());
+        if (model.getLastMove() != null) this.model.goToLastMove();
+        this.gamePresenter.updateView();
+        this.gameView.layoutNodes();
+        this.gamePresenter.disableButton();
     }
 }
