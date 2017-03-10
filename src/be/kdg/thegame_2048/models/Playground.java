@@ -28,6 +28,9 @@ final class Playground {
         return sections;
     }
 
+    /**
+     * Initialises the sections if the player starts a new game.
+     **/
     void initialiseSections() {
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
             for (int j = 0; j < NUMBER_OF_V_SECTIONS; j++) {
@@ -36,10 +39,17 @@ final class Playground {
         }
     }
 
+    /**
+     * Reinitialize the sections.
+     * Is used to go back one move.
+     **/
     void initialiseSections(Section[][] sections) {
         this.sections = sections;
     }
 
+    /**
+     * Adds a random block to the playground.
+     **/
     void addRandomBlock(int value) {
         if (playGroundFull()) return;
         boolean blockFound = false;
@@ -55,6 +65,11 @@ final class Playground {
         }
     }
 
+    /**
+     * Checks if the playground is full.
+     * Returns true if it's full.
+     * Returns false if it isn't full.
+     **/
     boolean playGroundFull() {
         int blockCounter = 0;
         for (int i = 0; i < 4; i++) {
@@ -65,12 +80,19 @@ final class Playground {
         return blockCounter >= 16;
     }
 
+    /**
+     * Merges to blocks on logical level.
+     * One of the blocks value is increased, the other one gets deleted.
+     **/
     private void merge(Section sectionBlock, Section sectionOtherBlock) {
         score.calculateScore(sectionBlock.getBlock(), sectionOtherBlock.getBlock());
         sectionBlock.getBlock().setValue(sectionBlock.getBlock().getValue() + sectionOtherBlock.getBlock().getValue());
         sectionOtherBlock.removeBlock();
     }
 
+    /**
+     * Moves all the blocks to the top of the playground on logical level.
+     **/
     void moveBlocksTop() {
         //ROW 1 AND 2
         boolean[] haveBlocksRow1 = haveBlocksRow(1);
@@ -137,6 +159,9 @@ final class Playground {
         }
     }
 
+    /**
+     * Moves all the blocks to the bottom of the playground on logical level.
+     **/
     void moveBlocksBottom() {
         //ROW 3 AND 4
         boolean[] haveBlocksRow4 = haveBlocksRow(4);
@@ -203,6 +228,9 @@ final class Playground {
         }
     }
 
+    /**
+     * Moves all the blocks to the left of the playground on logical level.
+     **/
     void moveBlocksLeft() {
         //COLUMN 1 AND 2
         boolean[] haveBlocksColumn1 = haveBlocksColumn(1);
@@ -270,6 +298,9 @@ final class Playground {
         }
     }
 
+    /**
+     * Moves all the blocks to the right of the playground on logical level.
+     **/
     void moveBlocksRight() {
         //COLUMN 3 AND 4
         boolean[] haveBlocksColumn4 = haveBlocksColumn(4);
@@ -336,6 +367,10 @@ final class Playground {
         }
     }
 
+    /**
+     * Decides if a their are blocks on a specific row.
+     * Returns an array of booleans.
+     **/
     private boolean[] haveBlocksRow(int numberRow) {
         boolean[] haveBlocksRow = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
@@ -344,6 +379,10 @@ final class Playground {
         return haveBlocksRow;
     }
 
+    /**
+     * Decides if a their are blocks on a specific column.
+     * Returns an array of booleans.
+     **/
     private boolean[] haveBlocksColumn(int numberColumn) {
         boolean[] haveBlocksColumn1 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
@@ -352,23 +391,41 @@ final class Playground {
         return haveBlocksColumn1;
     }
 
+    /**
+     * Decides if two blocks can be merged.
+     * Returns true if two blocks have the same value.
+     **/
     private boolean isMergable(Section section, Section otherSection) {
         return section.getBlock().getValue() == otherSection.getBlock().getValue();
     }
 
+    /**
+     * Moves a specific block by one section.
+     **/
     private void moveBlock(Section section, Section otherSection) {
         section.putBlock(otherSection.getBlock());
         otherSection.removeBlock();
     }
 
+    /**
+     * Gives back the x-coordinate of the last block that was put on the playground.
+     **/
     int getCoordRandomBlockX() {
         return coordRandomBlockX;
     }
 
+    /**
+     * Gives back the x-coordinate of the last block that was put on the playground.
+     **/
     int getCoordRandomBlockY() {
         return coordRandomBlockY;
     }
 
+    /**
+     * Gives back a grind of the positions of the sections and their values.
+     * An E stands for an empty space.
+     * The numbers represent a block with their current value.
+     **/
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
