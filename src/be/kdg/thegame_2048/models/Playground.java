@@ -7,7 +7,6 @@ import java.util.Random;
  * @version 1.0 8/02/2017 17:44
  */
 final class Playground {
-    //EIGENSCAPPEN
     private final Random blockGen = new Random();
     private static final int NUMBER_OF_H_SECTIONS = 4;
     private static final int NUMBER_OF_V_SECTIONS = 4;
@@ -17,13 +16,14 @@ final class Playground {
     private int coordRandomBlockX;
     private int coordRandomBlockY;
 
-    //CONSTRUCTORS
     Playground(Score score) {
         this.score = score;
         this.sections = new Section[NUMBER_OF_H_SECTIONS][NUMBER_OF_V_SECTIONS];
     }
 
-    //METHODEN
+    /**
+     * Returns all the sections with their block-value.
+     **/
     Section[][] getSections() {
         return sections;
     }
@@ -339,7 +339,7 @@ final class Playground {
     private boolean[] haveBlocksRow(int numberRow) {
         boolean[] haveBlocksRow = new boolean[NUMBER_OF_H_SECTIONS];
         for (int i = 0; i < NUMBER_OF_H_SECTIONS; i++) {
-            if (this.sections[numberRow-1][i].hasBlock()) haveBlocksRow[i] = true;
+            if (this.sections[numberRow - 1][i].hasBlock()) haveBlocksRow[i] = true;
         }
         return haveBlocksRow;
     }
@@ -347,7 +347,7 @@ final class Playground {
     private boolean[] haveBlocksColumn(int numberColumn) {
         boolean[] haveBlocksColumn1 = new boolean[NUMBER_OF_V_SECTIONS];
         for (int i = 0; i < NUMBER_OF_V_SECTIONS; i++) {
-            if (this.sections[i][numberColumn-1].hasBlock()) haveBlocksColumn1[i] = true;
+            if (this.sections[i][numberColumn - 1].hasBlock()) haveBlocksColumn1[i] = true;
         }
         return haveBlocksColumn1;
     }

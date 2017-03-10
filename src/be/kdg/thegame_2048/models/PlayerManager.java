@@ -65,6 +65,10 @@ public final class PlayerManager {
         return false;
     }
 
+    /**
+     * Saves all the info off the current player.
+     * If the player has beaten his highscore, dan
+     **/
     public void saveInfoCurrentPlayer() {
         int bestScore = this.currentPlayer.getBestScore();
 

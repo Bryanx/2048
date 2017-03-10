@@ -28,6 +28,7 @@ public class GamePresenter {
     private final AnimationView animationView;
     private boolean alreadyWon;
     private boolean firstRun;
+    private int prevScore;
 
     //CONSTRUCTORS
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
@@ -82,8 +83,8 @@ public class GamePresenter {
 
         view.setOnKeyPressed(event -> {
             if (animationView.getParallelTransition().getStatus() != Animation.Status.RUNNING) {
-                final int prevScore = modelGame.getScore().getScore();
                 final KeyCode direction = event.getCode();
+                prevScore = modelGame.getScore().getScore();
                 switch (direction) {
                     case DOWN:updateViewBlocks(Game.Direction.DOWN);break;
                     case UP:updateViewBlocks(Game.Direction.TOP);break;
@@ -97,6 +98,7 @@ public class GamePresenter {
                 if (currScore - prevScore > 0) {
                     animationView.animateScore(currScore - prevScore);
                 }
+
             }
         });
 
@@ -144,6 +146,8 @@ public class GamePresenter {
         checkIfLostOrWin();
     }
 
+
+
     private void checkIfLostOrWin() {
         if (alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
@@ -160,7 +164,11 @@ public class GamePresenter {
                 modelGame.getLastMove().equals(modelGame.getCurrentMove());
     }
 
-    public void disablrButtom() {
+    public int getPrevScore() {
+        return prevScore;
+    }
+
+    public void disableButtom() {
         bottomView.getBtnUndo().setDisable(true);
     }
 }

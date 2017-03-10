@@ -18,6 +18,10 @@ public final class Score {
         return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     void calculateScore(Block block, Block otherBlock) {
         this.score += block.getValue() + otherBlock.getValue();
     }

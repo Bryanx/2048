@@ -33,7 +33,7 @@ public class HighScorePresenter {
         GameView gameView = new GameView();
         gameView.getLblScoreInput().setText(String.valueOf(modelGame.getScore()));
         gameView.getLblBestScoreInput().setText(String.valueOf(modelPM.getCurrentPlayer().getBestScore()));
-        new GamePresenter(modelGame, modelPM, gameView);
+        //new GamePresenter(modelGame, modelPM, gameView);
         if (modelGame.getScore().getScore() >= modelPM.getCurrentPlayer().getBestScore()) {
             gameView.getLblBestScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
         }
