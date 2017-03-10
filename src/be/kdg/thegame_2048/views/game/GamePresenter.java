@@ -28,7 +28,6 @@ public class GamePresenter {
     private final AnimationView animationView;
     private boolean alreadyWon;
     private boolean firstRun;
-    private boolean undoGreyedOut;
     private int prevScore;
 
     //CONSTRUCTORS
