@@ -16,23 +16,19 @@ public final class Game {
     final static private int STAETVALUE = 2;
 
     private final Score score;
-    private final PlayerManager manager;
     private final Playground playground;
     private String lastMove;
     private String currentMove;
     private boolean isPlayingUndo;
 
-    public Game(PlayerManager playerManager) {
+    public Game() {
         this.score = new Score();
         this.playground = new Playground(this.score);
         this.isPlayingUndo = false;
 
-        this.manager = playerManager;
-
         playground.initialiseSections();
         this.playground.addRandomBlock(STAETVALUE);
         this.playground.addRandomBlock(STAETVALUE);
-
     }
 
     /**

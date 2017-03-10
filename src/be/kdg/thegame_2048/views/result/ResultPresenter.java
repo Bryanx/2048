@@ -37,7 +37,7 @@ public class ResultPresenter {
         view.getBtnRestart().setOnAction(event -> {
             gameView.layoutNodes();
             gameView.getLblScoreInput().setText("0");
-            modelGame = new Game(modelPM);
+            modelGame = new Game();
             new GamePresenter(modelGame, modelPM, gameView);
         });
         //Keyboard is blocked when resultpresenter is active

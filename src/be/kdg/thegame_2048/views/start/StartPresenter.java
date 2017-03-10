@@ -66,6 +66,9 @@ public class StartPresenter {
         });
     }
 
+    /**
+     * Makes a specific button grow in size.
+     **/
     private void scaleIn(Button button) {
         ScaleTransition st = new ScaleTransition();
         st.setNode(button);
@@ -77,6 +80,9 @@ public class StartPresenter {
         st.play();
     }
 
+    /**
+     * Makes a specific button decrease in size.
+     **/
     private void scaleOut(Button button) {
         ScaleTransition st = new ScaleTransition();
         st.setNode(button);

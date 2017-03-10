@@ -54,7 +54,7 @@ public class GamePresenter {
             alreadyWon = false;
             firstRun = true;
             if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
-            modelGame = new Game(modelPlayerMananger);
+            modelGame = new Game();
             topView.getLblScoreInput().setText("0");
             disableUndoButton(false);
             updateView();

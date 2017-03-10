@@ -6,6 +6,7 @@ import be.kdg.thegame_2048.models.Setting;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;

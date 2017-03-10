@@ -21,11 +21,16 @@ public class UndoPresenter {
         this.gamePresenter = gamePresenter;
         this.addEventHandlers();
     }
+
     private void addEventHandlers() {
         view.getBtnAccept().setOnAction(event -> updateViewUndo());
         view.getBtnCancel().setOnAction(event -> this.gameView.layoutNodes());
     }
 
+    /**
+     * Makes a move undone.
+     * The method is handles on logical and graphical level.
+     **/
     private void updateViewUndo() {
         this.model.setPlayingUndo(true);
         this.model.getScore().setScore(gamePresenter.getPrevScore());
