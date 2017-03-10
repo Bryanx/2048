@@ -33,6 +33,6 @@ public class UndoPresenter {
         if (model.getLastMove() != null) this.model.goToLastMove();
         this.gamePresenter.updateView();
         this.gameView.layoutNodes();
-        this.gamePresenter.disableButton();
+        this.gamePresenter.disableUndoButton(true);
     }
 }

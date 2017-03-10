@@ -28,6 +28,7 @@ public class GamePresenter {
     private final AnimationView animationView;
     private boolean alreadyWon;
     private boolean firstRun;
+    private boolean undoGreyedOut;
     private int prevScore;
 
     //CONSTRUCTORS
@@ -55,6 +56,7 @@ public class GamePresenter {
             if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
             modelGame = new Game(modelPlayerMananger);
             topView.getLblScoreInput().setText("0");
+            disableUndoButton(false);
             updateView();
         });
 
@@ -171,7 +173,7 @@ public class GamePresenter {
         return prevScore;
     }
 
-    public void disableButton() {
-        bottomView.getBtnUndo().setDisable(true);
+    public void disableUndoButton(boolean bool) {
+        bottomView.getBtnUndo().setDisable(bool);
     }
 }
