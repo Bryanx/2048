@@ -107,37 +107,4 @@ public class DataReaderWriter {
             System.exit(1);
         }
     }
-
-    /**
-     * Writes all the current credits to a text file
-     **/
-    public static void saveSettings(String backgroundcolor) {
-        Path playerData = Paths.get("data");
-        Path settings = playerData.resolve("credits.txt");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(settings.toFile()))) {
-            if (!Files.exists(playerData)) Files.createDirectory(playerData);
-            if (!Files.exists(settings)) Files.createFile(settings);
-
-            writer.write(backgroundcolor);
-        } catch (IOException e) {
-            writeToLog(e.getMessage());
-        }
-    }
-
-    /**
-     * Loads all the current credits form the text file.
-     **/
-    public static void loadSettings(Setting setting) {
-        Path playerData = Paths.get("data");
-        Path settings = playerData.resolve("credits.txt");
-        try (BufferedReader reader = new BufferedReader(new FileReader(settings.toFile()))) {
-            if (!Files.exists(playerData)) return;
-            if (!Files.exists(settings)) return;
-
-            String[] settingSplitted = reader.readLine().split(":");
-            setting.setBackgroundcolor(settingSplitted[1]);
-        } catch (IOException e) {
-            writeToLog(e.getMessage());
-        }
-    }
 }

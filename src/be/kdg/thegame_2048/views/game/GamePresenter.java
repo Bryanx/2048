@@ -62,7 +62,7 @@ public class GamePresenter {
 
         bottomView.getBtnUndo().setOnAction(event -> {
             UndoView alert = new UndoView();
-            alert.getLblMessage().setText("Are you sure you want to undo \nyour last animateMovement? " +
+            alert.getLblMessage().setText("Are you sure you want to undo \nyour last Movement? " +
                     "Your score will no longer \nbe added to the highscores.");
             new UndoPresenter(modelGame, alert, view, this);
             view.setView(alert);
@@ -90,21 +90,24 @@ public class GamePresenter {
                 switch (direction) {
                     case DOWN:
                         updateViewBlocks(Game.Direction.DOWN);
+                        animationView.animateMovement(direction);
                         break;
                     case UP:
                         updateViewBlocks(Game.Direction.TOP);
+                        animationView.animateMovement(direction);
                         break;
                     case RIGHT:
                         updateViewBlocks(Game.Direction.RIGHT);
+                        animationView.animateMovement(direction);
                         break;
                     case LEFT:
                         updateViewBlocks(Game.Direction.LEFT);
+                        animationView.animateMovement(direction);
                         break;
                     default:
                         event.consume();
                 }
                 final int currScore = modelGame.getScore().getScore();
-                animationView.animateMovement(direction);
                 modelPlayerMananger.setCurrentPlayerScore(currScore);
                 if (currScore - prevScore > 0) {
                     animationView.animateScore(currScore - prevScore);

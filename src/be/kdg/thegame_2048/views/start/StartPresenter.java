@@ -3,12 +3,12 @@ package be.kdg.thegame_2048.views.start;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.about.AboutPresenter;
 import be.kdg.thegame_2048.views.about.AboutView;
+import be.kdg.thegame_2048.views.credits.CreditsPresenter;
+import be.kdg.thegame_2048.views.credits.CreditsView;
 import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerPresenter;
 import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerView;
 import be.kdg.thegame_2048.views.newPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.newPlayer.NewPlayerView;
-import be.kdg.thegame_2048.views.credits.CreditsPresenter;
-import be.kdg.thegame_2048.views.credits.CreditsView;
 import javafx.animation.ScaleTransition;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
@@ -65,6 +65,7 @@ public class StartPresenter {
             view.getScene().setRoot(settingsView);
         });
     }
+
 
     /**
      * Makes a specific button grow in size.
