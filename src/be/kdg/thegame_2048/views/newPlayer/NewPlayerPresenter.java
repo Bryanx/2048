@@ -40,6 +40,10 @@ public class NewPlayerPresenter {
         });
     }
 
+    /**
+     * Checks the input for errors.
+     * Returns an error to the player if necessary.
+     **/
     private void checkInput(String name) {
         if (model.checkIfExists(name)) {
             view.getLblInputError().setText("Name already exists");
@@ -56,6 +60,10 @@ public class NewPlayerPresenter {
         }
     }
 
+    /**
+     * Switches scene's to the GameView.
+     * Should only be used when input is ok.
+     **/
     private void updateScene() {
         GameView gameView = new GameView();
         Game gameModel = new Game();

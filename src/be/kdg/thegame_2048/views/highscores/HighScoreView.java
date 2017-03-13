@@ -56,6 +56,9 @@ public final class HighScoreView extends BorderPane {
         this.setTop(top);
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         lblHighScores.getStyleClass().add("hsHeader");
         lblHsRanks.get(0).getStyleClass().add("hsColumnNames");
@@ -64,6 +67,9 @@ public final class HighScoreView extends BorderPane {
         goBack.getStyleClass().add("btnGoBack");
     }
 
+    /**
+     * Updates the current highscore list.
+     **/
     void updateHighScore(List<String> names, List<Integer> scores) {
         setPlayerAmount(names.size());
 
@@ -109,6 +115,9 @@ public final class HighScoreView extends BorderPane {
         }
     }
 
+    /**
+     * Highlights a selected player.
+     **/
     void highlightPlayer(String naam) {
         //highlights the active player in the highscore list
         String upperNaam = naam.toUpperCase().charAt(0) + naam.substring(1);
@@ -121,6 +130,9 @@ public final class HighScoreView extends BorderPane {
         }
     }
 
+    /**
+     * Returns a button used to go back.
+     **/
     Button getGoBack() {
         return goBack;
     }

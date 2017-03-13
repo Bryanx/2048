@@ -15,12 +15,12 @@ public final class StartView extends BorderPane {
     private static final ImageView IMG_UFO = new ImageView("be/kdg/thegame_2048/views/img/ufo.png");
     private static final ImageView IMG_MAN = new ImageView("be/kdg/thegame_2048/views/img/user.png");
     private static final ImageView IMG_JOYSTICK = new ImageView("be/kdg/thegame_2048/views/img/about.png");
-    private static final ImageView IMG_SETTINGS = new ImageView("be/kdg/thegame_2048/views/img/settings.png");
+    private static final ImageView IMG_CREDITS = new ImageView("be/kdg/thegame_2048/views/img/credits.png");
     private static final int OVERALL_PADDING = 50;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
     private Button btnAbout;
-    private Button btnSettings;
+    private Button btnCredits;
 
     public StartView() {
         initialiseNodes();
@@ -38,7 +38,7 @@ public final class StartView extends BorderPane {
         this.btnAbout = new Button("How to play", IMG_JOYSTICK);
 
         //Creates the credits button and adds an icon:
-        this.btnSettings = new Button("credits", IMG_SETTINGS);
+        this.btnCredits = new Button("Credits", IMG_CREDITS);
 
         addStyles();
     }
@@ -51,7 +51,7 @@ public final class StartView extends BorderPane {
 
         //Middle of the StartView, 2 buttons are stacked inside a GridPane:
         VBox vBox1 = new VBox(btnNewPlayer, btnAbout);
-        VBox vBox2 = new VBox(btnExistingPlayer, btnSettings);
+        VBox vBox2 = new VBox(btnExistingPlayer, btnCredits);
         HBox middle = new HBox(vBox1,vBox2);
         vBox1.setAlignment(Pos.CENTER);
         vBox2.setAlignment(Pos.CENTER);
@@ -62,26 +62,41 @@ public final class StartView extends BorderPane {
         this.setPadding(new Insets(OVERALL_PADDING));
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         btnNewPlayer.getStyleClass().add("btnStartView");
         btnExistingPlayer.getStyleClass().add("btnStartView");
         btnAbout.getStyleClass().add("btnStartView");
-        btnSettings.getStyleClass().add("btnStartView");
+        btnCredits.getStyleClass().add("btnStartView");
     }
 
+    /**
+     * Returns the new player button.
+     **/
     Button getBtnNewPlayer() {
         return btnNewPlayer;
     }
 
+    /**
+     * Returns the existing player button.
+     **/
     Button getBtnExistingPlayer() {
         return btnExistingPlayer;
     }
 
+    /**
+     * Returns the about button.
+     **/
     Button getBtnAbout() {
         return btnAbout;
     }
 
-    Button getBtnSettings() {
-        return btnSettings;
+    /**
+     * Returns the credits button.
+     **/
+    Button getBtnCredits() {
+        return btnCredits;
     }
 }

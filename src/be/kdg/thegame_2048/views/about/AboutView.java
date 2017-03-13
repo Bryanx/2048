@@ -73,6 +73,9 @@ public class AboutView extends BorderPane {
         this.setPadding(new Insets(OVERALL_PADDING));
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         btnGoBack.getStyleClass().add("btnGoBack");
         lblHeader.getStyleClass().add("lblHeader");
@@ -81,15 +84,26 @@ public class AboutView extends BorderPane {
         lblExplanation3.getStyleClass().add("lblExplanation");
     }
 
+    /**
+     * Returns go back button.
+     **/
     Button getBtnGoBack() {
         return btnGoBack;
     }
 
+    /**
+     * Returns a ToggleButton.
+     * The index parameter decides which button is returned from the array.
+     **/
     ToggleButton getToggleButton(int index) {
         ToggleButton[] toggleButtons = {rbOption1, rbOption2, rbOption3};
         return toggleButtons[index];
     }
 
+    /**
+     * Returns an ImageView.
+     * The index parameter decides which image is returned from the array.
+     **/
     static ImageView getImg(int i) {
         ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
         return images[i];

@@ -13,7 +13,7 @@ public final class Game {
         TOP, DOWN, LEFT, RIGHT
     }
 
-    final static private int STAETVALUE = 128;
+    final static private int STARTVALUE = 2;
 
     private final Score score;
     private final Playground playground;
@@ -27,8 +27,8 @@ public final class Game {
         this.isPlayingUndo = false;
 
         playground.initialiseSections();
-        this.playground.addRandomBlock(STAETVALUE);
-        this.playground.addRandomBlock(STAETVALUE);
+        this.playground.addRandomBlock(STARTVALUE);
+        this.playground.addRandomBlock(STARTVALUE);
     }
 
     /**
@@ -73,7 +73,7 @@ public final class Game {
         }
         this.currentMove = playground.toString();
         if (!lastMove.equals(currentMove)) {
-            playground.addRandomBlock(STAETVALUE);
+            playground.addRandomBlock(STARTVALUE);
         }
         System.out.println(score.getScore() + "\n" + playground.toString());
     }

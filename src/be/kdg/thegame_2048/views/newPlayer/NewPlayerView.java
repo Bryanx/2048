@@ -55,20 +55,33 @@ public final class NewPlayerView extends SuperView {
         this.setCenter(middle);
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         tfNewPlayer.getStyleClass().add("tfPlayer");
         lblInputError.getStyleClass().add("inputError");
         btnGoBack.getStyleClass().add("btnGoBack");
     }
 
+    /**
+     * Returns go back button.
+     **/
     Button getBtnGoBack() {
         return btnGoBack;
     }
 
+    /**
+     * Returns a TextField.
+     * The player will enter a new player name in this field.
+     **/
     TextField getTfNewPlayer() {
         return tfNewPlayer;
     }
 
+    /**
+     * Returns a Label for putting in errors.
+     **/
     Label getLblInputError() {
         return lblInputError;
     }

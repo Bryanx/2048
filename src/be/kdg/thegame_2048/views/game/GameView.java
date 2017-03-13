@@ -40,28 +40,46 @@ public final class GameView extends BorderPane {
         this.setCenter(container);
     }
 
+    /**
+     * Makes the background blurry and puts a new BorderPane on top.
+     **/
     void setView(BorderPane pane) {
         container.setEffect(new GaussianBlur());
         StackPane stack = new StackPane(container, pane);
         this.setCenter(stack);
     }
 
+    /**
+     * Returns the TopView.
+     **/
     GameTopView getTopView() {
         return gameTopView;
     }
 
+    /**
+     * Returns the MiddleView.
+     **/
     GameMiddleView getMiddleView() {
         return gameMiddleView;
     }
 
-    public GameBottomView getBottomView() {
+    /**
+     * Returns the BottomView.
+     **/
+    GameBottomView getBottomView() {
         return gameBottomView;
     }
 
+    /**
+     * Returns a Label for best score input.
+     **/
     public Label getLblBestScoreInput() {
         return gameTopView.getLblBestScoreInput();
     }
 
+    /**
+     * Returns a Label for score input.
+     **/
     public Label getLblScoreInput() {
         return gameTopView.getLblScoreInput();
     }

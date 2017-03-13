@@ -168,7 +168,8 @@ class AnimationView {
     }
 
     /**
-     * Animates the score
+     * Animates the score parameter on top of the currentScore.
+     * Can be used to animate score increase value.
      **/
     void animateScore(int score) {
         topView.getLblScoreChange().setText("+" + score);
@@ -193,7 +194,12 @@ class AnimationView {
         ttScore.play();
     }
 
-    void resetAnimation() {
+    /**
+     * Resets all move animations to the original position.
+     * Clears all move animations.
+     * Reinitializes all move animations.
+     **/
+    void resetMoveAnimation() {
         ParallelTransition p = new ParallelTransition();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -214,14 +220,27 @@ class AnimationView {
         }
     }
 
+    /**
+     * Returns a block value from the gameView.
+     * This method runs on a graphical level.
+     **/
     private int getBlockValue(int x, int y) {
         return midView.getBValue(x, y);
     }
 
+    /**
+     * Returns a block value
+     * This method is run on a graphical level.
+     **/
     ParallelTransition getParallelTransition() {
         return parallelTransition;
     }
 
+    /**
+     * Returns a move animation (TranslateTransition).
+     * The index parameter decides which TranslateTransition is returned from the array.
+     * There are max 16 animations in the array.
+     **/
     private TranslateTransition gettTransitions(int i) {
         return translateTransitions.get(i);
     }

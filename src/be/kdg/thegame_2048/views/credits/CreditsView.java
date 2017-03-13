@@ -3,6 +3,7 @@ package be.kdg.thegame_2048.views.credits;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.TextAlignment;
 
 /**
  * @author Jarne van Aerde, Bryan de Ridder
@@ -21,13 +22,13 @@ public class CreditsView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        //header
-        this.lblHeader = new Label("credits");
-
-        this.lblCredits = new Label("Made by Bryan and Jarne");
-
-
-
+        this.lblHeader = new Label("Credits");
+        this.lblCredits = new Label(
+                "This project was made by\n" +
+                "Bryan de Ridder and Jarne Van Aerde.\n" +
+                "Karel De Grote Hogeschool Antwerp\n" +
+                "2016-2017");
+        this.lblCredits.setTextAlignment(TextAlignment.CENTER);
         this.btnGoBack = new Button();
         addStyles();
     }
@@ -42,12 +43,18 @@ public class CreditsView extends BorderPane {
         this.setPadding(new Insets(OVERALL_PADDING));
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         btnGoBack.getStyleClass().add("btnGoBack");
         lblHeader.getStyleClass().add("lblHeader");
         lblCredits.getStyleClass().add("hsColumnFill");
     }
 
+    /**
+     * Returns go back button.
+     **/
     Button getBtnGoBack() {
         return btnGoBack;
     }

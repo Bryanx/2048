@@ -28,7 +28,6 @@ public class GamePresenter {
     private final AnimationView animationView;
     private boolean alreadyWon;
     private boolean firstRun;
-    private boolean undoGreyedOut;
     private int prevScore;
 
     //CONSTRUCTORS
@@ -62,7 +61,7 @@ public class GamePresenter {
 
         bottomView.getBtnUndo().setOnAction(event -> {
             UndoView alert = new UndoView();
-            alert.getLblMessage().setText("Are you sure you want to undo \nyour last Movement? " +
+            alert.getLblMessage().setText("Are you sure you want to undo \nyour last move? " +
                     "Your score will no longer \nbe added to the highscores.");
             new UndoPresenter(modelGame, alert, view, this);
             view.setView(alert);
@@ -117,22 +116,28 @@ public class GamePresenter {
         });
 
         animationView.getParallelTransition().setOnFinished(event -> {
-            animationView.resetAnimation();
+            animationView.resetMoveAnimation();
             updateView();
         });
     }
 
+    /**
+     * Transfers all calculated model output to the GameView.
+     * Also decides which block should get a popIn animation.
+     **/
     public void updateView() {
         int randomblockX = modelGame.getCoordRandomBlockX();
         int randomblockY = modelGame.getCoordRandomBlockY();
 
         if (!firstRun && !isMovable()) {
             animationView.popIn(randomblockY, randomblockX);
-            midView.putBlockOnGrid(2, randomblockX, randomblockY);
+            midView.putBlockOnGrid(
+                    modelGame.getPieceValue(randomblockX, randomblockY)
+                    , randomblockX, randomblockY);
         }
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < GameMiddleView.GRID_SIZE; i++) {
+            for (int j = 0; j < GameMiddleView.GRID_SIZE; j++) {
                 int value;
                 if (modelGame.getPiece(i, j) == null) {
                     value = 0;
@@ -150,12 +155,20 @@ public class GamePresenter {
         this.firstRun = false;
     }
 
+    /**
+     * After a move key is pressed, this method transfers
+     * its direction to the model classes.
+     *
+     **/
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
         updateViewScore(modelGame.getScore().getScore());
         checkIfLostOrWin();
     }
 
+    /**
+     * Scores on the top of the view are updated.
+     **/
     public void updateViewScore(int score) {
         if (modelPlayerMananger.getCurrentPlayer().getBestScore() <= score) {
             topView.getLblBestScoreInput().setText(String.valueOf(score));
@@ -163,7 +176,10 @@ public class GamePresenter {
         topView.getLblScoreInput().setText(String.valueOf(score));
     }
 
-
+    /**
+     * Model classes check if the player has won or lost.
+     * If so, the resultview must be set as the current view.
+     **/
     private void checkIfLostOrWin() {
         if (alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
@@ -175,15 +191,24 @@ public class GamePresenter {
         }
     }
 
+    /**
+     * Checks if there are any moves left.
+     **/
     boolean isMovable() {
         return modelGame.getLastMove() == null ||
                 modelGame.getLastMove().equals(modelGame.getCurrentMove());
     }
 
+    /**
+     * Returns the previous score.
+     **/
     public int getPrevScore() {
         return prevScore;
     }
 
+    /**
+     * Disables the undo button.
+     **/
     public void disableUndoButton(boolean bool) {
         bottomView.getBtnUndo().setDisable(bool);
     }

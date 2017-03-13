@@ -42,6 +42,11 @@ public class ExistingPlayerPresenter {
         });
     }
 
+    /**
+     * Searches for a playername that is the same as the String parameter.
+     * If the player exists, that player is made active.
+     * If it doesn't exist the player will receive an error message.
+     **/
     private void searchPlayer(String name) {
         if (model.checkIfExists(name)) {
             model.setCurrentPlayer(name);
@@ -54,6 +59,10 @@ public class ExistingPlayerPresenter {
         }
     }
 
+    /**
+     * Changes active scene to the GameView.
+     * Also initializes a new GamePresenter.
+     **/
     private void updateScene() {
         Game gameModel = new Game();
         GameView gameView = new GameView();

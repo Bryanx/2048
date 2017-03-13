@@ -36,13 +36,13 @@ public class StartPresenter {
         view.getBtnNewPlayer().setOnMouseEntered(event -> scaleIn(view.getBtnNewPlayer()));
         view.getBtnExistingPlayer().setOnMouseEntered(event -> scaleIn(view.getBtnExistingPlayer()));
         view.getBtnAbout().setOnMouseEntered(event -> scaleIn(view.getBtnAbout()));
-        view.getBtnSettings().setOnMouseEntered(event -> scaleIn(view.getBtnSettings()));
+        view.getBtnCredits().setOnMouseEntered(event -> scaleIn(view.getBtnCredits()));
 
         //SCALE OUT EFFECTS
         view.getBtnNewPlayer().setOnMouseExited(event -> scaleOut(view.getBtnNewPlayer()));
         view.getBtnExistingPlayer().setOnMouseExited(event -> scaleOut(view.getBtnExistingPlayer()));
         view.getBtnAbout().setOnMouseExited(event -> scaleOut(view.getBtnAbout()));
-        view.getBtnSettings().setOnMouseExited(event -> scaleOut(view.getBtnSettings()));
+        view.getBtnCredits().setOnMouseExited(event -> scaleOut(view.getBtnCredits()));
 
         view.getBtnNewPlayer().setOnAction(event -> {
             NewPlayerView playerView = new NewPlayerView();
@@ -59,7 +59,7 @@ public class StartPresenter {
             new AboutPresenter(model, aboutView);
             view.getScene().setRoot(aboutView);
         });
-        view.getBtnSettings().setOnAction(event -> {
+        view.getBtnCredits().setOnAction(event -> {
             CreditsView settingsView = new CreditsView();
             new CreditsPresenter(model, settingsView);
             view.getScene().setRoot(settingsView);

@@ -6,12 +6,14 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 10:45
  */
 class GameBottomView extends BorderPane {
+    private static final Paint BG_COLOR = Color.rgb(215, 180, 7);
     private Button btnRestart;
     private Button btnUndo;
     private Button btnHighScores;
@@ -47,9 +49,12 @@ class GameBottomView extends BorderPane {
             GridPane.setHalignment(btn, HPos.CENTER);
         }
         this.setCenter(gridBottom);
-        this.setBackground(new Background(new BackgroundFill(Color.rgb(215, 180, 7), CornerRadii.EMPTY, Insets.EMPTY)));
+        this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         btnHighScores.getStyleClass().add("btnHighScores");
         btnRestart.getStyleClass().add("btnRestart");
@@ -57,18 +62,30 @@ class GameBottomView extends BorderPane {
         btnExit.getStyleClass().add("btnExit");
     }
 
+    /**
+     * Returns high score button.
+     **/
     Button getBtnHighScores() {
         return btnHighScores;
     }
 
+    /**
+     * Returns exit button.
+     **/
     Button getBtnExit() {
         return btnExit;
     }
 
+    /**
+     * Returns restart button.
+     **/
     Button getBtnRestart() {
         return btnRestart;
     }
 
+    /**
+     * Returns undo button.
+     **/
     public Button getBtnUndo() {
         return btnUndo;
     }

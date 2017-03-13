@@ -29,6 +29,9 @@ public class HighScorePresenter {
         view.getGoBack().setOnAction(event -> updateScene());
     }
 
+    /**
+     * Returns the player to the GameView.
+     **/
     private void updateScene() {
         GameView gameView = new GameView();
         gameView.getLblScoreInput().setText(String.valueOf(modelGame.getScore()));

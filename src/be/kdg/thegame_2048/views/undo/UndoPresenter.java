@@ -29,7 +29,7 @@ public class UndoPresenter {
 
     /**
      * Makes a move undone.
-     * The method is handles on logical and graphical level.
+     * The method is handled on logical and graphical level.
      **/
     private void updateViewUndo() {
         this.model.setPlayingUndo(true);

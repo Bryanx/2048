@@ -61,6 +61,9 @@ class GameTopView extends BorderPane {
         this.setBackground(new Background(new BackgroundFill(Color.rgb(215, 180, 7), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         lblBestScore.getStyleClass().add("inGameScore");
         lblBestScoreInput.getStyleClass().add("inGameScore");
@@ -69,14 +72,23 @@ class GameTopView extends BorderPane {
         lblScoreChange.getStyleClass().add("lblScoreAnimation");
     }
 
+    /**
+     * Returns a Label for best score input.
+     **/
     Label getLblBestScoreInput() {
         return lblBestScoreInput;
     }
 
+    /**
+     * Returns a Label for score input.
+     **/
     Label getLblScoreInput() {
         return lblScoreInput;
     }
 
+    /**
+     * Returns a Label in which score animations can be put.
+     **/
     Label getLblScoreChange() {
         return lblScoreChange;
     }

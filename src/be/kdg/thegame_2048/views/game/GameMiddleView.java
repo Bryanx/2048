@@ -10,8 +10,8 @@ import javafx.scene.layout.*;
  */
 class GameMiddleView extends BorderPane {
     private static final int BLOCK_MARGIN = 10;
+    static final int GRID_SIZE = 4;
     private static final Image BG = new Image("be/kdg/thegame_2048/views/img/bg.png");
-    private GridPane sectionGrid;
     private BlockView[][] blocks;
 
     GameMiddleView() {
@@ -21,9 +21,9 @@ class GameMiddleView extends BorderPane {
 
     private void initialiseNodes() {
         //16 blocks are made
-        this.blocks = new BlockView[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        this.blocks = new BlockView[GRID_SIZE][GRID_SIZE];
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
                 blocks[i][j] = new BlockView(0);
             }
         }
@@ -31,10 +31,9 @@ class GameMiddleView extends BorderPane {
 
     private void layoutNodes() {
         //fill grid with 0's
-        this.sectionGrid = new GridPane();
-        blocks[0][0].setValue(4);
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        GridPane sectionGrid = new GridPane();
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
                 sectionGrid.add(blocks[i][j], i, j);
             }
         }
@@ -51,18 +50,28 @@ class GameMiddleView extends BorderPane {
         this.setCenter(new BorderPane(playground));
     }
 
+    /**
+     * Changes the value of a block at x y intersect.
+     * This method is used on a graphical level.
+     **/
     void putBlockOnGrid(int value, int x, int y) {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
                 blocks[y][x].setValue(value);
             }
         }
     }
 
+    /**
+     * Returns a block at coordinates x y.
+     **/
     BlockView getBlock(int x, int y) {
         return blocks[x][y];
     }
 
+    /**
+     * Returns a block value at coordinates x y.
+     **/
     int getBValue(int x, int y) {
         return blocks[x][y].getValue();
     }

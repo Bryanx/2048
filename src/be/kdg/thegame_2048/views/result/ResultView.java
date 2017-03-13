@@ -36,7 +36,9 @@ public final class ResultView extends BorderPane {
 
         addStyles();
     }
-
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         lblResult.getStyleClass().add("lblResult");
         lblScore.getStyleClass().add("lblResultScore");
@@ -57,26 +59,45 @@ public final class ResultView extends BorderPane {
         this.setCenter(vbox);
     }
 
+    /**
+     * Returns a Label for putting in the result.
+     **/
     void setLblResult(String result) {
         this.lblResult.setText(result);
     }
 
+    /**
+     * Returns a Label for putting in the score.
+     **/
     Label getLblScoreInput() {
         return lblScoreInput;
     }
 
+    /**
+     * Returns a continue button.
+     **/
     Button getBtnContinue() {
         return btnContinue;
     }
 
+    /**
+     * Returns a restart button.
+     **/
     Button getBtnRestart() {
         return btnRestart;
     }
 
+    /**
+     * Returns an exit button.
+     **/
     Button getBtnExit() {
         return btnExit;
     }
 
+    /**
+     * Adds a continue button to the resultView.
+     * This method should only be used if the player has won the game.
+     **/
     void addContinueBtn() {
         hBbuttons.getChildren().add(0,btnContinue);
     }

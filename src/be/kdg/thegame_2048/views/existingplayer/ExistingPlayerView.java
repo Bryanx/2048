@@ -56,20 +56,34 @@ public final class ExistingPlayerView extends SuperView {
         this.setCenter(middle);
     }
 
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         tfExistingPlayer.getStyleClass().add("tfPlayer");
         nameDoesntExistError.getStyleClass().add("inputError");
         btnGoBack.getStyleClass().add("btnGoBack");
     }
 
+    /**
+     * Returns a TextField
+     * The TextField contains the existingplayer input.
+     **/
     TextField getTfExistingPlayer() {
         return tfExistingPlayer;
     }
 
+    /**
+     * Returns a Label that can be filled with an error.
+     * The Label must also be set to visible.
+     **/
     Label getNameDoesntExistError() {
         return nameDoesntExistError;
     }
 
+    /**
+     * Returns go back button.
+     **/
     Button getBtnGoBack() {
         return btnGoBack;
     }

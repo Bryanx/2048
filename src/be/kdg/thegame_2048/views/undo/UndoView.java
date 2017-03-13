@@ -57,21 +57,32 @@ public class UndoView extends BorderPane {
         StackPane stack = new StackPane(box, vbox);
         this.setCenter(stack);
     }
-
+    /**
+     * Adds custom css selector to each individual node.
+     **/
     private void addStyles() {
         btnAccept.getStyleClass().add("btnAccept");
         btnCancel.getStyleClass().add("btnCancel");
         lblMessage.getStyleClass().add("hsColumnFill");
     }
 
+    /**
+     * Returns a Label for putting in a warning message.
+     **/
     public Label getLblMessage() {
         return lblMessage;
     }
 
+    /**
+     * Returns an accept button.
+     **/
     Button getBtnAccept() {
         return btnAccept;
     }
 
+    /**
+     * Returns a cancel button.
+     **/
     Button getBtnCancel() {
         return btnCancel;
     }

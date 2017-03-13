@@ -49,6 +49,9 @@ public class AboutPresenter {
         moveAnimation(0, 0);
     }
 
+    /**
+     * Animates images according to their index.
+     **/
     private void moveAnimation(int oldIndex, int newIndex) {
         int[] indexes = {oldIndex, newIndex};
         for (int index : indexes) {
