@@ -43,7 +43,7 @@ final class Playground {
      * Reinitialize the sections.
      * Is used to go back one move.
      **/
-    void initialiseSections(Section[][] sections) {
+    private void initialiseSections(Section[][] sections) {
         this.sections = sections;
     }
 
@@ -405,6 +405,27 @@ final class Playground {
     private void moveBlock(Section section, Section otherSection) {
         section.putBlock(otherSection.getBlock());
         otherSection.removeBlock();
+    }
+
+    /**
+     * Goes back to the last move.
+     * Only used when player presses on the undo-button.
+     **/
+    void goBack(String lastMove) {
+        String fields[] = lastMove.replaceAll("\n", "").replaceAll("  ", " ").split(" ");
+        Section[][] sections = new Section[4][4];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Section section = new Section();
+                if (!fields[(i * 4) + j].contains("E")) {
+                    section.putBlock(new Block(Integer.parseInt(fields[(i * 4) + j])));
+                }
+                sections[i][j] = section;
+                System.out.print(section.toString() + " ");
+            }
+        }
+        initialiseSections(sections);
     }
 
     /**

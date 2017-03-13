@@ -13,7 +13,7 @@ public final class Game {
         TOP, DOWN, LEFT, RIGHT
     }
 
-    final static private int STAETVALUE = 2;
+    final static private int STAETVALUE = 128;
 
     private final Score score;
     private final Playground playground;
@@ -36,20 +36,7 @@ public final class Game {
      * Only used when player presses on the undo-button.
      **/
     public void goToLastMove() {
-        String fields[] = this.lastMove.replaceAll("\n", "").replaceAll("  ", " ").split(" ");
-        Section[][] sections = new Section[4][4];
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                Section section = new Section();
-                if (!fields[(i * 4) + j].contains("E")) {
-                    section.putBlock(new Block(Integer.parseInt(fields[(i * 4) + j])));
-                }
-                sections[i][j] = section;
-                System.out.print(section.toString() + " ");
-            }
-        }
-        playground.initialiseSections(sections);
+        playground.goBack(this.lastMove);
     }
 
     /**
