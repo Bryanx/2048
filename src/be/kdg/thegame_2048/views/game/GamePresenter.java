@@ -131,9 +131,7 @@ public class GamePresenter {
 
         if (!firstRun && !isMovable()) {
             animationView.popIn(randomblockY, randomblockX);
-            midView.putBlockOnGrid(
-                    modelGame.getPieceValue(randomblockX, randomblockY)
-                    , randomblockX, randomblockY);
+            midView.putBlockOnGrid(2, randomblockX, randomblockY);
         }
 
         for (int i = 0; i < GameMiddleView.GRID_SIZE; i++) {
