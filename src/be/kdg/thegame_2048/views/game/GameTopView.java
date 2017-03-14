@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 /**
  * @author Bryan de Ridder, Jarne van Aerde
@@ -32,10 +33,11 @@ class GameTopView extends BorderPane {
         this.lblBestScoreInput = new Label("0");
         this.lblScore = new Label("Current score: ");
         this.lblScoreInput = new Label("0");
-        this.lblScoreChange = new Label(" 0");
+        this.lblScoreChange = new Label("0");
         this.lblScoreChange.setVisible(false);
 
         this.spScore = new StackPane(lblScoreInput, lblScoreChange);
+        spScore.setAlignment(Pos.CENTER_RIGHT);
 
         addStyles();
     }
