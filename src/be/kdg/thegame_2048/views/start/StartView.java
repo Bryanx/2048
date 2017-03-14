@@ -15,7 +15,7 @@ public final class StartView extends BorderPane {
     private static final ImageView IMG_UFO = new ImageView("be/kdg/thegame_2048/views/img/ufo.png");
     private static final ImageView IMG_MAN = new ImageView("be/kdg/thegame_2048/views/img/user.png");
     private static final ImageView IMG_JOYSTICK = new ImageView("be/kdg/thegame_2048/views/img/about.png");
-    private static final ImageView IMG_CREDITS = new ImageView("be/kdg/thegame_2048/views/img/settings.png");
+    private static final ImageView IMG_CREDITS = new ImageView("be/kdg/thegame_2048/views/img/credits.png");
     private static final int OVERALL_PADDING = 50;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;

@@ -87,25 +87,13 @@ public class GamePresenter {
                 final KeyCode direction = event.getCode();
                 prevScore = modelGame.getScore().getScore();
                 switch (direction) {
-                    case DOWN:
-                        updateViewBlocks(Game.Direction.DOWN);
-                        animationView.animateMovement(direction);
-                        break;
-                    case UP:
-                        updateViewBlocks(Game.Direction.TOP);
-                        animationView.animateMovement(direction);
-                        break;
-                    case RIGHT:
-                        updateViewBlocks(Game.Direction.RIGHT);
-                        animationView.animateMovement(direction);
-                        break;
-                    case LEFT:
-                        updateViewBlocks(Game.Direction.LEFT);
-                        animationView.animateMovement(direction);
-                        break;
-                    default:
-                        event.consume();
+                    case DOWN: updateViewBlocks(Game.Direction.DOWN); break;
+                    case UP: updateViewBlocks(Game.Direction.TOP); break;
+                    case RIGHT: updateViewBlocks(Game.Direction.RIGHT); break;
+                    case LEFT: updateViewBlocks(Game.Direction.LEFT); break;
+                    default: event.consume();
                 }
+                animationView.animateMovement(direction);
                 final int currScore = modelGame.getScore().getScore();
                 modelPlayerMananger.setCurrentPlayerScore(currScore);
                 if (currScore - prevScore > 0) {
