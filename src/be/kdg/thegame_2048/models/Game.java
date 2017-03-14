@@ -1,14 +1,13 @@
 package be.kdg.thegame_2048.models;
 
 /**
+ * The game class puts everything together. It represents the game as a whole.
+ * This has access to most of the other model classes.
+ *
  * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
  */
 public final class Game {
-    /**
-     * The game class puts everyting together. It represents the game as a whole.
-     * This has access to most of the other model classes.
-     **/
     public enum Direction {
         TOP, DOWN, LEFT, RIGHT
     }
@@ -134,7 +133,7 @@ public final class Game {
     }
 
     /**
-     * Returns the current score of the game.
+     * @return the current score of the game.
      **/
     public Score getScore() {
         return score;

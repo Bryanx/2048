@@ -3,6 +3,10 @@ package be.kdg.thegame_2048.models;
 import java.util.Random;
 
 /**
+ * This class handles all the things that happen with the playground.
+ * It contains an array of sections with blocks in them.
+ * If their isn't a block in a section, then the section is just empty.
+ *
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 8/02/2017 17:44
  */

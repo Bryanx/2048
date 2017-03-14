@@ -1,13 +1,12 @@
 package be.kdg.thegame_2048.models;
 
 /**
+ * A pojo that stores the most important section information
+ *
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 8/02/2017 17:06
  */
 final class Section {
-    /**
-     * A pojo that stores the most inmportant section inormation
-     **/
     private Block block;
 
     Block getBlock() {

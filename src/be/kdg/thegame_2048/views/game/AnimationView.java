@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Bryan de Ridder
+ * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 02-03-17 06:18
  */
 class AnimationView {

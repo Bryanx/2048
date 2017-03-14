@@ -3,13 +3,12 @@ package be.kdg.thegame_2048.models;
 import java.util.*;
 
 /**
+ * This class manages all the players that exist.
+ *
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 8/02/2017 17:17
  */
 public final class PlayerManager {
-    /**
-     * This class manages all the players that exist.
-     **/
     private final List<Player> playerList;
     private Player currentPlayer;
     private int currentPlayerScore;
