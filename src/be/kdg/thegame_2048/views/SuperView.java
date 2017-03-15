@@ -1,6 +1,7 @@
 package be.kdg.thegame_2048.views;
 
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
@@ -10,6 +11,7 @@ import javafx.scene.layout.BorderPane;
  */
 public abstract class SuperView extends BorderPane {
     private static final double OVERALL_PADDING = 50;
+    private static final String LOGO_PATH = "be/kdg/thegame_2048/views/img/logo.png";
     private ImageView logo;
 
 
@@ -19,8 +21,7 @@ public abstract class SuperView extends BorderPane {
     }
 
     protected void initialiseNodes() {
-        //Same as in the StartView class, maybe put inside an interface
-        this.logo = new ImageView("be/kdg/thegame_2048/views/img/logo.png");
+        this.logo = new ImageView(LOGO_PATH);
     }
 
     protected void layoutNodes() {

@@ -1,12 +1,17 @@
 package be.kdg.thegame_2048.views.start;
 
+import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 /**
+ * The start/home page of the application.
+ * Also contains a scale animation method to animate the buttons.
+ *
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 5/02/2017 18:49
  */
@@ -16,11 +21,17 @@ public final class StartView extends BorderPane {
     private static final ImageView IMG_MAN = new ImageView("be/kdg/thegame_2048/views/img/user.png");
     private static final ImageView IMG_JOYSTICK = new ImageView("be/kdg/thegame_2048/views/img/about.png");
     private static final ImageView IMG_CREDITS = new ImageView("be/kdg/thegame_2048/views/img/credits.png");
+    private static final String NEW_PLAYER_TEXT = "New Player";
+    private static final String EXISTING_PLAYER_TEXT = "Existing Player";
+    private static final String ABOUT_TEXT = "How to play";
+    private static final String CREDITS_TEXT = "Credits";
+    private static final Duration SCALE_DURATION = Duration.millis(100);
     private static final int OVERALL_PADDING = 50;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
     private Button btnAbout;
     private Button btnCredits;
+    private Button[] allButtons;
 
     public StartView() {
         initialiseNodes();
@@ -28,28 +39,29 @@ public final class StartView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        //Creates the New Player button and adds an icon:
-        this.btnNewPlayer = new Button("New Player", IMG_UFO);
-
-        //Creates the Existing Player button and adds an icon:
-        this.btnExistingPlayer = new Button("Existing Player", IMG_MAN);
-
-        //Creates the about button and adds an icon:
-        this.btnAbout = new Button("How to play", IMG_JOYSTICK);
-
-        //Creates the credits button and adds an icon:
-        this.btnCredits = new Button("Credits", IMG_CREDITS);
-
+        this.btnNewPlayer = new Button(
+                NEW_PLAYER_TEXT,
+                IMG_UFO);
+        this.btnExistingPlayer = new Button(
+                EXISTING_PLAYER_TEXT,
+                IMG_MAN);
+        this.btnAbout = new Button(
+                ABOUT_TEXT,
+                IMG_JOYSTICK);
+        this.btnCredits = new Button(
+                CREDITS_TEXT,
+                IMG_CREDITS);
+        this.allButtons = new Button[]{btnNewPlayer, btnExistingPlayer, btnAbout, btnCredits};
         addStyles();
     }
 
     private void layoutNodes() {
-        //topside of the StartView, contains the 2048 IMG_LOGO:
+        //TOP
         BorderPane top = new BorderPane(IMG_LOGO);
         top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
         this.setTop(top);
 
-        //Middle of the StartView, 2 buttons are stacked inside a GridPane:
+        //MIDDLE
         VBox vBox1 = new VBox(btnNewPlayer, btnAbout);
         VBox vBox2 = new VBox(btnExistingPlayer, btnCredits);
         HBox middle = new HBox(vBox1,vBox2);
@@ -66,37 +78,35 @@ public final class StartView extends BorderPane {
      * Adds custom css selector to each individual node.
      **/
     private void addStyles() {
-        btnNewPlayer.getStyleClass().add("btnStartView");
-        btnExistingPlayer.getStyleClass().add("btnStartView");
-        btnAbout.getStyleClass().add("btnStartView");
-        btnCredits.getStyleClass().add("btnStartView");
+        for (Button button : allButtons) {
+            button.getStyleClass().add("btnStartView");
+        }
     }
 
-    /**
-     * Returns the new player button.
-     **/
+    void scale(Button button, double fromXY, double toXY) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode(button);
+        st.setFromX(fromXY);
+        st.setFromY(fromXY);
+        st.setToX(toXY);
+        st.setToY(toXY);
+        st.setDuration(SCALE_DURATION);
+        st.play();
+    }
+
     Button getBtnNewPlayer() {
         return btnNewPlayer;
     }
-
-    /**
-     * Returns the existing player button.
-     **/
     Button getBtnExistingPlayer() {
         return btnExistingPlayer;
     }
-
-    /**
-     * Returns the about button.
-     **/
     Button getBtnAbout() {
         return btnAbout;
     }
-
-    /**
-     * Returns the credits button.
-     **/
     Button getBtnCredits() {
         return btnCredits;
+    }
+    Button[] getAllButtons() {
+        return allButtons;
     }
 }

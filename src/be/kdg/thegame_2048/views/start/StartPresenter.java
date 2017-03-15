@@ -9,40 +9,31 @@ import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerPresenter;
 import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerView;
 import be.kdg.thegame_2048.views.newPlayer.NewPlayerPresenter;
 import be.kdg.thegame_2048.views.newPlayer.NewPlayerView;
-import javafx.animation.ScaleTransition;
 import javafx.scene.control.Button;
-import javafx.util.Duration;
 
 /**
+ * Links the start/home view classes to the model classes.
+ *
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 14/02/2017 12:18
  */
 public class StartPresenter {
-    //ATTRIBUTES
+    private static final double BTN_MAX_SCALE = 1.15;
     private final PlayerManager model;
     private final StartView view;
 
-
-    //CONSTRUCTORS
     public StartPresenter(PlayerManager model, StartView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();
     }
 
-    //METHODS
     private void addEventHandlers() {
-        //FADE IN EFFECTS
-        view.getBtnNewPlayer().setOnMouseEntered(event -> scaleIn(view.getBtnNewPlayer()));
-        view.getBtnExistingPlayer().setOnMouseEntered(event -> scaleIn(view.getBtnExistingPlayer()));
-        view.getBtnAbout().setOnMouseEntered(event -> scaleIn(view.getBtnAbout()));
-        view.getBtnCredits().setOnMouseEntered(event -> scaleIn(view.getBtnCredits()));
-
-        //SCALE OUT EFFECTS
-        view.getBtnNewPlayer().setOnMouseExited(event -> scaleOut(view.getBtnNewPlayer()));
-        view.getBtnExistingPlayer().setOnMouseExited(event -> scaleOut(view.getBtnExistingPlayer()));
-        view.getBtnAbout().setOnMouseExited(event -> scaleOut(view.getBtnAbout()));
-        view.getBtnCredits().setOnMouseExited(event -> scaleOut(view.getBtnCredits()));
+        //SCALE IN and SCALE OUT effects are applied to the buttons
+        for (Button button : view.getAllButtons()) {
+            button.setOnMouseEntered(event -> view.scale(button, 1,BTN_MAX_SCALE));
+            button.setOnMouseExited(event -> view.scale(button, BTN_MAX_SCALE, 1));
+        }
 
         view.getBtnNewPlayer().setOnAction(event -> {
             NewPlayerView playerView = new NewPlayerView();
@@ -65,34 +56,4 @@ public class StartPresenter {
             view.getScene().setRoot(settingsView);
         });
     }
-
-
-    /**
-     * Makes a specific button grow in size.
-     **/
-    private void scaleIn(Button button) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode(button);
-        st.setFromX(1);
-        st.setFromY(1);
-        st.setToX(1.15);
-        st.setToY(1.15);
-        st.setDuration(Duration.millis(100));
-        st.play();
-    }
-
-    /**
-     * Makes a specific button decrease in size.
-     **/
-    private void scaleOut(Button button) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode(button);
-        st.setFromX(1.15);
-        st.setFromY(1.15);
-        st.setToX(1);
-        st.setToY(1);
-        st.setDuration(Duration.millis(100));
-        st.play();
-    }
-
 }

@@ -61,6 +61,7 @@ public class GamePresenter {
 
         bottomView.getBtnUndo().setOnAction(event -> {
             UndoView alert = new UndoView();
+            alert.getLblHeader().setText("Warning");
             alert.getLblMessage().setText("Are you sure you want to undo \nyour last move? " +
                     "Your score will no longer \nbe added to the highscores.");
             new UndoPresenter(modelGame, alert, view, this);
@@ -99,7 +100,6 @@ public class GamePresenter {
                 if (currScore - prevScore > 0) {
                     animationView.animateScore(currScore - prevScore);
                 }
-
             }
         });
 
@@ -164,10 +164,10 @@ public class GamePresenter {
 
     /**
      * Model classes check if the player has won or lost.
-     * If so, the resultview must be set as the current view.
+     * If so, the resultView must be shown.
      **/
     private void checkIfLostOrWin() {
-        if (alreadyWon) return;
+        if (!modelGame.hasLost() && alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
             alreadyWon = true;
             if (!modelGame.isPlayingUndo()) modelPlayerMananger.saveInfoCurrentPlayer();
@@ -185,16 +185,9 @@ public class GamePresenter {
                 modelGame.getLastMove().equals(modelGame.getCurrentMove());
     }
 
-    /**
-     * Returns the previous score.
-     **/
     public int getPrevScore() {
         return prevScore;
     }
-
-    /**
-     * Disables the undo button.
-     **/
     public void disableUndoButton(boolean bool) {
         bottomView.getBtnUndo().setDisable(bool);
     }

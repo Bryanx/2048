@@ -14,6 +14,14 @@ import javafx.stage.Stage;
  * @version 1.0 04-02-17 18:38
  */
 public class Main extends Application {
+    //the minheight is increased with 20px because the window top border is 20px.
+    private static final double STAGE_MIN_HEIGHT = 750 + 20;
+    private static final double STAGE_MIN_WIDTH = 550;
+    private static final String STAGE_TITLE = "2048";
+    private static final String STYLE_SHEET_PATH = "be/kdg/thegame_2048/views/css/stylesheet.css";
+    private static final String FONT_CLEAR_SANS = "views/fonts/ClearSans-Bold.TTF";
+    private static final double FONT_SIZE = 12;
+
     @Override
     public void start(Stage primaryStage) {
         //MAKING CLASSES
@@ -26,14 +34,14 @@ public class Main extends Application {
         Scene scene = new Scene(view);
 
         //add stylesheet:
-        scene.getStylesheets().add("be/kdg/thegame_2048/views/css/stylesheet.css");
-        //add fonts:
-        Font.loadFont(Main.class.getResource("views/fonts/ClearSans-Bold.TTF").toExternalForm(), 12);
+        scene.getStylesheets().add(STYLE_SHEET_PATH);
+        //add custom font:
+        Font.loadFont(Main.class.getResource(FONT_CLEAR_SANS).toExternalForm(), FONT_SIZE);
 
         primaryStage.setScene(scene);
-        primaryStage.setMinHeight(750 + 20);
-        primaryStage.setMinWidth(550);
-        primaryStage.setTitle("2048");
+        primaryStage.setMinHeight(STAGE_MIN_HEIGHT);
+        primaryStage.setMinWidth(STAGE_MIN_WIDTH);
+        primaryStage.setTitle(STAGE_TITLE);
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();

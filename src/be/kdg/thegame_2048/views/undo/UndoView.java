@@ -8,20 +8,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 
 
 /**
+ * Creates a BorderPane that can contain a warning message for the player.
+ * The lblHeader and lblMessage texts are not yet set.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-03-17 14:39
  */
 public class UndoView extends BorderPane {
+    private static final Paint RECTANGLE_BG_COLOR = Color.WHITE;
+    private static final double RECT_ARC_SIZE = 20;
+    private static final double TEXT_SPACING = 25;
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
     private Label lblMessage;
     private Label lblHeader;
-    private Rectangle box;
+    private Rectangle rect;
     private Button btnAccept;
     private Button btnCancel;
 
@@ -33,30 +40,35 @@ public class UndoView extends BorderPane {
     private void initialiseNodes() {
         this.btnAccept = new Button();
         this.btnCancel = new Button();
-        this.lblHeader = new Label("Warning");
+        this.lblHeader = new Label();
 
-        this.lblMessage = new Label("");
-        this.lblMessage.setMaxSize(WIDTH-20,HEIGHT-20);
+        this.lblMessage = new Label();
+        this.lblMessage.setMaxSize(WIDTH,HEIGHT);
         this.lblMessage.setTextAlignment(TextAlignment.CENTER);
+        this.lblMessage.setAlignment(Pos.CENTER);
 
-        this.box = new Rectangle(WIDTH,HEIGHT, Color.WHITE);
-        this.box.setOpacity(50);
-        this.box.setArcWidth(20);
-        this.box.setArcHeight(20);
+        this.rect = new Rectangle();
+        this.rect.setWidth(WIDTH);
+        this.rect.setHeight(HEIGHT);
+        this.rect.setFill(RECTANGLE_BG_COLOR);
+        this.rect.setArcWidth(RECT_ARC_SIZE);
+        this.rect.setArcHeight(RECT_ARC_SIZE);
 
         addStyles();
     }
 
     private void layoutNodes() {
-        HBox hbox1 = new HBox(btnAccept, btnCancel);
-        VBox vbox = new VBox(lblHeader, lblMessage, hbox1);
-        hbox1.setAlignment(Pos.CENTER);
-        lblMessage.setAlignment(Pos.CENTER);
+        HBox hbox = new HBox(btnAccept, btnCancel);
+        hbox.setAlignment(Pos.CENTER);
+
+        VBox vbox = new VBox(lblHeader, lblMessage, hbox);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setSpacing(25);
-        StackPane stack = new StackPane(box, vbox);
+        vbox.setSpacing(TEXT_SPACING);
+
+        StackPane stack = new StackPane(rect, vbox);
         this.setCenter(stack);
     }
+
     /**
      * Adds custom css selector to each individual node.
      **/
@@ -66,23 +78,16 @@ public class UndoView extends BorderPane {
         lblMessage.getStyleClass().add("hsColumnFill");
     }
 
-    /**
-     * Returns a Label for putting in a warning message.
-     **/
+
+    public Label getLblHeader() {
+        return lblHeader;
+    }
     public Label getLblMessage() {
         return lblMessage;
     }
-
-    /**
-     * Returns an accept button.
-     **/
     Button getBtnAccept() {
         return btnAccept;
     }
-
-    /**
-     * Returns a cancel button.
-     **/
     Button getBtnCancel() {
         return btnCancel;
     }

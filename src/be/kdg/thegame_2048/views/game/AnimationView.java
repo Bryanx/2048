@@ -154,20 +154,6 @@ class AnimationView {
     }
 
     /**
-     * Pop out animation for merged blocks.
-     **/
-    void popOut(int x, int y) {
-        this.scaleTransition = new ScaleTransition(POPOUT_DURATION, midView.getBlock(x, y));
-        scaleTransition.setFromX(1.0);
-        scaleTransition.setFromY(1.0);
-        scaleTransition.setToX(1.2);
-        scaleTransition.setToY(1.2);
-        scaleTransition.setCycleCount(2);
-        scaleTransition.setAutoReverse(true);
-        scaleTransition.play();
-    }
-
-    /**
      * Animates the score parameter on top of the currentScore.
      * Can be used to animate score increase value.
      **/
