@@ -8,18 +8,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
+ * Creates a BorderPane that contains a win or lose situation.
+ * lblResult needs to be set with win or lose.
+ * lblFinalScore needs to be set with the final score.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 14-02-17 11:51
  */
 public final class ResultView extends BorderPane {
+    private static final double TEXT_SPACING = 25;
     private Label lblResult;
     private Label lblScore;
-    private Label lblScoreInput;
+    private Label lblFinalScore;
     private Button btnRestart;
     private Button btnContinue;
     private Button btnExit;
 
-    private HBox hBbuttons;
+    private HBox hBoxButtons;
 
     public ResultView() {
         initialiseNodes();
@@ -29,69 +34,37 @@ public final class ResultView extends BorderPane {
     private void initialiseNodes() {
         this.lblResult = new Label("You win/lose!");
         this.lblScore = new Label("Final score: ");
-        this.lblScoreInput = new Label("0");
+        this.lblFinalScore = new Label("0");
         this.btnRestart = new Button();
         this.btnContinue = new Button();
         this.btnExit = new Button();
 
         addStyles();
     }
+
+    private void layoutNodes() {
+        HBox hbox = new HBox(lblScore, lblFinalScore);
+        hbox.setAlignment(Pos.CENTER);
+
+        this.hBoxButtons = new HBox(btnRestart, btnExit);
+        this.hBoxButtons.setAlignment(Pos.CENTER);
+
+        VBox vbox = new VBox(lblResult, hbox, hBoxButtons);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(TEXT_SPACING);
+        this.setCenter(vbox);
+    }
+
     /**
      * Adds custom css selector to each individual node.
      **/
     private void addStyles() {
         lblResult.getStyleClass().add("lblResult");
         lblScore.getStyleClass().add("lblResultScore");
-        lblScoreInput.getStyleClass().add("lblResultScore");
+        lblFinalScore.getStyleClass().add("lblResultScore");
         btnRestart.getStyleClass().add("btnRestart");
         btnContinue.getStyleClass().add("btnGoBack");
         btnExit.getStyleClass().add("btnExit");
-    }
-
-    private void layoutNodes() {
-        HBox hbox1 = new HBox(lblScore, lblScoreInput);
-        this.hBbuttons = new HBox(btnRestart, btnExit);
-        VBox vbox = new VBox(lblResult, hbox1, hBbuttons);
-        hbox1.setAlignment(Pos.CENTER);
-        hBbuttons.setAlignment(Pos.CENTER);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.setSpacing(25);
-        this.setCenter(vbox);
-    }
-
-    /**
-     * Returns a Label for putting in the result.
-     **/
-    void setLblResult(String result) {
-        this.lblResult.setText(result);
-    }
-
-    /**
-     * Returns a Label for putting in the score.
-     **/
-    Label getLblScoreInput() {
-        return lblScoreInput;
-    }
-
-    /**
-     * Returns a continue button.
-     **/
-    Button getBtnContinue() {
-        return btnContinue;
-    }
-
-    /**
-     * Returns a restart button.
-     **/
-    Button getBtnRestart() {
-        return btnRestart;
-    }
-
-    /**
-     * Returns an exit button.
-     **/
-    Button getBtnExit() {
-        return btnExit;
     }
 
     /**
@@ -99,6 +72,22 @@ public final class ResultView extends BorderPane {
      * This method should only be used if the player has won the game.
      **/
     void addContinueBtn() {
-        hBbuttons.getChildren().add(0,btnContinue);
+        hBoxButtons.getChildren().add(0,btnContinue);
+    }
+
+    Label getLblResult() {
+        return lblResult;
+    }
+    Label getLblFinalScore() {
+        return lblFinalScore;
+    }
+    Button getBtnContinue() {
+        return btnContinue;
+    }
+    Button getBtnRestart() {
+        return btnRestart;
+    }
+    Button getBtnExit() {
+        return btnExit;
     }
 }

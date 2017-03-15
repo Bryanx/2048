@@ -14,8 +14,7 @@ import javafx.scene.text.TextAlignment;
 
 
 /**
- * Creates a BorderPane that can contain a warning message for the player.
- * The lblHeader and lblMessage texts are not yet set.
+ * Creates a BorderPane that contains an undo warning message for the player.
  *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 08-03-17 14:39
@@ -26,6 +25,9 @@ public class UndoView extends BorderPane {
     private static final double TEXT_SPACING = 25;
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
+    private static final String HEADER = "Warning";
+    private static final String MESSAGE = "Are you sure you want to undo\nyour last move? " +
+            "Your score will no longer\nbe added to the highscores.";
     private Label lblMessage;
     private Label lblHeader;
     private Rectangle rect;
@@ -40,9 +42,9 @@ public class UndoView extends BorderPane {
     private void initialiseNodes() {
         this.btnAccept = new Button();
         this.btnCancel = new Button();
-        this.lblHeader = new Label();
+        this.lblHeader = new Label(HEADER);
 
-        this.lblMessage = new Label();
+        this.lblMessage = new Label(MESSAGE);
         this.lblMessage.setMaxSize(WIDTH,HEIGHT);
         this.lblMessage.setTextAlignment(TextAlignment.CENTER);
         this.lblMessage.setAlignment(Pos.CENTER);
@@ -78,13 +80,6 @@ public class UndoView extends BorderPane {
         lblMessage.getStyleClass().add("hsColumnFill");
     }
 
-
-    public Label getLblHeader() {
-        return lblHeader;
-    }
-    public Label getLblMessage() {
-        return lblMessage;
-    }
     Button getBtnAccept() {
         return btnAccept;
     }

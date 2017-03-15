@@ -5,6 +5,10 @@ import be.kdg.thegame_2048.views.game.GamePresenter;
 import be.kdg.thegame_2048.views.game.GameView;
 
 /**
+ * Links the undo button view to the model classes.
+ * If the warning message is accepted the player score
+ * and the playground are returned to its previous state.
+ *
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 08-03-17 16:21
  */

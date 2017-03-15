@@ -1,27 +1,29 @@
 package be.kdg.thegame_2048.views.game;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 
 /**
+ * Creates the topside of the game view.
+ * It contains all score information.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 11:06
  */
 class GameTopView extends BorderPane {
     private static final ImageView IMG_LOGO = new ImageView("be/kdg/thegame_2048/views/img/logo-2048.png");
+    private static final String BEST_SCORE_TEXT = "Best score: ";
+    private static final String CURRENT_SCORE_TEXT = "Current score: ";
     private Label lblBestScore;
     private Label lblBestScoreInput;
-    private Label lblScore;
+    private Label lblCurrentScore;
+    private Label lblCurrentScoreInput;
+    private Label lblScoreAnimation;
     private StackPane spScore;
-    private Label lblScoreInput;
-    private Label lblScoreChange;
 
     GameTopView() {
         initialiseNodes();
@@ -29,28 +31,33 @@ class GameTopView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        this.lblBestScore = new Label("Best score: ");
-        this.lblBestScoreInput = new Label("0");
-        this.lblScore = new Label("Current score: ");
-        this.lblScoreInput = new Label("0");
-        this.lblScoreChange = new Label("0");
-        this.lblScoreChange.setVisible(false);
+        this.lblBestScore = new Label(BEST_SCORE_TEXT);
+        this.lblBestScoreInput = new Label();
 
-        this.spScore = new StackPane(lblScoreInput, lblScoreChange);
+        this.lblCurrentScore = new Label(CURRENT_SCORE_TEXT);
+        this.lblCurrentScoreInput = new Label();
+
+        this.lblScoreAnimation = new Label();
+        this.lblScoreAnimation.setVisible(false);
+
+        //stacks the Label to be animated on top of the original score.
+        this.spScore = new StackPane(lblCurrentScoreInput, lblScoreAnimation);
         spScore.setAlignment(Pos.CENTER_RIGHT);
 
         addStyles();
     }
 
     private void layoutNodes() {
-        GridPane gridTop = new GridPane();
-        VBox vboxScore = new VBox(lblBestScore, lblScore);
+        VBox vboxScore = new VBox(lblBestScore, lblCurrentScore);
         VBox vboxScoreInput = new VBox(lblBestScoreInput, spScore);
+
+        GridPane gridTop = new GridPane();
         gridTop.add(IMG_LOGO, 0, 0, 1, 2);
         gridTop.add(vboxScore, 1, 0);
         gridTop.add(vboxScoreInput, 2, 0);
         gridTop.setMaxWidth(GameView.SCENE_WIDTH - GameView.OVERALL_PADDING * 2);
         gridTop.setMinHeight(GameView.HEIGHT_OUTER_PANELS);
+
         VBox[] vBoxes = {vboxScoreInput, vboxScore};
         for (VBox vBox : vBoxes) {
             GridPane.setVgrow(vBox, Priority.ALWAYS);
@@ -60,38 +67,30 @@ class GameTopView extends BorderPane {
         }
         GridPane.setHgrow(vboxScore, Priority.ALWAYS);
         this.setCenter(gridTop);
-        this.setBackground(new Background(new BackgroundFill(Color.rgb(215, 180, 7), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     /**
      * Adds custom css selector to each individual node.
      **/
     private void addStyles() {
+        this.getStyleClass().add("darkerBG");
         lblBestScore.getStyleClass().add("inGameScore");
         lblBestScoreInput.getStyleClass().add("inGameScore");
-        lblScore.getStyleClass().add("inGameScore");
-        lblScoreInput.getStyleClass().add("inGameScore");
-        lblScoreChange.getStyleClass().add("lblScoreAnimation");
+        lblCurrentScore.getStyleClass().add("inGameScore");
+        lblCurrentScoreInput.getStyleClass().add("inGameScore");
+        lblScoreAnimation.getStyleClass().add("lblScoreAnimation");
     }
 
     /**
-     * Returns a Label for best score input.
+     * @return a Label in which score animations can be put.
      **/
+    Label getLblScoreAnimation() {
+        return lblScoreAnimation;
+    }
     Label getLblBestScoreInput() {
         return lblBestScoreInput;
     }
-
-    /**
-     * Returns a Label for score input.
-     **/
-    Label getLblScoreInput() {
-        return lblScoreInput;
-    }
-
-    /**
-     * Returns a Label in which score animations can be put.
-     **/
-    Label getLblScoreChange() {
-        return lblScoreChange;
+    Label getLblCurrentScoreInput() {
+        return lblCurrentScoreInput;
     }
 }

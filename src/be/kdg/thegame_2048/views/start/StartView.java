@@ -56,7 +56,7 @@ public final class StartView extends BorderPane {
     }
 
     private void layoutNodes() {
-        //TOP
+        //UP
         BorderPane top = new BorderPane(IMG_LOGO);
         top.setPadding(new Insets(0, 0, -OVERALL_PADDING*2, 0));
         this.setTop(top);

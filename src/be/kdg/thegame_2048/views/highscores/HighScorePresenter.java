@@ -5,10 +5,14 @@ import be.kdg.thegame_2048.models.Player;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.game.GamePresenter;
 import be.kdg.thegame_2048.views.game.GameView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import java.util.*;
 
 /**
+ * Links the high score view to the model classes.
+ *
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 17-02-17 09:46
  */
@@ -26,7 +30,7 @@ public class HighScorePresenter {
     }
 
     private void addEventHandlers() {
-        view.getGoBack().setOnAction(event -> updateScene());
+        view.getBtnGoBack().setOnAction(event -> updateScene());
     }
 
     /**
@@ -34,13 +38,9 @@ public class HighScorePresenter {
      **/
     private void updateScene() {
         GameView gameView = new GameView();
-        gameView.getLblScoreInput().setText(String.valueOf(modelGame.getScore()));
-        gameView.getLblBestScoreInput().setText(String.valueOf(modelPM.getCurrentPlayer().getBestScore()));
         GamePresenter gp = new GamePresenter(modelGame, modelPM, gameView);
-        if (modelGame.getScore().getScore() >= modelPM.getCurrentPlayer().getBestScore()) {
-            gameView.getLblBestScoreInput().setText(String.valueOf(modelGame.getScore().getScore()));
-        }
         view.getScene().setRoot(gameView);
+
         if (modelGame.isPlayingUndo()) gp.disableUndoButton(true);
     }
 
@@ -55,8 +55,6 @@ public class HighScorePresenter {
             playernames.add(p.getName());
             playerBestScores.add(p.getBestScore());
         }
-        System.out.println(playernames.toString());
-        System.out.println(playerBestScores.toString());
 
         String currentPlayer = modelPM.getCurrentPlayer().getName();
 

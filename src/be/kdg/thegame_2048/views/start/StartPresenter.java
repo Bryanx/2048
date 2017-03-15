@@ -5,10 +5,8 @@ import be.kdg.thegame_2048.views.about.AboutPresenter;
 import be.kdg.thegame_2048.views.about.AboutView;
 import be.kdg.thegame_2048.views.credits.CreditsPresenter;
 import be.kdg.thegame_2048.views.credits.CreditsView;
-import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerPresenter;
-import be.kdg.thegame_2048.views.existingplayer.ExistingPlayerView;
-import be.kdg.thegame_2048.views.newPlayer.NewPlayerPresenter;
-import be.kdg.thegame_2048.views.newPlayer.NewPlayerView;
+import be.kdg.thegame_2048.views.newOrExistingPlayer.PlayerPresenter;
+import be.kdg.thegame_2048.views.newOrExistingPlayer.PlayerView;
 import javafx.scene.control.Button;
 
 /**
@@ -36,13 +34,13 @@ public class StartPresenter {
         }
 
         view.getBtnNewPlayer().setOnAction(event -> {
-            NewPlayerView playerView = new NewPlayerView();
-            new NewPlayerPresenter(model, playerView);
+            PlayerView playerView = new PlayerView();
+            new PlayerPresenter(model, playerView, true);
             view.getScene().setRoot(playerView);
         });
         view.getBtnExistingPlayer().setOnAction(event -> {
-            ExistingPlayerView playerView = new ExistingPlayerView();
-            new ExistingPlayerPresenter(model, playerView);
+            PlayerView playerView = new PlayerView();
+            new PlayerPresenter(model, playerView, false);
             view.getScene().setRoot(playerView);
         });
         view.getBtnAbout().setOnAction(event -> {

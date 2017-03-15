@@ -13,7 +13,6 @@ import javafx.scene.paint.Paint;
  * @version 1.0 17-02-17 10:45
  */
 class GameBottomView extends BorderPane {
-    private static final Paint BG_COLOR = Color.rgb(215, 180, 7);
     private Button btnRestart;
     private Button btnUndo;
     private Button btnHighScores;
@@ -49,13 +48,13 @@ class GameBottomView extends BorderPane {
             GridPane.setHalignment(btn, HPos.CENTER);
         }
         this.setCenter(gridBottom);
-        this.setBackground(new Background(new BackgroundFill(BG_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     /**
      * Adds custom css selector to each individual node.
      **/
     private void addStyles() {
+        this.getStyleClass().add("darkerBG");
         btnHighScores.getStyleClass().add("btnHighScores");
         btnRestart.getStyleClass().add("btnRestart");
         btnUndo.getStyleClass().add("btnUndo");

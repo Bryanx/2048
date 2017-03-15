@@ -5,6 +5,9 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.*;
 
 /**
+ * Creates the game view of the game seperated into 3 classes.
+ * Also creates an optional message to put on top of the game view.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 12-02-17 18:49
  */
@@ -14,11 +17,12 @@ public final class GameView extends BorderPane {
     static final double HEIGHT_OUTER_PANELS = 100;
     static final double GAME_SIZE = 450;
 
-    private BorderPane container;
-
     private GameTopView gameTopView;
     private GameMiddleView gameMiddleView;
     private GameBottomView gameBottomView;
+
+    private BorderPane container;
+
 
     public GameView() {
         initialiseNodes();
@@ -41,7 +45,10 @@ public final class GameView extends BorderPane {
     }
 
     /**
-     * Makes the background blurry and puts a new BorderPane on top.
+     * Makes the entire game view blurry and puts it in a stackpane.
+     * @param pane A new BorderPane is put on top of the StackPane.
+     *             It can be used to put in messages to the user.
+     *             To reset this effect method layoutNodes() needs to be called.
      **/
     void setView(BorderPane pane) {
         container.setEffect(new GaussianBlur());
@@ -49,38 +56,16 @@ public final class GameView extends BorderPane {
         this.setCenter(stack);
     }
 
-    /**
-     * Returns the TopView.
-     **/
     GameTopView getTopView() {
         return gameTopView;
     }
-
-    /**
-     * Returns the MiddleView.
-     **/
     GameMiddleView getMiddleView() {
         return gameMiddleView;
     }
-
-    /**
-     * Returns the BottomView.
-     **/
     GameBottomView getBottomView() {
         return gameBottomView;
     }
-
-    /**
-     * Returns a Label for best score input.
-     **/
-    public Label getLblBestScoreInput() {
-        return gameTopView.getLblBestScoreInput();
-    }
-
-    /**
-     * Returns a Label for score input.
-     **/
     public Label getLblScoreInput() {
-        return gameTopView.getLblScoreInput();
+        return gameTopView.getLblCurrentScoreInput();
     }
 }

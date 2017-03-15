@@ -158,9 +158,9 @@ class AnimationView {
      * Can be used to animate score increase value.
      **/
     void animateScore(int score) {
-        topView.getLblScoreChange().setText("+" + score);
-        topView.getLblScoreChange().setVisible(true);
-        Label lblScore = topView.getLblScoreChange();
+        topView.getLblScoreAnimation().setText("+" + score);
+        topView.getLblScoreAnimation().setVisible(true);
+        Label lblScore = topView.getLblScoreAnimation();
 
         FadeTransition ft = new FadeTransition();
         ft.setDuration(SCORE_FADE_DURATION);

@@ -16,9 +16,22 @@ BG darker:
     -fx-text-fill: #006464;
 }
 
+.darkerBG {
+    -fx-background-color: #D7B407;
+}
+
 .button {
     -fx-background-color: none;
     -fx-cursor: hand;
+}
+
+.btnGoBack {
+    -fx-background-color: none;
+    -fx-graphic: url("../img/goback.png");
+}
+
+.btnGoBack:hover {
+    -fx-graphic: url("../img/goback-hover.png");
 }
 
 /*  ========== StartView ========== */
@@ -41,7 +54,6 @@ BG darker:
 
 .btnStartView:pressed {
     -fx-text-fill: black;
-
 }
 
 /* ========== GameView ========== */
@@ -97,17 +109,7 @@ BG darker:
     -fx-graphic: url("../img/accept-hover.png");
 }
 
-/* ========== NewPlayerView & ExistingPlayerView ========== */
-.btnGoBack {
-    -fx-background-color: none;
-    -fx-graphic: url("../img/goback.png");
-    -fx-cursor: hand;
-}
-
-.btnGoBack:hover {
-    -fx-graphic: url("../img/goback-hover.png");
-}
-
+/* ========== PlayerViews (new/existing player) ========== */
 .inputError {
     -fx-font-size: 14pt;
     -fx-text-fill: darkred;
@@ -144,20 +146,17 @@ BG darker:
 }
 
 .hsColumnNames {
-    -fx-font-family: "Calibri";
     -fx-font-weight: bold;
     -fx-font-size: 14pt;
 }
 
 .hsColumnFillRanks {
     -fx-font-size: 16pt;
-    -fx-font-family: "Calibri";
     -fx-font-weight: bold;
 }
 
 .hsColumnFill {
     -fx-font-size: 16pt;
-    -fx-font-family: "Calibri";
     -fx-font-weight: lighter;
 }
 
@@ -176,7 +175,6 @@ BG darker:
 
 .lblResultScore {
     -fx-font-family: 'Clear Sans';
-    -fx-font-size: 25pt;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }

@@ -9,7 +9,19 @@ package be.kdg.thegame_2048.models;
  */
 public final class Game {
     public enum Direction {
-        TOP, DOWN, LEFT, RIGHT
+        UP, DOWN, LEFT, RIGHT;
+
+        public static Direction get(String value){
+            if(value.equalsIgnoreCase(UP.toString()))
+                return Direction.UP;
+            else if(value.equalsIgnoreCase(DOWN.toString()))
+                return Direction.DOWN;
+            else if(value.equalsIgnoreCase(LEFT.toString()))
+                return Direction.LEFT;
+            else {
+                return Direction.RIGHT;
+            }
+        }
     }
 
     final static private int STARTVALUE = 2;
@@ -54,11 +66,12 @@ public final class Game {
 
     /**
      * Runs one cycle of the game on the logical level.
+     * @param direction needs a direction parameter.
      **/
     public void runGameCycle(Direction direction) {
         this.lastMove = playground.toString();
         switch (direction) {
-            case TOP:
+            case UP:
                 playground.moveBlocksTop();
                 break;
             case DOWN:

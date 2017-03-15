@@ -1,7 +1,7 @@
 package be.kdg.thegame_2048.models;
 
 /**
- *A pojo that is used to calculate the score.
+ * A pojo that is used to calculate the score.
  *
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 8/02/2017 16:57

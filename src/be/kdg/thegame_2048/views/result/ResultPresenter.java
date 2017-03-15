@@ -9,6 +9,9 @@ import be.kdg.thegame_2048.views.start.StartView;
 import javafx.event.Event;
 
 /**
+ * Links the result view to the model classes.
+ * All keys are blocked when this presenter is active.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 21:57
  */
@@ -40,17 +43,19 @@ public class ResultPresenter {
             modelGame = new Game();
             new GamePresenter(modelGame, modelPM, gameView);
         });
+
         //Keyboard is blocked when resultpresenter is active
         view.setOnKeyPressed(Event::consume);
 
     }
     private void updateView() {
         int score = modelGame.getScore().getScore();
-        view.getLblScoreInput().setText(score + "");
+        view.getLblFinalScore().setText(Integer.toString(score));
+
         if (modelGame.hasLost()){
-            view.setLblResult("You lose!");
+            view.getLblResult().setText("You lose!");
         } else if (modelGame.hasWon()){
-            view.setLblResult("You win!");
+            view.getLblResult().setText("You win!");
             view.addContinueBtn();
         }
     }
