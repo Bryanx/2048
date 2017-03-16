@@ -10,7 +10,6 @@ import be.kdg.thegame_2048.views.result.ResultPresenter;
 import be.kdg.thegame_2048.views.result.ResultView;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
-import javafx.animation.Animation;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -24,7 +23,7 @@ public class GamePresenter {
     private final GameBottomView bottomView;
     private final GameMiddleView midView;
     private final GameTopView topView;
-    private final AnimationView animationView;
+    private final Animation animation;
     private boolean alreadyWon;
     private boolean firstRun;
     private int prevScore;
@@ -37,7 +36,7 @@ public class GamePresenter {
         this.bottomView = view.getBottomView();
         this.midView = view.getMiddleView();
         this.topView = view.getTopView();
-        this.animationView = new AnimationView(topView, midView, this);
+        this.animation = new Animation(topView, midView, this);
         this.firstRun = true;
         this.addEventHandlers();
         updateViewScore(currentScore);
@@ -77,38 +76,38 @@ public class GamePresenter {
         });
 
         this.view.setOnKeyPressed(event -> {
-            if (animationView.getParallelTransition().getStatus() != Animation.Status.RUNNING) {
+            if (animation.getParallelTransition().getStatus() != javafx.animation.Animation.Status.RUNNING) {
                 final KeyCode direction = event.getCode();
                 this.prevScore = modelGame.getScore();
                 switch (direction) {
                     case DOWN:
                         updateViewBlocks(Game.Direction.DOWN);
-                        animationView.animateMovement(direction);
+                        animation.animateMovement(direction);
                         break;
                     case UP:
                         updateViewBlocks(Game.Direction.UP);
-                        animationView.animateMovement(direction);
+                        animation.animateMovement(direction);
                         break;
                     case RIGHT:
                         updateViewBlocks(Game.Direction.RIGHT);
-                        animationView.animateMovement(direction);
+                        animation.animateMovement(direction);
                         break;
                     case LEFT:
                         updateViewBlocks(Game.Direction.LEFT);
-                        animationView.animateMovement(direction);
+                        animation.animateMovement(direction);
                         break;
                     default:
                         event.consume();
                 }
                 this.currentScore = modelGame.getScore();
                 if (currentScore - prevScore > 0) {
-                    this.animationView.animateScore(currentScore - prevScore);
+                    this.animation.animateScore(currentScore - prevScore);
                 }
             }
         });
 
-        this.animationView.getParallelTransition().setOnFinished(event -> {
-            this.animationView.resetMoveAnimation();
+        this.animation.getParallelTransition().setOnFinished(event -> {
+            this.animation.resetMoveAnimation();
             updateView();
         });
     }
@@ -121,8 +120,8 @@ public class GamePresenter {
         int randomblockX = modelGame.getCoordRandomBlockX();
         int randomblockY = modelGame.getCoordRandomBlockY();
 
-        if (!firstRun && !isMovable()) {
-            animationView.popIn(randomblockY, randomblockX);
+        if (!firstRun && isMovable()) {
+            animation.popIn(randomblockY, randomblockX);
             midView.changeBlockValue(2, randomblockX, randomblockY);
         }
 
@@ -136,7 +135,7 @@ public class GamePresenter {
                 }
                 if (firstRun) {
                     midView.changeBlockValue(value, i, j);
-                    animationView.popIn(i, j);
+                    animation.popIn(i, j);
                 } else if (!(i == randomblockX && j == randomblockY)) {
                     midView.changeBlockValue(value, i, j);
                 }
@@ -186,12 +185,14 @@ public class GamePresenter {
     }
 
     /**
-     * Checks if there are any moves left.
-     * @return boolean
+     * @return if there are any moves left.
      **/
     boolean isMovable() {
-        return modelGame.getLastMove() == null ||
-                modelGame.getLastMove().equals(modelGame.getCurrentMove());
+        if (modelGame.getLastMove() != null)
+            if (!modelGame.getLastMove().equals(modelGame.getCurrentMove())) {
+                return true;
+            }
+        return false;
     }
 
     public int getPrevScore() {

@@ -58,7 +58,7 @@ public class StartPresenter {
         });
     }
 
-    void scale(Button button, double fromXY, double toXY) {
+    private void scale(Button button, double fromXY, double toXY) {
         ScaleTransition st = new ScaleTransition();
         st.setNode(button);
         st.setFromX(fromXY);

@@ -1,12 +1,9 @@
 package be.kdg.thegame_2048.views.game;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 /**
  * The bottom part of the game view.

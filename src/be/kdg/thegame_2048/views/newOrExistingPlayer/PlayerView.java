@@ -32,7 +32,7 @@ public final class PlayerView extends BorderPane {
         layoutNodes();
     }
 
-    protected void initialiseNodes() {
+    private void initialiseNodes() {
         this.lblMessage = new Label();
         this.lblMessage.setPadding(new Insets(0,0,OVERALL_PADDING/2,0));
 
@@ -49,7 +49,7 @@ public final class PlayerView extends BorderPane {
         addStyles();
     }
 
-    protected void layoutNodes() {
+    private void layoutNodes() {
         BorderPane top = new BorderPane();
         top.setCenter(IMG_LOGO);
         top.setPadding(new Insets(0, 0, -OVERALL_PADDING * 2, 0));

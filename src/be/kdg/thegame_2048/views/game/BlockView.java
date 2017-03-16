@@ -48,8 +48,8 @@ class BlockView extends StackPane {
     private Rectangle rect;
     private Text number;
 
-    BlockView(int value) {
-        this.value = value;
+    BlockView() {
+        this.value = 0;
         initialiseNodes();
         changeBlockAppearance();
         layoutNodes();

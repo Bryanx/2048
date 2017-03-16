@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Contains animations used in the game view.
+ *
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 02-03-17 06:18
  */
-class AnimationView {
+final class Animation {
     private static final Duration SCORE_MOVE_DURATION = Duration.millis(1500);
     private static final Duration SCORE_FADE_DURATION = Duration.millis(1250);
     private static final Duration MOVE_DURATION = Duration.millis(100);
@@ -24,7 +26,7 @@ class AnimationView {
     private List<TranslateTransition> translateTransitions;
     private ScaleTransition scaleTransition;
 
-    AnimationView(GameTopView topView, GameMiddleView midView, GamePresenter gamePresenter) {
+    Animation(GameTopView topView, GameMiddleView midView, GamePresenter gamePresenter) {
         this.gamePresenter = gamePresenter;
         this.midView = midView;
         this.topView = topView;
@@ -40,16 +42,12 @@ class AnimationView {
         }
     }
 
-    /**
-     * Moves the blocks according to their position.
-     * This method is used on graphical level.
-     **/
     void animateMovement(KeyCode direction) {
         int index = 0;
         int increment;
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                if (!gamePresenter.isMovable() && getBlockValue(x, y) != 0) {
+                if (gamePresenter.isMovable() && getBlockValue(x, y) != 0) {
                     getTTransitions(index).setNode(midView.getBlock(x, y));
 
                     increment = getMoveIncrement(x, y, direction);
@@ -71,20 +69,28 @@ class AnimationView {
     }
 
     /**
-     * Checks if the x or y parameter is within the boundaries of the game.
+     * @return If the x or y parameter is within the boundaries of the game.
+     * @param boundary indicates which boundary the method needs to check
+     * @param x position of the block
+     * @param y position of the block
+     * @param direction direction the block should be moving in.
      **/
-    private boolean isGreaterThan(int x, int y, KeyCode direction, int value) {
+    private boolean isGreaterThan(int x, int y, KeyCode direction, int boundary) {
         switch (direction) {
-            case UP : return y > value;
-            case DOWN : return y < Math.abs(value-3);
-            case RIGHT : return x < Math.abs(value-3);
-            case LEFT : return x > value;
+            case UP : return y > boundary;
+            case DOWN : return y < Math.abs(boundary-3);
+            case RIGHT : return x < Math.abs(boundary-3);
+            case LEFT : return x > boundary;
         }
         return false;
     }
 
     /**
-     * Returns the value of a block that is on a different position.
+     * @return The value the block it needs to look at.
+     * @param lookat indicates the position of the block it needs to look at.
+     * @param x position of the block
+     * @param y position of the block
+     * @param direction direction the block should be moving in.
      **/
     private int BlockValueLookatDir(int x, int y, KeyCode direction, int lookat) {
         if (isGreaterThan(x, y, direction, lookat - 1)) {
@@ -99,8 +105,11 @@ class AnimationView {
     }
 
     /**
-     * Returns the appropriate amount the block needs to
-     * move across the screen without going out of boundaries or overlapping other blocks.
+     * @return  The appropriate amount the block needs to move across the screen without
+     * going out of boundaries or overlapping other blocks. Checks all possible conditions.
+     * @param x position of the block
+     * @param y position of the block
+     * @param direction direction the block should be moving in.
      **/
     private int getMoveIncrement(int x , int y, KeyCode direction) {
         int thisBlock = getBlockValue(x, y);
@@ -140,10 +149,7 @@ class AnimationView {
         return incr;
     }
 
-    /**
-     * Pop in animation for spawning blocks.
-     **/
-    void popIn(int x, int y) {
+void popIn(int x, int y) {
         this.scaleTransition = new ScaleTransition(POPIN_DURATION, midView.getBlock(x, y));
         scaleTransition.setFromX(0.0);
         scaleTransition.setFromY(0.0);
@@ -153,8 +159,9 @@ class AnimationView {
     }
 
     /**
-     * Animates the score parameter on top of the currentScore.
+     * Animates a Label on top of the currentScore.
      * Can be used to animate score increase value.
+     * @param score The score amount that should be animated.
      **/
     void animateScore(int score) {
         topView.getLblScoreAnimation().setText("+" + score);

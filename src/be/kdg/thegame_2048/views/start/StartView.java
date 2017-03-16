@@ -1,12 +1,10 @@
 package be.kdg.thegame_2048.views.start;
 
-import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
 
 /**
  * The start/home page of the application.

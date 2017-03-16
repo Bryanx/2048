@@ -6,6 +6,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextAlignment;
 
 /**
+ * A BorderPane that contains the credits.
+ *
  * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
  */
@@ -24,10 +26,13 @@ public class CreditsView extends BorderPane {
     private void initialiseNodes() {
         this.lblHeader = new Label("Credits");
         this.lblCredits = new Label(
-                "This project was made by\n" +
-                "Bryan de Ridder and Jarne Van Aerde.\n" +
-                "Karel De Grote Hogeschool Antwerp\n" +
-                "2016-2017");
+                        "This project was made by\n" +
+                        "Bryan de Ridder and Jarne Van Aerde.\n" +
+                        "Karel De Grote Hogeschool Antwerp\n" +
+                        "2016-2017\n\n" +
+                        "Fun fact:\n" +
+                        "The original game was made by Gabriele Cirulli\n" +
+                        "in JavaScript in just 1 weekend!\n");
         this.lblCredits.setTextAlignment(TextAlignment.CENTER);
         this.btnGoBack = new Button();
         addStyles();
@@ -52,9 +57,6 @@ public class CreditsView extends BorderPane {
         lblCredits.getStyleClass().add("hsColumnFill");
     }
 
-    /**
-     * Returns go back button.
-     **/
     Button getBtnGoBack() {
         return btnGoBack;
     }

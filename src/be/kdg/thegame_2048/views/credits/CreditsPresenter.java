@@ -5,6 +5,8 @@ import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
 
 /**
+ * Logical handling of the go back button on the creditsView
+ *
  * @author Jarne van Aerde, Bryan de Ridder
  * @version 1.0 12/02/2017 19:40
  */

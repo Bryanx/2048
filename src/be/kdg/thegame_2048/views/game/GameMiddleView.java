@@ -28,7 +28,7 @@ class GameMiddleView extends BorderPane {
         this.blocks = new BlockView[GRID_SIZE][GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
-                blocks[i][j] = new BlockView(0);
+                blocks[i][j] = new BlockView();
             }
         }
     }

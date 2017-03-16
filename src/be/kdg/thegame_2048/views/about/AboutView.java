@@ -7,6 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
+ * A borderpane that contains the about (how to play) view
+ *
+ *
  * @author Bryan de Ridder, Jarne Van Aerde
  * @version 1.0 17-02-17 12:11
  */
@@ -14,6 +17,7 @@ public class AboutView extends BorderPane {
     private static final ImageView IMG_ABOUT1 = new ImageView("be/kdg/thegame_2048/views/img/about1.png");
     private static final ImageView IMG_ABOUT2 = new ImageView("be/kdg/thegame_2048/views/img/about2.png");
     private static final ImageView IMG_ABOUT3 = new ImageView("be/kdg/thegame_2048/views/img/about3.png");
+    private static final ImageView[] IMAGE_VIEWS = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
     private static final double OVERALL_PADDING = 50;
     private Label lblExplanation1;
     private Label lblExplanation2;
@@ -33,7 +37,7 @@ public class AboutView extends BorderPane {
         //header
         this.lblHeader = new Label("How to play");
 
-        //explanation
+        //explanations
         this.lblExplanation1 = new Label("Use your arrow keys to moveAnimation the tiles. \n" +
                 "Try to combine blocks with the same value.");
         this.lblExplanation2 = new Label("When two tiles with the same number touch,\n they merge into one!");
@@ -56,20 +60,27 @@ public class AboutView extends BorderPane {
         addStyles();
     }
 
+    /**
+     * @param i index of which img and explanation is selected
+     **/
     void layoutNodes(int i) {
-        this.setTop(new BorderPane(lblHeader));
-        ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
-        Label[] explanations = {lblExplanation1, lblExplanation2, lblExplanation3};
+        //TOP
+        BorderPane top = new BorderPane(lblHeader);
+        this.setTop(new BorderPane(top));
 
+        //MID
+        Label[] explanations = {lblExplanation1, lblExplanation2, lblExplanation3};
         HBox hbox = new HBox(rbOption1, rbOption2, rbOption3);
-        VBox vbox = new VBox(images[i], explanations[i], hbox);
-        vbox.setPadding(new Insets(50,0,0,0));
+        VBox vbox = new VBox(IMAGE_VIEWS[i], explanations[i], hbox);
+        vbox.setPadding(new Insets(OVERALL_PADDING,0,0,0));
         vbox.setAlignment(Pos.CENTER);
         hbox.setAlignment(Pos.CENTER);
         this.setCenter(vbox);
 
+        //BOTTOM
         BorderPane bottom = new BorderPane(btnGoBack);
         this.setBottom(bottom);
+
         this.setPadding(new Insets(OVERALL_PADDING));
     }
 
@@ -84,28 +95,14 @@ public class AboutView extends BorderPane {
         lblExplanation3.getStyleClass().add("lblExplanation");
     }
 
-    /**
-     * Returns go back button.
-     **/
     Button getBtnGoBack() {
         return btnGoBack;
     }
-
-    /**
-     * Returns a ToggleButton.
-     * The index parameter decides which button is returned from the array.
-     **/
     ToggleButton getToggleButton(int index) {
         ToggleButton[] toggleButtons = {rbOption1, rbOption2, rbOption3};
         return toggleButtons[index];
     }
-
-    /**
-     * Returns an ImageView.
-     * The index parameter decides which image is returned from the array.
-     **/
     static ImageView getImg(int i) {
-        ImageView[] images = {IMG_ABOUT1, IMG_ABOUT2, IMG_ABOUT3};
-        return images[i];
+        return IMAGE_VIEWS[i];
     }
 }
