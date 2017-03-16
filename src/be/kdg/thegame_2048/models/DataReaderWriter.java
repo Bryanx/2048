@@ -101,10 +101,11 @@ public final class DataReaderWriter {
         Path playerData = Paths.get("data");
         Path errorMessage = playerData.resolve("errorLog.txt");
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()))) {
+        try {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
+            BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()));
             writer.write(message);
         } catch (IOException e) {
             System.out.println("Fundamental problem with the log-IO. Contact support!");

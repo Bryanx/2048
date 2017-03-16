@@ -74,9 +74,7 @@ public final class HighScoreView extends BorderPane {
         gridPane.setAlignment(Pos.TOP_CENTER);
         setMargin(gridPane, new Insets(OVERALL_PADDING));
 
-        //Player amount is increased by 1 because number 0 in the grid are the column names
-        for (int i = 0; i < playerAmount + 1; i++) {
-
+        for (int i = 0; i < playerAmount; i++) {
             String rank = String.valueOf(i + 1);
             String playerName = names.get(i).toUpperCase().charAt(0) + names.get(i).substring(1);
             String score = String.valueOf(scores.get(i));
@@ -84,7 +82,10 @@ public final class HighScoreView extends BorderPane {
             lblHsRanks.add(new Label(rank));
             lblHsNames.add(new Label(playerName));
             lblHsScores.add(new Label(score));
+        }
 
+        //Player amount is increased by 1 because number 0 in the grid are the column names
+        for (int i = 0; i < playerAmount + 1; i++) {
             gridPane.add(lblHsRanks.get(i), 0, i);
             gridPane.add(lblHsNames.get(i), 1, i);
             gridPane.add(lblHsScores.get(i), 2, i);
