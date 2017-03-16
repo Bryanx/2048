@@ -9,19 +9,7 @@ package be.kdg.thegame_2048.models;
  */
 public final class Game {
     public enum Direction {
-        UP, DOWN, LEFT, RIGHT;
-
-        public static Direction get(String value){
-            if(value.equalsIgnoreCase(UP.toString()))
-                return Direction.UP;
-            else if(value.equalsIgnoreCase(DOWN.toString()))
-                return Direction.DOWN;
-            else if(value.equalsIgnoreCase(LEFT.toString()))
-                return Direction.LEFT;
-            else {
-                return Direction.RIGHT;
-            }
-        }
+        UP, DOWN, LEFT, RIGHT
     }
 
     final static private int STARTVALUE = 2;
@@ -84,10 +72,12 @@ public final class Game {
                 playground.moveBlocksRight();
         }
         this.currentMove = playground.toString();
+        //TODO: VERWIJDER.
         if (!lastMove.equals(currentMove)) {
             playground.addRandomBlock(STARTVALUE);
         }
         System.out.println(score.getScore() + "\n" + playground.toString());
+        //TODO: VERWIJDR.
     }
 
     /**
@@ -148,7 +138,11 @@ public final class Game {
     /**
      * @return the current score of the game.
      **/
-    public Score getScore() {
+    public int getScore() {
+        return score.getScore();
+    }
+
+    public Score getScoreObject() {
         return score;
     }
 

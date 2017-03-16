@@ -13,19 +13,21 @@ import java.util.*;
  */
 public class DataReaderWriter {
     /**
-     * Decription was used while loading the playerdata.
+     * Decryption was used while loading the playerdata.
+     * The decode-number is subtracted from the individuals chars
+     * to go back to the right ASCII-value.
      **/
     public static List<Player> loadPlayerData() {
         Path data = Paths.get("data" + File.separator + "playerdata.txt");
-        Path decoderData = Paths.get("data" + File.separator + "encripted.txt");
+        Path decoderData = Paths.get("data" + File.separator + "encryption.txt");
         List<Player> playerList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))) {
             int decodeNumber = Integer.parseInt(new Scanner(decoderData).nextLine());
-            String info = reader.readLine();
-            if (info == null) return playerList;
-            while (info != null) {
-                String[] splittedData = info.split(":");
+            String playerInfo = reader.readLine();
+            if (playerInfo == null) return playerList;
+            while (playerInfo != null) {
+                String[] splittedData = playerInfo.split(":");
 
                 //DECRYPT THE PLAYER DATA
                 String decodedName = "";
@@ -41,7 +43,7 @@ public class DataReaderWriter {
                 Player player = new Player(decodedName, Integer.parseInt(decodedScore));
                 playerList.add(player);
 
-                info = reader.readLine();
+                playerInfo = reader.readLine();
             }
         } catch (IOException e) {
             writeToLog(e.getMessage());
@@ -55,7 +57,8 @@ public class DataReaderWriter {
     public static void savePlayerData(List<Player> playerList) {
         Path playerdata = Paths.get("data");
         Path data = playerdata.resolve("playerdata.txt");
-        Path encription = playerdata.resolve("encripted.txt");
+        Path encription = playerdata.resolve("encryption.txt");
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(data.toFile()))) {
             if (!Files.exists(playerdata)) Files.createDirectory(playerdata);
             if (!Files.exists(data)) Files.createFile(data);
@@ -83,9 +86,7 @@ public class DataReaderWriter {
 
             }
             writer.write(playerInfo);
-            Formatter formatter = new Formatter(encription.toFile());
-            formatter.format(String.valueOf(randomEncriptionCode));
-            formatter.close();
+            new Formatter(encription.toFile()).format(String.valueOf(randomEncriptionCode)).close();
         } catch (IOException e) {
             writeToLog(e.getMessage());
         }
@@ -97,13 +98,14 @@ public class DataReaderWriter {
     public static void writeToLog(String message) {
         Path playerData = Paths.get("data");
         Path errorMessage = playerData.resolve("errorLog.txt");
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()))) {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
             writer.write(message);
         } catch (IOException e) {
-            System.out.println("Fundamental problem to the log-IO. Contact support!");
+            System.out.println("Fundamental problem with the log-IO. Contact support!");
             System.exit(1);
         }
     }

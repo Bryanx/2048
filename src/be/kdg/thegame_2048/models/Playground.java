@@ -88,10 +88,11 @@ final class Playground {
      * Merges to blocks on logical level.
      * One of the blocks value is increased, the other one gets deleted.
      **/
-    private void merge(Section sectionBlock, Section sectionOtherBlock) {
-        score.calculateScore(sectionBlock.getBlock(), sectionOtherBlock.getBlock());
-        sectionBlock.getBlock().setValue(sectionBlock.getBlock().getValue() + sectionOtherBlock.getBlock().getValue());
-        sectionOtherBlock.removeBlock();
+    private void merge(Section sectionOne, Section sectionTwo) {
+        score.calculateScore(sectionOne.getBlock(), sectionTwo.getBlock());
+        int newValue = sectionOne.getBlock().getValue() + sectionTwo.getBlock().getValue();
+        sectionOne.getBlock().setValue(newValue);
+        sectionTwo.removeBlock();
     }
 
     /**
@@ -423,10 +424,12 @@ final class Playground {
             for (int j = 0; j < 4; j++) {
                 Section section = new Section();
                 if (!fields[(i * 4) + j].contains("E")) {
-                    section.putBlock(new Block(Integer.parseInt(fields[(i * 4) + j])));
+                    Block block = new Block(Integer.parseInt(fields[(i * 4) + j]));
+                    section.putBlock(block);
                 }
                 sections[i][j] = section;
                 System.out.print(section.toString() + " ");
+                //TODO: VERWIJDER.
             }
         }
         initialiseSections(sections);

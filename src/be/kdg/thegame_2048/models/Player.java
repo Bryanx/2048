@@ -9,28 +9,10 @@ package be.kdg.thegame_2048.models;
 public class Player implements Comparable<Player> {
     private final String name;
     private int bestScore;
-    private String lastMove;
-    private int highestBlockValue;
 
     Player(String name, int bestScore) {
         this.name = name;
         this.bestScore = bestScore;
-    }
-
-    /**
-     * Returns a string of the last move.
-     **/
-    public String getLastMove() {
-        return lastMove;
-    }
-
-    /**
-     * The last move of the current player is stored using this method.
-     * This method is called after each move.
-     **/
-    public void setLastMove(String lastMove) {
-        System.out.println(lastMove.replaceAll("\n", ""));
-        this.lastMove = lastMove;
     }
 
     /**
@@ -56,22 +38,6 @@ public class Player implements Comparable<Player> {
     }
 
     /**
-     * Returns the highest block-value that a player has ever reached.
-     * Is used to represent the highscoreView.
-     **/
-    public int getHighestBlockValue() {
-        return highestBlockValue;
-    }
-
-    /**
-     * If a player reaches a higher block-value,
-     * then this method is used to update that value.
-     **/
-    public void setHighestBlockValue(int highestBlockValue) {
-        this.highestBlockValue = highestBlockValue;
-    }
-
-    /**
      * Gives back a string that contains the name and the highest score of an instance of a player.
      **/
     @Override
@@ -80,7 +46,7 @@ public class Player implements Comparable<Player> {
     }
 
     /**
-     * If two players have the same highscore, then they need to be organised by name.
+     * If two players have the same high score, then they need to be organised by name.
      * This takes care of that.
      **/
     @Override

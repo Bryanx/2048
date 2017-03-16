@@ -37,7 +37,7 @@ public class UndoPresenter {
      **/
     private void updateViewUndo() {
         this.model.setPlayingUndo(true);
-        this.model.getScore().setScore(gamePresenter.getPrevScore());
+        this.model.getScoreObject().setScore(gamePresenter.getPrevScore());
         this.gamePresenter.updateViewScore(gamePresenter.getPrevScore());
         if (model.getLastMove() != null) this.model.goToLastMove();
         this.gamePresenter.updateView();

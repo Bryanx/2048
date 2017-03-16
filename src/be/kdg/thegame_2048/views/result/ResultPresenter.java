@@ -49,7 +49,7 @@ public class ResultPresenter {
 
     }
     private void updateView() {
-        int score = modelGame.getScore().getScore();
+        int score = modelGame.getScore();
         view.getLblFinalScore().setText(Integer.toString(score));
 
         if (modelGame.hasLost()){

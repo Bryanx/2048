@@ -50,6 +50,7 @@ public final class PlayerManager {
         playerList.add(new Player(name, 0));
         System.out.println("New player added: " + name);
         playerList.forEach(System.out::println);
+        //TODO: VERWIJDER.
     }
 
     /**
@@ -66,7 +67,7 @@ public final class PlayerManager {
 
     /**
      * Saves all the info off the current player.
-     * If the player has beaten his highscore, dan
+     * If the player has beaten his high score, dan
      **/
     public void saveInfoCurrentPlayer() {
         int bestScore = this.currentPlayer.getBestScore();
@@ -78,7 +79,7 @@ public final class PlayerManager {
 
     /**
      * Returns the list of players.
-     * Its only use if for the highscoreView.
+     * Its only use if for the high scoreView.
      **/
     public List<Player> getPlayerList() {
         return playerList;

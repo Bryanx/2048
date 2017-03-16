@@ -79,7 +79,7 @@ public class GamePresenter {
         this.view.setOnKeyPressed(event -> {
             if (animationView.getParallelTransition().getStatus() != Animation.Status.RUNNING) {
                 final KeyCode direction = event.getCode();
-                this.prevScore = modelGame.getScore().getScore();
+                this.prevScore = modelGame.getScore();
                 switch (direction) {
                     case DOWN:
                         updateViewBlocks(Game.Direction.DOWN);
@@ -100,7 +100,7 @@ public class GamePresenter {
                     default:
                         event.consume();
                 }
-                this.currentScore = modelGame.getScore().getScore();
+                this.currentScore = modelGame.getScore();
                 if (currentScore - prevScore > 0) {
                     this.animationView.animateScore(currentScore - prevScore);
                 }

@@ -1,12 +1,13 @@
 package be.kdg.thegame_2048.models;
 
 /**
- * A pojo that stores the most important section information
+ * A pojo that stores the most important section information.
  *
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 8/02/2017 17:06
  */
 final class Section {
+    private static final String EMPTY = "E";
     private Block block;
 
     Block getBlock() {
@@ -27,7 +28,7 @@ final class Section {
 
     @Override
     public String toString() {
-        if (block == null) return "E";
+        if (block == null) return EMPTY;
         return block.toString();
     }
 }
