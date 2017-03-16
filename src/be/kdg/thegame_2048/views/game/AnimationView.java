@@ -16,7 +16,6 @@ class AnimationView {
     private static final Duration SCORE_FADE_DURATION = Duration.millis(1250);
     private static final Duration MOVE_DURATION = Duration.millis(100);
     private static final Duration POPIN_DURATION = Duration.millis(200);
-    private static final Duration POPOUT_DURATION = Duration.millis(100);
     private final GameTopView topView;
     private final GameMiddleView midView;
     private final GamePresenter gamePresenter;
@@ -51,19 +50,19 @@ class AnimationView {
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 if (!gamePresenter.isMovable() && getBlockValue(x, y) != 0) {
-                    gettTransitions(index).setNode(midView.getBlock(x, y));
+                    getTTransitions(index).setNode(midView.getBlock(x, y));
 
                     increment = getMoveIncrement(x, y, direction);
 
                     switch (direction) {
-                        case UP : gettTransitions(index).setToY(-increment); break;
-                        case DOWN : gettTransitions(index).setToY(increment); break;
-                        case RIGHT : gettTransitions(index).setToX(increment); break;
-                        case LEFT : gettTransitions(index).setToX(-increment); break;
+                        case UP : getTTransitions(index).setToY(-increment); break;
+                        case DOWN : getTTransitions(index).setToY(increment); break;
+                        case RIGHT : getTTransitions(index).setToX(increment); break;
+                        case LEFT : getTTransitions(index).setToX(-increment); break;
                     }
 
                     midView.getBlock(x, y).toFront();
-                    this.parallelTransition.getChildren().addAll(gettTransitions(index));
+                    this.parallelTransition.getChildren().addAll(getTTransitions(index));
                     index++;
                 }
             }
@@ -206,28 +205,13 @@ class AnimationView {
         }
     }
 
-    /**
-     * Returns a block value from the gameView.
-     * This method runs on a graphical level.
-     **/
     private int getBlockValue(int x, int y) {
         return midView.getBValue(x, y);
     }
-
-    /**
-     * Returns a block value
-     * This method is run on a graphical level.
-     **/
     ParallelTransition getParallelTransition() {
         return parallelTransition;
     }
-
-    /**
-     * Returns a move animation (TranslateTransition).
-     * The index parameter decides which TranslateTransition is returned from the array.
-     * There are max 16 animations in the array.
-     **/
-    private TranslateTransition gettTransitions(int i) {
+    private TranslateTransition getTTransitions(int i) {
         return translateTransitions.get(i);
     }
 

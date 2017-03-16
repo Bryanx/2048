@@ -5,8 +5,6 @@ import be.kdg.thegame_2048.models.Player;
 import be.kdg.thegame_2048.models.PlayerManager;
 import be.kdg.thegame_2048.views.game.GamePresenter;
 import be.kdg.thegame_2048.views.game.GameView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import java.util.*;
 
@@ -17,35 +15,30 @@ import java.util.*;
  * @version 1.0 17-02-17 09:46
  */
 public class HighScorePresenter {
-    private final PlayerManager modelPM;
+    private final PlayerManager modelPlayerManager;
     private final Game modelGame;
     private final HighScoreView view;
 
-    public HighScorePresenter(Game modelGame, PlayerManager modelPM, HighScoreView view) {
+    public HighScorePresenter(Game modelGame, PlayerManager modelPlayerManager, HighScoreView view) {
         this.modelGame = modelGame;
-        this.modelPM = modelPM;
+        this.modelPlayerManager = modelPlayerManager;
         this.view = view;
         this.addEventHandlers();
         this.updateView();
     }
 
     private void addEventHandlers() {
-        view.getBtnGoBack().setOnAction(event -> updateScene());
-    }
+        view.getBtnGoBack().setOnAction(event -> {
+            GameView gameView = new GameView();
+            GamePresenter gp = new GamePresenter(modelGame, modelPlayerManager, gameView);
+            view.getScene().setRoot(gameView);
 
-    /**
-     * Returns the player to the GameView.
-     **/
-    private void updateScene() {
-        GameView gameView = new GameView();
-        GamePresenter gp = new GamePresenter(modelGame, modelPM, gameView);
-        view.getScene().setRoot(gameView);
-
-        if (modelGame.isPlayingUndo()) gp.disableUndoButton(true);
+            if (modelGame.isPlayingUndo()) gp.disableUndoButton(true);
+        });
     }
 
     private void updateView() {
-        List<Player> playerList = modelPM.getPlayerList();
+        List<Player> playerList = modelPlayerManager.getPlayerList();
         Collections.sort(playerList);
 
         //OPSPLITSEN IN 2 APART LISTS
@@ -56,7 +49,7 @@ public class HighScorePresenter {
             playerBestScores.add(p.getBestScore());
         }
 
-        String currentPlayer = modelPM.getCurrentPlayer().getName();
+        String currentPlayer = modelPlayerManager.getCurrentPlayer().getName();
 
         view.updateHighScore(playernames, playerBestScores);
         view.highlightPlayer(currentPlayer);

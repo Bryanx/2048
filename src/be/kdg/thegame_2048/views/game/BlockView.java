@@ -8,6 +8,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
+ * A single block.
+ * Appearance is affected by its value.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 11:11
  */
@@ -71,7 +74,6 @@ class BlockView extends StackPane {
         number.setFill(Color.web(getTextColor()));
         rect.setFill(Color.web(getRectFill()));
     }
-
 
     private String getTextInput() {
         if (value == 0) return "";

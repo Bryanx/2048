@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 /**
  * The middle part of the game view.
  * It contains the game grid.
- * All block objects
+ * All block objects are made here.
  *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 11:11

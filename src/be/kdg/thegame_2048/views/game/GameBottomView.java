@@ -9,6 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 /**
+ * The bottom part of the game view.
+ * Only contain a few buttons.
+ *
  * @author Bryan de Ridder, Jarne van Aerde
  * @version 1.0 17-02-17 10:45
  */
@@ -61,31 +64,16 @@ class GameBottomView extends BorderPane {
         btnExit.getStyleClass().add("btnExit");
     }
 
-    /**
-     * Returns high score button.
-     **/
     Button getBtnHighScores() {
         return btnHighScores;
     }
-
-    /**
-     * Returns exit button.
-     **/
     Button getBtnExit() {
         return btnExit;
     }
-
-    /**
-     * Returns restart button.
-     **/
     Button getBtnRestart() {
         return btnRestart;
     }
-
-    /**
-     * Returns undo button.
-     **/
-    public Button getBtnUndo() {
+    Button getBtnUndo() {
         return btnUndo;
     }
 }

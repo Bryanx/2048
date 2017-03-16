@@ -7,7 +7,9 @@ import be.kdg.thegame_2048.views.credits.CreditsPresenter;
 import be.kdg.thegame_2048.views.credits.CreditsView;
 import be.kdg.thegame_2048.views.newOrExistingPlayer.PlayerPresenter;
 import be.kdg.thegame_2048.views.newOrExistingPlayer.PlayerView;
+import javafx.animation.ScaleTransition;
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 /**
  * Links the start/home view classes to the model classes.
@@ -16,6 +18,7 @@ import javafx.scene.control.Button;
  * @version 1.0 14/02/2017 12:18
  */
 public class StartPresenter {
+    private static final Duration SCALE_DURATION = Duration.millis(100);
     private static final double BTN_MAX_SCALE = 1.15;
     private final PlayerManager model;
     private final StartView view;
@@ -29,8 +32,8 @@ public class StartPresenter {
     private void addEventHandlers() {
         //SCALE IN and SCALE OUT effects are applied to the buttons
         for (Button button : view.getAllButtons()) {
-            button.setOnMouseEntered(event -> view.scale(button, 1,BTN_MAX_SCALE));
-            button.setOnMouseExited(event -> view.scale(button, BTN_MAX_SCALE, 1));
+            button.setOnMouseEntered(event -> scale(button, 1,BTN_MAX_SCALE));
+            button.setOnMouseExited(event -> scale(button, BTN_MAX_SCALE, 1));
         }
 
         view.getBtnNewPlayer().setOnAction(event -> {
@@ -53,5 +56,16 @@ public class StartPresenter {
             new CreditsPresenter(model, settingsView);
             view.getScene().setRoot(settingsView);
         });
+    }
+
+    void scale(Button button, double fromXY, double toXY) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode(button);
+        st.setFromX(fromXY);
+        st.setFromY(fromXY);
+        st.setToX(toXY);
+        st.setToY(toXY);
+        st.setDuration(SCALE_DURATION);
+        st.play();
     }
 }

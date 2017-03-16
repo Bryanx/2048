@@ -25,7 +25,6 @@ public final class StartView extends BorderPane {
     private static final String EXISTING_PLAYER_TEXT = "Existing Player";
     private static final String ABOUT_TEXT = "How to play";
     private static final String CREDITS_TEXT = "Credits";
-    private static final Duration SCALE_DURATION = Duration.millis(100);
     private static final int OVERALL_PADDING = 50;
     private Button btnNewPlayer;
     private Button btnExistingPlayer;
@@ -81,17 +80,6 @@ public final class StartView extends BorderPane {
         for (Button button : allButtons) {
             button.getStyleClass().add("btnStartView");
         }
-    }
-
-    void scale(Button button, double fromXY, double toXY) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode(button);
-        st.setFromX(fromXY);
-        st.setFromY(fromXY);
-        st.setToX(toXY);
-        st.setToY(toXY);
-        st.setDuration(SCALE_DURATION);
-        st.play();
     }
 
     Button getBtnNewPlayer() {

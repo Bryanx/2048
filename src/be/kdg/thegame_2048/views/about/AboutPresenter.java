@@ -12,6 +12,8 @@ import javafx.util.Duration;
  * @version 1.0 17-02-17 12:17
  */
 public class AboutPresenter {
+    private static final double MOVE_RIGHT = 500;
+    private static final double MOVE_LEFT = -500;
     private final PlayerManager model;
     private final AboutView view;
     private int currentIndex;
@@ -58,9 +60,9 @@ public class AboutPresenter {
             TranslateTransition tt = new TranslateTransition(Duration.millis(150), AboutView.getImg(index));
             if (newIndex > oldIndex) {
                 if (index == newIndex) {
-                    tt.setToX(500);
+                    tt.setToX(MOVE_RIGHT);
                 } else {
-                    tt.setToX(-500);
+                    tt.setToX(MOVE_LEFT);
                 }
             } else if (newIndex == oldIndex) {
                 tt.setToX(0);
@@ -69,9 +71,9 @@ public class AboutPresenter {
                 }
             } else {
                 if (index == newIndex) {
-                    tt.setToX(-500);
+                    tt.setToX(MOVE_LEFT);
                 } else {
-                    tt.setToX(500);
+                    tt.setToX(MOVE_RIGHT);
                 }
             }
             tt.setInterpolator(Interpolator.EASE_BOTH);
@@ -80,11 +82,11 @@ public class AboutPresenter {
                 tt.setOnFinished(event -> {
                     TranslateTransition tt2 = new TranslateTransition(Duration.millis(150), AboutView.getImg(newIndex));
                     if (newIndex > oldIndex) {
-                        tt2.setFromX(500);
+                        tt2.setFromX(MOVE_RIGHT);
                     } else if (newIndex == oldIndex) {
                         tt2.setToX(0);
                     } else {
-                        tt2.setFromX(-500);
+                        tt2.setFromX(MOVE_LEFT);
                     }
                     tt2.setToX(0);
                     tt2.setInterpolator(Interpolator.EASE_BOTH);

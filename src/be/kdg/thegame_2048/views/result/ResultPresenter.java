@@ -16,13 +16,13 @@ import javafx.event.Event;
  * @version 1.0 17-02-17 21:57
  */
 public class ResultPresenter {
-    private final PlayerManager modelPM;
+    private final PlayerManager modelPlayerManager;
     private final ResultView view;
     private final GameView gameView;
     private Game modelGame;
 
     public ResultPresenter(PlayerManager model, ResultView view, Game modelGame, GameView gameView) {
-        this.modelPM = model;
+        this.modelPlayerManager = model;
         this.view = view;
         this.modelGame = modelGame;
         this.gameView = gameView;
@@ -32,16 +32,16 @@ public class ResultPresenter {
     private void addEventHandlers() {
         view.getBtnContinue().setOnAction(event -> gameView.layoutNodes());
         view.getBtnExit().setOnAction(event -> {
-            modelPM.setCurrentPlayerToNull();
+            modelPlayerManager.setCurrentPlayerToNull();
             StartView startView = new StartView();
-            new StartPresenter(modelPM, startView);
+            new StartPresenter(modelPlayerManager, startView);
             view.getScene().setRoot(startView);
         });
         view.getBtnRestart().setOnAction(event -> {
             gameView.layoutNodes();
             gameView.getLblScoreInput().setText("0");
             modelGame = new Game();
-            new GamePresenter(modelGame, modelPM, gameView);
+            new GamePresenter(modelGame, modelPlayerManager, gameView);
         });
 
         //Keyboard is blocked when resultpresenter is active
