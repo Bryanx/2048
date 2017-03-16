@@ -11,7 +11,7 @@ import java.util.*;
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 24/02/2017 10:08
  */
-public class DataReaderWriter {
+public final class DataReaderWriter {
     /**
      * Decryption was used while loading the playerdata.
      * The decode-number is subtracted from the individuals chars
@@ -23,9 +23,12 @@ public class DataReaderWriter {
         List<Player> playerList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))) {
-            int decodeNumber = Integer.parseInt(new Scanner(decoderData).nextLine());
+            Scanner scanner = new Scanner(decoderData);
+            if (!scanner.hasNext()) return playerList;
+            int decodeNumber = Integer.parseInt(scanner.nextLine());
+
             String playerInfo = reader.readLine();
-            if (playerInfo == null) return playerList;
+            if (playerInfo == null || playerInfo.isEmpty()) return playerList;
             while (playerInfo != null) {
                 String[] splittedData = playerInfo.split(":");
 

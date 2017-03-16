@@ -29,6 +29,7 @@ public class ResultPresenter {
         this.addEventHandlers();
         this.updateView();
     }
+
     private void addEventHandlers() {
         view.getBtnContinue().setOnAction(event -> gameView.layoutNodes());
         view.getBtnExit().setOnAction(event -> {
@@ -48,13 +49,14 @@ public class ResultPresenter {
         view.setOnKeyPressed(Event::consume);
 
     }
+
     private void updateView() {
         int score = modelGame.getScore();
         view.getLblFinalScore().setText(Integer.toString(score));
 
-        if (modelGame.hasLost()){
+        if (modelGame.hasLost()) {
             view.getLblResult().setText("You lose!");
-        } else if (modelGame.hasWon()){
+        } else if (modelGame.hasWon()) {
             view.getLblResult().setText("You win!");
             view.addContinueBtn();
         }

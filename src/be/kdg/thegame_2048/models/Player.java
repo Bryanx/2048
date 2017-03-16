@@ -6,7 +6,7 @@ package be.kdg.thegame_2048.models;
  * @author Jarne Van Aerde, Bryan de Ridder
  * @version 1.0 7/02/2017 19:58
  */
-public class Player implements Comparable<Player> {
+public final class Player implements Comparable<Player> {
     private final String name;
     private int bestScore;
 

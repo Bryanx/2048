@@ -1,1 +1,1 @@
-Name was to short or to long.
+Name was already used.
