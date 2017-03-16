@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
- * Creates the topside of the game view.
+ * The topside of the game view.
  * It contains all score information.
  *
  * @author Bryan de Ridder, Jarne van Aerde

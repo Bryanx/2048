@@ -123,7 +123,7 @@ public class GamePresenter {
 
         if (!firstRun && !isMovable()) {
             animationView.popIn(randomblockY, randomblockX);
-            midView.putBlockOnGrid(2, randomblockX, randomblockY);
+            midView.changeBlockValue(2, randomblockX, randomblockY);
         }
 
         for (int i = 0; i < GameMiddleView.GRID_SIZE; i++) {
@@ -135,10 +135,10 @@ public class GamePresenter {
                     value = modelGame.getPieceValue(i, j);
                 }
                 if (firstRun) {
-                    midView.putBlockOnGrid(value, i, j);
+                    midView.changeBlockValue(value, i, j);
                     animationView.popIn(i, j);
                 } else if (!(i == randomblockX && j == randomblockY)) {
-                    midView.putBlockOnGrid(value, i, j);
+                    midView.changeBlockValue(value, i, j);
                 }
             }
         }

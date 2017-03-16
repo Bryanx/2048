@@ -72,34 +72,23 @@ class BlockView extends StackPane {
         rect.setFill(Color.web(getRectFill()));
     }
 
-    /**
-     * Changes the block's text input according to the appropriate value.
-     **/
+
     private String getTextInput() {
         if (value == 0) return "";
         return Integer.toString(value);
     }
 
-    /**
-     * Changes the block's text size according to the appropriate value.
-     **/
     private int getTextSize() {
         if (value >= BLOCK_VALUE_1024) return TEXT_SIZE_SMALL;
         if (value >= BLOCK_VALUE_128) return TEXT_SIZE_MEDIUM;
         return TEXT_SIZE_LARGE;
     }
 
-    /**
-     * Changes the block's text color block according to the appropriate value.
-     **/
     private String getTextColor() {
         if (value >= BLOCK_VALUE_8) return COLOR_TEXT_8_TO_2048;
         return COLOR_TEXT_0_TO_8;
     }
 
-    /**
-     * Changes the block's background color block according to the appropriate value.
-     **/
     private String getRectFill() {
         if (value >= BLOCK_VALUE_2048) return COLOR_BLOCK_2048;
         if (value >= BLOCK_VALUE_1024) return COLOR_BLOCK_1024;
@@ -115,18 +104,9 @@ class BlockView extends StackPane {
         return COLOR_BLOCK_0;
     }
 
-    /**
-     * Returns the block value.
-     * This method runs on a graphical level.
-     **/
     int getValue() {
         return value;
     }
-
-    /**
-     * Changes the block value to the parameter value.
-     * This method runs on a graphical level.
-     **/
     void setValue(int value) {
         this.value = value;
         changeBlockAppearance();
