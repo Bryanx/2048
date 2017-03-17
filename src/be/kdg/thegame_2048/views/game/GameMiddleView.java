@@ -18,11 +18,11 @@ class GameMiddleView extends BorderPane {
     private static final Paint GRID_BG_COLOR = Color.web("bbada0");
     private static final double GRID_BG_CORNERRADII = 7;
     private static final int BLOCK_MARGIN = 10;
-    private StackPane container;
-    private BlockView[][] bg;
-
     static final int GRID_SIZE = 4;
+
+    private StackPane container;
     private BlockView[][] blocks;
+    private BlockView[][] bgBlocks;
 
     GameMiddleView() {
         initialiseNodes();
@@ -33,11 +33,11 @@ class GameMiddleView extends BorderPane {
         this.container = new StackPane();
         //16 blocks are made for background and foreground
         this.blocks = new BlockView[GRID_SIZE][GRID_SIZE];
-        this.bg = new BlockView[GRID_SIZE][GRID_SIZE];
+        this.bgBlocks = new BlockView[GRID_SIZE][GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 blocks[i][j] = new BlockView();
-                bg[i][j] = new BlockView();
+                bgBlocks[i][j] = new BlockView();
             }
         }
     }
@@ -49,7 +49,7 @@ class GameMiddleView extends BorderPane {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 sectionGrid.add(blocks[i][j], i, j);
-                bgGrid.add(bg[i][j], i, j);
+                bgGrid.add(bgBlocks[i][j], i, j);
             }
         }
 
