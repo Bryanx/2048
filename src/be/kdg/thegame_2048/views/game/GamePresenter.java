@@ -119,20 +119,11 @@ public class GamePresenter {
     public void updateView() {
         int randomblockX = modelGame.getCoordRandomBlockX();
         int randomblockY = modelGame.getCoordRandomBlockY();
-
-        if (!firstRun && isMovable()) {
-            animation.popIn(randomblockY, randomblockX);
-            midView.changeBlockValue(2, randomblockX, randomblockY);
-        }
+        updateRandomBlockView(randomblockX, randomblockY);
 
         for (int i = 0; i < GameMiddleView.GRID_SIZE; i++) {
             for (int j = 0; j < GameMiddleView.GRID_SIZE; j++) {
-                int value;
-                if (modelGame.getPiece(i, j) == null) {
-                    value = 0;
-                } else {
-                    value = modelGame.getPieceValue(i, j);
-                }
+                int value = getModelBlockValue(i, j);
                 if (firstRun) {
                     midView.changeBlockValue(value, i, j);
                     animation.popIn(i, j);
@@ -142,6 +133,18 @@ public class GamePresenter {
             }
         }
         this.firstRun = false;
+    }
+
+    private void updateRandomBlockView(int x, int y) {
+        if (!firstRun && isMovable()) {
+            animation.popIn(y, x);
+            midView.changeBlockValue(2, x, y);
+        }
+    }
+
+    private int getModelBlockValue(int x, int y) {
+        if (modelGame.getPiece(x, y) == null) return 0;
+        return modelGame.getPieceValue(x, y);
     }
 
     /**
