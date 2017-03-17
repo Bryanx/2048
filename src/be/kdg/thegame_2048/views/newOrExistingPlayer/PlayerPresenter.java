@@ -87,11 +87,15 @@ public class PlayerPresenter {
      **/
     private void checkInput(String name) {
         if (model.checkIfExists(name)) {
-            view.getLblInputError().setText("Name already exists");
+            view.getLblInputError().setText("Name already exists.");
             view.getLblInputError().setVisible(true);
+
+            IllegalArgumentException iae = new IllegalArgumentException("Name already exists.");
+            DataReaderWriter.writeToLog(iae.getMessage());
         } else if (name.length() < MIN_PLAYERNAME_LENGTH || name.length() > MAX_PLAYERNAME_LENGTH) {
             view.getLblInputError().setText(ERROR_MESSAGE);
             view.getLblInputError().setVisible(true);
+
             IllegalArgumentException iae = new IllegalArgumentException("Name was to short or to long.");
             DataReaderWriter.writeToLog(iae.getMessage());
         } else {

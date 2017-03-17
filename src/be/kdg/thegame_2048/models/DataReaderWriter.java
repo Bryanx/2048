@@ -4,6 +4,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -67,9 +70,32 @@ public final class DataReaderWriter {
             if (!Files.exists(playerData)) Files.createDirectory(playerData);
             if (!Files.exists(errorMessage)) Files.createFile(errorMessage);
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()));
-            writer.write(message);
-            writer.close();
+            //loading existing errors
+            String existingLog = "";
+            Scanner scanner = new Scanner(errorMessage);
+            if (scanner.hasNext()) {
+                while (scanner.hasNext()) {
+                    existingLog += scanner.nextLine();
+                }
+            }
+            scanner.close();
+
+            //Merge current error with existing error
+            String completeError;
+            LocalDateTime dateTime = LocalDateTime.now();
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            completeError = dateTimeFormatter.format(dateTime) + " - " + message + "END\n";
+            if (existingLog.length() != 0) {
+                String[] errors = existingLog.split("END");
+                for (String error: errors) {
+                    completeError += "\n" + error + "END" + "\n";
+                }
+            }
+
+            System.out.println(completeError);
+            Formatter formatter = new Formatter(errorMessage.toFile());
+            formatter.format(completeError);
+            formatter.close();
         } catch (IOException e) {
             System.out.println("Fundamental problem with the log-IO. Contact support!");
             System.exit(1);

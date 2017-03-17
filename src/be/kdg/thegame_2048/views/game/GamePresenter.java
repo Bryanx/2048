@@ -193,7 +193,7 @@ public class GamePresenter {
     }
 
     /**
-     * @return if there are any moves left.
+     * @return true if there are any moves left.
      **/
     boolean isMovable() {
         if (modelGame.getLastMove() != null)
