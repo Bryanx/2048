@@ -20,8 +20,6 @@ public class Main extends Application {
     private static final double STAGE_MIN_WIDTH = 550;
     private static final String STAGE_TITLE = "2048";
     private static final String STYLE_SHEET_PATH = "be/kdg/thegame_2048/views/css/stylesheet.css";
-    private static final String FONT_CLEAR_SANS = "views/fonts/ClearSans-Bold.TTF";
-    private static final double FONT_SIZE = 12;
 
     @Override
     public void start(Stage primaryStage) {
@@ -36,8 +34,6 @@ public class Main extends Application {
 
         //add stylesheet:
         scene.getStylesheets().add(STYLE_SHEET_PATH);
-        //add custom font:
-        Font.loadFont(Main.class.getResource(FONT_CLEAR_SANS).toExternalForm(), FONT_SIZE);
 
         primaryStage.setScene(scene);
         primaryStage.setMinHeight(STAGE_MIN_HEIGHT);

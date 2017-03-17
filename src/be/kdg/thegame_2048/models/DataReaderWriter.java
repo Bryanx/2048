@@ -11,14 +11,16 @@ import java.util.*;
  * @version 1.0 24/02/2017 10:08
  */
 public final class DataReaderWriter {
+
     /**
      * Decryption was used while loading the playerdata.
      * The decode-number is subtracted from the individuals chars
      * to go back to the right ASCII-value.
      **/
     public static List<Player> loadPlayerData() {
-        Path data = Paths.get("data" + File.separator + "playerdata.txt");
-        Path decoderData = Paths.get("data" + File.separator + "encryption.txt");
+        Properties prop = System.getProperties();
+        Path data = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data" + File.separator + "playerdata.txt");
+        Path decoderData = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data" + File.separator + "encryption.txt");
         List<Player> playerList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))) {
@@ -57,7 +59,8 @@ public final class DataReaderWriter {
      * Encryption was used while writing the playerdata.
      **/
     public static void savePlayerData(List<Player> playerList) {
-        Path playerdata = Paths.get("data");
+        Properties prop = System.getProperties();
+        Path playerdata = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data");
         Path data = playerdata.resolve("playerdata.txt");
         Path encription = playerdata.resolve("encryption.txt");
 
@@ -98,7 +101,8 @@ public final class DataReaderWriter {
      * Writes all error messages to a text file
      **/
     public static void writeToLog(String message) {
-        Path playerData = Paths.get("data");
+        Properties prop = System.getProperties();
+        Path playerData = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data");
         Path errorMessage = playerData.resolve("errorLog.txt");
 
         try {
