@@ -11,7 +11,6 @@ import java.util.*;
  * @version 1.0 24/02/2017 10:08
  */
 public final class DataReaderWriter {
-
     /**
      * Decryption was used while loading the playerdata.
      * The decode-number is subtracted from the individuals chars
@@ -19,36 +18,16 @@ public final class DataReaderWriter {
      **/
     public static List<Player> loadPlayerData() {
         Properties prop = System.getProperties();
-        Path data = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data" + File.separator + "playerdata.txt");
-        Path decoderData = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data" + File.separator + "encryption.txt");
+        String data = prop.getProperty("user.home") + File.separator + "2048_data" + File.separator + "playerdata.bin";
         List<Player> playerList = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(data.toFile()))) {
-            Scanner scanner = new Scanner(decoderData);
-            if (!scanner.hasNext()) return playerList;
-            int decodeNumber = Integer.parseInt(scanner.nextLine());
-
-            String playerInfo = reader.readLine();
-            if (playerInfo == null || playerInfo.isEmpty()) return playerList;
-            while (playerInfo != null) {
-                String[] splittedData = playerInfo.split(":");
-
-                //DECRYPT THE PLAYER DATA
-                String decodedName = "";
-                String decodedScore = "";
-                for (int i = 0; i < splittedData[0].length(); i++) {
-                    char decodedLetter = ((char) (splittedData[0].charAt(i) - decodeNumber));
-                    decodedName = decodedName + String.valueOf(decodedLetter);
-                }
-                for (int i = 0; i < splittedData[1].length(); i++) {
-                    char decodedNumber = ((char) (splittedData[1].charAt(i) - decodeNumber));
-                    decodedScore = decodedScore + decodedNumber;
-                }
-                Player player = new Player(decodedName, Integer.parseInt(decodedScore));
+        try (DataInputStream inputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(data)))) {
+            while (true) {
+                Player player = new Player(inputStream.readUTF(), inputStream.readInt());
                 playerList.add(player);
-
-                playerInfo = reader.readLine();
             }
+        } catch (EOFException eof) {
+            //Nothing, everything is fine.
         } catch (IOException e) {
             writeToLog(e.getMessage());
         }
@@ -61,37 +40,16 @@ public final class DataReaderWriter {
     public static void savePlayerData(List<Player> playerList) {
         Properties prop = System.getProperties();
         Path playerdata = Paths.get(prop.getProperty("user.home") + File.separator + "2048_data");
-        Path data = playerdata.resolve("playerdata.txt");
-        Path encription = playerdata.resolve("encryption.txt");
+        Path data = playerdata.resolve("playerdata.bin");
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(data.toFile()))) {
+        try (DataOutputStream outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(data.toFile())))) {
             if (!Files.exists(playerdata)) Files.createDirectory(playerdata);
             if (!Files.exists(data)) Files.createFile(data);
-            if (!Files.exists(encription)) Files.createFile(encription);
 
-            String playerInfo = "";
-            Random random = new Random();
-            int randomEncriptionCode = random.nextInt(100) + 10;
-
-            //ENCRYPTING THE PLAYER DATA
             for (Player player : playerList) {
-                String encodedName = "";
-                String encodedScore = "";
-                for (int i = 0; i < player.getName().length(); i++) {
-                    char encodedLetter = ((char) (player.getName().charAt(i) + randomEncriptionCode));
-                    encodedName = encodedName + String.valueOf(encodedLetter);
-                }
-                for (int i = 0; i < String.valueOf(player.getBestScore()).length(); i++) {
-                    char encodedNumber = ((char) (String.valueOf(player.getBestScore()).charAt(i) + randomEncriptionCode));
-                    encodedScore = encodedScore + encodedNumber;
-                }
-
-
-                playerInfo += encodedName + ":" + encodedScore + "\n";
-
+                outputStream.writeUTF(player.getName());
+                outputStream.writeInt(player.getBestScore());
             }
-            writer.write(playerInfo);
-            new Formatter(encription.toFile()).format(String.valueOf(randomEncriptionCode)).close();
         } catch (IOException e) {
             writeToLog(e.getMessage());
         }
