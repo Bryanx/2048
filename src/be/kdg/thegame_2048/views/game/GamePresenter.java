@@ -18,7 +18,7 @@ import javafx.scene.input.KeyCode;
  */
 public class GamePresenter {
     private Game modelGame;
-    private final PlayerManager modelPM;
+    private final PlayerManager modelPlayerManager;
     private final GameView view;
     private final GameBottomView bottomView;
     private final GameMiddleView midView;
@@ -31,7 +31,7 @@ public class GamePresenter {
 
     public GamePresenter(Game modelGame, PlayerManager modelPlayerManager, GameView view) {
         this.modelGame = modelGame;
-        this.modelPM = modelPlayerManager;
+        this.modelPlayerManager = modelPlayerManager;
         this.view = view;
         this.bottomView = view.getBottomView();
         this.midView = view.getMiddleView();
@@ -39,6 +39,7 @@ public class GamePresenter {
         this.animation = new Animation(topView, midView, this);
         this.firstRun = true;
         this.addEventHandlers();
+        this.currentScore = modelGame.getScore();
         updateViewScore(currentScore);
         updateView();
     }
@@ -47,7 +48,7 @@ public class GamePresenter {
         this.bottomView.getBtnRestart().setOnAction(event -> {
             this.alreadyWon = false;
             this.firstRun = true;
-            if (!modelGame.isPlayingUndo()) modelPM.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerManager.saveInfoCurrentPlayer();
             this.modelGame = new Game();
             this.topView.getLblCurrentScoreInput().setText("0");
             disableUndoButton(false);
@@ -61,17 +62,17 @@ public class GamePresenter {
         });
 
         this.bottomView.getBtnHighScores().setOnAction(event -> {
-            if (!modelGame.isPlayingUndo()) modelPM.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerManager.saveInfoCurrentPlayer();
             HighScoreView hsView = new HighScoreView();
-            new HighScorePresenter(modelGame, modelPM, hsView);
+            new HighScorePresenter(modelGame, modelPlayerManager, hsView);
             this.view.getScene().setRoot(hsView);
         });
 
         this.bottomView.getBtnExit().setOnAction(event -> {
-            if (!modelGame.isPlayingUndo()) modelPM.saveInfoCurrentPlayer();
-            modelPM.setCurrentPlayerToNull();
+            if (!modelGame.isPlayingUndo()) modelPlayerManager.saveInfoCurrentPlayer();
+            modelPlayerManager.setCurrentPlayerToNull();
             StartView startView = new StartView();
-            new StartPresenter(modelPM, startView);
+            new StartPresenter(modelPlayerManager, startView);
             this.view.getScene().setRoot(startView);
         });
 
@@ -100,6 +101,7 @@ public class GamePresenter {
                         event.consume();
                 }
                 this.currentScore = modelGame.getScore();
+                updateViewScore(currentScore);
                 if (currentScore - prevScore > 0) {
                     this.animation.animateScore(currentScore - prevScore);
                 }
@@ -154,17 +156,20 @@ public class GamePresenter {
      **/
     private void updateViewBlocks(Game.Direction direction) {
         modelGame.runGameCycle(direction);
-        updateViewScore(currentScore);
         checkIfLostOrWin();
     }
 
     /**
      * Scores on the top of the view are updated.
      * @param score can contain the current score or any other score.
+     *
+     * als score hoger is dan topscore -> topscore = score
+     * score = altijd inputscore
+     *
      **/
     public void updateViewScore(int score) {
-        this.modelPM.setCurrentPlayerScore(score);
-        int bestScore = modelPM.getCurrentPlayer().getBestScore();
+        this.modelPlayerManager.setCurrentPlayerScore(score);
+        int bestScore = modelPlayerManager.getCurrentPlayer().getBestScore();
         this.topView.getLblBestScoreInput().setText(String.valueOf(bestScore));
         if (score >= bestScore) {
             this.topView.getLblBestScoreInput().setText(String.valueOf(score));
@@ -180,9 +185,9 @@ public class GamePresenter {
         if (!modelGame.hasLost() && alreadyWon) return;
         if (modelGame.hasLost() || modelGame.hasWon()) {
             alreadyWon = true;
-            if (!modelGame.isPlayingUndo()) modelPM.saveInfoCurrentPlayer();
+            if (!modelGame.isPlayingUndo()) modelPlayerManager.saveInfoCurrentPlayer();
             ResultView resultView = new ResultView();
-            new ResultPresenter(modelPM, resultView, modelGame, view);
+            new ResultPresenter(modelPlayerManager, resultView, modelGame, view);
             view.setView(resultView);
         }
     }

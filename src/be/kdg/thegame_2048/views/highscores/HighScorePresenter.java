@@ -32,7 +32,7 @@ public class HighScorePresenter {
             GameView gameView = new GameView();
             GamePresenter gp = new GamePresenter(modelGame, modelPlayerManager, gameView);
             view.getScene().setRoot(gameView);
-
+            gp.updateViewScore(modelGame.getScore());
             if (modelGame.isPlayingUndo()) gp.disableUndoButton(true);
         });
     }
