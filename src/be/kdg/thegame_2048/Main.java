@@ -20,6 +20,7 @@ public class Main extends Application {
     private static final double STAGE_MIN_WIDTH = 550;
     private static final String STAGE_TITLE = "2048";
     private static final String STYLE_SHEET_PATH = "be/kdg/thegame_2048/views/css/stylesheet.css";
+    private static final String ICON = "be/kdg/thegame_2048/views/img/logo.png";
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,7 +40,7 @@ public class Main extends Application {
         primaryStage.setMinHeight(STAGE_MIN_HEIGHT);
         primaryStage.setMinWidth(STAGE_MIN_WIDTH);
         primaryStage.setTitle(STAGE_TITLE);
-        primaryStage.getIcons().add(new Image("be/kdg/thegame_2048/views/img/logo.png"));
+        primaryStage.getIcons().add(new Image(ICON));
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();

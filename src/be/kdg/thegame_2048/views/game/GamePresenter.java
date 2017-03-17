@@ -11,6 +11,7 @@ import be.kdg.thegame_2048.views.result.ResultView;
 import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
 /**
  * @author Jarne Van Aerde, Bryan de Ridder
@@ -107,7 +108,6 @@ public class GamePresenter {
                 }
             }
         });
-
         this.animation.getParallelTransition().setOnFinished(event -> {
             this.animation.resetMoveAnimation();
             updateView();

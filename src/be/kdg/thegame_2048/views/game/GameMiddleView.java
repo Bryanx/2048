@@ -1,8 +1,10 @@
 package be.kdg.thegame_2048.views.game;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * The middle part of the game view.
@@ -13,8 +15,12 @@ import javafx.scene.layout.*;
  * @version 1.0 17-02-17 11:11
  */
 class GameMiddleView extends BorderPane {
-    private static final Image BG_IMAGE = new Image("be/kdg/thegame_2048/views/img/bg.png");
+    private static final Paint GRID_BG_COLOR = Color.web("bbada0");
+    private static final double GRID_BG_CORNERRADII = 7;
     private static final int BLOCK_MARGIN = 10;
+    private StackPane container;
+    private BlockView[][] bg;
+
     static final int GRID_SIZE = 4;
     private BlockView[][] blocks;
 
@@ -24,32 +30,45 @@ class GameMiddleView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        //16 blocks are made
+        this.container = new StackPane();
+        //16 blocks are made for background and foreground
         this.blocks = new BlockView[GRID_SIZE][GRID_SIZE];
+        this.bg = new BlockView[GRID_SIZE][GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 blocks[i][j] = new BlockView();
+                bg[i][j] = new BlockView();
             }
         }
     }
 
     private void layoutNodes() {
         //fill grid with 0's
+        GridPane bgGrid = new GridPane();
         GridPane sectionGrid = new GridPane();
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 sectionGrid.add(blocks[i][j], i, j);
+                bgGrid.add(bg[i][j], i, j);
             }
         }
+
         sectionGrid.setVgap(BLOCK_MARGIN);
         sectionGrid.setHgap(BLOCK_MARGIN);
         sectionGrid.setAlignment(Pos.CENTER);
+        bgGrid.setVgap(BLOCK_MARGIN);
+        bgGrid.setHgap(BLOCK_MARGIN);
+        bgGrid.setAlignment(Pos.CENTER);
 
-        BorderPane playground = new BorderPane(sectionGrid);
-        playground.setPrefSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
-        playground.setBackground(new Background(new BackgroundImage(BG_IMAGE, BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
-        this.setCenter(new BorderPane(playground));
+        container.getChildren().addAll(bgGrid,sectionGrid);
+
+        BorderPane playground = new BorderPane(container);
+        playground.setMinSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
+        playground.setMaxSize(GameView.GAME_SIZE, GameView.GAME_SIZE);
+        playground.setBackground(new Background(new BackgroundFill(GRID_BG_COLOR,
+                new CornerRadii(GRID_BG_CORNERRADII), Insets.EMPTY)));
+
+        this.setCenter(playground);
     }
 
     void changeBlockValue(int value, int x, int y) {

@@ -40,10 +40,11 @@ class BlockView extends StackPane {
     private static final int BLOCK_VALUE_16 = 16;
     private static final int BLOCK_VALUE_8 = 8;
     private static final int BLOCK_VALUE_4 = 4;
+    private static final int BLOCK_SIZE = 100;
     private static final int TEXT_SIZE_LARGE = 55;
     private static final int TEXT_SIZE_MEDIUM = 43;
     private static final int TEXT_SIZE_SMALL = 32;
-    private static final int BLOCK_SIZE = 100;
+    private static final double RECT_CORNER_ARC_SIZE = 7;
     private int value;
     private Rectangle rect;
     private Text number;
@@ -73,6 +74,8 @@ class BlockView extends StackPane {
         number.setFont(Font.font("Clear Sans", FontWeight.BOLD, getTextSize()));
         number.setFill(Color.web(getTextColor()));
         rect.setFill(Color.web(getRectFill()));
+        rect.setArcWidth(RECT_CORNER_ARC_SIZE);
+        rect.setArcHeight(RECT_CORNER_ARC_SIZE);
     }
 
     private String getTextInput() {

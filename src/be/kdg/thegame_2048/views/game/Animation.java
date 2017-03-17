@@ -36,10 +36,7 @@ final class Animation {
     private void initialiseNodes() {
         this.parallelTransition = new ParallelTransition();
         this.translateTransitions = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
-            this.translateTransitions.add(new TranslateTransition(MOVE_DURATION));
-            this.translateTransitions.get(i).setInterpolator(Interpolator.EASE_BOTH);
-        }
+        createTTransitions();
     }
 
     void animateMovement(KeyCode direction) {
@@ -207,11 +204,15 @@ void popIn(int x, int y) {
 
         this.parallelTransition.getChildren().removeAll(translateTransitions);
         this.translateTransitions.clear();
-        for (int i = 0; i < 16; i++) {
-            this.translateTransitions.add(new TranslateTransition(MOVE_DURATION));
-        }
+        createTTransitions();
     }
 
+    private void createTTransitions() {
+        for (int i = 0; i < 16; i++) {
+            this.translateTransitions.add(new TranslateTransition(MOVE_DURATION));
+            this.translateTransitions.get(i).setInterpolator(Interpolator.EASE_BOTH);
+        }
+    }
     private int getBlockValue(int x, int y) {
         return midView.getBlockValue(x, y);
     }
