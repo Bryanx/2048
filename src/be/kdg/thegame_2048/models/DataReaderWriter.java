@@ -92,7 +92,6 @@ public final class DataReaderWriter {
                 }
             }
 
-            System.out.println(completeError);
             Formatter formatter = new Formatter(errorMessage.toFile());
             formatter.format(completeError);
             formatter.close();

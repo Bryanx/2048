@@ -48,9 +48,6 @@ public final class PlayerManager {
      **/
     public void addPlayer(String name) {
         playerList.add(new Player(name, 0));
-        System.out.println("New player added: " + name);
-        playerList.forEach(System.out::println);
-        //TODO: VERWIJDER.
     }
 
     /**

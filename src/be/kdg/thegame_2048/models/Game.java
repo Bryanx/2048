@@ -72,12 +72,9 @@ public final class Game {
                 playground.moveBlocksRight();
         }
         this.currentMove = playground.toString();
-        //TODO: VERWIJDER.
         if (!lastMove.equals(currentMove)) {
             playground.addRandomBlock(STARTVALUE);
         }
-        System.out.println(score.getScore() + "\n" + playground.toString());
-        //TODO: VERWIJDR.
     }
 
     /**

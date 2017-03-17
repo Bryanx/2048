@@ -428,8 +428,6 @@ final class Playground {
                     section.putBlock(block);
                 }
                 sections[i][j] = section;
-                System.out.print(section.toString() + " ");
-                //TODO: VERWIJDER.
             }
         }
         initialiseSections(sections);
