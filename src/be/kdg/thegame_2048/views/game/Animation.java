@@ -213,7 +213,7 @@ void popIn(int x, int y) {
     }
 
     private int getBlockValue(int x, int y) {
-        return midView.getBValue(x, y);
+        return midView.getBlockValue(x, y);
     }
     ParallelTransition getParallelTransition() {
         return parallelTransition;

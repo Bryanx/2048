@@ -6,6 +6,7 @@ import be.kdg.thegame_2048.views.start.StartPresenter;
 import be.kdg.thegame_2048.views.start.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -42,6 +43,7 @@ public class Main extends Application {
         primaryStage.setMinHeight(STAGE_MIN_HEIGHT);
         primaryStage.setMinWidth(STAGE_MIN_WIDTH);
         primaryStage.setTitle(STAGE_TITLE);
+        primaryStage.getIcons().add(new Image("be/kdg/thegame_2048/views/img/logo.png"));
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             if (model.getCurrentPlayer() != null) model.saveInfoCurrentPlayer();

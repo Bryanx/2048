@@ -18,6 +18,10 @@ import javafx.scene.input.KeyCode;
  * @version 1.0 14-02-17 14:24
  */
 public class PlayerPresenter {
+    private static final int MIN_PLAYERNAME_LENGTH = 2;
+    private static final int MAX_PLAYERNAME_LENGTH = 15;
+    private static final String ERROR_MESSAGE = "Name has to be between " + MIN_PLAYERNAME_LENGTH +
+            " and " + MAX_PLAYERNAME_LENGTH + " characters long";
     private final PlayerManager model;
     private final PlayerView view;
     private final boolean isNewPlayer;
@@ -78,15 +82,15 @@ public class PlayerPresenter {
 
     /**
      * Checks the input for errors.
-     * Returns an error to the player if necessary.
+     * Gives an error to the player if necessary.
      * This method is only used for new players.
      **/
     private void checkInput(String name) {
         if (model.checkIfExists(name)) {
             view.getLblInputError().setText("Name already exists");
             view.getLblInputError().setVisible(true);
-        } else if (name.length() < 3 || name.length() > 15) {
-            view.getLblInputError().setText("Name has to be between 3 and 15 characters long");
+        } else if (name.length() < MIN_PLAYERNAME_LENGTH || name.length() > MAX_PLAYERNAME_LENGTH) {
+            view.getLblInputError().setText(ERROR_MESSAGE);
             view.getLblInputError().setVisible(true);
             IllegalArgumentException iae = new IllegalArgumentException("Name was to short or to long.");
             DataReaderWriter.writeToLog(iae.getMessage());

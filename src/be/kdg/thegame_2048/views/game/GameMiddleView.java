@@ -60,7 +60,7 @@ class GameMiddleView extends BorderPane {
         return blocks[x][y];
     }
 
-    int getBValue(int x, int y) {
+    int getBlockValue(int x, int y) {
         return blocks[x][y].getValue();
     }
 }

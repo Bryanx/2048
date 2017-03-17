@@ -54,7 +54,7 @@ public final class DataReaderWriter {
     }
 
     /**
-     * Incription was used while writing the playerdata.
+     * Encryption was used while writing the playerdata.
      **/
     public static void savePlayerData(List<Player> playerList) {
         Path playerdata = Paths.get("data");
@@ -107,6 +107,7 @@ public final class DataReaderWriter {
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(errorMessage.toFile()));
             writer.write(message);
+            writer.close();
         } catch (IOException e) {
             System.out.println("Fundamental problem with the log-IO. Contact support!");
             System.exit(1);
