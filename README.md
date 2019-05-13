@@ -2,7 +2,7 @@
 2048 with local high scores, optional undo button, smooth animations and much more.  
 You can download the jar file [here](../../releases/download/v1/2048.jar).
 
-![img](http://i.imgur.com/5wjOwOx.png)
+![img](https://github.com/Bryanx/2048/blob/master/src/be/kdg/thegame_2048/views/img/demo.gif)
 
 # Credits
 Made by Jarne Van Aerde and Bryan de Ridder with JavaFX.  
