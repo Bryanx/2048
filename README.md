@@ -1,6 +1,6 @@
 # 2048
 2048 with local high scores, optional undo button, smooth animations and much more.  
-You can download the jar file [here](../../releases/download/games/2048.jar).
+You can download the jar file [here](../../releases/download/v1/2048.jar).
 
 ![img](http://i.imgur.com/5wjOwOx.png)
 
