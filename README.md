@@ -2,6 +2,9 @@
 2048 with local high scores, optional undo button, smooth animations and much more.  
 You can download the jar file [here](../../releases/download/v1/2048.jar).
 
+To open the jar type in command/terminal:
+```java -jar 2048.jar```
+
 ![img](https://github.com/Bryanx/2048/blob/master/src/be/kdg/thegame_2048/views/img/demo.gif)
 
 # Credits
